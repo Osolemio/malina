@@ -81,8 +81,8 @@ function tick() {
 	$('#text_battery_cons').html(cons.toFixed(1)+'Ач');
 	var cur_p_g=100-cur_p;
 	var cur_p_b=(cons/C20)*100;
-
-
+	document.getElementById('battery_percent').style.width=cur_p_g+'%';
+	document.getElementById('battery_ah').style.width=cur_p_b+'%';
 	}
 
 //------------- nodes cycle ------------------
