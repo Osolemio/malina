@@ -31,16 +31,21 @@
 
     mysql_free_result($result);
     $result=mysql_query("SELECT * FROM batmon WHERE number=0",$db) or die(mysql_error());
+    $row=mysql_fetch_assoc($result);
+
+    $ip_batmon=$row['ip'];
+    $active_batmon=$row['active'];
     
     mysql_close($db);
 ?>
 
 <script>
- var nodes;
+ var nodes,active_batmon=0,ip_batmon='127.0.0.1';
 
  $(function() {    
    nodes=$.parseJSON(<?php echo("'".json_encode($node)."'"); ?>);
-   
+   ip_batmon=<?php echo("'".$ip_batmon)."';"; ?>
+   active_batmon=<?php echo($active_batmon).";"; ?>
     });
 
 </script>
