@@ -1,0 +1,86 @@
+@CHARSET "UTF-8";
+body {
+  margin:0;
+  padding:0;
+    background: url(../img/uART_logo.png);
+    background-repeat: repeat-xy;
+
+}
+
+div {position:absolute;}
+
+#menu_div {
+top: 50px;
+left: 50px;
+width: 670px;
+height: 400px;
+border-radius: 10px;
+-moz-border-radius: 10px;
+-o-border-radius:10px;
+background: palegreen;
+box-shadow:inset green 5px 5px 5px, 5px 5px 5px black;
+-moz-box-shadow:inset green 5px 5px 5px, 5px 5px 5px black;
+-webkit-box-shadow:inset green 5px 5px 5px, 5px 5px 5px black;
+}
+
+#menu_in {
+    top:10px;
+    left:10px;
+    width:650px;
+    height:380px;
+    background:blanchedalmond;
+}
+
+#min {
+top: 270px;
+left: 80px;
+}
+
+#max {
+top: 290px;
+left: 80px;
+}
+
+#field {
+top: 300px;
+left:0px;
+width: auto;
+height: auto;
+}
+
+
+#arrow {
+  top: 0px;
+  left: 0px;
+  width: 0px;
+  height: 0px;
+  margin: 10px auto;
+  border: 10px solid; 
+  border-color: orangered ivory orangered orangered;
+  z-index:4;  
+}
+
+#commands {
+    top: 50px;
+    left: 750px;
+    width: 400px;
+    height: 400px;
+    background: deepskyblue;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -o-border-radius:10px;
+
+    box-shadow:inset blue 5px 5px 5px, 5px 5px 5px black;
+    -moz-box-shadow:inset blue 5px 5px 5px, 5px 5px 5px black;
+    -webkit-box-shadow:inset blue 5px 5px 5px, 5px 5px 5px black;
+
+}
+
+#commands_in {
+    top: 10px;
+    left: 10px;
+    width: 380px;
+    height: 380px;
+    background: lightsteelblue;
+}
+

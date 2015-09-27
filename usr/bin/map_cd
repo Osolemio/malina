@@ -1,0 +1,78 @@
+#!/bin/bash
+
+    if /bin/pidof mapd 2> /dev/null 
+  then
+   if test ! -e "/var/map/.map"; 
+    then kill -sigterm `/bin/pidof mapd 2> /dev/null`;
+   fi
+
+  else
+    if test -e "/var/map/.map"; 
+     then /usr/bin/mapd;
+     fi
+    
+    fi
+    
+    if /bin/pidof mpptd 2> /dev/null
+  then
+  
+    if test ! -e "/var/map/.mppt"; 
+     then kill -sigterm `/bin/pidof mpptd 2> /dev/null`;
+     fi
+        
+      else
+    if test -e "/var/map/.mppt"; 
+     then /usr/bin/mpptd; 
+     fi
+
+    fi
+
+
+if /bin/pidof batmon 2> /dev/null 
+  then
+   if test ! -e "/var/map/.bmon"; 
+    then kill -sigterm `/bin/pidof batmon 2> /dev/null`;
+   fi
+
+  else
+    if test -e "/var/map/.bmon"; 
+     then /usr/bin/batmon;
+     fi
+    
+    fi
+
+
+if /bin/pidof smsd 2> /dev/null 
+  then
+   if test ! -e "/var/map/.sms"; 
+    then /usr/sbin/service smstools stop;
+   fi
+
+  else
+    if test -e "/var/map/.sms"; 
+     then /usr/sbin/service smstools start;
+     fi
+    
+    fi
+
+
+   if test -e "/var/map/.reboot";
+    then
+	rm /var/map/.reboot
+	sudo reboot;
+   fi
+
+   if test -e "/var/map/.shutdown";
+    then
+	rm /var/map/.shutdown
+	sudo shutdown -h now;
+   fi
+
+   if test -e "/var/map/.tmp_p";
+    then
+	rm /etc/nginx/conf.d/htpasswd
+	cat /var/map/.tmp_p > /etc/nginx/conf.d/htpasswd
+	rm /var/map/.tmp_p;
+   fi
+
+

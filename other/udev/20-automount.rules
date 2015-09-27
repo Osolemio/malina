@@ -1,0 +1,4 @@
+ACTION=="add" KERNEL=="sd[a-z][0-9]" RUN+="/bin/mkdir -p /mnt/%k_%E{ID_VENDOR}_%E{ID_MODEL}_%n"
+ACTION=="add" KERNEL=="sd[a-z][0-9]" RUN+="/bin/mount /dev/%k /mnt/%k_%E{ID_VENDOR}_%E{ID_MODEL}_%n"
+ACTION=="remove" KERNEL=="sd[a-z][0-9]" RUN+="/bin/umount /dev/%k"
+ACTION=="remove" KERNEL=="sd[a-z][0-9]" RUN+="/bin/rmdir /mnt/%k_%E{ID_VENDOR}_%E{ID_MODEL}_%n"

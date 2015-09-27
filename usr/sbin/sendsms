@@ -1,0 +1,149 @@
+#!/bin/bash
+# This script send a text sms at the command line by creating
+# a sms file in the outgoing queue.
+
+# $1 is the destination phone number.
+# $2 is the message text.
+# If you leave $2 or both empty, the script will ask you.
+# If you give more than 2 arguments, last is taken as a text and
+# all other are taken as destination numbers.
+# If a destination is asked, you can type multiple numbers
+# delimited with spaces.
+
+# Additional headers can be given with -A option _before_ text:
+# sendsms -A "Flash: yes" 358401234567 "This is a test SMS"
+# sendsms -A Flash:yes 358401234567 "This is a test SMS"
+# sendsms -AFlash:yes 358401234567 358402345678 -A "Replace: 1" "This is a test SMS"
+
+# If using a header Include: /path/to/file, you may want to keep message
+# body in the main SMS file empty. In this case use the option -z
+# as the _last_ argument:
+# sendsms -AInclude:/path/to/file 358401234567 -z
+
+# Keys for example: "password" and "keke":
+# KEYS="5f4dcc3b5aa765d61d8327deb882cf99 4a5ea11b030ec1cfbc8b9947fdf2c872 "
+
+KEYS=""
+
+# When creating keys, remember to use -n for echo:
+# echo -n "key" | md5sum
+
+smsd_user="smsd"
+
+# Will need echo which accepts -n argument:
+ECHO=echo
+case `uname` in
+  SunOS)
+    ECHO=/usr/ucb/echo
+    ;;
+esac
+
+if ! [ -z "$KEYS" ]; then
+  printf "Key: "
+  read KEY
+  if [ -z "$KEY" ]; then
+    echo "Key required, stopping."
+    exit 1
+  fi
+  KEY=`$ECHO -n "$KEY" | md5sum | awk '{print $1;}'`
+  if ! echo "$KEYS" | grep "$KEY" >/dev/null; then
+    echo "Incorrect key, stopping."
+    exit 1
+  fi
+fi
+
+DEST=$1
+TEXT=$2
+
+if [ -z "$DEST" ]; then
+  printf "Destination(s): "
+  read DEST
+  if [ -z "$DEST" ]; then
+    echo "No destination, stopping."
+    exit 1
+  fi
+fi
+
+if [ -z "$TEXT" ]; then
+  printf "Text: "
+  read TEXT
+  if [ -z "$TEXT" ]; then
+    echo "No text, stopping."
+    exit 1
+  fi
+fi
+
+HEADERS=""
+
+if [ $# -gt 2 ]; then
+  n=$#
+  while [ $n -gt 1 ]; do
+    if [ "${1:0:2}" = "-A" ]; then
+      hdr="${1:2}"
+      if [ -z "$hdr" ]; then
+        shift
+        n=`expr $n - 1`
+        hdr="$1"
+      fi
+      [ -n "$HEADERS" ] && HEADERS="$HEADERS"$'\n'
+      HEADERS="${HEADERS}${hdr}"
+    else
+      destinations="$destinations $1"
+    fi
+    shift
+    n=`expr $n - 1`
+  done
+  TEXT=$1
+  [ "$TEXT" = "-z" ] && TEXT=""
+else
+  destinations=$DEST
+fi
+
+echo "-- "
+echo "Text: $TEXT"
+
+ALPHABET=""
+if which iconv > /dev/null 2>&1; then
+  if ! $ECHO -n "$TEXT" | iconv -t ISO-8859-15 >/dev/null 2>&1; then
+    ALPHABET="Alphabet: UCS"
+  fi
+fi
+
+owner=""
+userid=`id -u`
+if [ $userid -eq 0 ]; then
+  if [ -f /etc/passwd ]; then
+    if grep $smsd_user: /etc/passwd >/dev/null; then
+      owner=$smsd_user
+    fi
+  fi
+fi
+
+for destination in $destinations
+do
+  echo "To: $destination"
+
+  TMPFILE=`mktemp /tmp/smsd_XXXXXX`
+
+  $ECHO "To: $destination" >> $TMPFILE
+  [ -n "$ALPHABET" ] && $ECHO "$ALPHABET" >> $TMPFILE
+  [ -n "$HEADERS" ] && $ECHO "$HEADERS" >> $TMPFILE
+  $ECHO "" >> $TMPFILE
+  if [ -z "$ALPHABET" ]; then
+    $ECHO -n "$TEXT" >> $TMPFILE
+  else
+    $ECHO -n "$TEXT" | iconv -t UNICODEBIG >> $TMPFILE
+  fi
+
+  if [ "x$owner" != x ]; then
+    chown $owner $TMPFILE
+  else
+    if [ $userid -gt 0 ]; then
+      chmod 666 $TMPFILE
+    fi
+  fi
+
+  FILE=`mktemp /var/spool/sms/outgoing/send_XXXXXX`
+  mv $TMPFILE $FILE
+done
+ 

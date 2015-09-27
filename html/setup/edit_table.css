@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+body {
+  margin:0;
+  padding:0;
+}
+
+div {position:absolute}
+
+.chart_wrapper {
+    box-sizing: border-box;
+    top:200px;
+    left:400px;
+    width:700px;
+    height:400px;
+    padding: 20px 15px 15px 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    background: linear-gradient(#f6f6f6 0, #fff 50px);
+    background: -o-linear-gradient(#f6f6f6 0, #fff 50px);
+    background: -ms-linear-gradient(#f6f6f6 0, #fff 50px);
+    background: -moz-linear-gradient(#f6f6f6 0, #fff 50px);
+    background: -webkit-linear-gradient(#f6f6f6 0, #fff 50px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    -o-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    -ms-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+#chart {
+
+    width: 90%;
+    height: 90%;
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+#button_chart {
+    top:100%;
+    left:80%;
+}
+
+#hoverdata {
+    top:95%;
+    left:40%;
+
+}
