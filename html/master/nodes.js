@@ -203,3 +203,25 @@ var instance=$('#nodes').jstree(true).get_json('#',{'flat':false, 'no_state':tru
 	}});    
 
     }
+
+
+function erase() {
+    if (confirm('Вы уверены? Все узлы будут удалены из базы данных'))
+	{
+	 $.ajax({
+	url: 'erase_nodes.php',
+	async: false,
+        method: 'POST',
+	success: function(response) {
+	alert("Узлы удалены");
+	window.location.reload(true);
+	},
+	error: function (response) {
+    	    var r = jQuery.parseJSON(response.responseText);
+    	    alert("Message: " + r.Message);
+    	    alert("StackTrace: " + r.StackTrace);
+    	    alert("ExceptionType: " + r.ExceptionType);
+	}});    
+
+	}
+    }

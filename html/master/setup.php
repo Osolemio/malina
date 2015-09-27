@@ -35,7 +35,9 @@
 
 &nbsp&nbsp<input type="button" style="background-color:orange;" value="Удалить узел" onclick=delete_node() />
 
-&nbsp&nbsp<input type="button" style="background-color:lightblue;" value="Сохранить" onclick=save() /></div>
+&nbsp&nbsp<input type="button" style="background-color:lightblue;" value="Сохранить" onclick=save() />
+
+&nbsp&nbsp<input type="button" style="color:white; background-color:red;" value="Очистить" onclick=erase() /></div>
 <br>
 <div><input type="button" style="background-color:blanchedalmond;" value="Свернуть все" onclick=close_all() />
 &nbsp&nbsp
