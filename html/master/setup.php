@@ -13,6 +13,7 @@
 
 
 <body>
+<div style="background-color:#F0F0F0; border: 4px double gray;">
 <fieldset>
 <div id="nodes"></div>
 </fieldset>
@@ -44,8 +45,10 @@
 <input type="button" style="background-color:blanchedalmond;" value="Раскрыть все" onclick=open_all() />
 
 </div>
+</div>
 <br><br>
-<div>
+
+<div style="background-color:aquamarine; border: 4px double gray;">
 <fieldset>
     <b>IP адрес [:порт] узла батарейного монитора:</b>&nbsp<input type="text" value="127.0.0.1" id="batmon_ip"/>
     <b>Активен:</b>&nbsp<select size=1 id="batmon_active" name="Активен">

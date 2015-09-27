@@ -26,7 +26,8 @@ $(function() {
 	n_p=Number(load_battery['n_p']);
 	var In=C_bat/t_bat;
 	var Cp=Math.pow(In,n_p)*t_bat;
-	C20=(Math.pow(Cp/20,1/n_p)*20).toFixed(0);
+	C20=(t_bat!=20)?(Math.pow(Cp/20,1/n_p)*20).toFixed(0):C_bat;
+	
 	}
 	},
 	error: function() {
