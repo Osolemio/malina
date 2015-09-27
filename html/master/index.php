@@ -205,7 +205,7 @@ div.div_t {
 <?php
     include("bd.php");
     
-    $result=mysql_query('SELECT acc_number FROM nodes GROUP BY acc_number') or die(mysql_err());
+    $result=mysql_query('SELECT acc_number FROM nodes GROUP BY acc_number') or die(mysql_error());
      while ($row=mysql_fetch_array($result)) {
 ?>	
       

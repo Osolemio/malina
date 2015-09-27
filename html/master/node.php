@@ -20,7 +20,7 @@
 
     include("bd.php");
     $i=0; $all=0;
-    $result=mysql_query("SELECT * FROM nodes WHERE acc_number=".$_GET['node'],$db) or die(mysq_err());
+    $result=mysql_query("SELECT * FROM nodes WHERE acc_number=".$_GET['node'],$db) or die(mysql_error());
 	while ($row=mysql_fetch_assoc($result)) {
 	    $node[$i]['name']=$row['name'];
 	    $node[$i]['ip']=$row['ip'];
@@ -30,6 +30,8 @@
 
 
     mysql_free_result($result);
+    $result=mysql_query("SELECT * FROM batmon WHERE number=0",$db) or die(mysql_error());
+    
     mysql_close($db);
 ?>
 
@@ -125,6 +127,8 @@ location.href="index.php";
 
 
     }
+
+    
 ?>
 
 

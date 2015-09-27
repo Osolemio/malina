@@ -1,6 +1,6 @@
 <?php
     include("bd.php");
-    $result=mysql_query("SELECT * FROM batmon WHERE number=0",$db) or die(mysql_err());
+    $result=mysql_query("SELECT * FROM batmon WHERE number=0",$db) or die(mysql_error());
     $row=mysql_fetch_assoc($result);
 
     print_r(json_encode($row));

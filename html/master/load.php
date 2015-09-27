@@ -1,7 +1,7 @@
 <?php
     include("bd.php");
     $dev=array('МАП','MPPT','МАП+MPPT');
-    $result=mysql_query("SELECT acc_number FROM nodes GROUP BY acc_number",$db) or die(mysql_err());
+    $result=mysql_query("SELECT acc_number FROM nodes GROUP BY acc_number",$db) or die(mysql_error());
      $out='[';
 	while ($row=mysql_fetch_array($result)) {
 
@@ -9,7 +9,7 @@
 	
 	}
     mysql_free_result($result);
-    $result=mysql_query("SELECT * FROM nodes",$db) or die(mysql_err());
+    $result=mysql_query("SELECT * FROM nodes",$db) or die(mysql_error());
 	while ($row=mysql_fetch_assoc($result)) {
 
 	    $out=$out."{\"id\":\"node".$row['number']."\",\"parent\":\"".$row['acc_number']."\",\"text\":\"".$row['name']."\",\"icon\":\"../img/pc.png\"},";
