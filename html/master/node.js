@@ -1,6 +1,42 @@
-var load_map=[],load_mppt=[];
+var load_map=[],load_mppt=[], load_battery, C_bat, t_bat, n_p, C20;
 
 $(function() {
+
+    var str_ip=ip_batmon.split(':');
+	var bat_ip=str_ip[0];
+	var bat_port=(str_ip[1]==null)?80:str_ip[1];
+
+
+    if (active_batmon==1) {
+	
+	$.ajax({
+	data: {
+	    url: bat_ip,
+	    port: bat_port,
+	    dev: 'net_battery.php?table=info' 
+	},
+	method:'post',
+	url: 'request.php',
+	async: false,
+	success: function(response) {
+	if (response!=""){
+	load_battery=$.parseJSON(response);
+	C_bat=Number(load_battery['C_nominal']);
+	t_bat=Number(load_battery['t_nominal']);
+	n_p=Number(load_battery['n_p']);
+	var In=C_bat/t_bat;
+	var Cp=Math.pow(In,n_p)*t_bat;
+	C20=(Math.pow(Cp/20,1/n_p)*20).toFixed(0);
+	}
+	},
+	error: function() {
+	}
+	});
+	
+	
+	
+
+	}
 
     
     setInterval(function() {
@@ -12,16 +48,53 @@ $(function() {
 });
 
 function tick() {
-//  	load_map=null;
-//	load_mppt=null;
 
+// battery update;
+	var str_ip=ip_batmon.split(':');
+	var bat_ip=str_ip[0];
+	var bat_port=(str_ip[1]==null)?80:str_ip[1];
+
+
+    if (active_batmon==1) {
+	
+	$.ajax({
+	data: {
+	    url: bat_ip,
+	    port: bat_port,
+	    dev: 'net_battery.php?table=cycle' 
+	},
+	method:'post',
+	url: 'request.php',
+	async: false,
+	success: function(response) {
+	if (response!=""){
+	load_battery=$.parseJSON(response)
+	}
+	},
+	error: function() {
+	}
+	});
+	var cur_p=Number(load_battery['C_current_percent']);
+	var cons=Number(load_battery['integral_dCdt']);
+	$('#text_battery_ah').html(C20+'Ач');
+	$('#text_battery_percent').html(cur_p.toFixed(0)+'%');
+	$('#text_battery_cons').html(cons.toFixed(1)+'Ач');
+	var cur_p_g=100-cur_p;
+	var cur_p_b=(cons/C20)*100;
+
+
+	}
+
+//------------- nodes cycle ------------------
 
     for (var key in nodes) {
-	var str_ip=nodes[key]['ip'].split(':');
+	    str_ip=nodes[key]['ip'].split(':');
 	var ip=str_ip[0];
 	var port=(str_ip[1]==null)?80:str_ip[1];
 
+
 	if ((nodes[key]['dev']&1)==0) {
+
 	$.ajax({
 	data: {
 	    url: ip,
@@ -158,9 +231,10 @@ function tick() {
 	} //if load map
 
 
-    } //if
+    } //if nodes
 
 	if (nodes[key]['dev']==1 || nodes[key]['dev']==2 ) {
+
 	$.ajax({
 	data: {
 	    url: ip,
@@ -216,9 +290,9 @@ function tick() {
 
 	} //if load_mppt    
 
-    } //if
+    } //if nodes
 
-  }
+  } //for
 
 }
 

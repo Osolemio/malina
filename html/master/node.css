@@ -52,6 +52,38 @@ div.acc {
     background-repeat: repeat-x;    
 }
 
+div.battery_green {
+    left:70px;
+    top:90px;
+    width:80px;
+    height:40px;
+    background: url(../img/battery_g.png);
+}
+
+div.battery_blue {
+    left:70px;
+    top:130px;
+    width:80px;
+    height:40px;
+    background: url(../img/battery_b.png);
+}
+
+div.battery_in {
+    top:4px;
+    left:2px;
+    width:70px;
+    height:32px;
+    }
+
+div.battery_black {
+    position:relative;
+    float:right;
+    width:0%;
+    height:100%;
+    background-color:black;
+
+    }
+
 
 div.ip {
     position:absolute;

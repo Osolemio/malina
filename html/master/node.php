@@ -30,6 +30,7 @@
 
 
     mysql_free_result($result);
+
     $result=mysql_query("SELECT * FROM batmon WHERE number=0",$db) or die(mysql_error());
     $row=mysql_fetch_assoc($result);
 
@@ -53,6 +54,20 @@
 
 <div class="wrapper" style='width:<?php echo 208*($all)."px;"; ?>'>
 <div id="accumulator" class="acc">
+<?php if ($active_batmon==1) { echo "
+
+<div class='battery_green'><div class='battery_in'><div id='battery_percent' class='battery_black'></div></div></div>
+<div class='battery_blue'><div class='battery_in'><div id='battery_ah' class='battery_black'></div></div></div>
+<div id='text_battery_ah' style='color:white; top:140px; left:10px; font-size:120%; font-weight:700;'>Н/Д</div>
+<div id='text_battery_percent' style='color:white; top:100px; left:10px; font-size:120%; font-weight:700;'>Н/Д</div>
+<div id='text_battery_cons' style='color:white; top:140px; left:150px; font-size:120%; font-weight:700;'>Н/Д</div>
+
+
+";
+}
+
+?>
+
 <div style="bottom:1px; left:2px;">
 <input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
 <script>
