@@ -113,7 +113,63 @@ function HomeButton()
 location.href="menu.php";
 }
 </script>
+<?php
 
+    if (file_exists('/var/map/.bmon')) {
+?>
+
+<hr><p><center><b>Данные статистики по АКБ</b></center></p><hr>
+
+<?php
+    include('bd_bat.php');
+      
+     $result=mysql_query("SELECT * FROM battery_state WHERE number=1",$db_bat) or die(mysql_error());
+     $row=mysql_fetch_assoc($result);
+     echo "
+	<b>
+	<table border=1>
+	    <tr>
+	    <td width='5%'>Самый глубокий разряд %DOD</td><td width='5%'>Суммарно Ач</td>
+	    <td width='5%'>Минимальное напряжение, В</td><td width='5%'>Максимальное напряжение, В</td>
+	    <td width='5%'>Дата последнего заряда</td><td width='5%'>Кол-во автосинхронизаций</td>
+	    <td width='5%'>Суммарно от АКБ, Ач</td><td width='5%'>Суммарно на АКБ, Ач</td>
+	    <td width='5%'>Альт. за день, кВтч</td><td width='5%'>Альт. за месяц, кВтч</td>
+	    <td width='5%'>Альт. всего, кВтч</td><td width='5%'>Альт. пользователь, кВтч</td>
+	    </tr>
+	    <tr>
+	    <td>".$row['deepest_discharge']."</td>
+	    <td>".$row['summary_ah']."</td>
+	    <td>".$row['lowest_voltage']."</td>
+	    <td>".$row['highest_voltage']."</td>
+	    <td>".$row['last_charge_date']."</td>
+	    <td>".$row['number_autosync']."</td>
+	    <td>".$row['E_summary_from_battery']."</td>
+	    <td>".$row['E_summary_to_battery']."</td>
+	    <td>".$row['E_alt_daily']."</td>
+	    <td>".$row['E_alt_monthly']."</td>
+	    <td>".$row['E_alt_summary']."</td>
+	    <td>".$row['E_alt_user']."</td>
+
+
+	    </tr>
+	</table>
+	</b>
+    <br>
+    <input TYPE='button' style='font-weight:bolder; background-color:darkkhaki;' VALUE=' МЕНЮ ' ONCLICK='HomeButton()'> 
+    ";
+    mysql_free($result);
+    mysql_close($db_bat);
+
+
+?>
+
+
+
+
+
+
+
+<?php } ?>
 </body>
 
 

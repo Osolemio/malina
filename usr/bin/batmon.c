@@ -1,7 +1,7 @@
 /*
  * batmon.c
  *
- *  Release 1.02b
+ *  Release 1.03b
  *  Created on: July 10. 2015.
  *      Author: Osolemio
  */
@@ -561,7 +561,7 @@ rest_time_counter=ltime;
 	    time(&ltime);
 	    rest_time_counter=ltime; // drop timer if there is any current
 	    dCdt=I_summ/3600;
-	    dEdt=I_summ*u_batt/3600;
+	    dEdt=fabs(I_summ*u_batt/3600);
 	    battery_state.E_summary_from_battery+=dEdt;
 	    }
 
@@ -740,7 +740,7 @@ rest_time_counter=ltime;
 		    if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL - battery_cycle\n");}
 
 		sprintf(query, "TRUNCATE TABLE battery_state");
-		    if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError truncate MySQL table - battery_state\n");}
+		    if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError truncate MySQL table - battery_state\n");} else {
 
 		sprintf(query, "INSERT INTO battery_state VALUES ('1','%.1f','%.1f','%.1f','%d','%d','%.1f','%.2f','%.2f','%s','%d','%.1f','%.1f','%.1f','%.3f','%.2f','%.1f','%.3f')",
 		battery_state.deepest_discharge,battery_state.last_discharge,battery_state.average_discharge,battery_state.discharge_cycles,
@@ -749,6 +749,8 @@ rest_time_counter=ltime;
 		battery_state.E_from_battery_since_ls,battery_state.E_alt_daily,battery_state.E_alt_monthly,battery_state.E_alt_summ,battery_state.E_alt_user);
 
 		   if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL - battery_state\n");}
+		}
+
 //--------------------Calculate estimated nominal C -----------------------		
 
 		    if (delta_SOC!=0) estimated_C=(100*delta_C)/delta_SOC;
@@ -793,7 +795,8 @@ rest_time_counter=ltime;
 
 
 	     sprintf(query,"SELECT * FROM work_table LIMIT 100");
-    	    if (mysql_query(&mysql,query)) 
+    	
+	    if (mysql_query(&mysql,query)) 
 		{ 
 		syslog(LOG_ERR,"Error SELECT from MySQL work_table. Can't reload settings\n");
 		}
