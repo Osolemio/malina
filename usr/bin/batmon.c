@@ -784,6 +784,28 @@ rest_time_counter=ltime;
 		    battery_state.E_alt_user=0;
 		    unlink("/var/map/.eureset");
 		}
+
+		if (file_exists("/var/map/.allreset")) 
+		{
+				battery_state.deepest_discharge=0;
+				battery_state.last_discharge=0;
+				battery_state.average_discharge=0;
+				battery_state.discharge_cycles=0;
+				battery_state.full_discharges=0;
+				battery_state.summary_ah=0;
+				battery_state.lowest_voltage=0;
+				battery_state.highest_voltage=0;
+				sprintf(battery_state.last_charge_date,"2015-01-01");
+				battery_state.number_autosync=0;
+				battery_state.E_summary_to_battery=0;
+				battery_state.E_summary_from_battery=0;
+				battery_state.E_from_battery_since_ls=0;
+				battery_state.E_alt_daily=0;
+				battery_state.E_alt_monthly=0;
+				battery_state.E_alt_summ=0;
+				battery_state.E_alt_user=0;
+		    unlink("/var/map/.allreset");
+		}
 		
 //-----check whether battery settings have been changed and reload them if so
 

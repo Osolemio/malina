@@ -3,8 +3,10 @@
     <head>
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta charset="UTF-8">
+   <script src="./js/jquery-2.1.3.min.js"></script>
+   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
       
-    <title>History diagrams</title>
+    <title>Данные по истории</title>
     <style>    
     hr {
 	border: none;
@@ -23,8 +25,9 @@
  $time=date("H:i");
 
 ?>
-
+<div style="background-color:#F0F0F0">
 <hr><p><center><b>Построение графиков по сохраненным данным</b></center></p><hr>
+</div>
 <form method="post" action="history_hdl.php">
 <table border="1" color="black" width="100%">
 <tr>    
@@ -92,8 +95,8 @@
 <tr>
 <td>
 <center>
-<input type="submit" value="Поехали!" />
-<input type="submit" name="multichart" value="Мультиграф" />  
+<input type="submit" style="background-color:lightgreen" value="Поехали!" />
+<input type="submit" style="background-color:lightgreen" name="multichart" value="Мультиграф" />  
 </center>
 </td>			    
 </tr>
@@ -112,14 +115,44 @@ function HomeButton()
 {
 location.href="menu.php";
 }
+
+function Reset_Counter(sw) {
+    $.ajax({
+	data:{
+		'sw': sw
+		},
+	url: 'makedrop.php',
+	async: false,
+        method: 'POST',
+	success: function(response) {
+	alert("выполнено");
+	},
+	error: function (response) {
+    	    var r = jQuery.parseJSON(response.responseText);
+    	    alert("Message: " + r.Message);
+    	    alert("StackTrace: " + r.StackTrace);
+    	    alert("ExceptionType: " + r.ExceptionType);
+	}});
+
+
+
+}
+
+
 </script>
 <?php
 
     if (file_exists('/var/map/.bmon')) {
 ?>
-
-<hr><p><center><b>Данные статистики по АКБ</b></center></p><hr>
-
+<div style="background-color:#F0F0F0">
+<hr><p><center><b>Данные статистики по АКБ</b></center>
+<div align="right">
+    <input TYPE='button' style='font-weight:bolder; background-color:orange;' VALUE=' Сбросить счетчик пользователя ' ONCLICK='Reset_Counter(1)'> 
+&nbsp&nbsp
+    <input TYPE='button' style='font-weight:bolder; background-color:orange;' VALUE=' Обнулить все поля ' ONCLICK='Reset_Counter(2)'> 
+</div>
+</p><hr>
+</div>
 <?php
     include('bd_bat.php');
       
@@ -129,7 +162,7 @@ location.href="menu.php";
 	<b>
 	<table border=1>
 	    <tr>
-	    <td width='5%'>Самый глубокий разряд %DOD</td><td width='5%'>Суммарно Ач</td>
+	    <td width='5%'>Самый глубокий разряд %DOD</td>
 	    <td width='5%'>Минимальное напряжение, В</td><td width='5%'>Максимальное напряжение, В</td>
 	    <td width='5%'>Дата последнего заряда</td><td width='5%'>Кол-во автосинхронизаций</td>
 	    <td width='5%'>Суммарно от АКБ, Ач</td><td width='5%'>Суммарно на АКБ, Ач</td>
@@ -138,7 +171,6 @@ location.href="menu.php";
 	    </tr>
 	    <tr>
 	    <td>".$row['deepest_discharge']."</td>
-	    <td>".$row['summary_ah']."</td>
 	    <td>".$row['lowest_voltage']."</td>
 	    <td>".$row['highest_voltage']."</td>
 	    <td>".$row['last_charge_date']."</td>
@@ -153,6 +185,7 @@ location.href="menu.php";
 
 	    </tr>
 	</table>
+* После обнуления новые данные появляются по истечении цикла интегрирования (по умолчанию 1 мин)
 	</b>
     <br>
     <input TYPE='button' style='font-weight:bolder; background-color:darkkhaki;' VALUE=' МЕНЮ ' ONCLICK='HomeButton()'> 
