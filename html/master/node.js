@@ -81,7 +81,7 @@ function tick() {
 	$('#text_battery_percent').html(cur_p.toFixed(0)+'%');
 	$('#text_battery_cons').html(cons.toFixed(1)+'Ач');
 	var cur_p_g=100-cur_p;
-	var cur_p_b=(cons/C20)*100; if (cur_p_b>100) cur_p_b=100;
+	var cur_p_b=(Math.abs(cons)/C20)*100; if (cur_p_b>100) cur_p_b=100;
 	document.getElementById('battery_percent').style.width=cur_p_g+'%';
 	document.getElementById('battery_ah').style.width=cur_p_b+'%';
 	}
@@ -298,7 +298,6 @@ function tick() {
 }
 
 function setup(index) {
-
   window.open('http://'+nodes[index]['ip']+'/setup/index.php');
 
 }
