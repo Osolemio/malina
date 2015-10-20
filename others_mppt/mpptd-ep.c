@@ -1,8 +1,8 @@
 /*
  * mpptd.c
- *  for EP-Tracer. RS232
+ *  for EP-Tracer. Network version
  *  Release 1.01b
- *  Created on: October 6. 2015.
+ *  Created on: October 12. 2015.
  *      Author: Osolemio
  */
  
@@ -21,24 +21,21 @@
 #include <signal.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
 
-
-#define DAEMON_NAME "MPPT-EP Reader daemon"
- 
- #define PORT_MPPT "/dev/ttyUSB1"
- #define PORT_MPPT_ALONE "/dev/ttyUSB0"
- #define BAUDRATE B115200
- #define ID 0x0016
- #define read_command 0xA0    
- #define size_of_buffer 560
- #define map 1
- #define mppt 2
- #define mppt_a 3
+ #define host_ip "127.0.0.1"
+ #define http_port "80"
+ #define ID "1"
+ #define DAEMON_NAME "MPPT-EP Reader daemon"
+ #define size_of_buffer 512 
  #define true 1
  #define false 0
  #define SHARED_MEMORY_KEY 1999
  
-
+extern errno;
 
 unsigned char Buffer[size_of_buffer];
 
@@ -46,7 +43,7 @@ unsigned char sum;
 
 struct timeval tv1,tv2,dtv;
 
-unsigned char Buffer_read[13]={0xEB,0x90,0xEB,0x90,0xEB,0x90,0x00,0x00,0xA0,0x00,0x00,0x00,0x7F};
+unsigned char Buffer_tmp[13]={0xEB,0x90,0xEB,0x90,0xEB,0x90,0x16,0x00,0xA0,0x00,0x21,0x40,0x7F};
 
 unsigned char crctbl_l[256]={
 0x00,0x21,0x42,0x63,0x84,0xa5,0xc6,0xe7,
@@ -156,74 +153,6 @@ long time_stop()
 //-------------------------------------------------------------------------
 
 
- int put_char(int fd, unsigned char a)
- {
-	 if (write(fd,&a,1)!=1) return -1;
-	 
-    return 0;
-
- }
-
-
- int send_read(int fd)
-  {
-   int i;
-    unsigned int cs;
-    Buffer_read[6]=(unsigned char)ID;
-    Buffer_read[7]=(unsigned char)(ID>>8);;
-
-    cs=CRC(&Buffer_read[6],4);
-    Buffer_read[10]=(unsigned char)(cs>>8);
-    Buffer_read[11]=(unsigned char)(cs);
-    i=write(fd,Buffer_read,13);
-    if (i<13) return -1; return 1;
-    }
-
-  char validate_answer(void)
-	{
-	    int i;
-	    unsigned char check_buffer[10]={0xEB,0x90,0xEB,0x90,0xEB,0x90,0,0,0xA0,0x2E};
-	    check_buffer[6]=(unsigned char)ID;
-	    check_buffer[7]=(unsigned char)(ID>>8);
-	    for (i=0;i++;i<10)
-		if (Buffer[i]!=check_buffer[i]) return -1;
-	    return 1;
-    }
-
- int open_port(char dev)
-    {
-	 int fd;
-	 if (dev==mppt)
-	 	 {
-	 		 fd = open(PORT_MPPT, O_RDWR | O_NOCTTY);
-	 		 if (fd<0)
-			    {
-	 		 	syslog(LOG_ERR,"Can't open serial port\n"); return -1;}
-	 		  else
-	 		 {
-	 		 fcntl(fd,F_SETFL,0);
-	 		 return fd;
-	 		 }
-	 	 }
-	
-	if (dev==mppt_a)
-	 	 {
-	 		 fd = open(PORT_MPPT_ALONE, O_RDWR | O_NOCTTY);
-	 		 if (fd<0)
-			    {
-	 		 	syslog(LOG_ERR,"Can't open serial port\n"); return -1;}
-	 		  else
-	 		 {
-	 		 fcntl(fd,F_SETFL,0);
-	 		 return fd;
-	 		 }
-	 	 }
-	    
-	  return -1;
-    }
-
-
-
 void signal_hdl(int sig, siginfo_t *siginfo, void *context)
   {
       struct tm *newtime;
@@ -257,7 +186,44 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
     {
    return (access(filename, 0) == 0);
     }
+//-----------------------------Network functions ----------------------
 
+int connectsock(const char *host, const char *port, const char *transport)
+{
+    struct hostent *phe;
+    struct servent *pse;
+    struct protoent *ppe;
+    struct sockaddr_in sin;
+    int s, type;
+
+
+    memset(&sin, 0, sizeof(sin));
+    sin.sin_family = AF_INET;
+    sin.sin_port = htons((unsigned short)atoi(port)); 	
+    if(phe = gethostbyname(host))
+	memcpy(&sin.sin_addr, phe->h_addr, phe->h_length);
+    if((ppe = getprotobyname(transport)) == 0)
+	{
+	    printf("    : %s\n", strerror(errno));	
+	    return -1;			
+	}	
+    if(strcmp(transport, "udp") == 0)
+	type = SOCK_DGRAM;
+    else
+	type = SOCK_STREAM;			
+    s = socket(PF_INET, type, ppe->p_proto);
+    if(s < 0)
+	{
+	    printf("  : %s\n", strerror(errno));	 
+	    return -1;
+	}
+    if(connect(s, (struct sockaddr *)&sin, sizeof(sin)) < 0)
+	{
+	    printf("    : %s\n", strerror(errno));	
+	    return -1;			
+	}
+    return s;
+}
 
 
 //-----------------------------MAIN------------------------------------
@@ -280,16 +246,14 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	struct mppt_bat *batmon;
 	
 	int shm;
-
+	int sock;
 
 
 	long delay_var;
 	int status;
 	int pid;	  
-	int i,j;
-	unsigned int cs;
-	char query[355];
-	char mode[4]={'-','F','B','E'};
+	int i;
+	char query[255];
    
    
    
@@ -343,7 +307,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 
         syslog(LOG_NOTICE, "Entering Daemon");
 
-
+/*
 
 	mysql.reconnect=true;
 	mysql_init(&mysql);  
@@ -368,40 +332,9 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
           close(STDIN_FILENO);
           close(STDOUT_FILENO);
           close(STDERR_FILENO);
+*/
 
-  //-------------------------Open MPPT port-----------------------------------
-     
-     int fd_mppt = open_port(mppt);
-        if (fd_mppt<0) 
-		{
-		if (file_exists("/var/map/.map"))
-			return 1;
-		fd_mppt = open_port(mppt_a);
-		  if (fd_mppt<0)
-			return 1;
-		}
-        if (!isatty(fd_mppt))
-           return 2;
-
-        if (tcgetattr(fd_mppt, &port_cfg)<0)
-          return 3;
-
-  //------ other different settings -----------------
-
-           cfmakeraw(&port_cfg);
-
-         cfsetospeed(&port_cfg, BAUDRATE);
-         cfsetispeed(&port_cfg, BAUDRATE);
-
-//----------- all other port settings must be here <------------------         
-         port_cfg.c_cc[VMIN] =0;
-         port_cfg.c_cc[VTIME] =10;
-    
-         
-         
-          if (tcsetattr(fd_mppt, TCSAFLUSH, &port_cfg)<0)
-         return 4;
-
+/*
 //----------------------- signals handler ------------------------------
 	 my_signal.sa_sigaction=&signal_hdl;
 	 my_signal.sa_flags=SA_SIGINFO;
@@ -433,46 +366,41 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	     batmon->battery_id=1; //default value
 
 //-------------------- main cycle -------------------------------
-   
-	do {
-   
-	bzero(Buffer,size_of_buffer);
-	do { tcflush(fd_mppt,TCIFLUSH);} while (send_read(fd_mppt)!=1);
-         tcdrain(fd_mppt);usleep(20000);
-	j=read(fd_mppt,Buffer,size_of_buffer);
-		if (j>50 && validate_answer()) {
-	    if ((Buffer[j-2]+Buffer[j-3]*256)==CRC(&Buffer[6],j-9))
-		{
-	    		mppt_data.Vc_PV=(Buffer[18]+Buffer[19]*256)/100;
-			mppt_data.V_Bat=(Buffer[10]+Buffer[11]*256)/100;
-			mppt_data.P_PV=(Buffer[50]+Buffer[51]*256)/100;
-			mppt_data.Ic_PV=(mppt_data.Vc_PV==0)?0:mppt_data.P_PV/mppt_data.Vc_PV;
-			mppt_data.P_Out=(Buffer[50]+Buffer[51]*256)/100;
-			mppt_data.P_Load=(Buffer[50]+Buffer[51]*256)/100;
-			mppt_data.P_curr=(Buffer[50]+Buffer[51]*256)/100;
-			mppt_data.I_Ch=(Buffer[12]+Buffer[13]*256+Buffer[14]+Buffer[15]*256+Buffer[16]+Buffer[17]*256)/100;
-			mppt_data.I_Out=0;
-			mppt_data.Temp_Int=(Buffer[24]+Buffer[25]*256)/100-40;
-			mppt_data.Temp_Bat=(Buffer[26]+Buffer[27]*256)/100-40;
-			mppt_data.Pwr_kW=(Buffer[52]+Buffer[53]*256)/100;
-			mppt_data.Sign_C0=0;
-			mppt_data.Sign_C1=0;
-			mppt_data.I_EXTS0=0;
-			mppt_data.I_EXTS1=0;
-			mppt_data.P_EXTS0=0;
-			mppt_data.P_EXTS1=0;
-			mppt_data.Relay_C=0;
-			mppt_data.RSErrSis=0;
-			mppt_data.Mode=mode[Buffer[30]];
-			mppt_data.Sign='-';
-			mppt_data.MPP='-';
-			mppt_data.windspeed=65535;
+   do {
+  
+*/
+
+	sock = connectsock(host_ip, http_port, "tcp");
+	if(sock < 0)	//  
+	    return -1;
+	else 		//
+	    {
+		sprintf(Buffer, "GET / HTTP/1.1\r\nHost:%s?id=%s",host_ip,http_port);
+		printf("Buffer is:%s",Buffer);
+				//  
+		if(write(sock, Buffer, sizeof(Buffer)) < 0)		// 
+		    {
+			printf("    : %s\n", strerror(errno));
+			return -1;
+		    }
+		
+		bzero(Buffer, size_of_buffer);
+		if(read(sock, Buffer, sizeof(Buffer)) < 0)
+		    {
+			printf("    : %s\n", strerror(errno));
+			return -1;
+		    }
+		else				//  
+		    printf("  : %s\n", Buffer);
+	    close(sock);	// 
+	    }
 
 	    /* Get the time in seconds */
 	     time(&ltime);
             /* Convert it to the structure tm */
              newtime = localtime(&ltime);
 	     tim=*newtime;
+/*
      sprintf(query, "INSERT INTO mppt VALUES (NULL,'%d-%d-%d', '%d:%d:%d','%.1f','%.1f','%.1f','%d','%d','%d','%d','%.1f','%.1f','%d','%d','%.3f','%d','%d','%d','%d','%d','%d','%d','%d','%c','%c','%c','%d')",
 	tim.tm_year+1900,tim.tm_mon+1,tim.tm_mday,tim.tm_hour,tim.tm_min,
 	tim.tm_sec,mppt_data.Vc_PV,mppt_data.Ic_PV,mppt_data.V_Bat,
@@ -483,37 +411,24 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	mppt_data.RSErrSis,mppt_data.Mode, mppt_data.Sign,mppt_data.MPP,mppt_data.windspeed);
 
 
+/*        
 	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL\n"); return -1;}
 	    
-	     time(&ltime);
-	     batmon->battery_id=1;
-	     batmon->timestamp=ltime;
-	     batmon->current1=(mppt_data.Sign_C0==1)?(0-mppt_data.I_EXTS0):mppt_data.I_EXTS0;
-	     batmon->current2=(mppt_data.Sign_C1==1)?(0-mppt_data.I_EXTS1):mppt_data.I_EXTS1;
-	     batmon->current_ch=mppt_data.I_Ch;
-	     batmon->tbat=mppt_data.Temp_Bat;
-	     batmon->Ubat=mppt_data.V_Bat;  
- 
-          
+	bzero(Buffer,size_of_buffer);          
+	
+//----------------- drop kWh counter everyday at 23:30 ----------------
 
-	   usleep(900000);
-
-	} //if j>0
-       } else // if CRC
-	tcflush(fd_mppt,TCIFLUSH);
-    } while (1);
-
- close(fd_mppt);
- mysql_close(&mysql);
-closelog(); 
+// mysql_close(&mysql);
+ closelog(); 
  return 0;
  
  }
-
+/*
       else
       {
      return 0;
       }
   }
 
-
+*/
+}

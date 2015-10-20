@@ -165,7 +165,7 @@ int connectsock(const char *host, const char *port, const char *transport)
 	int status;
 	int pid;	  
 	int i;
-	char query[255];
+	char query[355];
    
    
    
@@ -219,7 +219,7 @@ int connectsock(const char *host, const char *port, const char *transport)
 
         syslog(LOG_NOTICE, "Entering Daemon");
 
-
+/*
 
 	mysql.reconnect=true;
 	mysql_init(&mysql);  
@@ -244,9 +244,9 @@ int connectsock(const char *host, const char *port, const char *transport)
           close(STDIN_FILENO);
           close(STDOUT_FILENO);
           close(STDERR_FILENO);
+*/
 
-
-
+/*
 //----------------------- signals handler ------------------------------
 	 my_signal.sa_sigaction=&signal_hdl;
 	 my_signal.sa_flags=SA_SIGINFO;
@@ -278,6 +278,7 @@ int connectsock(const char *host, const char *port, const char *transport)
 	     batmon->battery_id=1; //default value
 
 //-------------------- main cycle -------------------------------
+*/
 
    do {
   
@@ -303,7 +304,7 @@ int connectsock(const char *host, const char *port, const char *transport)
 				parse_buf=strtok(NULL,":");
 
 			    }
-			mppt_data.Vc_PV=atof(parsed_arr[1]);
+			mppt_data.Vc_PV=atof(parsed_arr[0]);
 			
 			mppt_data.V_Bat=atof(parsed_arr[0]);
 			mppt_data.P_PV=atof(parsed_arr[3]);
@@ -344,22 +345,6 @@ int connectsock(const char *host, const char *port, const char *transport)
 			mppt_data.Pwr_kW,mppt_data.Sign_C0,mppt_data.Sign_C1,mppt_data.I_EXTS0,
 			mppt_data.I_EXTS1,mppt_data.P_EXTS0,mppt_data.P_EXTS1,mppt_data.Relay_C,
 			mppt_data.RSErrSis,mppt_data.Mode, mppt_data.Sign,mppt_data.MPP,mppt_data.windspeed);
-			printf("query is %s\n",query);
-		if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL\n"); return -1;}
-		
-		time(&ltime);
-	     batmon->battery_id=1;
-	     batmon->timestamp=ltime;
-	     batmon->current1=(mppt_data.Sign_C0==1)?(0-mppt_data.I_EXTS0):mppt_data.I_EXTS0;
-	     batmon->current2=(mppt_data.Sign_C1==1)?(0-mppt_data.I_EXTS1):mppt_data.I_EXTS1;
-	     batmon->current_ch=mppt_data.I_Ch;
-	     batmon->tbat=mppt_data.Temp_Bat;
-	     batmon->Ubat=mppt_data.V_Bat;    
-		
-		    
-	    
-		bzero(Buffer,size_of_buffer);          
-
 
 		    }
 		}    
@@ -367,14 +352,27 @@ int connectsock(const char *host, const char *port, const char *transport)
 	    }
 	  usleep(900000);
 	} while (true);
+/*
 
-   mysql_close(&mysql);
+
+/*        
+	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL\n"); return -1;}
+	    
+	bzero(Buffer,size_of_buffer);          
+	
+//----------------- drop kWh counter everyday at 23:30 ----------------
+
+// mysql_close(&mysql);
  closelog(); 
  return 0;
  
  }
-else
+/*
+      else
       {
      return 0;
       }
   }
+
+*/
+}

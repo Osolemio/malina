@@ -353,7 +353,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	unsigned int offset;
 	int write_flag=0;
 
-        char query[255];
+        char query[355];
         char dateStr[9], timeStr[9];
         float I_acc, I_mppt;
 

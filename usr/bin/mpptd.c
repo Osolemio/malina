@@ -269,7 +269,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	int status;
 	int pid;	  
 	int i;
-	char query[255];
+	char query[355];
    
    
    
@@ -438,7 +438,6 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         	  	   mppt_data.P_curr=(Buffer[0x39]*256+Buffer[0x38]);
         	  	   CC=(Buffer[0x3B]*256+Buffer[0x3A]);
         	  	   mppt_data.I_Ch=(float)CC/100;
-        	  	   //syslog(LOG_NOTICE,"MPPT. @0x2FB:%2X, @0x2FC:%2X\n",Buffer[0x3A], Buffer[0x3B]);
         	  	   CC=(Buffer[0x3F]*256+Buffer[0x3E]);mppt_data.I_Out=(float)CC/100;
         	  	   mppt_data.Temp_Int=Buffer[0x5C];
         	  	   mppt_data.Temp_Bat=Buffer[0x5D];
