@@ -346,7 +346,7 @@ a.menu8:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
 a.menu9 {
  position:absolute;
  top:480px;
- left:28%;
+ left:27%;
  width:250px;
  height:40px;
   border-radius:100px;

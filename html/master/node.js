@@ -81,7 +81,7 @@ function tick() {
 	$('#text_battery_percent').html(cur_p.toFixed(0)+'%');
 	$('#text_battery_cons').html(cons.toFixed(1)+'Ач');
 	var cur_p_g=100-cur_p;
-	var cur_p_b=(Math.abs(cons)/C20)*100; if (cur_p_b>100) cur_p_b=100;
+	var cur_p_b=(cons/C20)*100; if (cur_p_b>100) cur_p_b=100;
 	document.getElementById('battery_percent').style.width=cur_p_g+'%';
 	document.getElementById('battery_ah').style.width=cur_p_b+'%';
 	}
@@ -180,13 +180,24 @@ function tick() {
 
 
 	    if (map_mode==2) {
-		document.getElementById('led_map_net+key').style.visibility='visible';
+		document.getElementById('led_map_net'+key).style.visibility='visible';
 		document.getElementById('led_map_relay'+key).style.background='red';
 		document.getElementById('led_map_charge'+key).style.visibility='hidden';
 		document.getElementById('map_stop_acc'+key).style.visibility='visible';
 		document.getElementById('arrow_map_up'+key).style.visibility='hidden';
 		document.getElementById('arrow_map_down'+key).style.visibility='hidden';
-		
+		if (load_map[key]['_IAcc_med_A_u16']>0) {
+		document.getElementById('arrow_map_up'+key).style.visibility='visible';
+		document.getElementById('arrow_map_down'+key).style.visibility='hidden';
+		document.getElementById('map_stop_add'+key).style.visibility='hidden';
+		}
+		else
+		{
+		document.getElementById('arrow_map_up'+key).style.visibility='hidden';
+		document.getElementById('arrow_map_down'+key).style.visibility='hidden';
+		document.getElementById('map_stop_add'+key).style.visibility='visible';
+		}
+
 	    }
 	    
 	    if (map_mode==3) {
