@@ -394,6 +394,8 @@ div.div_t {
 
 </style>
 
+<?php if (file_exists("/release")) {$ver=shell_exec("cat /release"); echo $ver;}?>
+
 <a href="index.php" class="menu1"><div class="div_t"> ТЕКСТ </div></a>
 <br>
 <a href="gauges.php" class="menu2"><div class="div_t"> ПРИБОРЫ </div></a>
