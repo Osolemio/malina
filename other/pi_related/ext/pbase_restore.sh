@@ -17,7 +17,7 @@ fsck.ext2 -f /dev/sda3
   fdisk /dev/sda <<EOF
 p
 d
-4
+3
 n
 p
 
