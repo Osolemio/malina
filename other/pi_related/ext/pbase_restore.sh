@@ -1,5 +1,5 @@
 !#/bin/bash
-echo "Start recreating /dev/sda3 ext2 partition"
+echo "Start recreating /dev/sda4 f2fs partition"
 
 echo "Stop all MAP services"
 rm /var/map/.map
@@ -9,15 +9,15 @@ sleep 20
 
 echo "Mysql stopping"
 /etc/init.d/mysql stop
-echo "Unmounting /dev/ext2"
-echo "Recreating /dev/ext2"
+echo "Unmounting /dev/sda4"
+echo "Recreating /dev/sda4"
 umount /bases
-fsck.ext2 -f /dev/sda3
+fsck.f2fs -f /dev/sda4
 
   fdisk /dev/sda <<EOF
 p
 d
-3
+4
 n
 p
 
@@ -27,10 +27,10 @@ p
 w
 q
 EOF
-echo "Done. Making ext2 on /dev/sda3"
-mkfs.ext2 /dev/sda3
+echo "Done. Making f2fs on /dev/sda4"
+mkfs.f2fs /dev/sda4
 
-fsck.ext2 -f /dev/sda3
+fsck.f2fs -f /dev/sda4
 
 echo "mounting /bases"
 mount -a

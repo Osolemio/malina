@@ -11,7 +11,8 @@ echo "Mysql stopping"
 /etc/init.d/mysql stop
 echo "Unmounting /dev/sda4"
 echo "Recreating /dev/sda4"
-umount /bases
+umount /dev/sda4
+
 fsck.f2fs -f /dev/sda4
 
   fdisk /dev/sda <<EOF
@@ -28,6 +29,8 @@ w
 q
 EOF
 echo "Done. Making f2fs on /dev/sda4"
+partprobe
+umount /dev/sda4
 mkfs.f2fs /dev/sda4
 
 fsck.f2fs -f /dev/sda4
