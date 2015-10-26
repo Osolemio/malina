@@ -551,7 +551,7 @@ rest_time_counter=ltime;
 	    time(&ltime);
 	    rest_time_counter=ltime; // drop timer if there is any current
 	    dCdt=(I_summ/3600)*coulomb_eff;
-	    dEdt=I_summ*u_batt/3600;
+	    dEdt=(I_summ*u_batt)/3600;
 	    battery_state.E_summary_to_battery+=dEdt;
 	    }
 	
@@ -561,7 +561,7 @@ rest_time_counter=ltime;
 	    time(&ltime);
 	    rest_time_counter=ltime; // drop timer if there is any current
 	    dCdt=I_summ/3600;
-	    dEdt=fabs(I_summ*u_batt/3600);
+	    dEdt=fabs((I_summ*u_batt)/3600);
 	    battery_state.E_summary_from_battery+=dEdt;
 	    }
 

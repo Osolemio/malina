@@ -165,7 +165,7 @@ function Reset_Counter(sw) {
 	    <td width='5%'>Самый глубокий разряд %DOD</td>
 	    <td width='5%'>Минимальное напряжение, В</td><td width='5%'>Максимальное напряжение, В</td>
 	    <td width='5%'>Дата последнего заряда</td><td width='5%'>Кол-во автосинхронизаций</td>
-	    <td width='5%'>Суммарно от АКБ, Ач</td><td width='5%'>Суммарно на АКБ, Ач</td>
+	    <td width='5%'>Суммарно от АКБ, кВтч</td><td width='5%'>Суммарно на АКБ, кВтч</td>
 	    <td width='5%'>Альт. за день, кВтч</td><td width='5%'>Альт. за месяц, кВтч</td>
 	    <td width='5%'>Альт. всего, кВтч</td><td width='5%'>Альт. пользователь, кВтч</td>
 	    </tr>
@@ -175,8 +175,8 @@ function Reset_Counter(sw) {
 	    <td>".$row['highest_voltage']."</td>
 	    <td>".$row['last_charge_date']."</td>
 	    <td>".$row['number_autosync']."</td>
-	    <td>".$row['E_summary_from_battery']."</td>
-	    <td>".$row['E_summary_to_battery']."</td>
+	    <td>".round($row['E_summary_from_battery']/1000,3)."</td>
+	    <td>".round($row['E_summary_to_battery']/1000,3)."</td>
 	    <td>".$row['E_alt_daily']."</td>
 	    <td>".$row['E_alt_monthly']."</td>
 	    <td>".$row['E_alt_summary']."</td>
