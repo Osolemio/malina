@@ -851,12 +851,13 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	  }    
           
 //------------------------Read average currents -----------------
-
-      if (eeprom[0x156]==2 || eeprom[0x156]==3) {
-   
           map_data._I_acc_avg=0;
           map_data._I_mppt_avg=0;
           I_mppt=0;
+
+
+      if (eeprom[0x156]==2 || eeprom[0x156]==3) {
+   
           
            send_command (to_read, fd, 0x432, 0x1);
 //              tcdrain (fd);
