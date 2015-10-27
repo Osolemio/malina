@@ -450,11 +450,11 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 			mppt_data.P_Out=(float)(Buffer[50]+Buffer[51]*256)/100;
 			mppt_data.P_Load=(float)(Buffer[50]+Buffer[51]*256)/100;
 			mppt_data.P_curr=(float)(Buffer[50]+Buffer[51]*256)/100;
-			mppt_data.I_Ch=(float)(Buffer[12]+Buffer[13]*256+Buffer[14]+Buffer[15]*256+Buffer[16]+Buffer[17]*256)/100;
+			mppt_data.I_Ch=(float)(float(Buffer[12]+Buffer[13]*256)/100+float(Buffer[14]+Buffer[15]*256)/100+float(Buffer[16]+Buffer[17]*256)/100);
 			mppt_data.I_Out=0;
 			mppt_data.Temp_Int=(float)(Buffer[24]+Buffer[25]*256)/100-40;
 			mppt_data.Temp_Bat=(float)(Buffer[26]+Buffer[27]*256)/100-40;
-			mppt_data.Pwr_kW=(float)(Buffer[52]+Buffer[53]*256)/100;
+			mppt_data.Pwr_kW=(float)((long)Buffer[52]+(long)Buffer[53]*0xFF+(long)Buffer[54]*0xFFFF+(long)Buffer[55]*0xFFFFFF)/100000;
 			mppt_data.Sign_C0=0;
 			mppt_data.Sign_C1=0;
 			mppt_data.I_EXTS0=0;
