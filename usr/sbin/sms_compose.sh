@@ -38,11 +38,11 @@ fi
 if test $result -eq 0; then
 
  if test ! -e "/var/map/temp_sms_$i"; then
-
+    cur_t=`date`
     echo "To: $report_number" > /var/map/temp_sms_$i
     echo " " >> /var/map/temp_sms_$i
     echo $text >> /var/map/temp_sms_$i
-    echo "value: ${data_fields[${cmpv[0]}]}" >> /var/map/temp_sms_$i
+    echo "value: ${data_fields[${cmpv[0]}]} $cur_t" >> /var/map/temp_sms_$i
     tmp_name=`date +%s`
     cp /var/map/temp_sms_$i /var/spool/sms/outgoing/$tmp_name.sms
  fi
@@ -51,11 +51,11 @@ if test $result -eq 0; then
  if test $result -eq 1; then
 
  if test -e "/var/map/temp_sms_$i"; then
-
+    cur_t=`date`
     rm /var/map/temp_sms_$i
     echo "To: $report_number" > /var/map/temp_sms_ok_$i
     echo " " >> /var/map/temp_sms_ok_$i
-    echo "${alias[${cmpv[0]}]} is in range" >> /var/map/temp_sms_ok_$i
+    echo "${alias[${cmpv[0]}]} is in range. $cur_t" >> /var/map/temp_sms_ok_$i
     tmp_name=`date +%s`
     mv /var/map/temp_sms_ok_$i /var/spool/sms/outgoing/$tmp_name.sms
 

@@ -34,7 +34,11 @@ box-shadow:
 
 <table border="2" align="left" >
 
-<tr bgcolor="lightblue"><td><b>МАП. МОНИТОРИНГ</b></td><td><a href="menu.php" class="button28">МЕНЮ</a></td></tr>
+<tr bgcolor="lightblue"><td><b>МАП. МОНИТОРИНГ</b></td><td>
+<a href="menu.php" class="button28">МЕНЮ</a>
+<a href="gauges.php" class="button28">ПРИБОРЫ</a>
+<a href="/setup/index.php" class="button28">СИСТЕМА</a>
+</td></tr>
 
 
 
