@@ -400,8 +400,8 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
           unsigned char _RSErrJobM;
           unsigned char _RSErrJob;
           unsigned char _RSWarning;
-          unsigned char _Temp_Grad0;
-          unsigned char _Temp_Grad2;
+          char _Temp_Grad0;
+          char _Temp_Grad2;
           float _INET_16_4;
           float _IAcc_med_A_u16;
           unsigned char _Temp_off;
@@ -412,6 +412,10 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	  float _I_acc_avg;
 	  float _I_mppt_avg;
 	  unsigned char _I2C_err;
+	  char _Temp_Grad1;
+	  unsigned char _Relay1;
+	  unsigned char _Relay2;
+	  unsigned char _Flag_ECO;
       };
 
       struct map_info map_data;
@@ -697,6 +701,11 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    }
 
 
+	send_command (to_read, fd, 0x585,0);
+	
+	 if (read_answer(fd) == 0) 
+	    map_data._Flag_ECO=Buffer[0]; else map_data._Flag_ECO=255;
+	    bzero(Buffer,sizeof(Buffer));
 
     	send_command (to_read, fd, 0x400, 0xFF);
 //              tcdrain (fd);
@@ -706,6 +715,33 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
         map_data._MODE = Buffer[0x400 - 0x3FF];
 
+/*
+
+    M_OFF          =0 – МАП выключен и нет сети на входе
+    M_OFFNET       =1 – МАП выключен но есть сеть на входе (значение напряжения сети выводится в ЖКИ)
+    M_ON           =2 – МАП включен (происходит генерация 220В от АКБ, нет сети на входе.  
+    M_ONNET        =3 – МАП включен и транслирует сеть (есть сеть на входе).
+    M_ONCHARGE 	   =4 – МАП включен, транслирует сеть и одновременно заряжает АКБ.
+
+    ------------ my extentions------------------------
+    5 - принудительная эко подкачка
+    6 - тарифная сеть
+    7 - трансляция + эко-подкачка
+    
+    
+    
+
+
+*/
+
+	map_data._UNET = Buffer[0x422 - 0x3FF];
+        map_data._UNET += 100;
+//-------------------change _MODE---------
+/*
+	if (map_data._MODE==2 && map_data._UNET>100 && eeprom[0x16B]==2) map_data._MODE=5;
+	if (map_data._MODE==2 && map_data._UNET>100 && eeprom[0x16B]==3) map_data._MODE=6;
+	if (map_data._MODE==3 && eeprom[0x16B]==
+*/
         map_data._Status_Char = Buffer[0x402 - 0x3FF];
 
         map_data._Uacc =
@@ -721,8 +757,6 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
         map_data._F_Net_Over = Buffer[0x41D - 0x3FF];
 
-        map_data._UNET = Buffer[0x422 - 0x3FF];
-        	  map_data._UNET += 100;
 
         map_data._INET = Buffer[0x423 - 0x3FF];
 
@@ -753,6 +787,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         map_data._RSWarning = Buffer[0x2E];
 
         map_data._Temp_Grad0 = Buffer[0x2F] - 50;
+	map_data._Temp_Grad1 = Buffer[0x30] - 50;
 
         map_data._Temp_Grad2 = Buffer[0x430 - 0x3FF] - 50;
 
@@ -770,6 +805,8 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	  map_data._E_ACC_CHARGE =
 	    (Buffer[0x56] * 65536 + Buffer[0x55] * 256 + Buffer[0x54]);
 	 map_data._I2C_err = Buffer[0x45A-0x3FF];
+	 map_data._Relay1=0;
+	 map_data._Relay2=0;
 
 
 //----------------- adding BMS data --------------------------------
@@ -888,7 +925,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         	  newtime = localtime (&ltime);
         	  tim = *newtime;
         	  sprintf (query,
-        		   "INSERT INTO data VALUES (NULL,'%d-%d-%d','%d:%d:%d','%d','%d','%.1f','%i','%i','%d','%d','%i','%d','%i','%d','%d','%i','%d','%i','%d','%d','%d','%d','%d','%d','%.1f','%.1f','%d','%d','%d','%d','%.1f','%.1f','%.1f','%d')",
+        		   "INSERT INTO data VALUES (NULL,'%d-%d-%d','%d:%d:%d','%d','%d','%.1f','%i','%i','%d','%d','%i','%d','%i','%d','%d','%i','%d','%i','%d','%d','%d','%d','%d','%d','%.1f','%.1f','%d','%d','%d','%d','%.1f','%.1f','%.1f','%d','%d','%d','%d','%d')",
         		   tim.tm_year + 1900, tim.tm_mon + 1, tim.tm_mday,
         		   tim.tm_hour, tim.tm_min, tim.tm_sec, map_data._MODE,
         		   map_data._Status_Char, map_data._Uacc, map_data._Iacc,
@@ -902,7 +939,8 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         		   map_data._Temp_Grad2, map_data._INET_16_4,
         		   map_data._IAcc_med_A_u16, map_data._Temp_off,
         		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
-        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err);
+        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
+			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO);
 
         	  if (mysql_query (&mysql, query))
         	    {

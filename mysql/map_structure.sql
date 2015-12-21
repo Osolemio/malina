@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS `data` (
   `_RSErrJobM` tinyint(3) unsigned NOT NULL,
   `_RSErrJob` tinyint(3) unsigned NOT NULL,
   `_RSWarning` tinyint(3) unsigned NOT NULL,
-  `_Temp_Grad0` tinyint(3) unsigned NOT NULL,
-  `_Temp_Grad2` tinyint(3) unsigned NOT NULL,
+  `_Temp_Grad0` tinyint(3) NOT NULL,
+  `_Temp_Grad2` tinyint(3) NOT NULL,
   `_INET_16_4` decimal(3,1) unsigned NOT NULL,
   `_IAcc_med_A_u16` decimal(4,1) unsigned NOT NULL,
   `_Temp_off` tinyint(3) unsigned NOT NULL,
@@ -62,6 +62,10 @@ CREATE TABLE IF NOT EXISTS `data` (
   `_I_acc_avg` decimal(4,1) unsigned NOT NULL,
   `_I_mppt_avg` decimal(4,1) unsigned NOT NULL,
   `_I2C_Err` tinyint(3) unsigned NOT NULL,
+  `_Temp_Grad1` tinyint(3) NOT NULL,
+  `_Relay1` tinyint(3) NOT NULL,
+  `_Relay2` tinyint(3) NOT NULL,
+  `_Flag_ECO` tinyint(3) NOT NULL,
   PRIMARY KEY (`number`,`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (DAYOFYEAR(date))
