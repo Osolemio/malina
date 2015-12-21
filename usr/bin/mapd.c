@@ -728,7 +728,10 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
     11 - принудительная эко генерация
     12 - тарифная сеть. минимальный тариф
     13 - трансляция + эко-подкачка
-    14 - ожидание внешнего заряда
+    14 - трансляция + продажа в сеть
+    15 - подкачка сети Pmax
+    16 - генерация сети Pmax
+
     
     
     
@@ -738,12 +741,28 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
 	map_data._UNET = Buffer[0x422 - 0x3FF];
         map_data._UNET += 100;
+
 //-------------------change _MODE---------
-/*
-	if (map_data._MODE==2 && map_data._UNET>100 && eeprom[0x16B]==2) map_data._MODE=5;
-	if (map_data._MODE==2 && map_data._UNET>100 && eeprom[0x16B]==3) map_data._MODE=6;
-	if (map_data._MODE==3 && eeprom[0x16B]==
-*/
+
+	if (map_data._MODE==2) 
+	    {
+		if (map_data._UNET>100)
+		 {
+		    if (eeprom[0x13B]==1) map_data._MODE=15;else
+		    if (eeprom[0x13B]==0) map_data._MODE=16;else
+		    if (eeprom[0x13C]==0) map_data._MODE=11;
+
+		 }
+
+	    }
+
+	if (map_data._MODE==3 && (map_data._Flag_ECO&3)==0)
+	    {
+		if (eeprom[0x13B]==1) map_data._MODE=13; else
+		if (eeprom[0x13B]==2) map_data._MODE=14;
+	    }
+
+
         map_data._Status_Char = Buffer[0x402 - 0x3FF];
 
         map_data._Uacc =
