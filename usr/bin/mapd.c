@@ -704,8 +704,9 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	send_command (to_read, fd, 0x585,0);
 	
 	 if (read_answer(fd) == 0) 
-	    map_data._Flag_ECO=Buffer[0]; else map_data._Flag_ECO=255;
+	    map_data._Flag_ECO=Buffer[1]; else map_data._Flag_ECO=255;
 	    bzero(Buffer,sizeof(Buffer));
+
 
     	send_command (to_read, fd, 0x400, 0xFF);
 //              tcdrain (fd);
@@ -724,9 +725,10 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
     M_ONCHARGE 	   =4 – МАП включен, транслирует сеть и одновременно заряжает АКБ.
 
     ------------ my extentions------------------------
-    5 - принудительная эко подкачка
-    6 - тарифная сеть
-    7 - трансляция + эко-подкачка
+    11 - принудительная эко генерация
+    12 - тарифная сеть. минимальный тариф
+    13 - трансляция + эко-подкачка
+    14 - ожидание внешнего заряда
     
     
     
