@@ -721,10 +721,17 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    }
 
 
-	send_command (to_read, fd, 0x585,0);
+	send_command (to_read, fd, 0x585,1);
 	
 	 if (read_answer(fd) == 0) 
-	    map_data._Flag_ECO=Buffer[1]; else map_data._Flag_ECO=255;
+	    {
+	    map_data._Flag_ECO=Buffer[1];
+
+	    map_data._Relay1=Buffer[2]&17;
+	    map_data._Relay2=Buffer[2]&34;
+
+	    }
+	     else map_data._Flag_ECO=255;
 	    bzero(Buffer,sizeof(Buffer));
 
 

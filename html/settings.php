@@ -18,6 +18,7 @@
 
    include ("./request_settings.php");
     $power=array("1,3","1,5","2","3","4,5","6","9","12","15","18","24","36");
+    $dominator=array("обычный","МАП трехфазный","н/о","DOMINATOR","н/о","н/о","н/о","DOMINATOR+");
     $voltage=array(12,24,48,96);
     $sin=array("Чистый синус","Оптимальный синус","Pmax","Прецизионный синус");
     $phase=array("Однофазная работа","Ведущий/фаза1","Фаза 2","Фаза 3", "Ведомый");
@@ -35,6 +36,7 @@
 <tr bgcolor="lightskyblue"><td><b>ИНФОРМАЦИЯ О НАСТРОЙКАХ ИНВЕРТОРА МАП</b></td><td><a href="./menu.php"><b>МЕНЮ</b></a></td></tr>
 <tr><td>ВЕРСИЯ МОДЕЛИ СИЛОВОЙ ПЛАТЫ:</td><td>&nbsp<?php echo $row[0x01][1]^0xC0; if ($row[0x01][1]&0x80) echo "&nbspГИБРИД";?></td></tr>
 <tr><td>ВЕРСИЯ ПО:</td><td>&nbsp<?php $i=$row[0x02][1]&0x1F;$i1=$row[0x02][1]>>5;echo $i.".".$i1;?></td></tr>
+<tr><td>Тип устройства:</td><td>&nbsp<?php echo $dominator[$row[0x24][1]]; ?></td></tr>
 <tr><td>Мощность устройства:</td><td>&nbsp<?php echo $power[$row[0x05][1]]."кВт"; ?></td></tr>
 <tr><td>Рабочее напряжение:</td><td>&nbsp<?php echo $voltage[$row[0x06][1]]."В"; ?></td></tr>
 <tr><td>Версия платы с процессором:</td><td>&nbsp<?php echo $row[0x0C][1]; ?></td></tr>
@@ -57,7 +59,7 @@
 <tr><td>ЭКО режим:</td><td>&nbsp<?php if ($row[0x13C][1]==255) echo "Отсуствует в настройках"; else echo $eco[$row[0x13C][1]];?></td></tr>
 <tr><td>Минимальное напряжение для рабоы от АКБ:</td><td>&nbsp<?php $i=(($row[0x13D][1]<<$row[0x06][1]) + $row[0x102][1])/10; echo $i."В"; ?></td></tr>
 <tr><td>Включение генерации по нагрузке:</td><td>&nbsp<?php $i=$row[0x13E][1]; if ($i==0) echo "Выключено"; else echo $i."Вт"; ?></td></tr>
-<tr><td>Совместная работа в трехфазной системе:</td><td>&nbsp<?php if ($row[0x13F][1]==255) echo $phase_mode[2]; else echo $phase_mode[$row[0x13F][1]]; ?></td></tr>
+<tr><td>Количество параллельно подключенных МАП:</td><td>&nbsp<?php if ($row[0x155][1]==255) echo 'недоступно в этой модели'; else echo $row[0x155][1]; ?></td></tr>
 <tr><td>Источник сети на входе:</td><td>&nbsp<?php echo $net[$row[0x150][1]]; ?></td></tr>
 <tr><td>Внешние устройства:</td><td>&nbsp<?php echo $ext[$row[0x156][1]]; ?></td></tr>
 <tr><td>Количество подключенных MPPT &microART&copy:</td><td>&nbsp<?php if ($row[0x157][1]==255) echo "Отключено"; else echo $row[0x157][1]; ?></td></tr>
