@@ -769,8 +769,10 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	map_data._UNET = Buffer[0x422 - 0x3FF];
         map_data._UNET += 100;
 
-//-------------------change _MODE---------
+//-------------------change _MODE--------
 
+      if (eeprom[0x16B]==2) //ECO Gen
+	 {
 	if (map_data._MODE==2) 
 	    {
 		if (map_data._UNET>100)
@@ -783,11 +785,35 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
 	    }
 
-	if (map_data._MODE==3 && (map_data._Flag_ECO&3)==0)
+	if (map_data._MODE==3 && (map_data._Flag_ECO&1)==0)
 	    {
 		if (eeprom[0x13B]==1) map_data._MODE=13; else
 		if (eeprom[0x13B]==2) map_data._MODE=14;
 	    }
+	}
+
+      if (eeprom[0x16B]==3) //Tarif Zone
+	 {
+	if (map_data._MODE==2) 
+	    {
+		if (map_data._UNET>100)
+		 {
+		    if (eeprom[0x13B]==1) map_data._MODE=15;else
+		    if (eeprom[0x13B]==0) map_data._MODE=16;else
+		    if (eeprom[0x13C]==0) map_data._MODE=11;
+
+		 }
+
+	    }
+
+	if (map_data._MODE==3 && (map_data._Flag_ECO&2)==0)
+	    {
+		if (eeprom[0x13B]==1) map_data._MODE=13; else
+		if (eeprom[0x13B]==2) map_data._MODE=14;
+	    }
+	}
+
+
 
 
         map_data._Status_Char = Buffer[0x402 - 0x3FF];
