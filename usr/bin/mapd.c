@@ -337,9 +337,10 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	};
 	
 	struct map_bat *batmon;
-	
 
-	int shm;
+	int shm, shm_cache;
+
+	char  *cache_str;
 
 
 	unsigned int tty_error_counter=0;
@@ -593,7 +594,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 		syslog(LOG_ERR,"Error change attributes on pipe /var/map/to_map");
 		exit(-1);
 	    }
-//-----------------Create shared memory segment------------
+//-----------------Create shared memory segments------------
 
 	shm=shmget(SHARED_MEMORY_KEY, 1024, 0644 | IPC_CREAT);
 	if (shm==-1)
@@ -610,6 +611,25 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    syslog(LOG_ERR,"Unable get pointer to shared memory segment.");
 	    return -1;
 	    }
+
+
+	shm_cache=shmget(2015, 1024, 0644 | IPC_CREAT);
+	if (shm_cache==-1)
+	    {
+	    syslog(LOG_ERR,"Unable to create shared memory segment for cache.");
+	    return -1;
+	    }
+
+
+
+	cache_str = shmat(shm_cache,(char *)0,0);
+	 if (cache_str == (char *)(-1)) 
+		    {
+	    syslog(LOG_ERR,"Unable get pointer to char to shared memory segment for cache.");
+	    return -1;
+	    }
+
+
 
 
 //-------------------ALERT THRESHOLDS-------------------------------------------
@@ -968,6 +988,25 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         	      syslog(LOG_ERR,"Error adding in MySQL\n");
         	    }
 		 time(&ltime);
+
+		sprintf (cache_str,
+        		   "{\"time\":\"%d:%d:%d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Uacc_optim\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\"}",
+        		   tim.tm_hour, tim.tm_min, tim.tm_sec, map_data._MODE,
+        		   map_data._Status_Char, map_data._Uacc, map_data._Iacc,
+        		   map_data._PLoad, map_data._F_Acc_Over,
+        		   map_data._F_Net_Over, map_data._UNET, map_data._INET,
+        		   map_data._PNET, map_data._TFNET, map_data._ThFMAP,
+        		   map_data._UOUTmed, map_data._TFNET_Limit,
+        		   map_data._UNET_Limit, map_data._RSErrSis,
+        		   map_data._RSErrJobM, map_data._RSErrJob,
+        		   map_data._RSWarning, map_data._Temp_Grad0,
+        		   map_data._Temp_Grad2, map_data._INET_16_4,
+        		   map_data._IAcc_med_A_u16, map_data._Temp_off,
+        		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
+        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
+			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO);
+
+
 
 		 batmon->timestamp=ltime;
 		 batmon->current=(map_data._MODE==4)?map_data._IAcc_med_A_u16:(0-map_data._IAcc_med_A_u16);; 
