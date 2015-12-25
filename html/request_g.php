@@ -88,15 +88,18 @@
 
 if (file_exists("/var/map/.map")) {
 	
-	 
-	 $result=mysql_query("SELECT * FROM data WHERE number = (SELECT MAX(number) FROM data)",$db) or die(mysql_error());     
-   	 $row = mysql_fetch_assoc($result);
+	 $shm=shmop_open(2015,"a",0,0);
+	    $str_json=shmop_read($shm,0,1000);
+	    $str=substr($str_json,0,strpos($str_json,"}")+1);
+    
+	    shmop_close($shm);
+ 
+   	 $row = json_decode($str,true);
 
 
-    	if (isset($_SESSION['n_gauges']) && $row['number']<=$_SESSION['n_gauges']) $flag_map=0; else $flag_map=1;
-	    $_SESSION['n_gauges']=$row['number'];
+    	if (isset($_SESSION['n_gauges']) && $row['time']<=$_SESSION['n_gauges']) $flag_map=0; else $flag_map=1;
+	    $_SESSION['n_gauges']=$row['time'];
 
-	mysql_free_result($result);
 	$result=mysql_query("SELECT value from settings WHERE offset=342", $db) or die(mysql_error());
 	 $row1=mysql_fetch_array($result);
 	$mppt_present=$row1[0];
@@ -144,12 +147,17 @@ if (file_exists("/var/map/.map")) {
 if (file_exists("/var/map/.mppt")) {
 	
 	
-	 
-	 $result_mppt=mysql_query("SELECT * FROM mppt WHERE number = (SELECT MAX(number) FROM mppt)",$db) or die(mysql_error());     
-     $row_mppt = mysql_fetch_assoc($result_mppt);
+	 $shm=shmop_open(2016,"a",0,0);
+	    $str_json=shmop_read($shm,0,1000);
+	    $str=substr($str_json,0,strpos($str_json,"}")+1);
     
-     if (isset($_SESSION['n_gauges_mppt']) && $row_mppt['number']<=$_SESSION['n_gauges_mppt']) $flag_mppt=0; else $flag_mppt=1;
-     $_SESSION['n_gauges_mppt']=$row_mppt['number'];
+	    shmop_close($shm);
+ 
+   	 $row_mppt = json_decode($str,true);
+
+    
+     if (isset($_SESSION['n_gauges_mppt']) && $row_mppt['time']<=$_SESSION['n_gauges_mppt']) $flag_mppt=0; else $flag_mppt=1;
+     $_SESSION['n_gauges_mppt']=$row_mppt['time'];
 	
 	 $err[5]=$row_mppt['RSErrSis'];
 	 
@@ -173,7 +181,6 @@ if (file_exists("/var/map/.mppt")) {
  }
 
 
-	 mysql_free_result($result_mppt);
      
      
 }
@@ -263,6 +270,7 @@ if (file_exists("/var/map/.mppt")) {
 //----------------------------------------------------
 
 
+
     echo $data['UNET'].",".$data['INET'].",".$data['UOUT'].",".$data['UACC'].",".$data['IACC'].",".$data['VPV'].",".$data['IPV'].",".$data['FNET'].",".$data['FMAP'].",". $data['ENET'].','.$data['EACC'].",".$data['ECHG'].",".$data['I_CH_I2C'].",".$data['EPV'].",".$data['TEMP1'].",".$data['TEMP2'].",".$data['TEMP_MPPT'].",".$data['PNET'].",".$data['PACC'].",".
 $data['PPV'].",".$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".$data['MODE'].",".$data['RELAY'].",".$error_status.",".$u_min.",".$u_max.",".$t_min.",".$t_max.",".$flag_map.",".$flag_mppt.",".
 $data['integral_dCdt'].",".$data['C_current_Ah'].",".$data['C_current_percent'].",".
@@ -271,9 +279,7 @@ $data['E_alt_daily'].",".$data['E_alt_monthly'].",".$data['E_alt_summ'].",".$dat
      
     
 
-
-
-
+ 
 
 
 

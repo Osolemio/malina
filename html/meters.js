@@ -312,7 +312,7 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     setInterval(function() {
         tick();
        
-         }, 1300);
+         }, 1000);
      tick();
   });
 

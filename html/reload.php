@@ -44,11 +44,15 @@ box-shadow:
 
 <?php    
     if (file_exists("/var/map/.map")) {        
-    $result=mysql_query("SELECT * FROM data WHERE number = (SELECT MAX(number) FROM data)",$db) or die(mysql_error());     
-    $row = mysql_fetch_assoc($result);
-?>
+
+    $shm=shmop_open(2015,"a",0,0);
+    $str_json=shmop_read($shm,0,1000);
+    $result=substr($str_json,0,strpos($str_json,"}")+1);
     
-<?php    
+    shmop_close($shm);
+
+    $row = json_decode($result,true);
+
     $mode=$row['_MODE'];
 
 	switch ($mode) {
@@ -68,10 +72,7 @@ box-shadow:
 		    $string_map="МАП включен. Трансляция + заряд";
 		    break;
 			}
-?>
 
- 
-<?php 
     $string=nl2br($string_map);
     $P=$row['_UNET'];
     $P1=$row['_INET_16_4'];$P=round($P*$P1);
@@ -88,7 +89,6 @@ box-shadow:
     if ($row['_I2C_Err']!=0) $map_error=$map_error." Ошибка I2C";
 ?>
 
-<tr><td><b>Дата:</b></td><td><?php echo $row['date'];?></td></tr>
 <tr><td><b>Время:</b></td><td><?php echo $row['time'];?></td></tr>
 <tr><td><b>Режим:</b></td><td><?php echo $string_map; ?> </td></tr>
 <tr><td><b>Напряжение с подстанции</b><td><b><?php echo $row['_UNET'];?>В</b></td></tr>
@@ -110,14 +110,17 @@ box-shadow:
 }
 else echo "Сервис МАП не запущен<br><br>";
 
-    mysql_free_result($result);
     
  if (file_exists("/var/map/.mppt")) {    
+
+    $shm=shmop_open(2016,"a",0,0);
+    $str_json=shmop_read($shm,0,1000);
+    $result=substr($str_json,0,strpos($str_json,"}")+1);
     
-    $result=mysql_query("SELECT * FROM mppt WHERE number = (SELECT MAX(number) FROM mppt)",$db) or die(mysql_error());     
-    if ($result!=NULL) {
+    shmop_close($shm);
     
-    $row = mysql_fetch_assoc($result);
+    
+    $row = json_decode($result,true);
     $energy=$row['Pwr_kW'];
     $pout=intval($row['P_Out']);
     $ppv=intval($row['P_PV']);
@@ -126,7 +129,6 @@ else echo "Сервис МАП не запущен<br><br>";
 
 <tr><td></td></tr>
 <tr bgcolor="yellow"><td><b>СОЛНЕЧНЫЕ ПАНЕЛИ. MPPT</b><td><tr>
-<tr><td><b>Дата:</b><td><?php echo $row['date'];?> </td></tr>
 <tr><td><b>Время:</b><td><?php echo $row['time'];?> </td></tr>
 <tr><td><b>Режим работы:</b><td><?php echo $row['Mode'].$row['Sign'].", MPP:".$row['MPP'];?> </td></tr>
 <tr><td><b>Напряжение панелей:</b><td><b><?php echo $row['Vc_PV'];?>В <b></td></tr>
@@ -142,11 +144,6 @@ else echo "Сервис МАП не запущен<br><br>";
 <?php
 
     
-    }
-
-
-
-    mysql_free_result($result);
 }   
 
  else echo "Сервис MPPT не запущен<br><br>"; 

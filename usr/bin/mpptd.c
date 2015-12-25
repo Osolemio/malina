@@ -261,8 +261,8 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	
 	struct mppt_bat *batmon;
 	
-	int shm;
-
+	int shm, shm_cache;
+	char *cache_str;
 
 
 	long delay_var;
@@ -400,7 +400,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 		 return 1;
 		 }
 
-//-----------------Create shared memory segment------------
+//-----------------Create shared memory segments------------
 
 	shm=shmget(SHARED_MEMORY_KEY, 1024, 0644 | IPC_CREAT);
 	if (shm==-1)
@@ -420,6 +420,35 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	    }
 
 	     batmon->battery_id=1; //default value
+
+
+	shm_cache=shmget(2016, 1024, 0644 | IPC_CREAT);
+	if (shm_cache==-1)
+	    {
+	    syslog(LOG_ERR,"Unable to create shared memory segment for cache.");
+	    return -1;
+	    }
+
+
+
+	cache_str = shmat(shm_cache,(char *)0,0);
+	 if (cache_str == (char *)(-1)) 
+		    {
+	    syslog(LOG_ERR,"Unable get pointer to char to shared memory segment for cache.");
+	    return -1;
+	    }
+
+
+
+
+
+
+
+
+
+
+
+
 //-------------------- main cycle -------------------------------
    do {
     
@@ -476,6 +505,16 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	mppt_data.RSErrSis,mppt_data.Mode, mppt_data.Sign,mppt_data.MPP,mppt_data.windspeed);
         
 	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL\n"); return -1;}
+
+    sprintf(cache_str, "{\"time\":\"%02d:%02d:%02d\",\"Vc_PV\":\"%.1f\",\"Ic_PV\":\"%.1f\",\"V_Bat\":\"%.1f\",\"P_PV\":\"%d\",\"P_Out\":\"%d\",\"P_Load\":\"%d\",\"P_curr\":\"%d\",\"I_Ch\":\"%.1f\",\"I_Out\":\"%.1f\",\"Temp_Int\":\"%d\",\"Temp_Bat\":\"%d\",\"Pwr_kW\":\"%.3f\",\"Sign_C0\":\"%d\",\"Sign_C1\":\"%d\",\"I_EXTS0\":\"%d\",\"I_EXTS1\":\"%d\",\"P_EXTS0\":\"%d\",\"P_EXTS1\":\"%d\",\"Relay_C\":\"%d\",\"RSErrSis\":\"%d\",\"Mode\":\"%c\",\"Sign\":\"%c\",\"MPP\":\"%c\",\"windspeed\":\"%d\"}",
+	tim.tm_hour,tim.tm_min,
+	tim.tm_sec,mppt_data.Vc_PV,mppt_data.Ic_PV,mppt_data.V_Bat,
+	mppt_data.P_PV,mppt_data.P_Out,mppt_data.P_Load,mppt_data.P_curr,
+	mppt_data.I_Ch,mppt_data.I_Out,mppt_data.Temp_Int,mppt_data.Temp_Bat,
+	mppt_data.Pwr_kW,mppt_data.Sign_C0,mppt_data.Sign_C1,mppt_data.I_EXTS0,
+	mppt_data.I_EXTS1,mppt_data.P_EXTS0,mppt_data.P_EXTS1,mppt_data.Relay_C,
+	mppt_data.RSErrSis,mppt_data.Mode, mppt_data.Sign,mppt_data.MPP,mppt_data.windspeed);
+    
 	    
 	     time(&ltime);
 	     batmon->battery_id=1;
