@@ -319,6 +319,89 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
     } 
 
 
+    unsigned char real_mode(unsigned char mode, unsigned char net_alg, unsigned char flag_eco, unsigned char NetUpEco, unsigned char NetUpLoad, unsigned char UNET)
+	
+	    {
+	    
+	
+/*
+
+    M_OFF          =0 – МАП выключен и нет сети на входе
+    M_OFFNET       =1 – МАП выключен но есть сеть на входе (значение напряжения сети выводится в ЖКИ)
+    M_ON           =2 – МАП включен (происходит генерация 220В от АКБ, нет сети на входе.  
+    M_ONNET        =3 – МАП включен и транслирует сеть (есть сеть на входе).
+    M_ONCHARGE 	   =4 – МАП включен, транслирует сеть и одновременно заряжает АКБ.
+
+    ------------ my extentions------------------------
+    10 - принудительная генерация
+    11 - тарифная сеть. максимальный тариф. принудительная генерация
+    12 - тарифная сеть. минимальный тариф
+    13 - трансляция + эко-подкачка
+    14 - трансляция + продажа в сеть
+    15 - ожидание внешнего заряда
+    16 - тарифная сеть. трансляция+эко-подкачка
+    17 - тарифная сеть. трансляция+продажа в сеть
+
+    
+    
+    
+
+
+*/	    
+
+	if (mode<2 && mode>3) return mode;
+
+      if (NetUpEco==0) //ECO forced gen or Tarifs
+	 {
+
+	if (mode==2) 
+	    {
+		if (UNET>100)
+		 {
+		    if (net_alg==2) return 10;else
+		    if (net_alg==3 && (flag_eco&2)==0) return 11; else
+		    if (net_alg==3 && (flag_eco&2)>0) return 12;
+
+		 } else return 2;
+
+	    }
+
+	}
+
+      if (NetUpEco==1) // Eco pumping
+	{
+
+	 if (mode==3)
+	    {
+		if (net_alg==2 && (flag_eco&1)>0) return 15;else
+		if (net_alg==2 && (flag_eco&1)==0) return 13; else
+		if (net_alg==3 && (flag_eco&2)>0) return 12; else
+		if (net_alg==3 && (flag_eco&2)==0) return 16;
+	    }
+
+	}
+
+	if (NetUpEco==2) // Sell to network
+	{
+
+	 if (mode==3)
+	    {
+		if (net_alg==2 && (flag_eco&1)>0) return 15;else
+		if (net_alg==2 && (flag_eco&1)==0) return 14; else
+		if (net_alg==3 && (flag_eco&2)>0) return 12; else
+		if (net_alg==3 && (flag_eco&2)==0) return 17;
+	    }
+
+	}
+    
+	
+
+	return mode;
+
+
+    }
+
+
 
 //-----------------------------------------------------------MAIN ---------------------------------------------------------
 
@@ -743,77 +826,18 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
         map_data._MODE = Buffer[0x400 - 0x3FF];
 
-/*
-
-    M_OFF          =0 – МАП выключен и нет сети на входе
-    M_OFFNET       =1 – МАП выключен но есть сеть на входе (значение напряжения сети выводится в ЖКИ)
-    M_ON           =2 – МАП включен (происходит генерация 220В от АКБ, нет сети на входе.  
-    M_ONNET        =3 – МАП включен и транслирует сеть (есть сеть на входе).
-    M_ONCHARGE 	   =4 – МАП включен, транслирует сеть и одновременно заряжает АКБ.
-
-    ------------ my extentions------------------------
-    11 - принудительная эко генерация
-    12 - тарифная сеть. минимальный тариф
-    13 - трансляция + эко-подкачка
-    14 - трансляция + продажа в сеть
-    15 - подкачка сети Pmax
-    16 - генерация сети Pmax
-
-    
-    
-    
 
 
-*/
+
+
 
 	map_data._UNET = Buffer[0x422 - 0x3FF];
         map_data._UNET += 100;
 
-//-------------------change _MODE--------
 
-      if (eeprom[0x16B]==2) //ECO Gen
-	 {
-	if (map_data._MODE==2) 
-	    {
-		if (map_data._UNET>100)
-		 {
-		    if (eeprom[0x13B]==1) map_data._MODE=15;else
-		    if (eeprom[0x13B]==0) map_data._MODE=16;else
-		    if (eeprom[0x13C]==0) map_data._MODE=11;
-
-		 }
-
-	    }
-
-	if (map_data._MODE==3 && (map_data._Flag_ECO&1)==0)
-	    {
-		if (eeprom[0x13B]==1) map_data._MODE=13; else
-		if (eeprom[0x13B]==2) map_data._MODE=14;
-	    }
-	}
-
-      if (eeprom[0x16B]==3) //Tarif Zone
-	 {
-	if (map_data._MODE==2) 
-	    {
-		if (map_data._UNET>100)
-		 {
-		    if (eeprom[0x13B]==1) map_data._MODE=15;else
-		    if (eeprom[0x13B]==0) map_data._MODE=16;else
-		    if (eeprom[0x13C]==0) map_data._MODE=11;
-
-		 }
-
-	    }
-
-	if (map_data._MODE==3 && (map_data._Flag_ECO&2)==0)
-	    {
-		if (eeprom[0x13B]==1) map_data._MODE=13; else
-		if (eeprom[0x13B]==2) map_data._MODE=14;
-	    }
-	}
-
-
+// change MAP mode to my extensions
+	
+	map_data._MODE=real_mode(map_data._MODE, eeprom[0x16B], map_data._Flag_ECO, eeprom[0x13C], eeprom[0x13B], map_data._UNET);
 
 
         map_data._Status_Char = Buffer[0x402 - 0x3FF];
