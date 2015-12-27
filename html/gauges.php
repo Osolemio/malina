@@ -209,7 +209,7 @@
 </div>
 
 
-<div id="mess"></div>
+<div id="mess" position="absolute"></div>
 </body>
 </html>
     

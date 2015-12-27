@@ -1,3 +1,9 @@
+var d = document;
+var offsetfromcursorY=15 // y offset of tooltip
+var ie=d.all && !window.opera;
+var ns6=d.getElementById && !d.all;
+var tipobj,op;
+
 var meter_v, meter_i, meter_i_i2c, meter_vout, meter_vacc, meter_iacc, meter_vpv,meter_ipv, v = 0, f, arr=[],
 display_1, display_2, onload, counter_net, counter_acc,counter_charge, counter_pv,
 display_3, display_4,display_5,i=1,angle=0,
@@ -270,7 +276,7 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
 		aniMs: 600
 		}); 
 
-//------------ MAP Liva chart
+//------------ MAP Live chart
     if (document.getElementById('map')) {
     var chart_map = new SmoothieChart({millisPerPixel:100,grid:{fillStyle:'#ffffff'},labels:{fillStyle:'#000000'}});
     series_map = new TimeSeries();    
@@ -280,7 +286,7 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     chart_map.streamTo(canvas_map);	
     series_map.append(new Date().getTime(),0)
 }
-//-----------MPPT Liva chart
+//-----------MPPT Live chart
     if (document.getElementById('mppt')) {
     var chart_mppt = new SmoothieChart({millisPerPixel:100,grid:{fillStyle:'#ffffff'},labels:{fillStyle:'#000000'}});
     series_mppt = new TimeSeries();    
@@ -426,11 +432,29 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
        return result;
   }
   
-  
+	function ietruebody()  {
+	return (d.compatMode && d.compatMode!="BackCompat")? d.documentElement : d.body
+	}
+
+	function positiontip(e) {
+
+	var curX=(ns6)?e.pageX : event.clientX+ietruebody().scrollLeft;
+	var curY=(ns6)?e.pageY : event.clientY+ietruebody().scrollTop;
+	var winwidth=ie? ietruebody().clientWidth : window.innerWidth-20;
+	var winheight=ie? ietruebody().clientHeight : window.innerHeight-20;
+	var rightedge=ie? winwidth-event.clientX : winwidth-e.clientX;
+	var bottomedge=ie? winheight-event.clientY-offsetfromcursorY : winheight-e.clientY-offsetfromcursorY;
+	if (rightedge < tipobj.offsetWidth)  tipobj.style.left=curX-tipobj.offsetWidth+"px";
+	    else tipobj.style.left=curX+"px";
+	    if (bottomedge < tipobj.offsetHeight) tipobj.style.top=curY-tipobj.offsetHeight-offsetfromcursorY+"px";
+	    else tipobj.style.top=curY+offsetfromcursorY+"px";
+	}
+	
     function tooltip(el,txt) {
-	var tipobj=document.getElementById('mess');
+	    tipobj=document.getElementById('mess');
 	    tipobj.innerHTML = txt;
 	    tipobj.style.visibility="visible";
+	    el.onmousemove=positiontip;
 	    }
 
 
