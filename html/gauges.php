@@ -53,11 +53,14 @@
     <div id="text1"></div>
     </div>
     
+    <div class="col1 row1 bor10 black">
+    <div id="display_6" onmouseover="tooltip(this,'Температура тора (ДОМИНАТОР), &degC')" onmouseout="hide_info(this)"></div></div>
+    
+    <div id="text3"></div>
+    
     <div class="col1 row1 bor3 black">
     <div id="display_3" onmouseover="tooltip(this,'Температура транзисторов инвертора, &degC')" onmouseout="hide_info(this)"></div></div>
     
-    <div id="text3"></div>
-
     
     <div id="map_mode"><div id="map_mode_in">
     </div></div>

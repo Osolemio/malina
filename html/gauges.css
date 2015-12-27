@@ -502,7 +502,7 @@ div.wrapper {
     font-size: 150%;
     text-shadow: 1px 1px 2px black, 0 0 2px blue;
     top: 3%;
-    left: 65%;
+    left: 55%;
     width: 10%;
     height: 5%;
 }
@@ -667,7 +667,7 @@ div.wrapper {
 
 .bor1 {
   top:1%;
-  left:10%;
+  left:2%;
   width:50%;
   height:6%;
 }
@@ -682,21 +682,21 @@ div.wrapper {
 
 .bor3 {
   top:1%;
-  left:80%;
+  left:82%;
   width:13%;
   height:6%;
 }
 
 .bor4 {
   top:1%;
-  left:70%;
+  left:74%;
   width:20%;
   height:6%;
 }
 
 .bor5 {
   top:1%;
-  left:70%;
+  left:74%;
   width:20%;
   height:6%;
 
@@ -739,6 +739,12 @@ div.wrapper {
 
 }
 
+.bor10 {
+  top:1%;
+  left:67%;
+  width:13%;
+  height:6%;
+}
 
 
 .silver {background:silver;}
