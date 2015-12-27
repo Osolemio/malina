@@ -109,13 +109,50 @@
 * Для повторного просмотра "мультиграф" учитывается только время/дата начала проигрывания данных
 <br><br>
 </i>
+
+<div>
 <input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" СИСТЕМА " ONCLICK="SystemButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ТЕКСТ " ONCLICK="TextButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ПРИБОРЫ " ONCLICK="GaugesButton()"> 
+
 <script>
+
 function HomeButton()
 {
 location.href="menu.php";
 }
 
+function SystemButton()
+{
+location.href="/setup/index.php";
+}
+
+function TextButton()
+{
+location.href="index.php";
+}
+
+function GaugesButton()
+{
+location.href="gauges.php";
+}
+
+
+
+</script>
+
+
+
+</div>
+
+
+
+
+
+
+
+<script>
 function Reset_Counter(sw) {
     $.ajax({
 	data:{

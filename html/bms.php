@@ -16,7 +16,6 @@
 
 
 <body>
-  <a href="./menu.php"><div id="arrow"></div></a>
   <div id="bms1"><div class="bms_in"><div class="col2 row2 scale"><div id=scale1 class="scale_display"></div></div><div class="col1 row1 display"><div id=display1>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp1</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg1" class="led_green"></div><div id="ledr1" class="led_red"></div></div></div>
   <div id="bms2"><div class="bms_in"><div class="col2 row2 scale"><div id=scale2 class="scale_display"></div></div><div class="col1 row1 display"><div id=display2>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp2</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg2" class="led_green"></div><div id="ledr2" class="led_red"></div></div></div>
   <div id="bms3"><div class="bms_in"><div class="col2 row2 scale"><div id=scale3 class="scale_display"></div></div><div class="col1 row1 display"><div id=display3>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp3</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg3" class="led_green"></div><div id="ledr3" class="led_red"></div></div></div>    
@@ -33,7 +32,49 @@
   <div id="bms14"><div class="bms_in"><div class="col2 row2 scale"><div id=scale14 class="scale_display"></div></div><div class="col1 row1 display"><div id=display14>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp14</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg14" class="led_green"></div><div id="ledr14" class="led_red"></div></div></div>
   <div id="bms15"><div class="bms_in"><div class="col2 row2 scale"><div id=scale15 class="scale_display"></div></div><div class="col1 row1 display"><div id=display15>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp15</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg15" class="led_green"></div><div id="ledr15" class="led_red"></div></div></div>
   <div id="bms16"><div class="bms_in"><div class="col2 row2 scale"><div id=scale16 class="scale_display"></div></div><div class="col1 row1 display"><div id=display16>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp16</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg16" class="led_green"></div><div id="ledr16" class="led_red"></div></div></div>
-  <div id="vmp"></div>
+  <div id="vmp">Напряжение срадней точки: 0В</div>
+
+<div id="buttons">
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" СИСТЕМА " ONCLICK="SystemButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ТЕКСТ " ONCLICK="TextButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ПРИБОРЫ " ONCLICK="GaugesButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ИСТОРИЯ " ONCLICK="HistoryButton()"> 
+
+<script>
+
+function HomeButton()
+{
+location.href="menu.php";
+}
+
+function SystemButton()
+{
+location.href="/setup/index.php";
+}
+
+function TextButton()
+{
+location.href="index.php";
+}
+
+function GaugesButton()
+{
+location.href="gauges.php";
+}
+
+function HistoryButton()
+{
+location.href="history.php";
+}
+
+
+
+</script>
+
+
+
+</div>
 
 </body>
 </html>

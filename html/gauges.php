@@ -22,7 +22,7 @@
 <body>
 
   <div id="header"></div>
-  <a href="./menu.php"><div id="arrow"></div></a> 
+  
 
 
 <div class="wrapper">
@@ -200,9 +200,55 @@
 
     </div>
 
+
+
+
+
     </div>
 
   <?php }?>
+
+<div id="buttons">
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" СИСТЕМА " ONCLICK="SystemButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ТЕКСТ " ONCLICK="TextButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МОЩНОСТИ " ONCLICK="PowerButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ИСТОРИЯ " ONCLICK="HistoryButton()"> 
+
+<script>
+
+function HomeButton()
+{
+location.href="menu.php";
+}
+
+function SystemButton()
+{
+location.href="/setup/index.php";
+}
+
+function TextButton()
+{
+location.href="index.php";
+}
+
+function PowerButton()
+{
+location.href="graph.php";
+}
+
+function HistoryButton()
+{
+location.href="history.php";
+}
+
+
+
+</script>
+
+
+
+</div>
 
 
 

@@ -17,7 +17,47 @@
 <body>
 
 
-<a href="./menu.php"><div id="arrow"></div></a>
+<div>
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" СИСТЕМА " ONCLICK="SystemButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ТЕКСТ " ONCLICK="TextButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ПРИБОРЫ " ONCLICK="GaugesButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ИСТОРИЯ " ONCLICK="HistoryButton()"> 
+
+<script>
+
+function HomeButton()
+{
+location.href="menu.php";
+}
+
+function SystemButton()
+{
+location.href="/setup/index.php";
+}
+
+function TextButton()
+{
+location.href="index.php";
+}
+
+function GaugesButton()
+{
+location.href="gauges.php";
+}
+
+function HistoryButton()
+{
+location.href="history.php";
+}
+
+
+
+</script>
+
+
+
+</div>
 <div id="legend">
 
     Легенда:
