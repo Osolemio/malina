@@ -200,7 +200,7 @@ function tick() {
 
 	    }
 	    
-	    if (map_mode==3) {
+	    if (map_mode==3 || (map_mode>=12 && map_mode<=17)) {
 		document.getElementById('led_map_net'+key).style.visibility='hidden';
 		document.getElementById('led_map_relay'+key).style.background='lime';
 		document.getElementById('led_map_charge'+key).style.visibility='hidden';
@@ -238,7 +238,26 @@ function tick() {
 		
 	    }
 
-	
+	    if (map_mode==10 || map_mode==11) {
+		document.getElementById('led_map_net'+key).style.visibility='hidden';
+		document.getElementById('led_map_relay'+key).style.background='red';
+		document.getElementById('led_map_charge'+key).style.visibility='hidden';
+		document.getElementById('map_stop_acc'+key).style.visibility='visible';
+		document.getElementById('arrow_map_up'+key).style.visibility='hidden';
+		document.getElementById('arrow_map_down'+key).style.visibility='hidden';
+		if (load_map[key]['_IAcc_med_A_u16']>0) {
+		document.getElementById('arrow_map_up'+key).style.visibility='visible';
+		document.getElementById('arrow_map_down'+key).style.visibility='hidden';
+		document.getElementById('map_stop_add'+key).style.visibility='hidden';
+		}
+		else
+		{
+		document.getElementById('arrow_map_up'+key).style.visibility='hidden';
+		document.getElementById('arrow_map_down'+key).style.visibility='hidden';
+		document.getElementById('map_stop_add'+key).style.visibility='visible';
+		}
+
+	 }
 
 	} //if load map
 
