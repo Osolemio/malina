@@ -4,7 +4,10 @@ body {
   margin:0;
   padding:0;
   background:#2c2c2c;
+  
 }
+
+
 
 div {
 position: absolute;
@@ -1391,6 +1394,7 @@ left:75%;
 height:82%;
 width:21%;
 color:black;
+cursor: pointer;
 border-radius:3px;
 -moz-border-radius:3px;
 -o-border-radius:3px;
@@ -1446,3 +1450,82 @@ left:83%;
     width:100%;
 
 }
+
+.menu .menu-content {
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  float: left;
+  width: 20em;
+  top: 10em;
+}
+
+
+.menu .menu-content ul {
+  list-style: none;
+}
+
+.menu a {
+
+ text-decoration:none;
+ color: rgba(252, 251, 250, 1);
+  cursor: pointer;
+ 
+
+
+}
+    
+
+.menu li,
+.menu label {
+  color: rgba(252, 251, 250, 1);
+  font-size:25px;
+  cursor: pointer;
+ 
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  background-color:rgba(0,0,190,0.7);
+}
+
+.menu a:hover,
+.menu li:hover,
+.menu label:hover {
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  color: rgba(252, 100, 100, 0.8);
+  text-decoration:none;
+}
+.menu .menu-switch {
+  padding-top: 17em;
+}
+.menu .menu-switch label {
+  position: fixed;
+  font-size: 3em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  z-index:2;
+}
+.menu input {
+  display: none;
+}
+.menu #menu-collapsed:checked ~ .menu-content {
+  margin-left: -20em;
+}
+.menu #menu-collapsed:checked ~ .menu-switch .rise {
+  display:block;
+}
+.menu #menu-collapsed:checked ~ .menu-switch .collapse {
+  display: none;
+}
+.menu #menu-collapsed ~ .menu-switch .rise {
+  display: none;
+}
+
+

@@ -1,25 +1,13 @@
 @CHARSET "UTF-8";
 body {
-  margin:0;
-  padding:0;
+      margin:0;
+      padding:0;
       background-color:#e0e0e0;
       }
 
       div {
     position:absolute;
-    right:0;
           }
-
-#arrow {
-  top: 0px;
-  right: 0px;
-  width: 0px;
-  height: 0px;
-  margin: 10px auto;
-  border: 10px solid; 
-  border-color: orangered ivory orangered orangered;
-  z-index:4;  
-}
 
 
    #legend {
@@ -29,10 +17,93 @@ body {
     width: 70%;
           }
     #chart {
-      left:0;
+      right:0px;
+      left:0px;
       top:30px;
       bottom:0;
+      z-index:0;
+      margin-left:0px;
           }
    span.blue {color:blue;}
    span.red {color:red;}
    span.green {color:green;}                      
+
+
+.menu .menu-content {
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  float: left;
+  width: 20em;
+  top: 10em;
+}
+
+
+.menu .menu-content ul {
+  list-style: none;
+}
+
+.menu a {
+
+ text-decoration:none;
+ color: rgba(252, 251, 250, 1);
+  cursor: pointer;
+ 
+
+
+}
+    
+
+.menu li,
+.menu label {
+  color: rgba(252, 251, 250, 1);
+  font-size:25px;
+  cursor: pointer;
+ 
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  background-color:rgba(0,0,190,0.5);
+}
+
+.menu a:hover,
+.menu li:hover,
+.menu label:hover {
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  color: rgba(252, 100, 100, 0.8);
+  text-decoration:none;
+}
+.menu .menu-switch {
+  padding-top: 17em;
+}
+.menu .menu-switch label {
+  position: fixed;
+  font-size: 3em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  z-index:2;
+}
+.menu input {
+  display: none;
+}
+.menu #menu-collapsed:checked ~ .menu-content {
+  margin-left: -20em;
+}
+.menu #menu-collapsed:checked ~ .menu-switch .rise {
+  display:block;
+}
+.menu #menu-collapsed:checked ~ .menu-switch .collapse {
+  display: none;
+}
+.menu #menu-collapsed ~ .menu-switch .rise {
+  display: none;
+}
+
+

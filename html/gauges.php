@@ -211,52 +211,32 @@
 
   <?php }?>
 
-<div id="buttons">
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" СИСТЕМА " ONCLICK="SystemButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ТЕКСТ " ONCLICK="TextButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МОЩНОСТИ " ONCLICK="PowerButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ИСТОРИЯ " ONCLICK="HistoryButton()"> 
-
-<script>
-
-function HomeButton()
-{
-location.href="menu.php";
-}
-
-function SystemButton()
-{
-location.href="/setup/index.php";
-}
-
-function TextButton()
-{
-location.href="index.php";
-}
-
-function PowerButton()
-{
-location.href="graph.php";
-}
-
-function HistoryButton()
-{
-location.href="history.php";
-}
-
-
-
-</script>
-
 
 
 </div>
 
-
-
+<div class="menu">
+  <input type="checkbox" id="menu-collapsed" name="menu-collapsed" checked/>
+  <div class="menu-content">
+    <ul>
+      <li><a href="menu.php">МЕНЮ</a></li>
+      <li><a href="index.php">ТЕКСТ</a></li>
+      <li><a href="graph.php">МОЩНОСТИ</a></li>
+      <li><a href="history.php">ИСТОРИЯ</a></li>
+      <li><a href="multi_select.php">МУЛЬТИГРАФ</a></li>
+      <li><a href="bms.php">BMS</a></li>
+      <li><a href="settings.php">ИНФО</a></li>
+      <li><a href="./setup/index.php">СИСТЕМА</a></li>
+      <li><a href="./setup/settings.php">СИСТЕМА-МАП</a></li>
+      <li><a href="./setup/sys.php">СИСТЕМА-СЕРВИСЫ</a></li>
+    
+    </ul>
+  </div>
+  <div class="menu-switch">
+    <label class="collapse" for="menu-collapsed">«</label>
+    <label class="rise" for="menu-collapsed">»</label>
+  </div>
 </div>
-
 
 <div id="mess" position="absolute"></div>
 </body>
