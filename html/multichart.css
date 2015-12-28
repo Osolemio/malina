@@ -1,21 +1,99 @@
 @CHARSET "UTF-8";
 
-#arrow {
-  top: 0px;
-  left: 0px;
-  width: 0px;
-  height: 0px;
-  margin: 10px auto;
-  border: 10px solid; 
-  border-color: orangered gold orangered orangered;
-  z-index:10;  
+body
+{
+ margin:0;
+ padding:0;
 }
 
-#charts
-    {
-top: 0px;
+
+.charts
+{
+position:relative;
 left:0px;
-height: 1900px;
-width: 1500px;
+right:20px;
+z-index:1;
+height:content;
 } 
  
+
+.menu {
+ z-index:10;
+ position: absolute;
+}
+
+.menu .menu-content {
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  width: 20em;
+  top: 10em;
+}
+
+
+
+.menu .menu-content ul {
+  list-style: none;
+}
+
+.menu a {
+
+ text-decoration:none;
+ color: rgba(252, 251, 250, 1);
+  cursor: pointer;
+
+}
+    
+
+.menu li,
+.menu label {
+  color: rgba(252, 251, 250, 1);
+  font-size:25px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  background-color:rgba(0,0,210,0.8);
+}
+
+.menu a:hover,
+.menu li:hover,
+.menu label:hover {
+    -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  color: rgba(252, 100, 100, 0.8);
+  text-decoration:none;
+}
+.menu .menu-switch {
+    top: 12em;
+    position:fixed;
+}
+.menu .menu-switch label {
+  font-size: 2em;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+.menu input {
+  display: none;
+}
+.menu #menu-collapsed:checked ~ .menu-content {
+  margin-left: -20em;
+}
+.menu #menu-collapsed:checked ~ .menu-switch .rise {
+  display:block;
+}
+.menu #menu-collapsed:checked ~ .menu-switch .collapse {
+  display: none;
+}
+.menu #menu-collapsed ~ .menu-switch .rise {
+  display: none;
+}
+
+
+

@@ -1489,7 +1489,7 @@ left:83%;
   -ms-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
   transition-duration: 0.5s;
-  background-color:rgba(0,0,190,0.7);
+  background-color:rgba(0,0,190,0.8);
 }
 
 .menu a:hover,
