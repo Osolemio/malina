@@ -1073,14 +1073,14 @@ width:20px;
  }
 
 #bms {
- left: 2%;
+ left: 0%;
  top: 27%;
- height: 10%;
- width: 96%;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+ height: 7%;
+ right: 0%;
+  border-radius:0px;
+  -moz-border-radius:0px;
+  -o-border-radius:0px;
+  -webkit-border-radius:0px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
@@ -1093,17 +1093,17 @@ width:20px;
  }
 
 #bms_in {
- left: 2%;
+ left: 1%;
  top: 2%;
  height: 96%;
- width: 96%;
+ right: 1%;
  color: white;
  font-size: 140%;
  text-shadow: -1px -2px 2px black;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -o-border-radius:5px;
+  -webkit-border-radius:5px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
@@ -1180,17 +1180,17 @@ width:20px;
 
 
 #map_mode {
- left: 2%;
+ left: 0%;
+ right: 0%;
  top: 27%;
  height: 7%;
- width: 96% ;
  color: black;
  font-weight: bolder;
  text-align: center;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius:0px;
+  -moz-border-radius:0px;
+  -o-border-radius:0px;
+  -webkit-border-radius:0px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
@@ -1204,17 +1204,17 @@ width:20px;
 
 #map_mode_in {
  left: 1%;
+ right: 1%;
  top: 1%;
- height: 98%;
- width: 98%;
+ bottom: 1%;
  color: black;
  font-weight: bolder;
  text-align: center;
  font-size: 120%;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -o-border-radius:5px;
+  -webkit-border-radius:5px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
@@ -1285,47 +1285,47 @@ width:20px;
 
 
 #smoothie-chart-map-div  {
-    left:20%;
+    left:1%;
     top:35%;
-    width:50%;
-    height:10%;
+    right:1%;
+    height:13%;
 
     }
 
 #smoothie-chart-mppt-div  {
-    left:10%;
+    left:1%;
     top:35%;
-    width:70%;
-    height:10%;
+    right:1%;
+    height:13%;
 
     }
 
 #smoothie-chart-acc-div  {
-    left:10%;
-    top:38%;
-    width:70%;
-    height:7%;
+    left:1%;
+    top:35%;
+    right:1%;
+    height:13%;
 
     }
 
 #smoothie-chart-wind-div  {
-    left:10%;
+    left:1%;
     top:45%;
-    width:98%;
-    height:40%;
+    right:1%;
+    height:45%;
 
     }
 
 #estimated_data {
- left: 1%;
+ left: 0%;
  top: 49%;
  height: 6%;
- width: 98%;
+ right: 0%;
  font-weight: bolder;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius:2px;
+  -moz-border-radius:2px;
+  -o-border-radius:2px;
+  -webkit-border-radius:2px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,

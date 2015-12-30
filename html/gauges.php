@@ -76,7 +76,7 @@
     <div id="text_kw_acc"></div>
     <div id="text_kw_charge"></div>
     <div id="smoothie-chart-map-div"> 
-    <canvas id="smoothie-chart-map" width="300" height="100"></canvas></div>
+    <canvas id="smoothie-chart-map"></canvas></div>
     <?php if (file_exists("/var/map/.bmon")) {?>
     <div id="alt_text">АЛЬТЕРНАТИВНЫЕ ИСТОЧНИКИ (I2C)</div>
     <div id="alt_energy">
@@ -142,7 +142,7 @@
         <div id="text_err"></div>
 	</div>    
 	<div id="smoothie-chart-acc-div"> 
-	<canvas id="smoothie-chart-acc" width="300" height="80"></canvas></div>
+	<canvas id="smoothie-chart-acc"></canvas></div>
 
 	<div id="estimated_data">
 	
@@ -191,12 +191,12 @@
     </div>
 
     <div id="smoothie-chart-mppt-div"> 
-    <canvas id="smoothie-chart-mppt" width="300" height="100"></canvas></div>
+    <canvas id="smoothie-chart-mppt"></canvas></div>
 
     <div id="wind">
     
     <div id="smoothie-chart-wind-div"> 
-    <canvas id="smoothie-chart-wind" width="300" height="100"></canvas></div>
+    <canvas id="smoothie-chart-wind" height="100"></canvas></div>
     
     <div id="propeller"><img src="./img/wind.gif" id="ventilator" height="140%" /></div>
     <div id="speed">0 мин<sup>-1</sup></div>

@@ -283,6 +283,9 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     chart_map.addTimeSeries(series_map, {lineWidth:3,strokeStyle:'#0000ff'});
 
     var canvas_map = document.getElementById('smoothie-chart-map');
+    canvas_map.width=document.getElementById('smoothie-chart-map-div').clientWidth-1;
+    canvas_map.height=document.getElementById('smoothie-chart-map-div').clientHeight-1;
+
     chart_map.streamTo(canvas_map);	
     series_map.append(new Date().getTime(),0)
 }
@@ -293,6 +296,9 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     chart_mppt.addTimeSeries(series_mppt, {lineWidth:3,strokeStyle:'green'});
     
     var canvas_mppt = document.getElementById('smoothie-chart-mppt');
+    canvas_mppt.width=document.getElementById('smoothie-chart-mppt-div').clientWidth-1;
+    canvas_mppt.height=document.getElementById('smoothie-chart-mppt-div').clientHeight-1;
+
     chart_mppt.streamTo(canvas_mppt);	
     series_mppt.append(new Date().getTime(),0)    
 
@@ -301,6 +307,9 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     chart_wind.addTimeSeries(series_wind, {lineWidth:3,strokeStyle:'deeppink'});
     
     var canvas_wind = document.getElementById('smoothie-chart-wind');
+    canvas_wind.width=document.getElementById('smoothie-chart-wind-div').clientWidth-1;
+//    canvas_wind.height=document.getElementById('smoothie-chart-wind-div').clientHeight-1;
+
     chart_wind.streamTo(canvas_wind);	
     series_wind.append(new Date().getTime(),0)    
 
@@ -312,6 +321,8 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     chart_acc.addTimeSeries(series_acc, {lineWidth:3,strokeStyle:'black'});
 
     var canvas_acc = document.getElementById('smoothie-chart-acc');
+    canvas_acc.width=document.getElementById('smoothie-chart-acc-div').clientWidth-1;
+    canvas_acc.height=document.getElementById('smoothie-chart-acc-div').clientHeight-1;
     chart_acc.streamTo(canvas_acc);	
     series_acc.append(new Date().getTime(),0)
 
