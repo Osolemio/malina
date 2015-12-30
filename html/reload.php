@@ -94,7 +94,7 @@ box-shadow:
 
 <?php
 }
-else echo "Сервис МАП не запущен<br><br>";
+
 
     
  if (file_exists("/var/map/.mppt")) {    
@@ -132,6 +132,7 @@ else echo "Сервис МАП не запущен<br><br>";
     
 }   
 
- else echo "Сервис MPPT не запущен<br><br>"; 
+if (!file_exists("/var/map/.mppt") && !file_exists("/var/map/.map")) echo "Запустите необходимые сервисы";
+
 ?>
 

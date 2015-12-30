@@ -122,7 +122,17 @@
 <!--    <div id="text_timer"></div> -->
     <div id="text_c_measured"></div>
 
-    <div id="bms"><div id="bms_in"></div></div>
+    <div id="bms"><div id="bms_in" onmouseover="tooltip(this,'Пороговые значения BMS')" onmouseout="hide_info(this)">
+    <div id="bms_tmin" class="bms_in_container"></div>
+    <div id="bms_tmax" class="bms_in_container"></div>
+    <div id="bms_umin" class="bms_in_container"></div>
+    <div id="bms_umax" class="bms_in_container"></div>
+    
+    <div class="bms_in_text">t<sub>min</sub>&degC</div>
+    <div class="bms_in_text">t<sub>max</sub>&degC</div>
+    <div class="bms_in_text">U<sub>min</sub>,В</div>
+    <div class="bms_in_text">U<sub>max</sub>,В</div>
+    </div></div>
     
     <div id="text_common">Общие данные:</div>
 
@@ -178,18 +188,20 @@
     
     <div id="text5"></div>
 
-    <div id="mppt_o" onmouseover="tooltip(this,'Режим работы MPPT. s-сканирование, b,B-буферный, i-заряд, v-дозаряд.<br> + нехватка энергии, - избыток энергии')" onmouseout="hide_info(this)"><div id="mppt_text"></div></div>
+    
 
     <div id="counter4" class="out_2">
     <div class="in"></div></div>
     <div id="text_kw_pv"></div>
-
+    <div id="mppt_mode">
+    <div id="mppt_o" onmouseover="tooltip(this,'Режим работы MPPT. s-сканирование, b,B-буферный, i-заряд, v-дозаряд.<br> + нехватка энергии, - избыток энергии')" onmouseout="hide_info(this)"><div id="mppt_text"></div></div>
     <div id="mppt_relay" onmouseover="tooltip(this,'Реле контроллера. Красный - выкл')" onmouseout="hide_info(this)">
+    
     <div id="mppt_relay1"></div>
     <div id="mppt_relay2"></div>
     <div id="mppt_relay3"></div>
     </div>
-
+    </div>
     <div id="smoothie-chart-mppt-div"> 
     <canvas id="smoothie-chart-mppt"></canvas></div>
 

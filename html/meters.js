@@ -650,8 +650,10 @@ var mipv=document.getElementById('meter_ipv')
 
 //--------------------- ACC SECTION -----------------------
 
-$('#bms_in').html("&nbsp<b>BMS</b>  &nbspt<sub>min</sub>=".concat((arr[26]=="off")?arr[26]:arr[26]+"&degC","&nbspt<sub>max</sub>=",(arr[27]=="off")?arr[27]:arr[27]+"&degC","<br>&nbspU<sub>min</sub>=",arr[24],"В,&nbspU<sub>max</sub>=",arr[25],"В"));
-
+$('#bms_tmin').html(arr[26]);
+$('#bms_tmax').html(arr[27]);
+$('#bms_umin').html(arr[24]);
+$('#bms_umax').html(arr[25]);
 
 //-----displays
     

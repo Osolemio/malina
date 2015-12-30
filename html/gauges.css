@@ -960,14 +960,14 @@ width:20px;
 
 #mppt_o {
  left: 2%;
- top: 27%;
- height: 7%;
+ top: 2%;
+ bottom: 1%;
  width: 47%;
  text-align:center;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -o-border-radius:5px;
+  -webkit-border-radius:5px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
@@ -993,16 +993,16 @@ width:20px;
 
 #mppt_relay {
  left: 51%;
- top: 27%;
- height: 7%;
+ top: 1%;
+ bottom: 1%;
  width: 46%;
  font-size: 150%;
  font-weight: bolder;
  text-align: right;
-  border-radius:10px;
-  -moz-border-radius:10px;
-  -o-border-radius:10px;
-  -webkit-border-radius:10px;
+  border-radius:5px;
+  -moz-border-radius:5px;
+  -o-border-radius:5px;
+  -webkit-border-radius:5px;
   box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
@@ -1115,6 +1115,33 @@ width:20px;
 
  }
 
+.bms_in_container
+{
+ position:relative;
+ top:5%;
+ height:55%;
+ width: 20%;
+ margin-left:3%;
+ float: left;
+ text-align:center;
+ color:white;
+ background-color:rgba(50,50,50,1);
+ border:2px inset darkblue; 
+}
+ 
+
+.bms_in_text
+{
+ position:relative;
+ top:1%;
+ height:30%;
+ width: 20%;
+ margin-left:4%;
+ float: left;
+ font-size:72%;
+ color:ivory;
+ text-align:center;
+}
  
 
 #counter1 {
@@ -1282,6 +1309,30 @@ width:20px;
  font-size: 100%; 
  color: black;
  }
+
+#mppt_mode {
+ left: 0%;
+ right: 0%;
+ top: 27%;
+ height: 7%;
+ color: black;
+ font-weight: bolder;
+ text-align: center;
+  border-radius:0px;
+  -moz-border-radius:0px;
+  -o-border-radius:0px;
+  -webkit-border-radius:0px;
+  box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+      4px 4px 6px 2px rgba(0,0,0,0.7);
+  -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+      4px 4px 6px 2px rgba(0,0,0,0.7);
+  -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
+      4px 4px 6px 2px rgba(0,0,0,0.7);
+  background: slategray;
+
+
+ }
+
 
 
 #smoothie-chart-map-div  {

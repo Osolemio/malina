@@ -7,17 +7,6 @@ body {
 
 div {position:absolute;}
 
-#arrow {
-  top: 0px;
-  left: 0px;
-  width: 0px;
-  height: 0px;
-  margin: 10px auto;
-  border: 10px solid; 
-  border-color: orangered ivory orangered orangered;
-  z-index:4;  
-}
-
 
 #bms1 {
   left:10px;
