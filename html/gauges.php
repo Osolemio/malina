@@ -77,8 +77,8 @@
     <div id="text_kw_charge"></div>
     <div id="smoothie-chart-map-div"> 
     <canvas id="smoothie-chart-map"></canvas></div>
-    <div class="relay_map_form1"><div id="relay_container1" class="relay_container"><div id="map_slider1" class="map_relay_slider"></div></div></div>
-    <div class="relay_map_form2"><div id="relay_container2" class="relay_container"><div id="map_slider2" class="map_relay_slider"></div></div></div>
+    <div class="relay_map_form1" onmouseover="tooltip(this,'Реле 1')" onmouseout="hide_info(this)"><div id="relay_container1" class="relay_container"><div id="map_slider1" class="map_relay_slider"></div></div></div>
+    <div class="relay_map_form2" onmouseover="tooltip(this,'Реле 2')" onmouseout="hide_info(this)"><div id="relay_container2" class="relay_container"><div id="map_slider2" class="map_relay_slider"></div></div></div>
 
 
     <?php if (file_exists("/var/map/.bmon")) {?>

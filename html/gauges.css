@@ -91,7 +91,10 @@ div.wrapper {
 #mess {
     left:13%;
     top:80%;
-    width:20%;
+    width:auto;
+    max-width:20%;
+    min-width:5%;
+    padding:1%;
     height:auto;
     background:lightskyblue;
     font-weight:bolder;
