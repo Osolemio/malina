@@ -506,7 +506,8 @@ div.wrapper {
     text-shadow: 1px 1px 2px black, 0 0 2px blue;
     top: 3%;
     left: 55%;
-    width: 10%;
+    width: content;
+    z-index:-1;
     height: 5%;
 }
 
@@ -647,9 +648,16 @@ div.wrapper {
   left:2%;
   width:90%;
   height:99%;
-
-
 }
+
+#display_6 {
+    top:1%;
+  left:2%;
+  width:90%;
+  height:99%;
+}
+
+
 
 #battery_100 {
     top:0%;
@@ -1065,7 +1073,7 @@ top:3%;
 color:black;
 text-align:right;
 font-size:30%;
-font-weight:bold;
+font-weight:bolder;
 }
 
 #off {
@@ -1074,7 +1082,7 @@ right:1%;
 color:black;
 font-size:30%;
 text-align:right;
-font-weight:bold;
+font-weight:bolder;
 }
 
 
@@ -1180,6 +1188,11 @@ font-weight:bold;
 
 }
 
+.slider_on
+{
+    background: green;
+}
+
 .relay_container:after {
  content: "";
     position: absolute;
@@ -1238,7 +1251,7 @@ font-weight:bold;
 }
 
 .map_relay_slider:before{
-content: "off";
+    content: "off";
     position: absolute;
     top: 50%;
     right: -50%;
@@ -1251,6 +1264,21 @@ content: "off";
     font-size: 100%;
     text-transform: uppercase;
     text-shadow: 0 1px 0 #bcb8ae, 0 -1px 0 #97958e;
+
+}
+
+.map_relay_slider.checked {
+
+    left: auto;
+    right: -1%;
+
+}
+
+.map_relay_slider.checked:before{
+     content: "on";
+    right: 115%;
+    color: #82a06a;
+    text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
 
 }
  

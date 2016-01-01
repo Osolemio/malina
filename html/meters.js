@@ -6,7 +6,7 @@ var tipobj,op;
 
 var meter_v, meter_i, meter_i_i2c, meter_vout, meter_vacc, meter_iacc, meter_vpv,meter_ipv, v = 0, f, arr=[],
 display_1, display_2, onload, counter_net, counter_acc,counter_charge, counter_pv,
-display_3, display_4,display_5,i=1,angle=0,
+display_3, display_4,display_5, display_6, i=1,angle=0,
     map_mode0="&nbspВЫКЛЮЧЕН. НЕТ СЕТИ",
     map_mode1="&nbspВЫКЛЮЧЕН. ЕСТЬ СЕТЬ",
     map_mode2="&nbspВКЛЮЧЕН. НЕТ СЕТИ. ГЕНЕРАЦИЯ",
@@ -254,7 +254,11 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     display_5 = new JSGadget.Display("#display_5",
 		{digits:2,
 		color:"red"});
+    display_6 = new JSGadget.Display("#display_6",
+		{digits:2,
+		color:"red"});
     
+
     counter_net = new JSGadget.Counter("#counter1",
 		{digits:9,
 		color: "white",
@@ -508,6 +512,34 @@ var alt_u=$('#alt_user');
     display_1.setVal((6250/arr[7]).toFixed(1));
     display_2.setVal((6250/arr[8]).toFixed(1));
     display_3.setVal(arr[15]);
+    display_6.setVal(arr[46]);
+    var relay_container1=document.getElementById("relay_container1");
+    var relay_container2=document.getElementById("relay_container2");
+    var relay_slider1=document.getElementById("map_slider1");
+    var relay_slider2=document.getElementById("map_slider2");
+    if (arr[47]>0)
+	{
+	    relay_container1.className="relay_container slider_on";
+	    relay_slider1.className="map_relay_slider checked";
+
+	} else
+	{
+	    relay_container1.className="relay_container";
+	    relay_slider1.className="map_relay_slider";
+	}
+
+    if (arr[48]>0)
+	{
+	    relay_container2.className="relay_container slider_on";
+	    relay_slider2.className="map_relay_slider checked";
+
+	} else
+	{
+	    relay_container2.className="relay_container";
+	    relay_slider2.className="map_relay_slider";
+	}
+
+
     $('#text_kw_net').html("кВтч от сети");
     $('#text_kw_acc').html("кВтч от АКБ");
     $('#text_kw_charge').html("кВтч на АКБ (заряд МАП)");

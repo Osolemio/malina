@@ -48,7 +48,10 @@
 		'E_alt_daily'=>0,
 		'E_alt_monthly'=>0,
 		'E_alt_summ'=>0,
-		'E_alt_user'=>0
+		'E_alt_user'=>0,
+		'MAP_relay1'=>0,
+		'MAP_relay2'=>0,
+		'Temp_Tor'=>0
 	    );
 				
 	$flag_map=0;
@@ -127,7 +130,11 @@ if (file_exists("/var/map/.map")) {
     $data['ECHG']=$row['_E_ACC_CHARGE'];
     $data['TEMP1']=$row['_Temp_Grad0'];
     $data['TEMP2']=$row['_Temp_Grad2'];
+    $data['Temp_Tor']=$row['_Temp_Grad1'];
+    $data['MAP_Relay1']=$row['_Relay1'];
+    $data['MAP_Relay2']=$row['_Relay2'];
     $data['MODE']=$row['_MODE'];
+
     
     
     if ($row['_RSErrSis']==0) {$error_status="0";} else {$error_status="1";}
@@ -269,11 +276,12 @@ if (file_exists("/var/map/.mppt")) {
 	}
 //----------------------------------------------------
 
+
     echo $data['UNET'].",".$data['INET'].",".$data['UOUT'].",".$data['UACC'].",".$data['IACC'].",".$data['VPV'].",".$data['IPV'].",".$data['FNET'].",".$data['FMAP'].",". $data['ENET'].','.$data['EACC'].",".$data['ECHG'].",".$data['I_CH_I2C'].",".$data['EPV'].",".$data['TEMP1'].",".$data['TEMP2'].",".$data['TEMP_MPPT'].",".$data['PNET'].",".$data['PACC'].",".
 $data['PPV'].",".$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".$data['MODE'].",".$data['RELAY'].",".$error_status.",".$u_min.",".$u_max.",".$t_min.",".$t_max.",".$flag_map.",".$flag_mppt.",".
 $data['integral_dCdt'].",".$data['C_current_Ah'].",".$data['C_current_percent'].",".
 $data['C_nominal'].",".$data['C_measured'].",".$data['time_to_go'].",".$data['windspeed'].",".$data['user_counter'].",".$data['estimated_SOC'].",".$data['estimated_C'].",".$data['timer'].",".$data['CH_ST'].",".
-$data['E_alt_daily'].",".$data['E_alt_monthly'].",".$data['E_alt_summ'].",".$data['E_alt_user'];
+$data['E_alt_daily'].",".$data['E_alt_monthly'].",".$data['E_alt_summ'].",".$data['E_alt_user'].",".$data['Temp_Tor'].",".$data['MAP_Relay1'].",".$data['MAP_Relay2'];
      
     
 
