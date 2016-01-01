@@ -374,53 +374,20 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
 	}
   
   function mppt_relay(value) {
+	var index=[0,1,2,4];
 	if (document.getElementById('mppt')) {
-
-	switch (value) {
-	
-	case 0: 
-		document.getElementById('mppt_relay1').style.background="red";
-		document.getElementById('mppt_relay2').style.background="red";
-		document.getElementById('mppt_relay3').style.background="red";
-		break
-	case 1:document.getElementById('mppt_relay1').style.background="green";
-		document.getElementById('mppt_relay2').style.background="red";
-		document.getElementById('mppt_relay3').style.background="red";
-	
-		break
-	case 2:document.getElementById('mppt_relay1').style.background="red";
-		document.getElementById('mppt_relay2').style.background="green";
-		document.getElementById('mppt_relay3').style.background="red";
-	
-		break
-	case 3:document.getElementById('mppt_relay1').style.background="green";
-		document.getElementById('mppt_relay2').style.background="green";
-		document.getElementById('mppt_relay3').style.background="red";
-	
-		break
-	case 4:document.getElementById('mppt_relay1').style.background="red";
-		document.getElementById('mppt_relay2').style.background="red";
-		document.getElementById('mppt_relay3').style.background="green";
-	
-		break
-	case 5:document.getElementById('mppt_relay1').style.background="green";
-		document.getElementById('mppt_relay2').style.background="red";
-		document.getElementById('mppt_relay3').style.background="green";
-		
-		break
-	case 6:document.getElementById('mppt_relay1').style.background="red";
-		document.getElementById('mppt_relay2').style.background="green";
-		document.getElementById('mppt_relay3').style.background="green";
-	
-		break
-	case 7:document.getElementById('mppt_relay1').style.background="green";
-		document.getElementById('mppt_relay2').style.background="green";
-		document.getElementById('mppt_relay3').style.background="green";
-	
-		break
-	default:
-	
-	}
+	for (var i=1;i<=3;i++)
+	    {
+		if ((value&index[i])>0) 
+		    {
+		    document.getElementById('mppt_relay'+i).style.background="blue";
+		    document.getElementById('mppt_relay'+i).style.top="2%";
+		    } else
+		    {
+		    document.getElementById('mppt_relay'+i).style.background="red";
+		    document.getElementById('mppt_relay'+i).style.top="60%";
+		    }
+	    }
    }
   }
     

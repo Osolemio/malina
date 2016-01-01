@@ -195,11 +195,13 @@
     <div id="text_kw_pv"></div>
     <div id="mppt_mode">
     <div id="mppt_o" onmouseover="tooltip(this,'Режим работы MPPT. s-сканирование, b,B-буферный, i-заряд, v-дозаряд.<br> + нехватка энергии, - избыток энергии')" onmouseout="hide_info(this)"><div id="mppt_text"></div></div>
-    <div id="mppt_relay" onmouseover="tooltip(this,'Реле контроллера. Красный - выкл')" onmouseout="hide_info(this)">
+    <div id="mppt_relay" onmouseover="tooltip(this,'Реле контроллера.')" onmouseout="hide_info(this)">
     
-    <div id="mppt_relay1"></div>
-    <div id="mppt_relay2"></div>
-    <div id="mppt_relay3"></div>
+    <div id="mppt_relay1" class="mppt_relay_slider slider1"></div>
+    <div id="mppt_relay2" class="mppt_relay_slider slider2"></div>
+    <div id="mppt_relay3" class="mppt_relay_slider slider3"></div>
+    <div id="on">ВКЛ</div><div id="off">ВЫКЛ</div>
+    <div class="mppt_relay_guide guide1"></div><div class="mppt_relay_guide guide2"></div><div class="mppt_relay_guide guide3"></div>
     </div>
     </div>
     <div id="smoothie-chart-mppt-div"> 
@@ -250,7 +252,7 @@
   </div>
 </div>
 
-<div id="mess" position="absolute"></div>
+<div id="mess" position="absolute" style="z-index:10"></div>
 </body>
 </html>
     

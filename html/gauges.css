@@ -1014,11 +1014,12 @@ width:20px;
 
  }
 
-#mppt_relay1 {
- left: 7px;
- top: 2px;
- height: 44px;
- width: 40px;
+.mppt_relay_slider {
+ position:absolute;
+ top: 60%;
+ height: 30%;
+ width: 20%;
+  border:2px outset red;
   border-radius:5px;
   -moz-border-radius:5px;
   -o-border-radius:5px;
@@ -1030,47 +1031,51 @@ width:20px;
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   background: red;
+  z-index:4;
 
- }
-
-#mppt_relay2 {
- left: 62px;
- top: 2px;
- height: 44px;
- width: 40px;
-  border-radius:5px;
-  -moz-border-radius:5px;
-  -o-border-radius:5px;
-  -webkit-border-radius:5px;
-  box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
-      4px 4px 6px 2px rgba(0,0,0,0.7);
-  -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
-      4px 4px 6px 2px rgba(0,0,0,0.7);
-  -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
-      4px 4px 6px 2px rgba(0,0,0,0.7);
-  background: red;
-
- }
-
-#mppt_relay3 {
- left: 117px;
- top: 2px;
- height: 44px;
- width: 40px;
-  border-radius:5px;
-  -moz-border-radius:5px;
-  -o-border-radius:5px;
-  -webkit-border-radius:10px;
-  box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
-      4px 4px 6px 2px rgba(0,0,0,0.7);
-  -moz-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
-      4px 4px 6px 2px rgba(0,0,0,0.7);
-  -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
-      4px 4px 6px 2px rgba(0,0,0,0.7);
-  background: red;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
 
 
  }
+
+.slider1 {left:5%;}
+.slider2 {left:32%;}
+.slider3 {left:59%;}
+ 
+.mppt_relay_guide {
+    top:1%;
+    bottom:1%;
+    width:4%;
+    border: 2px inset gray;
+    background-color:black;
+    z-index:1;
+}
+
+.guide1 { left:14%;}
+.guide2 { left:41%;}
+.guide3 { left:68%;}
+
+#on {
+right:1%;
+top:3%;
+color:black;
+text-align:right;
+font-size:30%;
+font-weight:bold;
+}
+
+#off {
+bottom:3%;
+right:1%;
+color:black;
+font-size:30%;
+text-align:right;
+font-weight:bold;
+}
 
 #bms {
  left: 0%;
