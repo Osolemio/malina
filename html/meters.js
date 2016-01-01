@@ -384,7 +384,7 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
 		    document.getElementById('mppt_relay'+i).style.top="2%";
 		    } else
 		    {
-		    document.getElementById('mppt_relay'+i).style.background="red";
+		    document.getElementById('mppt_relay'+i).style.background="gray";
 		    document.getElementById('mppt_relay'+i).style.top="60%";
 		    }
 	    }
@@ -617,10 +617,10 @@ var mipv=document.getElementById('meter_ipv')
 
 //--------------------- ACC SECTION -----------------------
 
-$('#bms_tmin').html(arr[26]);
-$('#bms_tmax').html(arr[27]);
-$('#bms_umin').html(arr[24]);
-$('#bms_umax').html(arr[25]);
+$('#bms_tmin').html(arr[26]);if (arr[26]=='off') document.getElementById("bms_tmin").style.color="gray"; else document.getElementById("bms_tmin").style.color="white";
+$('#bms_tmax').html(arr[27]);if (arr[27]=='off') document.getElementById("bms_tmax").style.color="gray"; else document.getElementById("bms_tmax").style.color="white";
+$('#bms_umin').html(arr[24]);if (arr[24]=='off') document.getElementById("bms_umin").style.color="gray"; else document.getElementById("bms_umin").style.color="white";
+$('#bms_umax').html(arr[25]);if (arr[25]=='off') document.getElementById("bms_umax").style.color="gray"; else document.getElementById("bms_umax").style.color="white";
 
 //-----displays
     

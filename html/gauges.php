@@ -77,6 +77,10 @@
     <div id="text_kw_charge"></div>
     <div id="smoothie-chart-map-div"> 
     <canvas id="smoothie-chart-map"></canvas></div>
+    <div class="relay_map_form1"><div class="relay_container"><div id="map_slider1" class="map_relay_slider"></div></div></div>
+    <div class="relay_map_form2"><div class="relay_container"><div id="map_slider2" class="map_relay_slider"></div></div></div>
+
+
     <?php if (file_exists("/var/map/.bmon")) {?>
     <div id="alt_text">АЛЬТЕРНАТИВНЫЕ ИСТОЧНИКИ (I2C)</div>
     <div id="alt_energy">
