@@ -1265,6 +1265,8 @@ font-weight:bolder;
 
 .map_relay_slider:after{
     content: "";
+    text-align:center;
+    font-weight:bolder;
     position: absolute;
     left: 15%;
     top: 25%;
@@ -1310,16 +1312,16 @@ font-weight:bolder;
  
 
 #counter1 {
- top: 50%;
+ top: 49.5%;
  }
 #counter2 {
- top: 56%;
+ top: 55.5%;
  }
 #counter3 {
- top: 62%;
+ top: 61.5%;
  }
 #counter4 {
- top: 50%;
+ top: 49.5%;
  }
 
 #counter4 .in {background: green;}
@@ -1328,10 +1330,10 @@ font-weight:bolder;
 #text_kw_pv {
     color: white;
     font-weight: bolder;
-    font-size: 140%;
+    font-size: 130%;
     text-shadow: 1px 1px 2px black, 0 0 6px lightgreen;
-    top: 50%;
-    left: 56%;
+    top: 51%;
+    left: 55%;
     width: 60%;
     height: 6%;
 }
@@ -1339,10 +1341,10 @@ font-weight:bolder;
 #text_kw_net {
     color: white;
     font-weight: bolder;
-    font-size: 150%;
+    font-size: 130%;
     text-shadow: 1px 1px 2px black, 0 0 6px lightskyblue;
-    top: 50%;
-    left: 45%;
+    top: 51%;
+    left: 43%;
     width: 60%;
     height: 6%;
 }
@@ -1350,10 +1352,10 @@ font-weight:bolder;
 #text_kw_acc {
     color: white;
     font-weight: bolder;
-    font-size: 150%;
+    font-size: 130%;
     text-shadow: 1px 1px 2px black, 0 0 6px lightgray;
-    top: 56%;
-    left: 45%;
+    top: 57%;
+    left: 43%;
     width: 60%;
     height: 6%;
 }
@@ -1361,10 +1363,10 @@ font-weight:bolder;
 #text_kw_charge {
     color: white;
     font-weight: bolder;
-    font-size: 150%;
+    font-size: 130%;
     text-shadow: 1px 1px 2px black, 0 0 6px lightgray;
-    top: 62%;
-    left: 45%;
+    top: 63%;
+    left: 43%;
     width: 60%;
     height: 6%;
 }
@@ -1402,8 +1404,9 @@ font-weight:bolder;
  color: black;
  font-weight: bolder;
  text-align: center;
+ vertical-align:middle;
+ justify-content:center;
  font-size: 120%;
- line-height:100%;
   border-radius:5px;
   -moz-border-radius:5px;
   -o-border-radius:5px;
