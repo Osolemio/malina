@@ -24,9 +24,10 @@ body {
 
 div.wrapper {
     position:absolute;
-    top:0px;
     width:800px;
     height:800px;
+    left:50%;
+    margin-left:-400px;
 }
 
 a {
