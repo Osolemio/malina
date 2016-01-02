@@ -112,12 +112,12 @@
 
     <div id="timer" onmouseover="tooltip(this,'Таймер отдыха батареи. После установленного времени будет измерен % заряда')" onmouseout="hide_info(this)"></div>
 
-    <div class="col1 row1 bor8 silver"></div>
-    <div class="col1 row1 bor9 silver"></div>
-    <div class="col1 row1 bor6 black">
+    <div class="col1 row1 pin bor8 silver"></div>
+    <div class="col1 row1 pin bor9 silver"></div>
+    <div class="col1 row1 bat bor6 black">
     <div id="battery_100" onmouseover="tooltip(this,'Емкость батареи в %. Расcчитывается с учетом интенсивности разряда и экспоненты Пейкерта.')" onmouseout="hide_info(this)"><div id="text_bmon"></div></div></div>
 
-    <div class="col1 row1 bor7 black">
+    <div class="col1 row1 bat bor7 black">
     <div id="battery_real" onmouseover="tooltip(this,'Реальный расход емкости в Ач. Емкость C<sub>20</sub> c учетом температуры. При разряде - приведенная по среднему току разряда')" onmouseout="hide_info(this)"><div id="text_bmon_real"></div></div></div>
 
     

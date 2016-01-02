@@ -605,13 +605,16 @@ div.wrapper {
 }
 
 #timer {
-  top:0%;
-  left:51%;
-  width:20%;
-  height:6%;
-  color:ivory;
+  top:35.5%;
+  left:1%;
+  width:context;
+  height:context;
+  color: rgba(23,23,0,0.7);
   font-size:120%;
   font-weight:bolder;
+  background: rgba(20,20,200,0.3);
+  z-index:10;
+  border: 2px ridge rgba(50,50,50,0.5);
 }
 
 
@@ -771,6 +774,15 @@ div.wrapper {
   box-shadow:4px 4px 6px 2px rgba(0,0,0,0.7);
   -moz-box-shadow:4px 4px 6px 2px rgba(0,0,0,0.7);
   -webkit-box-shadow:4px 4px 6px 2px rgba(0,0,0,0.7);
+}
+
+.col1.row1.bat {
+ border: 2px outset gray;
+
+}
+
+.col1.row1.pin {
+ border: 2px outset ivory;
 }
 
 .in {
