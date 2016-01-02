@@ -573,11 +573,13 @@ div.wrapper {
 #text_common {
     font-weight: bolder;
     color: lime;
-    font-size: 150%;
+    font-size: 120%;
+    text-align:center;
     text-shadow: 1px 1px 2px black, 0 0 6px lightgray;
     top: 56%;
-    left: 30%;
-    width: auto;
+    left: 1%;
+    right: 1%;
+    width: content;
     height: 5%;
 }
 
@@ -827,10 +829,10 @@ div.wrapper {
 
 
 #powers_back {
- left: 1%;
+ left: 0%;
  top: 60%;
  height: 17%;
- width: 98%;
+ right: 0%;
  background: ivory;
  border-radius:5px;
 -moz-border-radius:5px;
@@ -842,6 +844,7 @@ div.wrapper {
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
+    border: 3px outset darkgray;
  }  
 
 #powers {
@@ -920,6 +923,11 @@ width:20px;
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   background:blue;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 
 }
 
@@ -939,6 +947,11 @@ width:20px;
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   background:gray;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 
 
 }
@@ -959,6 +972,11 @@ width:20px;
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   background:green;
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -ms-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  transition-duration: 0.5s;
 
 
 }
@@ -1030,6 +1048,11 @@ width:20px;
  top: 60%;
  height: 30%;
  width: 20%;
+ text-align:center;
+ line-height:90%;
+ font-size:70%;
+ font-weight:bolder;
+ color:black;
   border:2px outset red;
   border-radius:5px;
   -moz-border-radius:5px;
@@ -1041,7 +1064,7 @@ width:20px;
       4px 4px 6px 2px rgba(0,0,0,0.7);
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
-  background: red;
+  background: gray;
   z-index:4;
 
   -webkit-transition-duration: 0.3s;
@@ -1260,7 +1283,7 @@ font-weight:bolder;
     right: -50%;
     margin-top: -12px;
     color: #666; /* Fallback */
-    color: rgba(0,0,0,0.4);
+    color: rgba(0,0,0,0.8);
     font-style: normal;
     font-weight: bold;
     font-family: Helvetica, Arial, sans-serif;
@@ -1280,7 +1303,7 @@ font-weight:bolder;
 .map_relay_slider.checked:before{
      content: "on";
     right: 115%;
-    color: #82a06a;
+    color: lime;
     text-shadow: 0 1px 0 #afcb9b, 0 -1px 0 #6b8659;
 
 }
@@ -1380,6 +1403,7 @@ font-weight:bolder;
  font-weight: bolder;
  text-align: center;
  font-size: 120%;
+ line-height:100%;
   border-radius:5px;
   -moz-border-radius:5px;
   -o-border-radius:5px;
@@ -1397,10 +1421,10 @@ font-weight:bolder;
 
 
 #map_err {
- left: 1%;
+ left: 0%;
  top: 79%;
  height: 20%;
- width: 98%;
+ right: 0%;
  color: red;
  font-weight: bolder;
   border-radius:5px;
@@ -1414,7 +1438,7 @@ font-weight:bolder;
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 2px 2px 2px, inset rgba(0,0,0,0.3) -2px -2px 2px,
       4px 4px 6px 2px rgba(0,0,0,0.7);
   background: red;
-
+  border: 3px outset darkgray;
  }
  
  #map_err_in {
@@ -1503,11 +1527,11 @@ font-weight:bolder;
     }
 
 #smoothie-chart-wind-div  {
-    left:1%;
+    left:0%;
     top:45%;
-    right:1%;
+    right:0%;
     height:45%;
-
+    border: 3px outset darkgreen;
     }
 
 #estimated_data {

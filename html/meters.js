@@ -698,7 +698,7 @@ arr[40]<36000)?Math.floor(arr[40]/60)+'&nbspмин':Math.floor(arr[40]/3600)+'&n
 //        $('#text6').html("температура,&degС");
         
 
-	$('#text_power').html("Мощность, ВА (Вт)");
+	$('#text_power').html("");
 
 	$('#text_err').html("Ошибки и предупреждения");
 	$('#text_pnet').html(arr[17]);
