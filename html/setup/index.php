@@ -43,7 +43,7 @@ a {
     text-align: center;
     text-decoration: none;
       text-shadow: 0 -1px 1px #777;
-      font-size: 150%;
+      font-size: 190%;
       font-weight: 700;
   -moz-border-radius:10px;
   -o-border-radius:10px;
