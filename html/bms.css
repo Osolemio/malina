@@ -157,7 +157,7 @@ div {position:absolute;}
 
 #bms9 {
   left:10px;
-  top:350px;
+  top:360px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -175,7 +175,7 @@ div {position:absolute;}
 
 #bms10 {
   left:290px;
-  top:350px;
+  top:360px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -193,7 +193,7 @@ div {position:absolute;}
 
 #bms11 {
   left:570px;
-  top:350px;
+  top:360px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -211,7 +211,7 @@ div {position:absolute;}
 
 #bms12 {
   left:850px;
-  top:350px;
+  top:360px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -230,7 +230,7 @@ div {position:absolute;}
 
 #bms13 {
   left:10px;
-  top:520px;
+  top:530px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -248,7 +248,7 @@ div {position:absolute;}
 
 #bms14 {
   left:290px;
-  top:520px;
+  top:530px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -266,7 +266,7 @@ div {position:absolute;}
 
 #bms15 {
   left:570px;
-  top:520px;
+  top:530px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -284,7 +284,7 @@ div {position:absolute;}
 
 #bms16 {
   left:850px;
-  top:520px;
+  top:530px;
   width:270px;
   height:150px;
   border-radius:5px;
@@ -317,6 +317,7 @@ div {position:absolute;}
   -webkit-box-shadow:inset rgba(255,255,255,0.7) 1px 0px 0px, inset rgba(0,0,0,0.3) 0px 0px 0px,
       4px 0px 0px 0px rgba(0,0,0,0.7);
   background:darkslategray;
+  cursor:default;
 }
 
 .led_red {
@@ -382,6 +383,7 @@ div {position:absolute;}
     width: 210px;
     height: 30px;
     background: black;
+    cursor:default;
 }
 
 .scale {
@@ -404,12 +406,18 @@ div {position:absolute;}
 #vmp {
     font-size:25px;
     font-weight:bolder;
-    color:white;
-    top:700px;
-    width:auto;
+    color:ivory;
+    line-height:90%;
+    font-size:120%;
+    text-align:center;
+    top:331px;
+    width:465px;
     left:330px;
-
-
+    height:20px;
+    border: 4px ridge gray;
+    background:darkblue;
+    z-index:4;
+    cursor:default;
 }
 
 #buttons {
