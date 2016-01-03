@@ -8,8 +8,17 @@ declare -A to_map
 mode['0']="MAP is off. No input AC"
 mode['1']="MAP is off. AC in"
 mode['2']="MAP is ON. No AC in. Generation"
-mode['3']="MAP is ON. Translation"
-mode['4']="MAP is ON. Translation+charge"
+mode['3']="MAP is ON. Relay"
+mode['4']="MAP is ON. Relay+charge"
+mode['10']="Forced generation"
+mode['11']="Max tarif. Forced generation"
+mode['12']="Min tarif"
+mode['13']="Relay. ECO Injection"
+mode['14']="Relay. Sell to network"
+mode['15']="Waiting for an externall full charge"
+mode['16']="Tarif zone. Relay+ECO injection"
+mode['17']="Tarif zone. Relay+Sale"
+
 
 to_map['stop']='\xFF\x00\x00\x01'
 to_map['start']='\xFF\x00\x00\x02'
