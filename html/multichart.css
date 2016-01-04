@@ -30,6 +30,7 @@ height:content;
   transition-duration: 0.5s;
   width: 20em;
   top: 10em;
+  position:fixed;
 }
 
 
