@@ -607,6 +607,7 @@ div.wrapper {
 #timer {
   top:35.5%;
   left:1%;
+  cursor:default;
   width:context;
   height:context;
   color: rgba(23,23,0,0.7);
@@ -743,7 +744,7 @@ div.wrapper {
 .bor8 {
   top:1%;
   left:10%;
-  width:33%;
+  width:32.5%;
   height:1%;
 
 }
@@ -753,7 +754,7 @@ div.wrapper {
 .bor9 {
   top:6%;
   left:10%;
-  width:33%;
+  width:32.5%;
   height:1%;
 
 }
@@ -783,6 +784,7 @@ div.wrapper {
 
 .col1.row1.pin {
  border: 2px outset ivory;
+ background:ivory;
 }
 
 .in {
@@ -1459,8 +1461,8 @@ font-weight:bolder;
  #map_err_in {
  left: 1%;
  top: 1%;
- height: 98%;
- width: 98%;
+ bottom: 10%;
+ right: 1%;
  color: black;
  font-size: 110%;
  overflow: auto;
@@ -1483,12 +1485,15 @@ font-weight:bolder;
 
 
 #text_err {
- top: 90%;
- left: 20%;
- width: auto;
+ bottom: 5%;
+ left: 0%;
+ height:4%;
+ line-height:95%;
+ text-align:center;
+ width: 100%;
  font-weight: bolder;
  font-size: 100%; 
- color: black;
+ color: ivory;
  }
 
 #mppt_mode {
