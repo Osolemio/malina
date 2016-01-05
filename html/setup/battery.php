@@ -78,7 +78,7 @@
 
 
 <tr>
-Разделяемый блок АКБ<input type="checkbox" name="shared" <?php if ($row['SHARED']==1) echo "checked"; ?> >
+Разделяемый блок АКБ<input type="checkbox" name="shared" <?php if ($row['SHARED']==1) echo "checked"; ?> disabled>
 <br><br>
 </tr>
 <tr bgcolor="blanchedalmond"><td>
