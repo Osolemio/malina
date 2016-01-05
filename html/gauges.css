@@ -1067,7 +1067,7 @@ width:20px;
  font-size:70%;
  font-weight:bolder;
  color:black;
-  border:2px outset red;
+  border:2px outset black;
   border-radius:5px;
   -moz-border-radius:5px;
   -o-border-radius:5px;
@@ -1485,7 +1485,7 @@ font-weight:bolder;
 
 
 #text_err {
- bottom: 5%;
+ bottom: 6%;
  left: 0%;
  height:4%;
  line-height:95%;
