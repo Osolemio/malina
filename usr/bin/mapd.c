@@ -873,7 +873,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         	    map_data._UOUTmed += 100;
 
         map_data._TFNET_Limit = Buffer[0x428 - 0x3FF];
-        	  if (map_data._TFNET_Limit!=0) map_data._TFNET_Limit= 2500 / map_data._TFNET_Limit;
+        	  //if (map_data._TFNET_Limit!=0) map_data._TFNET_Limit= 2500 / map_data._TFNET_Limit;
 
         map_data._UNET_Limit = Buffer[0x429 - 0x3FF];
         	  map_data._UNET_Limit += 100;

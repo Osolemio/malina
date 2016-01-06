@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `map_errors` (
   `_F_AccOver` tinyint(3) unsigned NOT NULL,
   `_F_NETOver` tinyint(3) unsigned NOT NULL,
   `_TFNET_Limit` tinyint(3) unsigned NOT NULL,
-  `_UNET_Limit` tinyint(3) unsigned NOT NULL,
+  `_UNET_Limit` smallint(3) unsigned NOT NULL,
   UNIQUE KEY `number` (`number`),
   KEY `date` (`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='map errors if =/= 0' AUTO_INCREMENT=1 ;
