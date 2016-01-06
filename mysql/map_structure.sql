@@ -1,13 +1,34 @@
+-- phpMyAdmin SQL Dump
+-- version 3.4.11.1deb2+deb7u1
+-- http://www.phpmyadmin.net
+--
+-- Хост: localhost
+-- Время создания: Янв 06 2016 г., 19:33
+-- Версия сервера: 5.5.44
+-- Версия PHP: 5.4.45-0+deb7u1
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT=0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- База данных: `map`
+--
 CREATE DATABASE `map` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `map`;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bms`
+--
 
 CREATE TABLE IF NOT EXISTS `bms` (
   `cell_number` tinyint(3) unsigned NOT NULL,
@@ -15,6 +36,12 @@ CREATE TABLE IF NOT EXISTS `bms` (
   `I` decimal(3,2) unsigned NOT NULL,
   `t` tinyint(3) NOT NULL
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `bms_alert`
+--
 
 CREATE TABLE IF NOT EXISTS `bms_alert` (
   `series_number` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -26,6 +53,12 @@ CREATE TABLE IF NOT EXISTS `bms_alert` (
   `t` tinyint(3) NOT NULL,
   PRIMARY KEY (`series_number`,`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `data`
+--
 
 CREATE TABLE IF NOT EXISTS `data` (
   `number` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -63,11 +96,11 @@ CREATE TABLE IF NOT EXISTS `data` (
   `_I_mppt_avg` decimal(4,1) unsigned NOT NULL,
   `_I2C_Err` tinyint(3) unsigned NOT NULL,
   `_Temp_Grad1` tinyint(3) NOT NULL,
-  `_Relay1` tinyint(3) NOT NULL,
-  `_Relay2` tinyint(3) NOT NULL,
-  `_Flag_ECO` tinyint(3) NOT NULL,
+  `_Relay1` tinyint(3) unsigned NOT NULL,
+  `_Relay2` tinyint(3) unsigned NOT NULL,
+  `_Flag_ECO` tinyint(3) unsigned NOT NULL,
   PRIMARY KEY (`number`,`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (DAYOFYEAR(date))
 (PARTITION p01 VALUES LESS THAN (10) ENGINE = InnoDB,
  PARTITION p02 VALUES LESS THAN (20) ENGINE = InnoDB,
@@ -104,12 +137,43 @@ CREATE TABLE IF NOT EXISTS `data` (
  PARTITION p34 VALUES LESS THAN (340) ENGINE = InnoDB,
  PARTITION p35 VALUES LESS THAN (350) ENGINE = InnoDB,
  PARTITION p36 VALUES LESS THAN (360) ENGINE = InnoDB,
- PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=1 ;
+ PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=1300887 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `eeprom_result`
+--
 
 CREATE TABLE IF NOT EXISTS `eeprom_result` (
   `offset` tinyint(3) unsigned NOT NULL,
   `result` tinyint(3) unsigned NOT NULL
 ) ENGINE=MEMORY DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `map_errors`
+--
+
+CREATE TABLE IF NOT EXISTS `map_errors` (
+  `number` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `_RSErrSis` tinyint(3) unsigned NOT NULL,
+  `_RSErrJobM` tinyint(3) unsigned NOT NULL,
+  `_RSErrJob` tinyint(3) unsigned NOT NULL,
+  `_RSWarning` tinyint(3) unsigned NOT NULL,
+  `_I2C_Err` tinyint(3) unsigned NOT NULL,
+  UNIQUE KEY `number` (`number`),
+  KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='map errors if =/= 0' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `mppt`
+--
 
 CREATE TABLE IF NOT EXISTS `mppt` (
   `number` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -140,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `mppt` (
   `MPP` char(1) NOT NULL,
   `windspeed` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`number`,`date`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8
 /*!50100 PARTITION BY RANGE (DAYOFYEAR(date))
 (PARTITION p01 VALUES LESS THAN (10) ENGINE = InnoDB,
  PARTITION p02 VALUES LESS THAN (20) ENGINE = InnoDB,
@@ -177,13 +241,41 @@ CREATE TABLE IF NOT EXISTS `mppt` (
  PARTITION p34 VALUES LESS THAN (340) ENGINE = InnoDB,
  PARTITION p35 VALUES LESS THAN (350) ENGINE = InnoDB,
  PARTITION p36 VALUES LESS THAN (360) ENGINE = InnoDB,
- PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=1 ;
+ PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=8083187 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `mppt_errors`
+--
+
+CREATE TABLE IF NOT EXISTS `mppt_errors` (
+  `number` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `_RSErrSis` tinyint(3) unsigned NOT NULL,
+  `_I2C_Err` tinyint(3) unsigned NOT NULL,
+  UNIQUE KEY `number` (`number`),
+  KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='mppt errors if =/=0' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `settings`
+--
 
 CREATE TABLE IF NOT EXISTS `settings` (
   `offset` smallint(3) unsigned NOT NULL,
   `value` tinyint(3) unsigned NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `sms_alert`
+--
 
 CREATE TABLE IF NOT EXISTS `sms_alert` (
   `number` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -192,7 +284,8 @@ CREATE TABLE IF NOT EXISTS `sms_alert` (
   `ge` decimal(10,2) NOT NULL,
   `sms` text NOT NULL,
   PRIMARY KEY (`number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
