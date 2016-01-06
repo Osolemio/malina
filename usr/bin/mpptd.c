@@ -519,13 +519,14 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL\n"); return -1;}
 
 //-----------Adding error field if there is one
-
-     sprintf(query, "INSERT INTO mppt_errors VALUES (NULL,'%d-%d-%d', '%d:%d:%d',%d')",
+    if (mppt_data.RSErrSis>0)
+    {
+     sprintf(query, "INSERT INTO mppt_errors VALUES (NULL,'%d-%d-%d','%d:%d:%d','%d')",
 	tim.tm_year+1900,tim.tm_mon+1,tim.tm_mday,tim.tm_hour,tim.tm_min,
 	tim.tm_sec,mppt_data.RSErrSis);
         
 	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL - mppt_errors\n"); return -1;}
-    
+    }
 	    
 	     batmon->battery_id=1;
 	     batmon->timestamp=ltime;
