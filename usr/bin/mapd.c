@@ -500,6 +500,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	  unsigned char _Relay1;
 	  unsigned char _Relay2;
 	  unsigned char _Flag_ECO;
+	  unsigned char _RSErrDop;
       };
 
       struct map_info map_data;
@@ -903,6 +904,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	  map_data._E_ACC_CHARGE =
 	    (Buffer[0x56] * 65536 + Buffer[0x55] * 256 + Buffer[0x54]);
 	 map_data._I2C_err = Buffer[0x45A-0x3FF];
+	 map_data._RSErrDop= Buffer[0x447-0x3FF];
 	 map_data._Relay1=0;
 	 map_data._Relay2=0;
 
@@ -1022,6 +1024,28 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         	  time (&ltime);
         	  newtime = localtime (&ltime);
         	  tim = *newtime;
+//------------- updating data in memory segment
+
+		sprintf (cache_str,
+        		   "{\"time\":\"%02d:%02d:%02d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Uacc_optim\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\",\"_RSErrDop\":\"%d\"}",
+        		   tim.tm_hour, tim.tm_min, tim.tm_sec, map_data._MODE,
+        		   map_data._Status_Char, map_data._Uacc, map_data._Iacc,
+        		   map_data._PLoad, map_data._F_Acc_Over,
+        		   map_data._F_Net_Over, map_data._UNET, map_data._INET,
+        		   map_data._PNET, map_data._TFNET, map_data._ThFMAP,
+        		   map_data._UOUTmed, map_data._TFNET_Limit,
+        		   map_data._UNET_Limit, map_data._RSErrSis,
+        		   map_data._RSErrJobM, map_data._RSErrJob,
+        		   map_data._RSWarning, map_data._Temp_Grad0,
+        		   map_data._Temp_Grad2, map_data._INET_16_4,
+        		   map_data._IAcc_med_A_u16, map_data._Temp_off,
+        		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
+        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
+			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO, map_data._RSErrDop);
+ 
+//---------------adding DB record
+
+
         	  sprintf (query,
         		   "INSERT INTO data VALUES (NULL,'%d-%d-%d','%d:%d:%d','%d','%d','%.1f','%i','%i','%d','%d','%i','%d','%i','%d','%d','%i','%d','%i','%d','%d','%d','%d','%d','%d','%.1f','%.1f','%d','%d','%d','%d','%.1f','%.1f','%.1f','%d','%d','%d','%d','%d')",
         		   tim.tm_year + 1900, tim.tm_mon + 1, tim.tm_mday,
@@ -1042,31 +1066,31 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
         	  if (mysql_query (&mysql, query))
         	    {
-        	      syslog(LOG_ERR,"Error adding in MySQL\n");
+        	      syslog(LOG_ERR,"Error adding in MySQL\n"); return -1;
         	    }
-		 time(&ltime);
+//-------------checking for errors and updating error table
 
-		sprintf (cache_str,
-        		   "{\"time\":\"%02d:%02d:%02d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Uacc_optim\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\"}",
-        		   tim.tm_hour, tim.tm_min, tim.tm_sec, map_data._MODE,
-        		   map_data._Status_Char, map_data._Uacc, map_data._Iacc,
-        		   map_data._PLoad, map_data._F_Acc_Over,
-        		   map_data._F_Net_Over, map_data._UNET, map_data._INET,
-        		   map_data._PNET, map_data._TFNET, map_data._ThFMAP,
-        		   map_data._UOUTmed, map_data._TFNET_Limit,
-        		   map_data._UNET_Limit, map_data._RSErrSis,
+	    if ((map_data._RSErrSis>0 || map_data._RSErrJobM>0 || map_data._RSErrJob>0 || map_data._RSWarning>0 || map_data._I2C_err>0 || map_data._RSErrDop>0))
+		    {
+		  sprintf (query,
+        		   "INSERT INTO map_errors VALUES (NULL,'%d-%d-%d','%d:%d:%d','%d','%d','%d','%d','%d','%d','%d','%d','%d','%d')",
+        		   tim.tm_year + 1900, tim.tm_mon + 1, tim.tm_mday,
+        		   tim.tm_hour, tim.tm_min, tim.tm_sec,
+			   map_data._RSErrSis,
         		   map_data._RSErrJobM, map_data._RSErrJob,
-        		   map_data._RSWarning, map_data._Temp_Grad0,
-        		   map_data._Temp_Grad2, map_data._INET_16_4,
-        		   map_data._IAcc_med_A_u16, map_data._Temp_off,
-        		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
-        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
-			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO);
+        		   map_data._RSWarning, map_data._I2C_err,
+			   map_data._RSErrDop,map_data._F_Acc_Over, map_data._F_Net_Over,
+			   map_data._TFNET_Limit, map_data._UNET_Limit);
 
+        	  if (mysql_query (&mysql, query))
+        	    {
+        	      syslog(LOG_ERR,"Error adding in MySQL - map_errors table\n"); return -1;
+        	    }
 
-
+		    } //if errors
+//---------------------------------------------------------
 		 batmon->timestamp=ltime;
-		 batmon->current=(map_data._MODE==4)?map_data._IAcc_med_A_u16:(0-map_data._IAcc_med_A_u16);; 
+		 batmon->current=(map_data._MODE==4)?map_data._IAcc_med_A_u16:(0-map_data._IAcc_med_A_u16);
 		 batmon->tbat=map_data._Temp_Grad0;
 		 batmon->Ubat=map_data._Uacc;
 		 batmon->Imppt=map_data._I_mppt_avg;

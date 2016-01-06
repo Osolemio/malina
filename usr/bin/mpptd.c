@@ -495,6 +495,18 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
             /* Convert it to the structure tm */
              newtime = localtime(&ltime);
 	     tim=*newtime;
+
+    sprintf(cache_str, "{\"time\":\"%02d:%02d:%02d\",\"Vc_PV\":\"%.1f\",\"Ic_PV\":\"%.1f\",\"V_Bat\":\"%.1f\",\"P_PV\":\"%d\",\"P_Out\":\"%d\",\"P_Load\":\"%d\",\"P_curr\":\"%d\",\"I_Ch\":\"%.1f\",\"I_Out\":\"%.1f\",\"Temp_Int\":\"%d\",\"Temp_Bat\":\"%d\",\"Pwr_kW\":\"%.3f\",\"Sign_C0\":\"%d\",\"Sign_C1\":\"%d\",\"I_EXTS0\":\"%d\",\"I_EXTS1\":\"%d\",\"P_EXTS0\":\"%d\",\"P_EXTS1\":\"%d\",\"Relay_C\":\"%d\",\"RSErrSis\":\"%d\",\"Mode\":\"%c\",\"Sign\":\"%c\",\"MPP\":\"%c\",\"windspeed\":\"%d\"}",
+	tim.tm_hour,tim.tm_min,
+	tim.tm_sec,mppt_data.Vc_PV,mppt_data.Ic_PV,mppt_data.V_Bat,
+	mppt_data.P_PV,mppt_data.P_Out,mppt_data.P_Load,mppt_data.P_curr,
+	mppt_data.I_Ch,mppt_data.I_Out,mppt_data.Temp_Int,mppt_data.Temp_Bat,
+	mppt_data.Pwr_kW,mppt_data.Sign_C0,mppt_data.Sign_C1,mppt_data.I_EXTS0,
+	mppt_data.I_EXTS1,mppt_data.P_EXTS0,mppt_data.P_EXTS1,mppt_data.Relay_C,
+	mppt_data.RSErrSis,mppt_data.Mode, mppt_data.Sign,mppt_data.MPP,mppt_data.windspeed);
+
+
+
      sprintf(query, "INSERT INTO mppt VALUES (NULL,'%d-%d-%d', '%d:%d:%d','%.1f','%.1f','%.1f','%d','%d','%d','%d','%.1f','%.1f','%d','%d','%.3f','%d','%d','%d','%d','%d','%d','%d','%d','%c','%c','%c','%d')",
 	tim.tm_year+1900,tim.tm_mon+1,tim.tm_mday,tim.tm_hour,tim.tm_min,
 	tim.tm_sec,mppt_data.Vc_PV,mppt_data.Ic_PV,mppt_data.V_Bat,
@@ -506,17 +518,15 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         
 	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL\n"); return -1;}
 
-    sprintf(cache_str, "{\"time\":\"%02d:%02d:%02d\",\"Vc_PV\":\"%.1f\",\"Ic_PV\":\"%.1f\",\"V_Bat\":\"%.1f\",\"P_PV\":\"%d\",\"P_Out\":\"%d\",\"P_Load\":\"%d\",\"P_curr\":\"%d\",\"I_Ch\":\"%.1f\",\"I_Out\":\"%.1f\",\"Temp_Int\":\"%d\",\"Temp_Bat\":\"%d\",\"Pwr_kW\":\"%.3f\",\"Sign_C0\":\"%d\",\"Sign_C1\":\"%d\",\"I_EXTS0\":\"%d\",\"I_EXTS1\":\"%d\",\"P_EXTS0\":\"%d\",\"P_EXTS1\":\"%d\",\"Relay_C\":\"%d\",\"RSErrSis\":\"%d\",\"Mode\":\"%c\",\"Sign\":\"%c\",\"MPP\":\"%c\",\"windspeed\":\"%d\"}",
-	tim.tm_hour,tim.tm_min,
-	tim.tm_sec,mppt_data.Vc_PV,mppt_data.Ic_PV,mppt_data.V_Bat,
-	mppt_data.P_PV,mppt_data.P_Out,mppt_data.P_Load,mppt_data.P_curr,
-	mppt_data.I_Ch,mppt_data.I_Out,mppt_data.Temp_Int,mppt_data.Temp_Bat,
-	mppt_data.Pwr_kW,mppt_data.Sign_C0,mppt_data.Sign_C1,mppt_data.I_EXTS0,
-	mppt_data.I_EXTS1,mppt_data.P_EXTS0,mppt_data.P_EXTS1,mppt_data.Relay_C,
-	mppt_data.RSErrSis,mppt_data.Mode, mppt_data.Sign,mppt_data.MPP,mppt_data.windspeed);
+//-----------Adding error field if there is one
+
+     sprintf(query, "INSERT INTO mppt_errors VALUES (NULL,'%d-%d-%d', '%d:%d:%d',%d')",
+	tim.tm_year+1900,tim.tm_mon+1,tim.tm_mday,tim.tm_hour,tim.tm_min,
+	tim.tm_sec,mppt_data.RSErrSis);
+        
+	if (mysql_query(&mysql,query)) { syslog(LOG_ERR,"\nError adding in MySQL - mppt_errors\n"); return -1;}
     
 	    
-	     time(&ltime);
 	     batmon->battery_id=1;
 	     batmon->timestamp=ltime;
 	     batmon->current1=(mppt_data.Sign_C0==1)?(0-mppt_data.I_EXTS0):mppt_data.I_EXTS0;

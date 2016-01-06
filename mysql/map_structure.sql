@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Янв 06 2016 г., 19:33
+-- Время создания: Янв 06 2016 г., 23:42
 -- Версия сервера: 5.5.44
 -- Версия PHP: 5.4.45-0+deb7u1
 
@@ -137,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `data` (
  PARTITION p34 VALUES LESS THAN (340) ENGINE = InnoDB,
  PARTITION p35 VALUES LESS THAN (350) ENGINE = InnoDB,
  PARTITION p36 VALUES LESS THAN (360) ENGINE = InnoDB,
- PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=1300887 ;
+ PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=1315039 ;
 
 -- --------------------------------------------------------
 
@@ -165,6 +165,11 @@ CREATE TABLE IF NOT EXISTS `map_errors` (
   `_RSErrJob` tinyint(3) unsigned NOT NULL,
   `_RSWarning` tinyint(3) unsigned NOT NULL,
   `_I2C_Err` tinyint(3) unsigned NOT NULL,
+  `_RSErrDop` tinyint(3) unsigned NOT NULL,
+  `_F_AccOver` tinyint(3) unsigned NOT NULL,
+  `_F_NETOver` tinyint(3) unsigned NOT NULL,
+  `_TFNET_Limit` tinyint(3) unsigned NOT NULL,
+  `_UNET_Limit` tinyint(3) unsigned NOT NULL,
   UNIQUE KEY `number` (`number`),
   KEY `date` (`date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='map errors if =/= 0' AUTO_INCREMENT=1 ;
@@ -241,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `mppt` (
  PARTITION p34 VALUES LESS THAN (340) ENGINE = InnoDB,
  PARTITION p35 VALUES LESS THAN (350) ENGINE = InnoDB,
  PARTITION p36 VALUES LESS THAN (360) ENGINE = InnoDB,
- PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=8083187 ;
+ PARTITION p37 VALUES LESS THAN (370) ENGINE = InnoDB) */ AUTO_INCREMENT=8096214 ;
 
 -- --------------------------------------------------------
 
