@@ -22,7 +22,7 @@ session_start();
     $index=0;
     $_SESSION['Legend']=$field;
 
-if (isset($_POST['multichart']))
+    if (isset($_POST['multichart']))
     {
     $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time LIKE '".$time_start.":0%'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
@@ -107,6 +107,43 @@ if (isset($_POST['multichart']))
             }
         }
         break;
+    
+    case "map_errors":
+	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' \n";
+        $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
+	$row=mysql_fetch_row($result);
+	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате начала"; exit();}
+	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_end."' AND time LIKE '".$time_end.":0%'\n";
+	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
+	$row=mysql_fetch_row($result);
+	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
+	$_SESSION['number_low']=$number_low;
+	$_SESSION['number_high']=$number_high;
+	$_SESSION['table']='map_errors';
+	mysql_free_result($result);
+        mysql_close($db);
+	header("Location:errors_table.php");
+	die;
+	break;
+
+    case "mppt_errors":
+	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_start."'\n";
+        $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
+	$row=mysql_fetch_row($result);
+	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате начала"; exit();}
+	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_end."' AND time LIKE '".$time_end.":0%'\n";
+	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
+	$row=mysql_fetch_row($result);
+	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
+	$_SESSION['number_low']=$number_low;
+	$_SESSION['number_high']=$number_high;
+	$_SESSION['table']='mppt_errors';
+	mysql_free_result($result);
+        mysql_close($db);
+	header("Location:errors_table.php");
+	die;
+	break;
+    
 
     case "Energy":
 	$query="SELECT TO_DAYS('".$date_start."')\n";

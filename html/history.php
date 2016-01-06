@@ -26,7 +26,7 @@
 
 ?>
 <div style="background-color:#F0F0F0">
-<hr><p><center><b>Построение графиков по сохраненным данным</b></center></p><hr>
+<hr><p><center><b>Построение графиков и таблиц по сохраненным данным</b></center></p><hr>
 </div>
 <form method="post" action="history_hdl.php">
 <table border="1" color="black" width="100%">
@@ -34,10 +34,10 @@
 <td>
 <center>
 <b>
-<p>Дата начала: <input type="date" value=<?php echo $yesterday; ?> name="date_start">
-Дата окончания: <input type="date" value=<?php echo $today; ?> name="date_end">
-Время начала: <input type="time" value=<?php echo $time; ?> name="time_start">
-Время окончания: <input type="time" value=<?php echo $time; ?> name="time_end"></p>
+<p>Дата начала: <input type="date" value=<?php echo $yesterday; ?> name="date_start" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+Дата окончания: <input type="date" value=<?php echo $today; ?> name="date_end"  pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+Время начала: <input type="time" value=<?php echo $time; ?> name="time_start" pattern="[0-9]{2}:[0-9]{2}">
+Время окончания: <input type="time" value=<?php echo $time; ?> name="time_end" pattern="[0-9]{2}:[0-9]{2}"></p>
 </b>
 </center>
 </td>
@@ -86,6 +86,17 @@
 
 <input type="radio" name="field" value="Energy" />Статистика выработки по дням, кВт*ч (время не учитывается)</p>
 </p>
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+<input type="radio" name="field" value="map_errors" /><b>Ошибки МАП
+<input type="radio" name="field" value="mppt_errors" />Ошибки MPPT</b>
+<br><br>
+Время не учитывается
 
 
 </td>
