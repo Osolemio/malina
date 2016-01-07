@@ -237,7 +237,7 @@ function Reset_Counter(sw) {
     <br>
     <input TYPE='button' style='font-weight:bolder; background-color:darkkhaki;' VALUE=' МЕНЮ ' ONCLICK='HomeButton()'> 
     ";
-    mysql_free($result);
+    mysql_free_result($result);
     mysql_close($db_bat);
 
 

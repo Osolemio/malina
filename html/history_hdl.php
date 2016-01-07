@@ -37,7 +37,7 @@ session_start();
     $map_table="data";
     $mppt_table="mppt";
     $index=0;
-    $_SESSION['Legend']=$legend[$field];
+    @$_SESSION['Legend']=$legend[$field];
 
     if (isset($_POST['multichart']))
     {

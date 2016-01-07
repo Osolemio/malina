@@ -49,7 +49,7 @@ table {table-layout:fixed}
 			'Залипла кнопка (“СТАРТ” или “ЗАРЯД”).',
 			'Переход на заряд не возможен - нет сети на входе.',
 			'В режиме трансляции сети и возможно заряда, мощность нагрузки за пределами выставленной максимальной мощности (EE_LCD_NetMaxPow), но меньше мощности МАР. Произойдет переход на генерацию (кроме режима подкачки).',
-			'Сеть нестабильна (по напряжению или частоте), не будет перехода на трансляцию сети или выход из заряда если насчитали много нестабильностей.'
+			'Сеть нестабильна (по напряжению или частоте), не будет перехода на трансляцию сети или выход из заряда если насчитали много нестабильностей'
 			    ),
 	    '_I2C_Err'=>array(
 			'I2C Err Ack',
@@ -134,38 +134,38 @@ else echo "</tr></b>";
           if ($_SESSION['table']=='mppt_errors')
 	    {
 	      echo "Value=".$row['_RSErrSis']."&nbsp";    
-	     for ($i=1;$i<=8;$i++)  if (($row['_RSErrSis']&$i)==$i) echo $data_mppt['_RSErrSis'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_RSErrSis']>>$i)&1)>0) echo $data_mppt['_RSErrSis'][$i].",<br>";
 	      echo "</td>";
 	    }
 	
 	  if ($_SESSION['table']=='map_errors')	     
 	    {
 	     echo "Value=".$row['_RSErrSis']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_RSErrSis']&$i)==$i) echo $data_map['_RSErrSis'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_RSErrSis']>>$i)&1)>0) echo $data_map['_RSErrSis'][$i].",<br>";
 	     echo "</td><td>";
 	    
 	    echo "Value=".$row['_RSErrJobM']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_RSErrJobM']&$i)==$i) echo $data_map['_RSErrJobM'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_RSErrJobM']>>$i)&1)>0) echo $data_map['_RSErrJobM'][$i].",<br>";
 	     echo "</td><td>";
 
 	    echo "Value=".$row['_RSWarning']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_RSWarning']&$i)==$i) echo $data_map['_RSWarning'][$i-1].",<br>";
+	     for ($i=0;$i<8;$i++)  if ((($row['_RSWarning']>>$i)&1)>0) echo $data_map['_RSWarning'][$i].",<br>";
 	     echo "</td><td>";
 
 	    echo "Value=".$row['_I2C_Err']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_I2C_Err']&$i)==$i) echo $data_map['_I2C_Err'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_I2C_Err']>>$i)&1)>0) echo $data_map['_I2C_Err'][$i].",<br>";
 	     echo "</td><td>";
 
 	echo "Value=".$row['_RSErrDop']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_RSErrDop']&$i)==$i) echo $data_map['_RSErrDop'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_RSErrDop']>>$i)&1)>0) echo $data_map['_RSErrDop'][$i].",<br>";
 	     echo "</td><td>";
 
 	echo "Value=".$row['_F_AccOver']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_F_AccOver']&$i)==$i) echo $data_map['_F_AccOver'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_F_AccOver']>>$i)&1)>0) echo $data_map['_F_AccOver'][$i].",<br>";
 	     echo "</td><td>";
 
 	echo "Value=".$row['_F_NETOver']."&nbsp";
-	     for ($i=1;$i<=8;$i++)  if (($row['_F_NETOver']&$i)==$i) echo $data_map['_F_NETOver'][$i-1].",";
+	     for ($i=0;$i<8;$i++)  if ((($row['_F_NETOver']>>$i)&1)>0) echo $data_map['_F_NETOver'][$i].",<br>";
 	     echo "</td><td>";
 
 
