@@ -484,8 +484,8 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
           unsigned char _RSErrJobM;
           unsigned char _RSErrJob;
           unsigned char _RSWarning;
-          char _Temp_Grad0;
-          char _Temp_Grad2;
+          signed char _Temp_Grad0;
+          signed char _Temp_Grad2;
           float _INET_16_4;
           float _IAcc_med_A_u16;
           unsigned char _Temp_off;
