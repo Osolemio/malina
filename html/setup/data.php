@@ -32,6 +32,19 @@ if (isset($_POST['clean']))
     echo "Таблицы ПО мониторинга успешно очищены";
    }
 
+if (isset($_POST['clean_err']))
+    {
+    include('../bd.php');
+    touch("/var/map/.lock_mysql");
+    $result=mysql_query("TRUNCATE TABLE map_errors",$db) or die(mysql_error());    
+    $result=mysql_query("TRUNCATE TABLE mppt_errors",$db) or die(mysql_error());
+    unlink('/var/map/.lock_mysql'); 
+    mysql_close($db);
+    
+    echo "Таблицы ПО мониторинга успешно очищены";
+   }
+
+
 if (isset($_POST['group1']))
     {
     echo "Команда импорта в БД отправлена. Будет импортирован файл: ".$_POST['group1']."<br><br>";

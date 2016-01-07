@@ -100,7 +100,8 @@ for($i=0; $i<$c; $i++)
 <hr>
 <br>
 <p>
-</p></p><p><input type='submit' name="clean" value='Очистить все таблицы (TRUNCATE)'></p>
+</p></p><p><input type='submit' name="clean" value='Очистить все основные таблицы данных МАП и контроллера (TRUNCATE)'></p>
+</p></p><p><input type='submit' name="clean_err" value='Очистить все таблицы ошибок МАП и контроллера (TRUNCATE)'></p>
 </form>
 Текущий размер таблиц:<br>
 
