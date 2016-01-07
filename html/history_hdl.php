@@ -81,7 +81,7 @@ session_start();
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
-    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_end."' AND time >= '".$time_end."'\n";
+    $query = "SELECT MAX(number) FROM `data` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
     $result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
@@ -108,7 +108,7 @@ session_start();
     $result=mysql_query($query) or die("Query failed:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_low=$row[0];if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
-    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_end."' AND time >= '".$time_end."'\n";
+    $query = "SELECT MAX(number) FROM `mppt` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
     $result=mysql_query($query) or die("Query failed:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
@@ -129,11 +129,11 @@ session_start();
 	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' AND time >= '".$time_start."' \n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате начала"; exit();}
-	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_end."' AND time >= '".$time_end."'\n";
+	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
+	$query = "SELECT MAX(number) FROM `map_errors` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате окончания"; exit();}
+	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
 	$_SESSION['number_low']=$number_low;
 	$_SESSION['number_high']=$number_high;
 	$_SESSION['table']='map_errors';
@@ -147,11 +147,11 @@ session_start();
 	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате начала"; exit();}
-	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_end."' AND time >= '".$time_end."' \n";
+	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
+	$query = "SELECT MAX(number) FROM `mppt_errors` WHERE date='".$date_end."' AND time <= '".$time_end."' \n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате окончания"; exit();}
+	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
 	$_SESSION['number_low']=$number_low;
 	$_SESSION['number_high']=$number_high;
 	$_SESSION['table']='mppt_errors';
