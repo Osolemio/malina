@@ -151,7 +151,7 @@ function tick() {
 	else document.getElementById('arrow_map_i2c'+key).style.visibility='hidden';
 	var map_error=Number(load_map[key]['_RSErrSis'])+Number(load_map[key]['_RSErrJobM'])+
 			Number(load_map[key]['_RSErrJob'])+Number(load_map[key]['_RSWarning'])
-			Number(load_map[key]['_I2C_Err']);
+			Number(load_map[key]['_I2C_Err'])+Number(load_map[key]['_RSErrDop']);
 	if (map_error) document.getElementById('led_map_error'+key).style.visibility='visible'; else
 			document.getElementById('led_map_error'+key).style.visibility='hidden';
 	$('#map_acc_temp'+key).html(load_map[key]['_Temp_Grad0']+'&degC');
