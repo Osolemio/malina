@@ -64,9 +64,20 @@ if [ "$command" = "report" ]; then
   eacc_chg=`perl -e "print ${out[29]}/100;"`
 
   sendsms $FromPhone "${out[2]}. ${mode[${out[3]}]}, Uacc:${out[5]}V, Unet:${out[10]}V, Uout:${out[15]}V, AccTemp:${out[22]}C, Pnet:${out[12]}W, Pacc:${out[7]}W, Enet:${enet}kWh, Eacc:${eacc}kWh, Eacc_charge:${eacc_chg}kWh"
-  to_log "Sent report to $FromPhone: $out"
+  to_log "Sent map report to $FromPhone: $out"
   
 fi
+
+if [ "$command" = "reportmppt" ] && [ -e "/var/map/.mppt" ]; then
+  out=(`mysql -NBu root -pmicroart map -e "SELECT * from mppt WHERE number=(SELECT MAX(number) from mppt)"`)
+  SEND_BACK_REPORT="NO"
+
+  sendsms $FromPhone "${out[2]}.  Upv:${out[3]}V, Ipv:${out[4]}A, Icharge:${out[10]}A, AccTemp:${out[13]}C, Ppv:${out[6]}W, Esolar:${out[14]}kWh, Mode:${out[23]}${out[24]}MPP:${out[25]}"
+  to_log "Sent mppt report to $FromPhone: $out"
+  
+fi
+
+
 
 if [ ${to_map[$command]} ]; then
 
