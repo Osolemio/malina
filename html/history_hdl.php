@@ -15,16 +15,33 @@ session_start();
     $field=$_POST["field"];
     $field_width=$_POST["width"];
     $field_height=$_POST["height"];
-    
+    $legend=array(
+    '_Uacc'=>'Battery voltage, V',
+    '_Iacc'=>'Battery current, A',
+    '_PLoad'=>'MAP load, W',
+    '_UNET'=>'Network voltage, V',
+    '_PNET'=>'Power from network, W',
+    '_UOUTmed'=>'MAP Voltage,V',
+    '_Temp_Grad0'=>'Battery Temperature',
+    '_INET_16_4'=>'Current, A',
+    '_IAcc_med_A_u16'=>'Battery current, A',
+    'Vc_PV'=>'PV voltage, V',
+    'Ic_PV'=>'PV current, A',
+    'V_Bat'=>'Battery voltage, V',
+    'P_PV'=>'PV power, W',
+    'P_curr'=>'MPPT power to battery',
+    'windspeed'=>'Rotation frequency, min-1'
+
+    );    
    include ("./bd.php");
     $map_table="data";
     $mppt_table="mppt";
     $index=0;
-    $_SESSION['Legend']=$field;
+    $_SESSION['Legend']=$legend[$field];
 
     if (isset($_POST['multichart']))
     {
-    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time LIKE '".$time_start.":0%'\n";
+    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала для МАП"; 
@@ -34,7 +51,7 @@ session_start();
     
     if (file_exists("/var/map/.mppt")) {
 
-    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time LIKE '".$time_start.":0%'\n";
+    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала для MPPT"; 
@@ -60,11 +77,11 @@ session_start();
      case "_Temp_Grad0":
      case "_INET_16_4":
      case "_IAcc_med_A_u16":
-    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time LIKE '".$time_start.":0%'\n";
+    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
-    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_end."' AND time LIKE '".$time_end.":0%'\n";
+    $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_end."' AND time >= '".$time_end."'\n";
     $result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
@@ -87,11 +104,11 @@ session_start();
     case "P_PV":
     case "P_curr":
     case "windspeed":
-    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time LIKE '".$time_start.":0%'\n";
+    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_low=$row[0];if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
-    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_end."' AND time LIKE '".$time_end.":0%'\n";
+    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_end."' AND time >= '".$time_end."'\n";
     $result=mysql_query($query) or die("Query failed:".mysql_error());
     $row=mysql_fetch_row($result);
     $number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
@@ -109,11 +126,11 @@ session_start();
         break;
     
     case "map_errors":
-	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' \n";
+	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' AND time >= '".$time_start."' \n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
 	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате начала"; exit();}
-	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_end."'\n";
+	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_end."' AND time >= '".$time_end."'\n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
 	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате окончания"; exit();}
@@ -127,11 +144,11 @@ session_start();
 	break;
 
     case "mppt_errors":
-	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_start."'\n";
+	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
 	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате начала"; exit();}
-	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_end."' \n";
+	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_end."' AND time >= '".$time_end."' \n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
 	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате окончания"; exit();}

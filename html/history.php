@@ -95,8 +95,7 @@
 
 <input type="radio" name="field" value="map_errors" /><b>Ошибки МАП
 <input type="radio" name="field" value="mppt_errors" />Ошибки MPPT</b>
-<br><br>
-Время не учитывается
+<br>
 
 
 </td>
