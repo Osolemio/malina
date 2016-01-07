@@ -2,7 +2,7 @@ var d = document;
 var offsetfromcursorY=15 // y offset of tooltip
 var ie=d.all && !window.opera;
 var ns6=d.getElementById && !d.all;
-var tipobj,op;
+var tipobj,op,consumed=0;
 
 var meter_v, meter_i, meter_i_i2c, meter_vout, meter_vacc, meter_iacc, meter_vpv,meter_ipv, v = 0, f, arr=[],
 display_1, display_2, onload, counter_net, counter_acc,counter_charge, counter_pv,
@@ -664,7 +664,7 @@ $('#bms_umax').html(arr[25]);if (arr[25]=='off') document.getElementById("bms_um
         
         $('#text4').html("АКБ");
 	$('#text_bmon').html(arr[32]+"%");
-	var consumed=arr[30];
+	consumed=arr[30];
 	var real_p=((Number(arr[34])+Number(arr[30]))/Number(arr[34]))*100;
 	if (real_p>100) real_p=100;
 	$('#text_bmon_real').html(consumed.concat("/",arr[34],"Ач"));
