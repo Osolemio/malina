@@ -78,11 +78,11 @@ location.href="index.php";
 
 <form action="commands.php" method="post">
 
-<p><input type="submit" name="on" value="включить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:green; color:ivory;cursor:pointer;" ></p>
-<p><input type="submit" name="off" value="выключить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer;"></p>
-<p><input type="submit" name="reset" value="сброс МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer;"></p>
-<p><input type="submit" name="charge_start" value="включить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer;" ></p>
-<p><input type="submit" name="charge_stop" value="выключить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer;"></p>
+<p><input type="submit" name="on" value="включить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:green; color:ivory; cursor:pointer; border:5px outset gray;" ></p>
+<p><input type="submit" name="off" value="выключить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
+<p><input type="submit" name="reset" value="сброс МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
+<p><input type="submit" name="charge_start" value="включить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;" ></p>
+<p><input type="submit" name="charge_stop" value="выключить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;"></p>
 
 </form></b>
 </center>
