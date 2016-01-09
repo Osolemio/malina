@@ -1,4 +1,5 @@
 var settings=[];
+const max_items=45;
 
 function getXmlHttp(){
   var xmlhttp;
@@ -28,6 +29,7 @@ $(function() {
    
     else alert('Ошибка получения данных');
     
+     var eacc=result[max_items][0];
      $('#input_field').prop('disabled',true);
      $('#chapter').change(function() {
 	$('#menu, #submenu').find('option')
@@ -35,7 +37,7 @@ $(function() {
 	    .end()
 	    .prop('disabled',true);
      chapter_id=$(this).val();
-	 for (i=0;i<46;i++) {
+	 for (i=0;i<max_items;i++) {
 	    if (result[i][0]==chapter_id) 
 	     $('#menu').append('<option value="'+result[i][1]+'">'+menu[i]+'</option>');
 
@@ -59,7 +61,7 @@ $(function() {
      $('#input_field').prop('type',"text");
      $('#input_field').val("выберите из списка");
 
-	    for (i=0;i<46;i++) {
+	    for (i=0;i<max_items;i++) {
 //------------------------list------------------------------------------ 
 		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='list' && result[i][8]=='on')
 	      {
@@ -131,15 +133,15 @@ $(function() {
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
 		$('#dop').val(result[i][3]);
-		$('#eacc').val(result[43][0]);
+		$('#eacc').val(eacc);
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat(((result[i][5]<<result[43][0])+result[i][3])/10));
-		$('#max').html("Максимальное значение: ".concat(((result[i][6]<<result[43][0])+result[i][3])/10));
+		$('#min').html("Минимальное значение: ".concat(((result[i][5]<<eacc)+result[i][3])/10));
+		$('#max').html("Максимальное значение: ".concat(((result[i][6]<<eacc)+result[i][3])/10));
 		$('#input_field').prop('type',"number");
-		$('#input_field').prop('min',(((result[i][5]<<result[43][0])+result[i][3])/10));
-		$('#input_field').prop('max',(((result[i][6]<<result[43][0])+result[i][3])/10));
+		$('#input_field').prop('min',(((result[i][5]<<eacc)+result[i][3])/10));
+		$('#input_field').prop('max',(((result[i][6]<<eacc)+result[i][3])/10));
 		$('#input_field').prop('step',0.1);
-		$('#input_field').val(((result[i][7]<<result[43][0])+result[i][3])/10);
+		$('#input_field').val(((result[i][7]<<eacc)+result[i][3])/10);
 		$('#input_field').prop('disabled',false);
 		}    
 
@@ -152,7 +154,7 @@ $(function() {
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
 		$('#dop').val(result[i][3]);
-		$('#eacc').val(result[43][0]);
+		$('#eacc').val(eacc);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
 		$('#min').html("Минимальное значение: ".concat((result[i][5]<<result[i][3])*100));
@@ -194,16 +196,16 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
-		$('#eacc').val(result[43][0]);
+		$('#eacc').val(eacc);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat((result[i][5]*25)>>result[43][0]));
-		$('#max').html("Максимальное значение: ".concat((result[i][6]*25)>>result[43][0]));
-		$('#input_field').prop('min',(result[i][5]*25)>>result[43][0]);
-		$('#input_field').prop('max',(result[i][6]*25)>>result[43][0]);
+		$('#min').html("Минимальное значение: ".concat((result[i][5]*25)>>eacc));
+		$('#max').html("Максимальное значение: ".concat((result[i][6]*25)>>eacc));
+		$('#input_field').prop('min',(result[i][5]*25)>>eacc);
+		$('#input_field').prop('max',(result[i][6]*25)>>eacc);
 		$('#input_field').prop('step',1);
 		
-		$('#input_field').val((result[i][7]*25)>>result[43][0]);
+		$('#input_field').val((result[i][7]*25)>>eacc);
 		$('#input_field').prop('disabled',false);
 		}    
 
@@ -229,8 +231,8 @@ $(function() {
 		{
 		$('#mem_offset').val(result[i][2]);
 		$('#mem_class').val(result[i][4]);
-		$('#min_val').val(result[i][5]);
-		$('#max_val').val(result[i][6]);
+		$('#min_val').val(result[i][5]*16/60);
+		$('#max_val').val(result[i][6]*16/60);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"1");

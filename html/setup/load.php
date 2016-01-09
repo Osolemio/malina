@@ -18,7 +18,7 @@
        $row[0x13B]['value'],(($row[0x13B+8]['value']==$row[0x13B+16]['value']) || $row[0x13B]['value']==255)?'off':'on'),
     array(0,4,0x13C,null,'list',$row[0x13C+8]['value'],$row[0x13C+16]['value'],
        $row[0x13C]['value'],(($row[0x13C+8]['value']==$row[0x13C+16]['value']) || $row[0x13C]['value']==255)?'off':'on'), 
-    array(0,5,0x13D,null,'dc_dop',$row[0x13D+8]['value'],$row[0x13D+16]['value'],
+    array(0,5,0x13D,$row[0x102]['value'],'dc_dop',$row[0x13D+8]['value'],$row[0x13D+16]['value'],
        $row[0x13D]['value'],(($row[0x13D+8]['value']==$row[0x13D+16]['value']) || $row[0x13D]['value']==255)?'off':'on'),
     array(0,6,0x13E,null,'number',$row[0x13E+8]['value'],$row[0x13E+16]['value'],
        $row[0x13E]['value'],(($row[0x13E+8]['value']==$row[0x13E+16]['value']) || $row[0x13E]['value']==255)?'off':'on'),
