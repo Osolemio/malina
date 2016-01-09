@@ -83,7 +83,7 @@ location.href="index.php";
 <p><input type="submit" name="reset" value="сброс МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
 <p><input type="submit" name="charge_start" value="включить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;" ></p>
 <p><input type="submit" name="charge_stop" value="выключить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;"></p>
-
+<p><input type="checkbox" name="confirm" value="подтверждение команды" style="left:10px; bottom:10px; color:black;font-weight:bolder;" unchecked>Отметьте перед отправкой команды</p>
 </form></b>
 </center>
 </div>

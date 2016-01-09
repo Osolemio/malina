@@ -6,6 +6,17 @@ if (isset($_POST['charge_start'])) $value=chr(5);
 if (isset($_POST['charge_stop'])) $value=chr(4);
 if (isset($_POST['reset'])) $value=chr(6);
 
+if (!isset($_POST['confirm'])) {
+    echo "Вы не отметили флажок отправки команды <br>";
+    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
+    echo "Через 2 секунды вы будете возвращены обратно";
+
+    exit(-1);
+
+
+
+}
+
 include("../bd.php");
 
 $offset=$_POST['mem_offset'];
