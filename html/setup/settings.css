@@ -14,38 +14,51 @@ top: 50px;
 left: 50px;
 width: 670px;
 height: 400px;
-border-radius: 10px;
--moz-border-radius: 10px;
--o-border-radius:10px;
-background: palegreen;
-box-shadow:inset green 5px 5px 5px, 5px 5px 5px black;
--moz-box-shadow:inset green 5px 5px 5px, 5px 5px 5px black;
--webkit-box-shadow:inset green 5px 5px 5px, 5px 5px 5px black;
+border: 5px outset darkgreen;
+text-align:center;
+font-weight:bolder;
+color:black;
+border-radius: 5px;
+-moz-border-radius: 5px;
+-o-border-radius:5px;
+background: blanchedalmond;
+box-shadow:outset green 1px 1px 1px, 1px 1px 1px black;
+-moz-box-shadow:outset green 1px 1px 1px, 1px 1px 1px black;
+-webkit-box-shadow:outset green 1px 1px 1px, 1px 1px 1px black;
 }
 
 #menu_in {
-    top:10px;
+    top:30px;
     left:10px;
-    width:650px;
-    height:380px;
+    right:30px;
+    bottom:2px;
     background:blanchedalmond;
 }
 
 #min {
-top: 270px;
-left: 80px;
+top: 240px;
+left: 0px;
+width:50%;
+background:lightgreen;
+border: 2px outset gray;
 }
 
 #max {
-top: 290px;
-left: 80px;
+top: 240px;
+left: 50%;
+width: 50%;
+color: white;
+background: lightcoral;
+border:2px outset gray;
 }
 
 #field {
+text-align:left;
 top: 300px;
 left:0px;
-width: auto;
+right: 0px;
 height: auto;
+color: darkgreen;
 }
 
 
@@ -65,22 +78,28 @@ height: auto;
     left: 750px;
     width: 400px;
     height: 400px;
-    background: deepskyblue;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -o-border-radius:10px;
+    background: lightsteelblue;
+    border: 5px outset gray;
+    text:darkgray;
+    text-align:center;
+    font-weight:bolder;
+    font-size:110%;
 
-    box-shadow:inset blue 5px 5px 5px, 5px 5px 5px black;
-    -moz-box-shadow:inset blue 5px 5px 5px, 5px 5px 5px black;
-    -webkit-box-shadow:inset blue 5px 5px 5px, 5px 5px 5px black;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius:5px;
+
+    box-shadow:inset blue 1px 1px 1px, 1px 1px 1px black;
+    -moz-box-shadow:inset blue 1px 1px 1px, 1px 1px 1px black;
+    -webkit-box-shadow:inset blue 1px 1px 1px, 1px 1px 1px black;
 
 }
 
 #commands_in {
-    top: 10px;
-    left: 10px;
-    width: 380px;
-    height: 380px;
+    top: 20px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
     background: lightsteelblue;
 }
 

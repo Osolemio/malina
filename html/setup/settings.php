@@ -19,8 +19,8 @@
 <body>
 
 
-<!--<a href="index.php"><div id="arrow"></div></a> !-->
 <input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+
 <script>
 function HomeButton()
 {
@@ -29,12 +29,12 @@ location.href="index.php";
 </script>
 
 
-<div id='menu_div'>
+<div id='menu_div'>НАСТРОЙКИ МАП
 <div id='menu_in'>
 <form action="store.php" method="post">
 
 <center>
- <select size=6 id="chapter" name="Menu">
+ <select size=6 id="chapter" name="Menu" style="width:80%; font-weight:bolder; background:aqua;">
     <option value=0>Генерация МАП</option>
     <option value=1>Сеть/Генератор, BMS/MPPT</option>
     <option value=2>Сеть/ЭнергЭконом</option>
@@ -44,9 +44,9 @@ location.href="index.php";
     </select>
 </center>
  <br><br>    
-  <select id="menu"></select>
+  <select id="menu" style="width:80%; background: ivory;"></select>
   <br><br>
-  <select id="submenu"></select>
+  <select id="submenu" style="width:80%; background: ivory;"></select>
 
 <input type="hidden" name="mem_offset" id="mem_offset">
 <input type="hidden" name="mem_value" id="mem_value">
@@ -61,27 +61,28 @@ location.href="index.php";
 Текущее значение:
 <input type="number" name="field" id="input_field" value="">
 <br><br>
-<input type="submit" value="Записать">
+<input type="submit" value="Записать" style="padding:1px; font-weight:bolder; font-size:100%; background:green; color:ivory;">
 </div>
 </b>
 </form>
+<div id=min></div>
+<div id=max></div>
+
 </div>
 </div>
 <b>
-<div id=min></div>
-<div id=max></div>
 </b>
 <div id=commands>
 <div id=commands_in>
 <center><b>
-КОМАНДЫ МАП:
+
 <form action="commands.php" method="post">
 
-<p><input type="submit" name="on" value="включить МАП" ></p>
-<p><input type="submit" name="off" value="выключить МАП" ></p>
-<p><input type="submit" name="reset" value="сброс МАП" ></p>
-<p><input type="submit" name="charge_start" value="включить заряд" ></p>
-<p><input type="submit" name="charge_stop" value="выключить заряд" ></p>
+<p><input type="submit" name="on" value="включить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:green; color:ivory;" ></p>
+<p><input type="submit" name="off" value="выключить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;"></p>
+<p><input type="submit" name="reset" value="сброс МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;"></p>
+<p><input type="submit" name="charge_start" value="включить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;" ></p>
+<p><input type="submit" name="charge_stop" value="выключить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;"></p>
 
 </form></b>
 </center>
