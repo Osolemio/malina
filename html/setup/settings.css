@@ -41,6 +41,7 @@ left: 0px;
 width:50%;
 background:lightgreen;
 border: 2px outset gray;
+
 }
 
 #max {
@@ -50,6 +51,7 @@ width: 50%;
 color: white;
 background: lightcoral;
 border:2px outset gray;
+
 }
 
 #field {
@@ -96,7 +98,7 @@ color: darkgreen;
 }
 
 #commands_in {
-    top: 20px;
+    top: 10px;
     left: 2px;
     right: 2px;
     bottom: 2px;
