@@ -221,6 +221,7 @@ $(function() {
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"any");
 		$('#min').html("Время задается с точностью до 10 мин, например 23:50");
+		$('#max').html("");
 		var hh=(result[i][7]>>3).toString(); hh=(hh.length==1)?"0"+hh:hh;
 		var mm=((result[i][7]&7)*10).toString();mm=(mm.length==1)?"0"+mm:mm;
 		$('#input_field').val(hh.concat(":",mm));
@@ -231,12 +232,13 @@ $(function() {
 		{
 		$('#mem_offset').val(result[i][2]);
 		$('#mem_class').val(result[i][4]);
-		$('#min_val').val(result[i][5]*16/60);
-		$('#max_val').val(result[i][6]*16/60);
+		$('#min_val').val(result[i][5]);
+		$('#max_val').val(result[i][6]);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"1");
 		$('#min').html("Время задается в часах");
+		$('#max').html("Максимальное значение: ".concat((result[i][6]*16/60).toFixed(0)));
 		var hh=(result[i][7]*16/60).toFixed(0).toString();
 		
 		$('#input_field').val(hh);
