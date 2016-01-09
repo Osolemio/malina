@@ -35,7 +35,7 @@ $(function() {
 	    .end()
 	    .prop('disabled',true);
      chapter_id=$(this).val();
-	 for (i=0;i<42;i++) {
+	 for (i=0;i<46;i++) {
 	    if (result[i][0]==chapter_id) 
 	     $('#menu').append('<option value="'+result[i][1]+'">'+menu[i]+'</option>');
 
@@ -48,7 +48,6 @@ $(function() {
 	$('#chapter').change();
 
 //------------------SUBMENU------------------------------
-
      $('#menu').change(function() {
 	$('#submenu').find('option')
 	    .remove()
@@ -60,7 +59,7 @@ $(function() {
      $('#input_field').prop('type',"text");
      $('#input_field').val("выберите из списка");
 
-	    for (i=0;i<42;i++) {
+	    for (i=0;i<46;i++) {
 //------------------------list------------------------------------------ 
 		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='list' && result[i][8]=='on')
 	      {
@@ -225,6 +224,23 @@ $(function() {
 		$('#input_field').val(hh.concat(":",mm));
 		$('#input_field').prop('disabled',false);
 		}    
+//-------------------------charge_time---------------
+		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='charge_time' && result[i][8]=='on')
+		{
+		$('#mem_offset').val(result[i][2]);
+		$('#mem_class').val(result[i][4]);
+		$('#min_val').val(result[i][5]);
+		$('#max_val').val(result[i][6]);
+		$('#input_field').prop('type',"number");
+		$('#input_field').prop('disabled',true);
+		$('#input_field').prop('step',"1");
+		$('#min').html("Время задается в часах");
+		var hh=(result[i][7]*16/60).toFixed(0).toString();
+		
+		$('#input_field').val(hh);
+		$('#input_field').prop('disabled',false);
+		}
+
 
 
 ////
