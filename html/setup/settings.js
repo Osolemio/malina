@@ -237,8 +237,8 @@ $(function() {
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"1");
-		$('#input_field').prop('min',(result[i][5]*16/60));
-		$('#input_field').prop('max',(result[i][6]*16/60));
+		$('#input_field').prop('min',(result[i][5]*16/60).toFixed(0));
+		$('#input_field').prop('max',(result[i][6]*16/60).toFixed(0));
 
 		$('#min').html("Время задается в часах");
 		$('#max').html("Максимальное значение: ".concat((result[i][6]*16/60).toFixed(0)));
