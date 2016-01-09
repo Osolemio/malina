@@ -129,6 +129,18 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 		}
 	    break;
 
+    case 'charge_time':
+	    $value=$_POST['field']*60/16;
+	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
+		{
+		    echo "Значение вне допустимого диапазона"."<br>";
+		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
+		    echo "Через 2 секунды вы будете возвращены обратно";
+
+		    exit(-1);
+		}
+	    break;
+
 
     default:
 	    echo "Нет данных для записи"."<br>";
