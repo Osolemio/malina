@@ -432,6 +432,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         int pid;
         int i,i1;
 	float bms_alert=bms_high_u;
+	unsigned char num_maps;
 
         unsigned char v, map_status_old=255;
 	unsigned int offset;
@@ -827,7 +828,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
         map_data._MODE = Buffer[0x400 - 0x3FF];
 
-
+	num_maps=(eeprom[0x155]==255)?1:(eeprom[0x155]+1);
 
 
 
@@ -1091,6 +1092,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 //---------------------------------------------------------
 		 batmon->timestamp=ltime;
 		 batmon->current=(map_data._MODE==4)?map_data._IAcc_med_A_u16:(0-map_data._IAcc_med_A_u16);
+		 batmon->current*=num_maps;
 		 batmon->tbat=map_data._Temp_Grad0;
 		 batmon->Ubat=map_data._Uacc;
 		 batmon->Imppt=map_data._I_mppt_avg;

@@ -249,7 +249,7 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
 		{digits:2,
 		color:"red"});
     display_4 = new JSGadget.Display("#display_4",
-		{digits:2,
+		{digits:3,
 		color:"red"});
     display_5 = new JSGadget.Display("#display_5",
 		{digits:2,
