@@ -60,6 +60,7 @@ $(function() {
      $('#input_field').prop('disabled',true);
      $('#input_field').prop('type',"text");
      $('#input_field').val("выберите из списка");
+     $('#field_units').html("");
 
 	    for (i=0;i<max_items;i++) {
 //------------------------list------------------------------------------ 
