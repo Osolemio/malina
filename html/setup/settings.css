@@ -63,6 +63,11 @@ height: auto;
 color: darkgreen;
 }
 
+#field_units {
+height:auto;
+color:black;
+font-weight:bolder;
+}
 
 #arrow {
   top: 0px;

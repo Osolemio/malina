@@ -60,9 +60,13 @@ location.href="index.php";
 <div id=field><b>
 Текущее значение:
 <input type="number" name="field" id="input_field" value="">
+<span id="field_units"></span>
 <br><br>
 <input type="submit" value="Записать" style="padding:1px; font-weight:bolder; font-size:100%; background:green; color:ivory; cursor:pointer;">
+
+
 </div>
+
 </b>
 </form>
 <div id=min></div>
@@ -83,7 +87,7 @@ location.href="index.php";
 <p><input type="submit" name="reset" value="сброс МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
 <p><input type="submit" name="charge_start" value="включить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;" ></p>
 <p><input type="submit" name="charge_stop" value="выключить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;"></p>
-<p><input type="checkbox" name="confirm" value="подтверждение команды" style="left:10px; bottom:10px; height: 15px; width:15px; color:black;font-weight:bolder;" unchecked> отметьте перед отправкой команды</p>
+<p><input type="checkbox" name="confirm" value="подтверждение команды" style="left:10px; bottom:10px; height: 15px; width:15px; color:black;font-weight:bolder;" unchecked>Отметьте перед отправкой команды</p>
 </form></b>
 </center>
 </div>
