@@ -49,8 +49,8 @@
 		'E_alt_monthly'=>0,
 		'E_alt_summ'=>0,
 		'E_alt_user'=>0,
-		'MAP_relay1'=>0,
-		'MAP_relay2'=>0,
+		'MAP_Relay1'=>0,
+		'MAP_Relay2'=>0,
 		'Temp_Tor'=>0
 	    );
 				
@@ -275,8 +275,8 @@ if (file_exists("/var/map/.mppt")) {
 	mysql_close($db_bat);
 	}
 //----------------------------------------------------
-
-
+//$data['MAP_Relay1']=1;
+//$data['TEMP1']=-20;
     echo $data['UNET'].",".$data['INET'].",".$data['UOUT'].",".$data['UACC'].",".$data['IACC'].",".$data['VPV'].",".$data['IPV'].",".$data['FNET'].",".$data['FMAP'].",". $data['ENET'].','.$data['EACC'].",".$data['ECHG'].",".$data['I_CH_I2C'].",".$data['EPV'].",".$data['TEMP1'].",".$data['TEMP2'].",".$data['TEMP_MPPT'].",".$data['PNET'].",".$data['PACC'].",".
 $data['PPV'].",".$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".$data['MODE'].",".$data['RELAY'].",".$error_status.",".$u_min.",".$u_max.",".$t_min.",".$t_max.",".$flag_map.",".$flag_mppt.",".
 $data['integral_dCdt'].",".$data['C_current_Ah'].",".$data['C_current_percent'].",".

@@ -41,6 +41,21 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 		    exit(-1);
 		}
 	    break;
+    
+    case 'temp': 
+	    $value=$_POST['field']+50;
+	    if ($value<$_POST['min'] || $value>$_POST['max_val'])
+		{
+		    echo "Значение вне допустимого диапазона"."<br>";
+		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
+		    echo "Через 2 секунды вы будете возвращены обратно";
+
+		    exit(-1);
+		}
+	    break;
+    
+
+
     case 'list':
 	    $value=$_POST['mem_value'];
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
@@ -64,6 +79,7 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 		}
 	    break;
     case 'dc_dop':
+    case 'dc':
 	    $value=($_POST['field']*10)>>$_POST['eacc'];
 	    $dop=$_POST['field']*10-($value<<$_POST['eacc']);
 	    

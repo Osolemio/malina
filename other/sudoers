@@ -38,6 +38,6 @@ ALL ALL = NOPASSWD: /usr/sbin/service mysql status
 ALL ALL = NOPASSWD: /usr/sbin/db_restore.sh*
 ALL ALL = NOPASSWD: /usr/sbin/db_dump.sh*
 ALL ALL = NOPASSWD: /usr/sbin/pbase_restore.sh
-
+ALL ALL = NOPASSWD: /bin/stty
 
 

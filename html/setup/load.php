@@ -6,6 +6,9 @@
  $row[] = mysql_fetch_assoc($result); $row[$i]['value']=intval($row[$i]['value']);
  } while ($i++<512);
 
+ $relay_mode_on=array('off','sec','dc','temp','time','list','list','list');
+ $relay_mode_off=array('off','off','dc','temp','time','list','list','list');
+ $hysteresis=array('off','off','dc','temp','off','off','off','off');
 
  $settings=array(
     array(0,0,0x138,null,'list',$row[0x138+8]['value'],$row[0x138+16]['value'],
@@ -68,19 +71,19 @@
        $row[0x187]['value'],(($row[0x187+8]['value']==$row[0x187+16]['value']) || $row[0x187]['value']==255)?'off':'on'),
     array(4,0,0x198,null,'list',$row[0x198+8]['value'],$row[0x198+16]['value'],
        $row[0x198]['value'],(($row[0x198+8]['value']==$row[0x198+16]['value']) || $row[0x198]['value']==255)?'off':'on'),
-    array(4,1,0x199,null,'relay',$row[0x199+8]['value'],$row[0x199+16]['value'],
+    array(4,1,0x199,null,$relay_mode_on[$row[0x198]['value']],$row[0x199+8]['value'],$row[0x199+16]['value'],
        $row[0x199]['value'],(($row[0x199+8]['value']==$row[0x199+16]['value']) || $row[0x199]['value']==255)?'off':'on'),
-    array(4,2,0x19A,null,'relay',$row[0x19A+8]['value'],$row[0x19A+16]['value'],
+    array(4,2,0x19A,null,$relay_mode_off[$row[0x198]['value']],$row[0x19A+8]['value'],$row[0x19A+16]['value'],
        $row[0x19A]['value'],(($row[0x19A+8]['value']==$row[0x19A+16]['value']) || $row[0x19A]['value']==255)?'off':'on'),
-    array(4,3,0x19B,null,'list',$row[0x19B+8]['value'],$row[0x19B+16]['value'],
+    array(4,3,0x19B,null,$hysteresis[$row[0x198]['value']],$row[0x19B+8]['value'],$row[0x19B+16]['value'],
        $row[0x19B]['value'],(($row[0x19B+8]['value']==$row[0x19B+16]['value']) || $row[0x19B]['value']==255)?'off':'on'),
-    array(4,4,0x19C,null,'relay',$row[0x19C+8]['value'],$row[0x19C+16]['value'],
+    array(4,4,0x19C,null,'list',$row[0x19C+8]['value'],$row[0x19C+16]['value'],
        $row[0x19C]['value'],(($row[0x19C+8]['value']==$row[0x19C+16]['value']) || $row[0x19C]['value']==255)?'off':'on'),
-    array(4,5,0x19D,null,'relay',$row[0x19D+8]['value'],$row[0x19D+16]['value'],
+    array(4,5,0x19D,null,$relay_mode_on[$row[0x19C]['value']],$row[0x19D+8]['value'],$row[0x19D+16]['value'],
        $row[0x19D]['value'],(($row[0x19D+8]['value']==$row[0x19D+16]['value']) || $row[0x19D]['value']==255)?'off':'on'),
-    array(4,6,0x19E,null,'relay',$row[0x19E+8]['value'],$row[0x19DE+16]['value'],
+    array(4,6,0x19E,null,$relay_mode_off[$row[0x19C]['value']],$row[0x19E+8]['value'],$row[0x19E+16]['value'],
        $row[0x19E]['value'],(($row[0x19E+8]['value']==$row[0x19E+16]['value']) || $row[0x19E]['value']==255)?'off':'on'),
-    array(4,7,0x19F,null,'relay',$row[0x19F+8]['value'],$row[0x19F+16]['value'],
+    array(4,7,0x19F,null,$hysteresis[$row[0x19C]['value']],$row[0x19F+8]['value'],$row[0x19F+16]['value'],
        $row[0x19F]['value'],(($row[0x19F+8]['value']==$row[0x19F+16]['value']) || $row[0x19F]['value']==255)?'off':'on'),
     array(5,0,0x1B0,null,'list',$row[0x1B0+8]['value'],$row[0x1B0+16]['value'],
        $row[0x1B0]['value'],(($row[0x1B0+8]['value']==$row[0x1B0+16]['value']) || $row[0x1B0]['value']==255)?'off':'on'),

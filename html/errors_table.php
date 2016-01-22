@@ -7,11 +7,6 @@
   <title>Errors history table</title>
 
     
-</head>
-<style>
-table {table-layout:fixed}
-
-</style>
 <body>
 
 

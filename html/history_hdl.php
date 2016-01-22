@@ -126,11 +126,11 @@ session_start();
         break;
     
     case "map_errors":
-	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' AND time >= '".$time_start."' \n";
+	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' AND time >= '".$time_start."'LIMIT 1 \n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
 	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
-	$query = "SELECT MAX(number) FROM `map_errors` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
+	$query = "SELECT MAX(number) FROM `map_errors` WHERE date='".$date_end."' AND time <= '".$time_end."' LIMIT 1 \n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
 	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}

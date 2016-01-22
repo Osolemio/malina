@@ -69,7 +69,8 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
-		
+		$('#field_units').html("");
+
              for (i1=result[i][5];i1<=result[i][6];i1++)
 		{
 	        $('#submenu').append('<option value="'+i1+'">'+submenu[i][i1]+'</option>');
@@ -86,13 +87,14 @@ $(function() {
 	     
 //------------------------number----------------
 
-		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='number' && result[i][8]=='on')
+		if (result[i][0]==chapter_id && result[i][1]==menu_id && (result[i][4]=='number' || result[i][4]=='sec') && result[i][8]=='on')
 		{
 		$('#mem_offset').val(result[i][2]);
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
-		
+		if (result[i][4]=='sec') $('#field_units').html("сек"); else $('#field_units').html("");
+
 		$('#input_field').prop('disabled',true);
 		$('#min').html("Минимальное значение: "+result[i][5]);
 		$('#max').html("Максимальное значение: "+result[i][6]);
@@ -104,6 +106,28 @@ $(function() {
 		$('#input_field').prop('disabled',false);
 		}    
 
+//------------------------temperature----------------
+
+		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='temp' && result[i][8]=='on')
+		{
+		$('#mem_offset').val(result[i][2]);
+		$('#mem_class').val(result[i][4]);
+		$('#min_val').val(result[i][5]);
+		$('#max_val').val(result[i][6]);
+		$('#field_units').html("&degC");
+
+		$('#input_field').prop('disabled',true);
+		$('#min').html("Минимальное значение: "+(result[i][5]-50));
+		$('#max').html("Максимальное значение: "+(result[i][6]-50));
+		$('#input_field').prop('type',"number");
+		$('#input_field').prop('min',result[i][5]-50);
+		$('#input_field').prop('max',result[i][6]-50);
+		$('#input_field').prop('step',1);
+		$('#input_field').val(result[i][7]-50);
+		$('#input_field').prop('disabled',false);
+		}    
+
+
 //------------------------voltage ac----------------
 
 		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='ac' && result[i][8]=='on')
@@ -113,6 +137,7 @@ $(function() {
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
 		$('#input_field').prop('disabled',true);
+		$('#field_units').html("В");
 		$('#min').html("Минимальное значение: ".concat(result[i][5]+100));
 		$('#max').html("Максимальное значение: ".concat(result[i][6]+100));
 		$('#input_field').prop('type',"number");
@@ -134,6 +159,7 @@ $(function() {
 		$('#max_val').val(result[i][6]);
 		$('#dop').val(result[i][3]);
 		$('#eacc').val(eacc);
+		$("#field_units").html("В");
 		$('#input_field').prop('disabled',true);
 		$('#min').html("Минимальное значение: ".concat(((result[i][5]<<eacc)+result[i][3])/10));
 		$('#max').html("Максимальное значение: ".concat(((result[i][6]<<eacc)+result[i][3])/10));
@@ -145,6 +171,29 @@ $(function() {
 		$('#input_field').prop('disabled',false);
 		}    
 
+
+//------------------------dc----------------
+
+		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='dc' && result[i][8]=='on')
+		{
+		$('#mem_offset').val(result[i][2]);
+		$('#mem_class').val(result[i][4]);
+		$('#min_val').val(result[i][5]);
+		$('#max_val').val(result[i][6]);
+		$('#eacc').val(eacc);
+		$("#field_units").html("В");
+		$('#input_field').prop('disabled',true);
+		$('#min').html("Минимальное значение: ".concat(((result[i][5]<<eacc))/10));
+		$('#max').html("Максимальное значение: ".concat(((result[i][6]<<eacc))/10));
+		$('#input_field').prop('type',"number");
+		$('#input_field').prop('min',(((result[i][5]<<eacc))/10));
+		$('#input_field').prop('max',(((result[i][6]<<eacc))/10));
+		$('#input_field').prop('step',1);
+		$('#input_field').val(((result[i][7]<<eacc))/10);
+		$('#input_field').prop('disabled',false);
+		}    
+
+
 //------------------------power_dop----------------
 
 		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='power_dop' && result[i][8]=='on')
@@ -153,6 +202,7 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
+		$('#field_units').html("Вт");
 		$('#dop').val(result[i][3]);
 		$('#eacc').val(eacc);
 		$('#input_field').prop('type',"number");
@@ -175,6 +225,7 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
+		$('#field_units').html("С");
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
 		$('#min').html("Минимальное значение: ".concat(result[i][5]/100));
@@ -196,6 +247,7 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
+		$('#field_units').html("Ач");
 		$('#eacc').val(eacc);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
@@ -217,6 +269,7 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
+		$('#field_units').html("");
 		$('#input_field').prop('type',"time");
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"any");
@@ -234,6 +287,7 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
+		$('#field_units').html("");
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"1");

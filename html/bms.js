@@ -71,7 +71,7 @@ else
     if (arr[index]==arr[arr[0]*3+1]) document.getElementById("bms".concat(i)).style.background="orange";
     if (arr[index]==arr[arr[0]*3+2]) document.getElementById("bms".concat(i)).style.background="deepskyblue";
     document.getElementById("scale".concat(i)).style.width=100*arr[index+1]/arr[index]*2.1+'px';
-    $('#vmp').html("Напряжение средней точки V<sub>mpp</sub>: ".concat(Vmp.toFixed(2),"В или ",((Math.abs(Vmp)/Vbat)*100).toFixed(2),"%"));
+    $('#vmp').html("Напряжение средней точки U<sub>mp</sub>: ".concat(Vmp.toFixed(2),"В или ",((Math.abs(Vmp)/Vbat)*100).toFixed(2),"%"));
     $('#display'.concat(i)).html("&nbspU=".concat(arr[index],"В&nbspI=",arr[index+1],"A&nbspt=",t,(t=="off")?"":"&degC"));
     index+=3;
     }
