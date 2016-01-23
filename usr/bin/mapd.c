@@ -817,8 +817,8 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    {
 	    map_data._Flag_ECO=Buffer[1];
 
-	    map_data._Relay1=Buffer[2]&17;
-	    map_data._Relay2=Buffer[2]&34;
+	    map_data._Relay1=Buffer[2];
+	    map_data._Relay2=Buffer[2];
 
 	    }
 	     else map_data._Flag_ECO=255;
