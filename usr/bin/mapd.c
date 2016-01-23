@@ -818,7 +818,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    map_data._Flag_ECO=Buffer[1];
 
 	    map_data._Relay1=Buffer[2];
-	    map_data._Relay2=Buffer[2];
+	    map_data._Relay2=Buffer[2]&34;
 
 	    }
 	     else map_data._Flag_ECO=255;
@@ -911,8 +911,6 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    (Buffer[0x56] * 65536 + Buffer[0x55] * 256 + Buffer[0x54]);
 	 map_data._I2C_err = Buffer[0x45A-0x3FF];
 	 map_data._RSErrDop= Buffer[0x447-0x3FF];
-	 map_data._Relay1=0;
-	 map_data._Relay2=0;
 
 
 //----------------- adding BMS data --------------------------------
