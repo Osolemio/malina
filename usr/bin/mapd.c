@@ -723,6 +723,10 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	if (eeprom[0x180]==5) bms_alert=3.9;
 	 batmon->battery_id=1;
 
+
+	 map_data._Relay1=0;
+	 map_data._Relay2=0;
+
 //-------------------- main cycle -------------------------------
 
           do
@@ -805,6 +809,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
 	    }
 
+	
 
 	send_command (to_read, fd, 0x585,1);
 	
