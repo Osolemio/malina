@@ -344,7 +344,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         openlog(DAEMON_NAME, LOG_CONS | LOG_NDELAY | LOG_PERROR | LOG_PID, LOG_USER);
 
         syslog(LOG_NOTICE, "Entering Daemon");
-
+	sleep(5);
 
 
 	mysql.reconnect=true;
