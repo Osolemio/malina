@@ -1,6 +1,6 @@
 /*
  * mapd.c
- * Release 2.03b
+ * Release 4.01
  *  Created on: April 6 2015 
  *      Author: Osolemio
  */  
@@ -22,13 +22,13 @@
 #include <sys/shm.h>
 
 
-#define VOLTAGE 48
 #define DAEMON_NAME "MAP Reader daemon"
 #define SHARED_MEMORY_KEY  1998
 #define SHARED_MEMORY_KEY_BMS  1997
 #define SHARED_MEMORY_SIZE 100
 #define SHM_CREATE 1
 #define PORT_MAP "/dev/ttyUSB0"
+#define PORT_MAP_ALT "/dev/ttyUSB1"
 #define BAUDRATE B19200
 #define size_of_buffer 560
 #define to_read 0x72
@@ -214,19 +214,54 @@ int read_answer (int fd)
 
 
  int open_port (char dev)
-{
-   int fd;
-   if (dev == map)
-    
     {
-      fd = open (PORT_MAP, O_RDWR, O_NOCTTY);
-      if (fd < 0)
+   int fd;
+   if (dev == 1)
+    
+        fd = open (PORT_MAP, O_RDWR, O_NOCTTY);
+    else
+	fd = open (PORT_MAP_ALT, O_RDWR, O_NOCTTY);
+     
+     if (fd < 0)
 		{
 	syslog(LOG_ERR,"Can't open serial port");
 		return -1;
 		}
+
+          struct termios port_cfg;
+
+          if (tcgetattr (fd, &port_cfg) < 0)
+	{
+	 syslog(LOG_ERR, "Error getting serial config");
+              return -1;
+	}
+
+            
+            cfmakeraw (&port_cfg); // All other settings must be after this line
+              port_cfg.c_cc[VMIN] = 0;
+              port_cfg.c_cc[VTIME] = 1;
+            
+            cfsetospeed (&port_cfg, BAUDRATE);
+
+          cfsetispeed (&port_cfg, BAUDRATE);
+
+          if (tcsetattr (fd, TCSAFLUSH, &port_cfg) < 0)
+		{
+          
+          syslog(LOG_ERR, "Error entering Daemon. Port setattr");
+          return -1;
+          
+          
+          }
+	
+	if (!isatty (fd))   
+          {
+          syslog(LOG_ERR, "Not a tty port");
+           return -1;
+	}
+
 	return fd;
-    }
+    
   
 return -1;
 }
@@ -441,7 +476,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         char query[355];
         char dateStr[9], timeStr[9];
         float I_acc, I_mppt;
-
+	int fd;
 
 
         MYSQL mysql;
@@ -548,56 +583,34 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
           close(STDOUT_FILENO);
           close(STDERR_FILENO);
 
-          //------------------------------------открываем порт МАП --------------------------------
-            int fd = open_port (map);
-
-          if (fd < 0)  
-          {
-          syslog(LOG_NOTICE, "Error open device");
-          return 1;
-        	}
-          if (!isatty (fd))   
-          {
-          syslog(LOG_NOTICE, "Error 2");
-           return 2;
-	}	
-          struct termios port_cfg;
-
-          if (tcgetattr (fd, &port_cfg) < 0)
-	{
-	 syslog(LOG_NOTICE, "Error 3");
-              return 3;
-}
-
-// --------------settings for different systems---------------------
-          //    port_cfg.c_cflag |= (CLOCAL | CREAD);
-          //    port_cfg.c_cflag &= ~PARENB;
-          //    port_cfg.c_cflag &= ~CSTOPB;
-          //    port_cfg.c_cflag &= ~CSIZE;
-          //    port_cfg.c_cflag |= CS8;
-          
-          //    port_cfg.c_iflag |= (INPCK | ISTRIP);
-          //    port_cfg.c_iflag &= ~(IXON | IXOFF | IXANY);
-          //    port_cfg.c_oflag &= ~OPOST;
-          //    port_cfg.c_cflag &= ~CRTSCTS;
+//------------------------------------looking for a MAP --------------------------------
             
-            cfmakeraw (&port_cfg); // All other settings must be after this line
-//            port_cfg.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG | ECHOKE | ECHOCTL);
-              port_cfg.c_cc[VMIN] = 0;
-              port_cfg.c_cc[VTIME] = 1;
-            
-            cfsetospeed (&port_cfg, BAUDRATE);
+	for (i=1;i<=3;i++)
+	    {
+	    if (i>2) { syslog(LOG_ERR, "No MAP found. Exiting"); return -1;}
+	    
+	    fd = open_port (i);
 
-          cfsetispeed (&port_cfg, BAUDRATE);
+        	if (fd < 0)  
+        	    {
+        		syslog(LOG_NOTICE, "Error open ttyUSB%d. Trying another port....",i-1);
+			continue;    
+		    }
+//================ READ ALL MAP SETTINGS ======================
 
-          if (tcsetattr (fd, TCSAFLUSH, &port_cfg) < 0)
-		{
-          
-          syslog(LOG_NOTICE, "Error entering Daemon. Port setattr");
-          return 4;
-          
-          
-          }
+	if (read_eeprom(eeprom, fd, mysql)!=0) {
+	    syslog(LOG_ERR, "Error read MAP settings. Trying to restart...");
+	    return -1;
+	    }
+	    
+	if (eeprom[0]==3) 
+	    {
+	      syslog(LOG_NOTICE, "MAP found on ttyUSB%d. Starting....",i-1);
+	      break;
+	    } else
+	      syslog(LOG_NOTICE, "MAP not found on ttyUSB%d.",i-1);
+          }	
+
 //----------------------- signals handler ------------------------------
 	 my_signal.sa_sigaction=&signal_hdl;
 	 my_signal.sa_flags=SA_SIGINFO;
@@ -611,9 +624,6 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 		 return 1;
 		 }
 
-//================ READ ALL MAP SETTINGS ======================
-
-	if (read_eeprom(eeprom, fd, mysql)!=0) return -1;
 	
 //=========== if bms exists we create table bms in memory for transaction  & shared memory segmant for monitor==================	
 	         

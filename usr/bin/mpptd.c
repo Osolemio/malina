@@ -25,8 +25,8 @@
 
 #define DAEMON_NAME "MPPT Reader daemon"
  
- #define PORT_MPPT "/dev/ttyUSB1"
- #define PORT_MPPT_ALONE "/dev/ttyUSB0"
+ #define PORT_MPPT "/dev/ttyUSB0"
+ #define PORT_MPPT_ALT "/dev/ttyUSB1"
  #define BAUDRATE B19200
  #define size_of_buffer 560
  #define to_read 0x72
@@ -172,37 +172,59 @@ long time_stop()
   return -1;
  }
 
- int open_port(char dev)
+
+int open_port (char dev)
     {
-	 int fd;
-	 if (dev==mppt)
-	 	 {
-	 		 fd = open(PORT_MPPT, O_RDWR, O_NOCTTY);
-	 		 if (fd<0)
-			    {
-	 		 	syslog(LOG_ERR,"Can't open serial port\n"); return -1;}
-	 		  else
-	 		 {
-	 		 //fcntl(fd,F_SETFL,0);
-	 		 return fd;
-	 		 }
-	 	 }
+   int fd;
+   if (dev == 1)
+    
+        fd = open (PORT_MPPT, O_RDWR, O_NOCTTY);
+    else
+	fd = open (PORT_MPPT_ALT, O_RDWR, O_NOCTTY);
+     
+     if (fd < 0)
+		{
+	syslog(LOG_ERR,"Can't open serial port");
+		return -1;
+		}
+
+          struct termios port_cfg;
+
+          if (tcgetattr (fd, &port_cfg) < 0)
+	{
+	 syslog(LOG_ERR, "Error getting serial config");
+              return -1;
+	}
+
+            
+            cfmakeraw (&port_cfg); // All other settings must be after this line
+              port_cfg.c_cc[VMIN] = 0;
+              port_cfg.c_cc[VTIME] = 1;
+            
+            cfsetospeed (&port_cfg, BAUDRATE);
+
+          cfsetispeed (&port_cfg, BAUDRATE);
+
+          if (tcsetattr (fd, TCSAFLUSH, &port_cfg) < 0)
+		{
+          
+          syslog(LOG_ERR, "Error entering Daemon. Port setattr");
+          return -1;
+          
+          
+          }
 	
-	if (dev==mppt_a)
-	 	 {
-	 		 fd = open(PORT_MPPT_ALONE, O_RDWR, O_NOCTTY);
-	 		 if (fd<0)
-			    {
-	 		 	syslog(LOG_ERR,"Can't open serial port\n"); return -1;}
-	 		  else
-	 		 {
-	 		 //fcntl(fd,F_SETFL,0);
-	 		 return fd;
-	 		 }
-	 	 }
-	    
-	  return -1;
-    }
+	if (!isatty (fd))   
+          {
+          syslog(LOG_ERR, "Not a tty port");
+           return -1;
+	}
+
+	return fd;
+    
+  
+return -1;
+}
 
 
 
@@ -270,7 +292,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	int pid;	  
 	int i;
 	char query[355];
-   
+	int fd_mppt;
    
    
    MYSQL mysql;
@@ -349,47 +371,34 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
           close(STDOUT_FILENO);
           close(STDERR_FILENO);
 
-  //-------------------------Open MPPT port-----------------------------------
-     
-     int fd_mppt = open_port(mppt);
-        if (fd_mppt<0) 
-		{
-		if (file_exists("/var/map/.map"))
-			return 1;
-		fd_mppt = open_port(mppt_a);
-		  if (fd_mppt<0)
-			return 1;
-		}
-        if (!isatty(fd_mppt))
-           return 2;
+  //-------------------------Looking for MPPT-----------------------------------
+            
+	for (i=1;i<=3;i++)
+	    {
+	    if (i>2) { syslog(LOG_ERR, "No MPPT found. Exiting"); return -1;}
+	    
+	    fd_mppt = open_port (i);
 
-        if (tcgetattr(fd_mppt, &port_cfg)<0)
-          return 3;
+            if (fd_mppt < 0)  
+          {
+            syslog(LOG_NOTICE, "Error open ttyUSB%d. Trying another port....",i-1);
+	    continue;    
+	  }
+	send_command(to_read,fd_mppt,0,0);
+	 
+	if (read_answer(fd_mppt)!=0) {
+	    syslog(LOG_ERR, "Error read eeprom cell. Trying to restart...");
+	    return -1;
+	    }
+	    
+	if (Buffer[1]==5) 
+	    {
+	      syslog(LOG_NOTICE, "MPPT found on ttyUSB%d. Starting....",i-1);
+	      break;
+	    } else
+	      syslog(LOG_NOTICE, "MPPT not found on ttyUSB%d.",i-1);
+          }     
 
-  //------ other different settings -----------------
-  
-    //     port_cfg.c_cflag |= (CLOCAL | CREAD);
-    //     port_cfg.c_cflag &= ~PARENB;
-    //     port_cfg.c_cflag &= ~CSTOPB;
-    //     port_cfg.c_cflag &= ~CSIZE;
-    //     port_cfg.c_cflag |= CS8;
-    //     port_cfg.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
-    //     port_cfg.c_iflag |= (INPCK | ISTRIP);
-    //     port_cfg.c_iflag &= ~(IXON | IXOFF | IXANY);
-    //     port_cfg.c_oflag &= ~OPOST;
-    //     port_cfg.c_cflag &= ~CRTSCTS;
-         cfmakeraw(&port_cfg);
-
-//----------- all other port settings must be here <------------------         
-         port_cfg.c_cc[VMIN] =0;
-         port_cfg.c_cc[VTIME] =1;
-         
-         
-         cfsetospeed(&port_cfg, BAUDRATE);
-         cfsetispeed(&port_cfg, BAUDRATE);
-
-          if (tcsetattr(fd_mppt, TCSAFLUSH, &port_cfg)<0)
-         return 4;
 
 //----------------------- signals handler ------------------------------
 	 my_signal.sa_sigaction=&signal_hdl;
