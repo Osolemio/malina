@@ -13,7 +13,7 @@ div {position:absolute;}
 top: 50px;
 left: 50px;
 width: 670px;
-height: 400px;
+height: 550px;
 border: 5px outset darkgreen;
 text-align:center;
 font-weight:bolder;
@@ -84,7 +84,7 @@ font-weight:bolder;
     top: 50px;
     left: 750px;
     width: 400px;
-    height: 400px;
+    height: 550px;
     background: lightsteelblue;
     border: 5px outset gray;
     text:darkgray;
