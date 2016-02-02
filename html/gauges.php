@@ -34,7 +34,8 @@
 
 <div id="map">
 
-    <div id="meter_o"><div id="text_v">0</div>
+    <div id="meter_o"><div id="text_v">0</div><div id="input1" onmouseover="tooltip(this,'Вход 1')" onmouseout="hide_info(this)">
+    </div><div id="input2" onmouseover="tooltip(this,'Вход 2')" onmouseout="hide_info(this)"></div>
     <div id="meter_v"></div></div>
     
     <div id="meter_o1"><div id="text_i">0</div>

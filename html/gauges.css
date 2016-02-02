@@ -144,6 +144,32 @@ div.wrapper {
   background:blue;
 }
 
+
+#input1 {
+    bottom:10%;
+    left:10%;
+    height:20px;
+    width:20px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+    background:lime;
+}
+
+#input2 {
+    bottom:10%;
+    right:10%;
+    height:20px;
+    width:20px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+    background:green;
+}
+
+
 #meter_o1 {
   left:34%;
   top:10%;
