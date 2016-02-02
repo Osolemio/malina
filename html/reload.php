@@ -59,7 +59,7 @@ box-shadow:
 
 
 
-
+    if ($row['_UNET']==100) $row['_UNET']=0;
     $P=$row['_UNET'];
     $P1=$row['_INET_16_4'];$P=round($P*$P1);
     $P2=$row['_IAcc_med_A_u16'];
