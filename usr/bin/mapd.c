@@ -304,9 +304,9 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
     {
     int i;
     char query[255];
-        
+       tcdrain(fd);
      send_command(to_read,fd,0,0xFF);
-//       tcdrain(fd);
+
         if (read_answer(fd) == 0) 
          {
           for (i=0;i<256;i++) eeprom[i]=Buffer[i+1];
@@ -316,7 +316,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
          {
          
          syslog(LOG_ERR, "Error read MAP settings"); return -1;
-         
+         tcflush (fd, TCIOFLUSH);
          }
     
       send_command(to_read,fd,0x100,0xFF);
@@ -329,7 +329,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
          {
          
          syslog(LOG_ERR, "Error read MAP settings"); return -1;
-         
+         tcflush (fd, TCIOFLUSH);
          }
          
          sprintf(query,"TRUNCATE TABLE settings");
