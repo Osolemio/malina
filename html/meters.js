@@ -494,6 +494,9 @@ var alt_u=$('#alt_user');
     if (alt_s) alt_s.html(arr[44]);
     if (alt_u) alt_u.html(arr[45]);
 
+    if (arr[49]&1) { $('#input2').css('background','lime');$('#input1').css('background','orange');} else
+		    { $('#input2').css('background','orange');$('#input1').css('background','lime');} 
+    if (arr[49]&4) $('#input2').css('background','lightskyblue');
 
     meter_v.setVal(arr[0]);
     if (Number(arr[0])<150) 
