@@ -146,7 +146,7 @@ div.wrapper {
 
 
 #input1 {
-    bottom:10%;
+    bottom:5px;
     left:10%;
     height:20px;
     width:20px;
@@ -155,10 +155,11 @@ div.wrapper {
     -o-border-radius:10px;
     -webkit-border-radius:10px;
     background:lime;
+    border: 2px outset darkblue;
 }
 
 #input2 {
-    bottom:10%;
+    bottom:5px;
     right:10%;
     height:20px;
     width:20px;
@@ -167,6 +168,7 @@ div.wrapper {
     -o-border-radius:10px;
     -webkit-border-radius:10px;
     background:green;
+    border: 2px outset darkblue;
 }
 
 

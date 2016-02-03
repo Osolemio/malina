@@ -537,9 +537,12 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	  unsigned char _Relay2;
 	  unsigned char _Flag_ECO;
 	  unsigned char _RSErrDop;
+	  unsigned char _flagUnet2;
       };
 
       struct map_info map_data;
+
+      float I_acc_3ph, I_ph1, I_ph2, I_ph3; // currents for 3-phase system. For BM only
       
       struct bms_struct 
       {
@@ -819,19 +822,30 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
 	    }
 
-	
+	bzero(Buffer,sizeof(Buffer));
 
-	send_command (to_read, fd, 0x585,1);
+	send_command (to_read, fd, 0x527,0x5F);
 	
 	 if (read_answer(fd) == 0) 
 	    {
-	    map_data._Flag_ECO=Buffer[1];
+	    map_data._Flag_ECO=Buffer[0x5E];
 
-	    map_data._Relay1=Buffer[2]&1;
-	    map_data._Relay2=Buffer[2]&2;
-
+	    map_data._Relay1=Buffer[0x5F]&1;
+	    map_data._Relay2=Buffer[0x5F]&2;
+	    
+	    map_data._flagUnet2=Buffer[1];
+//------------3 phase currents calculation---------------------	    
+	    I_ph1=((float)Buffer[2]+((float)(Buffer[3]&0x7F))*256)/10;
+	    I_ph2=((float)Buffer[4]+((float)(Buffer[5]&0x7F))*256)/10;
+	    I_ph3=((float)Buffer[6]+((float)(Buffer[7]&0x7F))*256)/10;
+	    I_ph1=(Buffer[3]&0x80==0)?I_ph1:0-I_ph1;
+	    I_ph2=(Buffer[5]&0x80==0)?I_ph2:0-I_ph2;
+	    I_ph3=(Buffer[7]&0x80==0)?I_ph3:0-I_ph3;
+	    I_acc_3ph=I_ph1+I_ph2+I_ph3;
+//-----------------------------------------------------------------	    
 	    }
 	     else map_data._Flag_ECO=255;
+
 	    bzero(Buffer,sizeof(Buffer));
 
 
@@ -1041,7 +1055,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 //------------- updating data in memory segment
 
 		sprintf (cache_str,
-        		   "{\"time\":\"%02d:%02d:%02d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Uacc_optim\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\",\"_RSErrDop\":\"%d\"}",
+        		   "{\"time\":\"%02d:%02d:%02d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Uacc_optim\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\",\"_RSErrDop\":\"%d\",\"_flagUnet2\":\"%d\"}",
         		   tim.tm_hour, tim.tm_min, tim.tm_sec, map_data._MODE,
         		   map_data._Status_Char, map_data._Uacc, map_data._Iacc,
         		   map_data._PLoad, map_data._F_Acc_Over,
@@ -1055,7 +1069,8 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         		   map_data._IAcc_med_A_u16, map_data._Temp_off,
         		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
         		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
-			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO, map_data._RSErrDop);
+			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO, map_data._RSErrDop,
+			   map_data._flagUnet2);
  
 //---------------adding DB record
 
@@ -1104,8 +1119,9 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 		    } //if errors
 //---------------------------------------------------------
 		 batmon->timestamp=ltime;
-		 batmon->current=(map_data._MODE==4)?map_data._IAcc_med_A_u16:(0-map_data._IAcc_med_A_u16);
-		 batmon->current*=num_maps;
+		 if (eeprom[0x139]<1 || eeprom[0x139]>3) I_acc_3ph=(map_data._MODE==4)?map_data._IAcc_med_A_u16:(0-map_data._IAcc_med_A_u16);
+		 if (eeprom[0x139]==0) I_acc_3ph*=num_maps;
+		 batmon->current=I_acc_3ph;
 		 batmon->tbat=map_data._Temp_Grad0;
 		 batmon->Ubat=map_data._Uacc;
 		 batmon->Imppt=map_data._I_mppt_avg;
