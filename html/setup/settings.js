@@ -62,9 +62,15 @@ $(function() {
      $('#input_field').val("выберите из списка");
      $('#field_units').html("");
 
-     if (result[29][7]==8) $('#relay_1').prop(disabled,false);
-     if (result[33][7]==8) $('#relay_2').prop(disabled,false);
+     if (result[29][7]==8) {
+	    $('#relay_1').prop('disabled',false);
+	    $('#relay_1').css("background","green");
+	    }
+     if (result[33][7]==8) {
+	    $('#relay_2').prop('disabled',false);
+	    $('#relay_2').css("background","green");
 
+	    }
 	    for (i=0;i<max_items;i++) {
 //------------------------list------------------------------------------ 
 		if (result[i][0]==chapter_id && result[i][1]==menu_id && result[i][4]=='list' && result[i][8]=='on')
