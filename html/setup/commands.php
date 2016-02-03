@@ -5,6 +5,22 @@ if (isset($_POST['off'])) $value=chr(1);
 if (isset($_POST['charge_start'])) $value=chr(5);
 if (isset($_POST['charge_stop'])) $value=chr(4);
 if (isset($_POST['reset'])) $value=chr(6);
+if (isset($_POST['relay_1']) || isset($_POST['relay_2']))
+	{
+
+	    $shm=shmop_open(2015,"a",0,0);
+	    $str_json=shmop_read($shm,0,1000);
+	    $str=substr($str_json,0,strpos($str_json,"}")+1);
+    
+	    shmop_close($shm);
+ 
+   	    $row = json_decode($str,true);
+	    $row['_Relay1']=(isset($_POST['relay_1'])?($row['_Relay1']^1):$row['_Relay1'];
+	    $row['_Relay2']=(isset($_POST['relay_2'])?($row['_Relay2']^2):$row['_Relay2'];
+	    $value=$row['_Relay1']+$row['_Relay2'];
+
+
+	}
 
 if (!isset($_POST['confirm'])) {
     echo "Вы не отметили флажок отправки команды <br>";
@@ -36,6 +52,15 @@ if (file_exists("/var/map/.restricted") && (isset($_POST['off']) || isset($_POST
 
 
 $post=chr(0xFF).chr(0x00).chr(0x00).$value;
+
+if (isset($_POST['relay_1']) || isset($_POST['relay_2']))
+	{
+ 
+	$offset=0x586;
+	$post=chr(0xFF).chr($offset&0xFF).chr($offset>>8).chr($value);
+
+	}
+
 
 fwrite($to_map, $post);
 echo "Команда передана.<br>";

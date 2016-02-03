@@ -764,7 +764,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	    {
 		if (offset<0x138 || (char_fifo[3]>=eeprom[offset+8] && char_fifo[3]<=eeprom[offset+16]))
 		{
-		if (offset==0 || (offset>=0x102 && offset<=0x1B7)) 
+		if (offset==0 || (offset>=0x102 && offset<=0x1B7) || offset==0x587) 
 		    {
 		    syslog(LOG_NOTICE,"Read from pipe - offset %4X value %2X",offset, char_fifo[3]);
 		    Buffer[0]=3;
