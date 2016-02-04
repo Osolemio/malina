@@ -802,7 +802,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 			    send_command(to_write,fd,0x0,0x0);
 			    if (read_answer(fd)==0)
 				{
-				syslog(LOG_NOTICE,"Written to eeprom: offset %4X value %2X",offset, char_fifo[3]);
+				syslog(LOG_NOTICE,"Written to eeprom or RAM: offset %4X value %2X",offset, char_fifo[3]);
 				sprintf(query, "INSERT INTO eeprom_result VALUES('%d','%d')",offset, 0);
 				if (mysql_query (&mysql, query))
         				{
@@ -828,10 +828,10 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	
 	 if (read_answer(fd) == 0) 
 	    {
-	    map_data._Flag_ECO=Buffer[0x5E];
+	    map_data._Flag_ECO=Buffer[0x5D];
 
-	    map_data._Relay1=Buffer[0x5F]&1;
-	    map_data._Relay2=Buffer[0x5F]&2;
+	    map_data._Relay1=Buffer[0x5E]&1;
+	    map_data._Relay2=Buffer[0x5E]&2;
 	    
 	    map_data._flagUnet2=Buffer[1];
 //------------3 phase currents calculation---------------------	    
