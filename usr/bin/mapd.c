@@ -828,10 +828,10 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	
 	 if (read_answer(fd) == 0) 
 	    {
-	    map_data._Flag_ECO=Buffer[0x5D];
+	    map_data._Flag_ECO=Buffer[0x5F];
 
-	    map_data._Relay1=Buffer[0x5E]&1;
-	    map_data._Relay2=Buffer[0x5E]&2;
+	    map_data._Relay1=Buffer[0x60]&1;
+	    map_data._Relay2=Buffer[0x60]&2;
 	    
 	    map_data._flagUnet2=Buffer[1];
 //------------3 phase currents calculation---------------------	    
