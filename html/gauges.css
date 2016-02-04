@@ -146,16 +146,20 @@ div.wrapper {
 
 
 #input1 {
+    
     bottom:5px;
     left:10%;
     height:20px;
     width:20px;
+    color:black;
+    text-align:center;
+    font-weight:bolder;
     border-radius:10px;
     -moz-border-radius:10px;
     -o-border-radius:10px;
     -webkit-border-radius:10px;
     background:lime;
-    border: 2px outset darkblue;
+    border: 4px outset darkblue;
 }
 
 #input2 {
@@ -163,12 +167,15 @@ div.wrapper {
     right:10%;
     height:20px;
     width:20px;
+    color:black;
+    text-align:center;
+    font-weight:bolder;
     border-radius:10px;
     -moz-border-radius:10px;
     -o-border-radius:10px;
     -webkit-border-radius:10px;
     background:green;
-    border: 2px outset darkblue;
+    border: 4px outset darkblue;
 }
 
 
