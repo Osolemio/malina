@@ -388,6 +388,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	 
 	if (read_answer(fd_mppt)!=0) {
 	    syslog(LOG_ERR, "Error read eeprom cell. Trying to restart...");
+	    close(fd_mppt);
 	    return -1;
 	    }
 	    
@@ -397,7 +398,8 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	      break;
 	    } else
 	      syslog(LOG_NOTICE, "MPPT not found on ttyUSB%d.",i-1);
-          }     
+	      close(fd_mppt);
+	     }     
 
 
 //----------------------- signals handler ------------------------------

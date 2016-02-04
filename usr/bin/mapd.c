@@ -603,6 +603,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 
 	if (read_eeprom(eeprom, fd, mysql)!=0) {
 	    syslog(LOG_ERR, "Error read MAP settings. Trying to restart...");
+	    close(fd);
 	    return -1;
 	    }
 	    
@@ -612,6 +613,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	      break;
 	    } else
 	      syslog(LOG_NOTICE, "MAP not found on ttyUSB%d.",i-1);
+	      close(fd);
           }	
 
 //----------------------- signals handler ------------------------------
