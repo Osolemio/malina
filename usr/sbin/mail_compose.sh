@@ -74,7 +74,7 @@ if test $result -eq 0; then
     cur_t=`date`
     rm /var/map/temp_email_$i
     echo " " >> /var/map/temp_email_ok_$i
-    echo $text >> /var/map/temp_email_ok_$i
+    echo ${alias[$i]} >> /var/map/temp_email_ok_$i
     echo "value: ${alias[$i]} is in range. Value=${data_fields[$i]} $cur_t" >> /var/map/temp_email_ok_$i
     tmp_name=`date +%s`
     /usr/bin/mail -s "Notification from MAP" $mail_recipient < /var/map/temp_email_ok_$i
