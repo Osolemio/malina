@@ -1,0 +1,42 @@
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# Please consider adding local content in /etc/sudoers.d/ instead of
+# directly modifying this file.
+#
+# See the man page for details on how to write a sudoers file.
+#
+Defaults	env_reset
+Defaults	mail_badpass
+Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# Host alias specification
+
+# User alias specification
+
+# Cmnd alias specification
+
+# User privilege specification
+root	ALL=(ALL:ALL) ALL
+
+# Allow members of group sudo to execute any command
+%sudo	ALL=(ALL:ALL) ALL
+
+# See sudoers(5) for more information on "#include" directives:
+
+#includedir /etc/sudoers.d
+pi ALL=(ALL) NOPASSWD: ALL
+ALL ALL = NOPASSWD: /usr/bin/gpg
+ALL ALL = NOPASSWD: /usr/sbin/modem_setup.sh
+ALL ALL = NOPASSWD: /usr/sbin/sendsms
+%wheel ALL=NOPASSWD: /bin/umount
+ALL ALL = NOPASSWD: /sbin/fdisk -l*
+ALL ALL = NOPASSWD: /sbin/udevadm trigger --action=remove
+ALL ALL = NOPASSWD: /usr/bin/mysqladmin
+ALL ALL = NOPASSWD: /usr/bin/mysql
+ALL ALL = NOPASSWD: /usr/sbin/service mysql status
+ALL ALL = NOPASSWD: /usr/sbin/db_restore.sh*
+ALL ALL = NOPASSWD: /usr/sbin/db_dump.sh*
+ALL ALL = NOPASSWD: /usr/sbin/pbase_restore.sh
+ALL ALL = NOPASSWD: /bin/stty
+
