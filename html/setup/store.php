@@ -119,7 +119,7 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    break;
 	
     case 'capacity':
-	    $value=($_POST['field']>>$_POST['eacc'])/25;    
+	    $value=($_POST['field']<<$_POST['eacc'])/25;    
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
 		    echo "Значение вне допустимого диапазона"."<br>";
