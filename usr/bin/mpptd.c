@@ -490,7 +490,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	 send_command(to_read, fd_mppt, 0x5A6, 0x59);
           if (read_answer(fd_mppt)==0)
                {
-			   mppt_data.Relay_C=Buffer[0x2E];
+			   mppt_data.Relay_C=Buffer[0x2B];
         	  	   mppt_data.RSErrSis=Buffer[1];
 			   mppt_data.Sign_C0=Buffer[0x4F];
         	  	   mppt_data.Sign_C1=Buffer[0x50];
