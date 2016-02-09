@@ -26,3 +26,5 @@ MAILTO=""
 */1 * * * * /usr/sbin/sms_compose.sh 2>/dev/null; /bin/sleep 30 2>/dev/null; /usr/sbin/sms_compose.sh
 */1 * * * * /usr/sbin/mail_compose.sh 2>/dev/null; /bin/sleep 30 2>/dev/null; /usr/sbin/mail_compose.sh
 */1 * * * * /usr/sbin/stop_gen.sh 2>/dev/null
+01 3  * * * /usr/sbin/pi_service.sh 2>/dev/null
+
