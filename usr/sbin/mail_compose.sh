@@ -3,7 +3,7 @@
 out=(`mysql -NBu root -pmicroart map -e "SELECT * from data WHERE number=(SELECT MAX(number) from data)"`)
 
 declare -A data_fields
-declare -A description
+declare -A alias
 declare -A min
 declare -A max
 
@@ -21,10 +21,10 @@ data_fields[3]=${out[3]}
 data_fields[4]=${out[22]}
 
 #=============  Aliases or text============================
-description[1]="Acc voltage "
-description[2]="Output AC "
-description[3]="Mode "
-description[4]="Acc temp "
+alias[1]="Acc voltage "
+alias[2]="Output AC "
+alias[3]="Mode "
+alias[4]="Acc temp "
 
 
 #=============== min & max values ========================
@@ -48,7 +48,7 @@ max[4]=30
 index=4
 
 #====================== Where we want to send email to =========================
-mail_recipient="12345@mail.ru"
+mail_recipient="ivan_belarus@inbox.ru"
 
 #============================== script body ===================================
 
@@ -61,7 +61,7 @@ if test $result -eq 0; then
  if test ! -e "/var/map/temp_email_$i"; then
     cur_t=`date`
     echo " " >> /var/map/temp_email_$i
-    echo ${description[$i]} >> /var/map/temp_email_$i
+    echo ${alias[$i]} >> /var/map/temp_email_$i
     echo "value: ${data_fields[$i]} $cur_t" >> /var/map/temp_email_$i
     tmp_name=`date +%s`
     /usr/bin/mail -s "Notification from MAP" $mail_recipient < /var/map/temp_email_$i
@@ -74,12 +74,14 @@ if test $result -eq 0; then
     cur_t=`date`
     rm /var/map/temp_email_$i
     echo " " >> /var/map/temp_email_ok_$i
-    echo ${description[$i]} >> /var/map/temp_email_ok_$i
-    echo "value: ${description[$i]} is in range. Value=${data_fields[$i]} $cur_t" >> /var/map/temp_email_ok_$i
+    echo $text >> /var/map/temp_email_ok_$i
+    echo "value: ${alias[$i]} is in range. Value=${data_fields[$i]} $cur_t" >> /var/map/temp_email_ok_$i
     tmp_name=`date +%s`
     /usr/bin/mail -s "Notification from MAP" $mail_recipient < /var/map/temp_email_ok_$i
     rm /var/map/temp_email_ok_$i
  fi
  fi
+
+  rm ~/dead.letter
 
 done
