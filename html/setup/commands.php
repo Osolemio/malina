@@ -15,8 +15,8 @@ if (isset($_POST['relay_1']) || isset($_POST['relay_2']))
 	    shmop_close($shm);
  
    	    $row = json_decode($str,true);
-	    $row['_Relay1']=(isset($_POST['relay_1'])?($row['_Relay1']^1):$row['_Relay1'];
-	    $row['_Relay2']=(isset($_POST['relay_2'])?($row['_Relay2']^2):$row['_Relay2'];
+	    if (isset($_POST['relay_1'])) $row['_Relay1']=($row['_Relay1']^1);
+	    if (isset($_POST['relay_2'])) $row['_Relay2']=($row['_Relay2']^2);
 	    $value=$row['_Relay1']+$row['_Relay2'];
 
 
