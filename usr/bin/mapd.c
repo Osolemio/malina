@@ -865,7 +865,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
 
 	map_data._UNET = Buffer[0x422 - 0x3FF];
-        map_data._UNET += 100;
+        if (map_data._UNET>0) map_data._UNET += 100;
 
 
 // change MAP mode to my extensions
