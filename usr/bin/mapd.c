@@ -949,7 +949,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 		    {    	
                      for (i=0;i<limit;i+=2) {
 	                bms[i1].cell_number=i1+1;
-        	        bms[i1].v=((float)Buffer[0x81+i]+(float)Buffer[0x81+i+1]*256)/100;
+        	        bms[i1].v=((float)Buffer[0x81+i]+(float)(Buffer[0x81+i+1]&0x7F)*256)/100;
         	        
             		bms[i1].i=(float)Buffer[0xE1+i1]*bms[i1].v/100;
             		if (Buffer[0xC1+i1]==255) bms[i1].t=127; else bms[i1].t=Buffer[0xC1+i1]-50; 
