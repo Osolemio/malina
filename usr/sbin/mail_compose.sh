@@ -82,6 +82,4 @@ if test $result -eq 0; then
  fi
  fi
 
-  rm ~/dead.letter
-
 done
