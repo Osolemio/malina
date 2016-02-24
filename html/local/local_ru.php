@@ -112,6 +112,38 @@ $text=array(
  'not_connected'=>'НЕ ПОДКЛЮЧЕН',
  'or'=>'или',
  'vmp'=>'Напряжение средней точки U',
+ 'info_header'=>'ИНФОРМАЦИЯ О НАСТРОЙКАХ ИНВЕРТОРА МАП',
+ 'version_hw'=>'',
+ 'version_fw'=>'',
+ 'device_type'=>'',
+ 'work_voltage'=>'',
+ 'motherboard_version'=>'',
+ 't_sensors'=>'',
+ 'vent_no'=>'',
+ 'min_curr_absorption'=>'',
+ 'chg_time_BMS'=>'',
+ 'nominal_power'=>'',
+ 'restart_attempts'=>'',
+ 'chg_delay'=>'',
+ 'stab_time'=>'',
+ 'tmax_chg'=>'',
+ 'NET_delay'=>'',
+ 'discharged_acc_time'='',
+ 'Vdd'=>'',
+ 'sine_acc'=>'',
+ '3ph'=>'',
+ 'Uout_gen'=>'',
+ 'Pmax_add'=>'',
+ 'Eco_mode'=>'',
+ 'Uacc_min'=>'',
+ 'Load_gen'=>'',
+ 'parallel_macs'=>'',
+ 'input_source'=>'',
+ 'external_devices'=>'',
+ 'mppt_no'=>'',
+ ' 
+ 
+
 
 );
 ?>
