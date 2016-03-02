@@ -4,12 +4,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="jschart1.css">
+    <?php include('./local/local_ru.inc');?>
+
   <script src="js/jquery-1.11.2.min.js"></script>
   <script src="js/jquery-migrate-1.2.1.min.js"></script>
   <script src="./js/jschart-2.2.1.min.js"></script>
   <script src="jschart2.js"></script>
   
   <title>MAP Monitor. Diagrams</title>
+
     
 </head>
 
@@ -19,13 +22,13 @@
 
 <div id="legend">
 
-    Легенда:
+    <?php loc('Legend');?>:
   
-    <span class="blue"><b>Мощность с подстанции, ВА</b></span>  
+    <span class="blue"><b><?php loc('P_MAINS');?>, <?php loc('VA');?></b></span>  
     
-    <span class="red"><b>Мощность АКБ-МАП по модулю, Вт</b></span>  
+    <span class="red"><b><?php loc('P_ACC_MAC_MOD');?>, <?php loc('W');?></b></span>  
       
-    <span class="green"><b>Мощность СП, Вт</b></span>    
+    <span class="green"><b><?php loc('PPV');?>, <?php loc('W');?></b></span>    
   </div>
   
           
@@ -35,16 +38,16 @@
   <input type="checkbox" id="menu-collapsed" name="menu-collapsed" checked/>
   <div class="menu-content">
     <ul>
-      <li><a href="menu.php">МЕНЮ</a></li>
-      <li><a href="index.php">ТЕКСТ</a></li>
-      <li><a href="gauges.php">ПРИБОРЫ</a></li>
-      <li><a href="history.php">ИСТОРИЯ</a></li>
-      <li><a href="multi_select.php">МУЛЬТИГРАФ</a></li>
-      <li><a href="bms.php">BMS</a></li>
-      <li><a href="settings.php">ИНФО</a></li>
-      <li><a href="./setup/index.php">СИСТЕМА</a></li>
-      <li><a href="./setup/settings.php">СИСТЕМА-МАП</a></li>
-      <li><a href="./setup/sys.php">СИСТЕМА-СЕРВИСЫ</a></li>
+      <li><a href="menu.php"><?php loc('MENU');?></a></li>
+      <li><a href="index.php"><?php loc('TEXT');?></a></li>
+      <li><a href="gauges.php"><?php loc('GAUGES');?></a></li>
+      <li><a href="history.php"><?php loc('HISTORY');?></a></li>
+      <li><a href="multi_select.php"><?php loc('MULTICHART');?></a></li>
+      <li><a href="bms.php"><?php loc('BMS');?></a></li>
+      <li><a href="settings.php"><?php loc('INFO');?></a></li>
+      <li><a href="./setup/index.php"><?php loc('SYSTEM');?></a></li>
+      <li><a href="./setup/settings.php"><?php loc('SYSTEM');?>-<?php loc('MAC');?></a></li>
+      <li><a href="./setup/sys.php"><?php loc('SYSTEM');?>-<?php loc('SERVICES');?></a></li>
     
     </ul>
   </div>
