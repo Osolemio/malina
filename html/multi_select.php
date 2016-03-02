@@ -2,8 +2,8 @@
 <html>
   <head>
   <meta charset="UTF-8">
-
-  <title>Выбор графиков</title>
+<?php include('./local/local_ru.inc');?>
+  <title><?php loc('graph_chose');?></title>
     
     
 </head>
@@ -11,7 +11,7 @@
 
 <body>
 <hr>
-<center>Выберите графики реального времени для отображения</center>
+<center><?php loc('multichart_header');?></center>
 <hr>
 
 <form method="post" action="multichart.php">
@@ -27,18 +27,18 @@ if (file_exists("/var/map/.mppt")) $mppt_exists=true; else $mppt_exists=false;
 <b>
 <p>
 <fieldset>
-    <input type="checkbox" name="acc" checked disabled/> График АКБ
-    <input type="checkbox" name="umap" checked <?php if (!$map_exists) echo "disabled" ?>/> Напряжение вход/выход МАП    
-    <input type="checkbox" name="imap" checked <?php if (!$map_exists) echo "disabled" ?>/> Токи/мощности МАП/MPPT(I2C)
-    <input type="checkbox" name="imppt" <?php if (!$mppt_exists) echo "disabled" ?>/> Токи MPPT (данные MPPT)
-    <input type="checkbox" name="iacc" checked <?php if (!$mppt_exists) echo "disabled" ?>/> Баланс АКБ по токам
-    <input type="checkbox" name="wind"  <?php if (!$mppt_exists) echo "disabled" ?>/> Обороты ветрогенератора
+    <input type="checkbox" name="acc" checked disabled/> <?php loc('acc_graph');?>
+    <input type="checkbox" name="umap" checked <?php if (!$map_exists) echo "disabled" ?>/> <?php loc('u_inout_mac');?>
+    <input type="checkbox" name="imap" checked <?php if (!$map_exists) echo "disabled" ?>/> <?php loc('i_p_mac_mppt');?>
+    <input type="checkbox" name="imppt" <?php if (!$mppt_exists) echo "disabled" ?>/> <?php loc('i_mppt');?>
+    <input type="checkbox" name="iacc" checked <?php if (!$mppt_exists) echo "disabled" ?>/> <?php loc('acc_balance');?>
+    <input type="checkbox" name="wind"  <?php if (!$mppt_exists) echo "disabled" ?>/> <?php loc('wind_rpm');?>
 </fieldset>
 <p>
-<input type="submit" value="Отобразить">
+<input type="submit" value="<?php loc('show');?>">
 </form>
 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('MENU');?> " ONCLICK="HomeButton()"> 
 <script>
 function HomeButton()
 {
