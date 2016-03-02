@@ -75,9 +75,9 @@
     <div id="counter3" class="out_1">
     <div class="in"></div></div>
   
-    <div id="text_kw_net"></div>    
-    <div id="text_kw_acc"></div>
-    <div id="text_kw_charge"></div>
+    <div id="text_kw_net"><?php loc('ENET');?></div>    
+    <div id="text_kw_acc"><?php loc('EACC');?></div>
+    <div id="text_kw_charge"><?php loc('ECHG');?></div>
     <div id="smoothie-chart-map-div"> 
     <canvas id="smoothie-chart-map"></canvas></div>
     <div class="relay_map_form1" onmouseover="tooltip(this,'<?php loc('tooltip16');?>')" onmouseout="hide_info(this)"><div id="relay_container1" class="relay_container"><div id="map_slider1" class="map_relay_slider"></div></div></div>
@@ -156,7 +156,7 @@
 	<div id="power_pv" onmouseover="tooltip(this,'<?php loc('tooltip24');?>')" onmouseout="hide_info(this)"></div></div>
 
 	<div id="map_err"><div id="map_err_in"></div>
-        <div id="text_err"></div>
+        <div id="text_err"><?php loc('Err_Alerts');?></div>
 	</div>    
 	<div id="smoothie-chart-acc-div"> 
 	<canvas id="smoothie-chart-acc"></canvas></div>

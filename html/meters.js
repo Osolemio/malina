@@ -542,9 +542,6 @@ var alt_u=$('#alt_user');
 	}
 
 
-    $('#text_kw_net').html("кВтч от сети");
-    $('#text_kw_acc').html("кВтч от АКБ");
-    $('#text_kw_charge').html("кВтч на АКБ (заряд МАП)");
 
     if (i==1) {i=0; $('#text1').html(">&nbspГц&nbsp>");}
     else {i=1;$('#text1').html("<b>></b>&nbspГц&nbsp<b>><b>");}
@@ -700,7 +697,6 @@ arr[40]<36000)?Math.floor(arr[40]/60)+'&nbspмин':Math.floor(arr[40]/3600)+'&n
 
 	$('#text_power').html("");
 
-	$('#text_err').html("Ошибки и предупреждения");
 	$('#text_pnet').html(arr[17]);
 	$('#text_pacc').html(arr[18]);
 	
