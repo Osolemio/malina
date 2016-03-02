@@ -504,7 +504,6 @@ var alt_u=$('#alt_user');
     else 
     document.getElementById('meter_o').style.background="blue";
     
-    $('#text3').html("МАП");
     meter_i.setVal(arr[1]);
     meter_vout.setVal(arr[2]);
     meter_i_i2c.setVal((arr[12]<0)?0:arr[12]);
@@ -601,7 +600,6 @@ var alt_u=$('#alt_user');
 
 //----------------MPPT SECTION
 
-    $('#text5').html("MPPT");
 
 if (document.getElementById('mppt')) {
 
@@ -665,7 +663,6 @@ $('#bms_umax').html(arr[25]);if (arr[25]=='off') document.getElementById("bms_um
 //----- text values
 
         
-        $('#text4').html("АКБ");
 	$('#text_bmon').html(arr[32]+"%");
 	consumed=arr[30];
 	var real_p=((Number(arr[34])+Number(arr[30]))/Number(arr[34]))*100;
