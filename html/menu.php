@@ -3,7 +3,8 @@
   <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  <title>Главное меню</title>
+ <?php include('./local/local_ru.inc');?>
+  <title><?php loc('MMENU');?></title>
     
 </head>
 
@@ -259,23 +260,23 @@ div.div_t {
 <?php if (file_exists("/release")) {$ver=shell_exec("cat /release"); echo $ver;}?>
 
 <div class="wrapper">
-<a href="index.php" class="menu1"><div class="div_t"> ТЕКСТ </div></a>
+<a href="index.php" class="menu1"><div class="div_t"> <?php loc('TEXT');?> </div></a>
 <br>
-<a href="gauges.php" class="menu2"><div class="div_t"> ПРИБОРЫ </div></a>
+<a href="gauges.php" class="menu2"><div class="div_t"> <?php loc('GAUGES');?> </div></a>
 <br>
-<a href="graph.php" class="menu3"><div class="div_t">МОЩНОСТИ</div></a>
+<a href="graph.php" class="menu3"><div class="div_t"><?php loc('POWERS');?></div></a>
 <br>
-<a href="multi_select.php" class="menu4"><div class="div_t">МУЛЬТИГРАФ</div></a>
+<a href="multi_select.php" class="menu4"><div class="div_t"><?php loc('MULTICHART');?></div></a>
 <br>
-<a href="history.php" class="menu5"><div class="div_t">ИСТОРИЯ</div></a>
+<a href="history.php" class="menu5"><div class="div_t"><?php loc('HISTORY');?></div></a>
 <br>
-<a href="bms.php" class="menu6"><div class="div_t">BMS</div></a>
+<a href="bms.php" class="menu6"><div class="div_t"><?php loc('BMS');?></div></a>
 <br>
-<a href="settings.php" class="menu7"><div class="div_t">ИНФО</div></a>
+<a href="settings.php" class="menu7"><div class="div_t"><?php loc('INFO');?></div></a>
 <br>
-<a href="/setup/index.php" class="menu8"><div class="div_t">СИСТЕМА</div></a>
+<a href="/setup/index.php" class="menu8"><div class="div_t"><?php loc('SYSTEM');?></div></a>
 <br>
-<a href="/master/index.php" class="menu9"><div class="div_t">МАСТЕР-УЗЕЛ</div></a>
+<a href="/master/index.php" class="menu9"><div class="div_t"><?php loc('MASTER-NODE');?></div></a>
 <br>
 </div>
 
