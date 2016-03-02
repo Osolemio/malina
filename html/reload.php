@@ -1,3 +1,5 @@
+<?php include('./local/local_ru.inc');
+?>
 <style>
 
 a.button28 {
@@ -34,10 +36,10 @@ box-shadow:
 
 <table border="2" align="left" >
 
-<tr bgcolor="lightblue"><td><b>МАП. МОНИТОРИНГ</b></td><td>
-<a href="menu.php" class="button28">МЕНЮ</a>
-<a href="gauges.php" class="button28">ПРИБОРЫ</a>
-<a href="/setup/index.php" class="button28">СИСТЕМА</a>
+<tr bgcolor="lightblue"><td><b><?php loc('MAC');?></b></td><td>
+<a href="menu.php" class="button28"><?php loc('MENU');?></a>
+<a href="gauges.php" class="button28"><?php loc('GAUGES');?></a>
+<a href="/setup/index.php" class="button28"><?php loc('SYSTEM');?></a>
 </td></tr>
 
 
@@ -52,10 +54,6 @@ box-shadow:
     shmop_close($shm);
 
     $row = json_decode($result,true);
-    $mode=array("МАП выключени и нет сети на входе","МАП выключен.Сеть на входе","МАП включен. Генерация от АКБ. Нет сети.","МАП включен и транслирует сеть","МАП включен. Трансляция + заряд","","","","","",
-    "Принудительная генерация","Тарифная сеть. максимальный тариф. принудительная генерация", "Тарифная сеть. минимальный тариф",
-    "Трансляция + эко-подкачка", "Трансляция + продажа в сеть", "Ожидание внешнего полного заряда", "Тарифная сеть. трансляция+эко-подкачка",
-    "Тарифная сеть. трансляция+продажа в сеть");
 
 
 
@@ -66,30 +64,30 @@ box-shadow:
     $P1=$row['_Uacc']; $Pacc=round($P2*$P1);   
 
     $map_error='';
-    if ($row['_F_Acc_Over']!=0) $map_error="Ошибка по АКБ/температуре";
-    if ($row['_F_Net_Over']!=0) $map_error=$map_error." Ошибка по перегрузке от сети.";
-    if ($row['_RSErrSis']!=0) $map_error=$map_error." Критическая ошибка!";
-    if ($row['_RSErrJobM']!=0) $map_error=$map_error." Ошибка (неисправность) после перегрузки.";
-    if ($row['_RSErrJob']!=0) $map_error=$map_error." Ошибка после перегрузки";
-    if ($row['_RSWarning']!=0) $map_error=$map_error." Ошибка напряжения по диапазону. Нестабильность сети";
-    if ($row['_I2C_Err']!=0) $map_error=$map_error." Ошибка I2C";
+    if ($row['_F_Acc_Over']!=0) $map_error=$text['map_error1'];
+    if ($row['_F_Net_Over']!=0) $map_error=$map_error.$text['map_error2'];
+    if ($row['_RSErrSis']!=0) $map_error=$map_error.$text['map_error3'];
+    if ($row['_RSErrJobM']!=0) $map_error=$map_error.$text['map_error4'];
+    if ($row['_RSErrJob']!=0) $map_error=$map_error.$text['map_error5'];
+    if ($row['_RSWarning']!=0) $map_error=$map_error.$text['map_error6'];
+    if ($row['_I2C_Err']!=0) $map_error=$map_error.$text['map_error7'];
 ?>
 
-<tr><td><b>Время:</b></td><td><?php echo $row['time'];?></td></tr>
-<tr><td><b>Режим:</b></td><td><?php echo $mode[$row['_MODE']]; ?> </td></tr>
-<tr><td><b>Напряжение с подстанции</b><td><b><?php echo $row['_UNET'];?>В</b></td></tr>
-<tr><td><b>Ток по входу:</b><td><b><?php echo $row['_INET_16_4'];?>А</b> </td></tr>
-<tr><td><b>Мощность с подстанции</b><td><b><?php echo $row['_PNET'];?>Вт</b>, расчет:<?php echo $P;?>ВА</td></tr>
-<tr><td><b>Частота с подстанции:</b><td><?php echo round(6250/$row['_TFNET'],1);?>Гц </td></tr>
-<tr><td><b>Частота с МАП:</b><td><?php echo round(6250/$row['_ThFMAP'],1);?>Гц </td></tr>
-<tr><td><b>Напряжение с МАП:</b><td><b><?php echo $row['_UOUTmed'];?>В </b></td></tr>
-<tr><td><b>Последнее напряжение вне диапазона:</b><td><text color="red"><b><?php echo $row['_UNET_Limit'];?>В<b></text> </td></tr>
-<tr><td><b>Температура АКБ:</b><td><?php echo $row['_Temp_Grad0'];?>&degС </td></tr>
-<tr><td><b>Температура транзисторов:</b><td><?php echo $row['_Temp_Grad2'];?>&degC </td></tr>
-<tr><td><b>Напряжение АКБ:</b><td><b><?php echo $row['_Uacc'];?>В </b></td></tr>
-<tr><td><b>Ток по АКБ:</b><td><?php echo $row['_IAcc_med_A_u16'];?>А </td></tr>
-<tr><td><b>Мощность по линии АКБ-МАП:</b><td><?php echo $row['_PLoad']."Вт,&nbspрасчет:&nbsp".$Pacc."Вт";?></td></tr>
-<tr><td><b>ОШИБКИ:</b><td><text color="red"><b><?php echo $map_error;?></b></text></td></tr>
+<tr><td><b><?php loc('TIME');?>:</b></td><td><?php echo $row['time'];?></td></tr>
+<tr><td><b><?php loc('MODE');?>:</b></td><td><?php echo $mode[$row['_MODE']]; ?> </td></tr>
+<tr><td><b><?php loc('UNET');?>:</b><td><b><?php echo $row['_UNET'];?><?php loc('V');?></b></td></tr>
+<tr><td><b><?php loc('INET');?>:</b><td><b><?php echo $row['_INET_16_4'];?><?php loc('A');?></b> </td></tr>
+<tr><td><b><?php loc('PNET');?>:</b><td><b><?php echo $row['_PNET'];?><?php loc('W');?></b>, <?php loc('calc');?>:<?php echo $P;?><?php loc('VA');?></td></tr>
+<tr><td><b><?php loc('FNET');?>:</b><td><?php echo round(6250/$row['_TFNET'],1);?><?php loc('Hz');?> </td></tr>
+<tr><td><b><?php loc('FMAC');?>:</b><td><?php echo round(6250/$row['_ThFMAP'],1);?><?php loc('Hz');?> </td></tr>
+<tr><td><b><?php loc('UMAC');?>:</b><td><b><?php echo $row['_UOUTmed'];?><?php loc('V');?> </b></td></tr>
+<tr><td><b><?php loc('UERR');?>:</b><td><text color="red"><b><?php echo $row['_UNET_Limit'];?>В<b></text> </td></tr>
+<tr><td><b><?php loc('TACC');?>:</b><td><?php echo $row['_Temp_Grad0'];?>&degС </td></tr>
+<tr><td><b><?php loc('TTRANS');?>:</b><td><?php echo $row['_Temp_Grad2'];?>&degC </td></tr>
+<tr><td><b><?php loc('UACC');?>:</b><td><b><?php echo $row['_Uacc'];?><?php loc('V');?> </b></td></tr>
+<tr><td><b><?php loc('IACC');?>:</b><td><?php echo $row['_IAcc_med_A_u16'];?><?php loc('A');?> </td></tr>
+<tr><td><b><?php loc('PACC-MAC');?>:</b><td><?php echo $row['_PLoad'].$text['W'].",&nbsp".$text['calc'].":&nbsp".$Pacc.$text['W'];?></td></tr>
+<tr><td><b><?php loc('ERRORS');?>:</b><td><text color="red"><b><?php echo $map_error;?></b></text></td></tr>
 
 
 <?php
@@ -114,16 +112,16 @@ box-shadow:
 ?>
 
 <tr><td></td></tr>
-<tr bgcolor="yellow"><td><b>СОЛНЕЧНЫЕ ПАНЕЛИ. MPPT</b><td><tr>
-<tr><td><b>Время:</b><td><?php echo $row['time'];?> </td></tr>
-<tr><td><b>Режим работы:</b><td><?php echo $row['Mode'].$row['Sign'].", MPP:".$row['MPP'];?> </td></tr>
-<tr><td><b>Напряжение панелей:</b><td><b><?php echo $row['Vc_PV'];?>В <b></td></tr>
-<tr><td><b>Ток панелей:</b><td><b><?php echo $row['Ic_PV'];?>А </b></td></tr>
-<tr><td><b>Мощность панелей:</b><td><b><?php echo $row['P_PV'];?>Вт<b></td></tr>
-<tr><td><b>Мощность на выходе:</b><td><?php echo $row['P_Out']."Вт,&nbsp&#951=".$n."%";?> </td></tr>
-<tr><td><b>Ток на АКБ:</b><td><?php echo $row['I_Ch'];?>А </td></tr>
-<tr><td><b>Внутренняя температура:</b><td><?php echo $row['Temp_Int'];?>&degС </td></tr>
-<tr><td><b>Энергия за сутки:</b><td><?php echo $energy;?>кВтч </td></tr>
+<tr bgcolor="yellow"><td><b>MPPT</b><td><tr>
+<tr><td><b><?php loc('TIME');?>:</b><td><?php echo $row['time'];?> </td></tr>
+<tr><td><b><?php loc('MODE');?>:</b><td><?php echo $row['Mode'].$row['Sign'].", MPP:".$row['MPP'];?> </td></tr>
+<tr><td><b><?php loc('UPV');?>:</b><td><b><?php echo $row['Vc_PV'];?><?php loc('V');?> <b></td></tr>
+<tr><td><b><?php loc('IPV');?>:</b><td><b><?php echo $row['Ic_PV'];?><?php loc('A');?> </b></td></tr>
+<tr><td><b><?php loc('PPV');?>:</b><td><b><?php echo $row['P_PV'];?><?php loc('W');?><b></td></tr>
+<tr><td><b><?php loc('POUT');?>:</b><td><?php echo $row['P_Out'].$text['W'].",&nbsp&#951=".$n."%";?> </td></tr>
+<tr><td><b><?php loc('IACC');?>:</b><td><?php echo $row['I_Ch'];?><?php loc('A');?> </td></tr>
+<tr><td><b><?php loc('TINT');?>:</b><td><?php echo $row['Temp_Int'];?>&degС </td></tr>
+<tr><td><b><?php loc('E24');?>:</b><td><?php echo $energy;?><?php loc('kWh');?> </td></tr>
 
 </table>
 
@@ -132,7 +130,7 @@ box-shadow:
     
 }   
 
-if (!file_exists("/var/map/.mppt") && !file_exists("/var/map/.map")) echo "Запустите необходимые сервисы";
+if (!file_exists("/var/map/.mppt") && !file_exists("/var/map/.map")) loc('START_SERVICES');
 
 ?>
 
