@@ -5,8 +5,9 @@
    <meta charset="UTF-8">
    <script src="./js/jquery-2.1.3.min.js"></script>
    <script src="./js/jquery-migrate-1.2.1.min.js"></script>
+   <?php include('./local/local_ru.inc'); ?>
       
-    <title>Данные по истории</title>
+    <title><?php loc('history_page'); ?></title>
     <style>    
     hr {
 	border: none;
@@ -26,7 +27,7 @@
 
 ?>
 <div style="background-color:#F0F0F0">
-<hr><p><center><b>Построение графиков и таблиц по сохраненным данным</b></center></p><hr>
+<hr><p><center><b><?php loc('history_header'); ?></b></center></p><hr>
 </div>
 <form method="post" action="history_hdl.php">
 <table border="1" color="black" width="100%">
@@ -34,10 +35,10 @@
 <td>
 <center>
 <b>
-<p>Дата начала: <input type="date" value=<?php echo $yesterday; ?> name="date_start" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-Дата окончания: <input type="date" value=<?php echo $today; ?> name="date_end"  pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
-Время начала: <input type="time" value=<?php echo $time; ?> name="time_start" pattern="[0-9]{2}:[0-9]{2}">
-Время окончания: <input type="time" value=<?php echo $time; ?> name="time_end" pattern="[0-9]{2}:[0-9]{2}"></p>
+<p><?php loc('start_date'); ?>: <input type="date" value=<?php echo $yesterday; ?> name="date_start" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+<?php loc('end_date'); ?>: <input type="date" value=<?php echo $today; ?> name="date_end"  pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+<?php loc('start_time'); ?>: <input type="time" value=<?php echo $time; ?> name="time_start" pattern="[0-9]{2}:[0-9]{2}">
+<?php loc('end_time'); ?>: <input type="time" value=<?php echo $time; ?> name="time_end" pattern="[0-9]{2}:[0-9]{2}"></p>
 </b>
 </center>
 </td>
@@ -45,10 +46,10 @@
 <tr>
 <td>
 <b>
-	<p>Размер графика, pix</p>
+	<p><?php loc('Graph_size'); ?>, pix</p>
 <b>
-<p>Размер по горизонтали: <input type="number" value="1200" name="width">
-  Размер по вертикали: <input type="number" value="800" name="height"></p>
+<p><?php loc('h_size'); ?>: <input type="number" value="1200" name="width">
+  <?php loc('v_size'); ?>: <input type="number" value="800" name="height"></p>
 
 </td>
 </tr>
@@ -56,16 +57,16 @@
 <tr>
 <td>	
 <b>
-	    <p>Строим график по параметру МАП:</p>
+	    <p><?php loc('mac_graphs'); ?>:</p>
 </b>	    
-<p><input type="radio" name="field" value="_Uacc" /> Напряжение АКБ, В  
-<input type="radio" name="field" value="_IAcc_med_A_u16" /> Ток АКБ, А  
-<input type="radio" name="field" value="_PLoad" />Мощность по АКБ, Вт 
-<input type="radio" name="field" value="_UNET"/> Напряжение сети, В  
-<input type="radio" name="field" value="_INET_16_4" />Ток сети, А  
-<input type="radio" name="field" value="_PNET" checked/>Мощность по сети, Вт  
-<input type="radio" name="field" value="_UOUTmed" />Напряжение МАП, В  
-<input type="radio" name="field" value="_Temp_Grad0" />Температура АКБ, C  
+<p><input type="radio" name="field" value="_Uacc" /> <?php loc('UACC'); ?>, <?php loc('V'); ?>  
+<input type="radio" name="field" value="_IAcc_med_A_u16" /> <?php loc('IACC'); ?>, <?php loc('A'); ?>  
+<input type="radio" name="field" value="_PLoad" /><?php loc('PACC'); ?>, <?php loc('W'); ?> 
+<input type="radio" name="field" value="_UNET"/> <?php loc('UNET'); ?>, <?php loc('V'); ?>  
+<input type="radio" name="field" value="_INET_16_4" /><?php loc('INET'); ?>, <?php loc('A'); ?> 
+<input type="radio" name="field" value="_PNET" checked/><?php loc('PNET'); ?>, <?php loc('W'); ?>  
+<input type="radio" name="field" value="_UOUTmed" /><?php loc('UMAC'); ?>, <?php loc('V'); ?>  
+<input type="radio" name="field" value="_Temp_Grad0" /><?php loc('TACC'); ?>, &degC  
 </p>
 </td>
 </tr>	
@@ -73,18 +74,18 @@
 <tr>
 <td>	
 	
-<b>	    <p>Строим график по параметру MPPT контроллера:</p></b>
-<p><input type="radio" name="field" value="Vc_PV" />Напряжение панелей, В   
-<input type="radio" name="field" value="Ic_PV" />Ток панелей, А  
-<input type="radio" name="field" value="V_Bat" />Напряжение АКБ, В  
-<input type="radio" name="field" value="P_PV" />Мощность панелей, Вт  
-<input type="radio" name="field" value="P_curr" />Мощность заряда, Вт
-<input type="radio" name="field" value="windspeed" />Частота оборотов ВГ, мин<sup>-1</sup>
+<b>	    <p><?php loc('mppt_graphs'); ?>:</p></b>
+<p><input type="radio" name="field" value="Vc_PV" /><?php loc('UPV'); ?>, <?php loc('V'); ?>   
+<input type="radio" name="field" value="Ic_PV" /><?php loc('IPV'); ?>, <?php loc('A'); ?>  
+<input type="radio" name="field" value="V_Bat" /><?php loc('UACC'); ?>, <?php loc('V'); ?>  
+<input type="radio" name="field" value="P_PV" /><?php loc('PPV'); ?>, <?php loc('W'); ?>  
+<input type="radio" name="field" value="P_curr" /><?php loc('PCHG'); ?>, <?php loc('W'); ?>
+<input type="radio" name="field" value="windspeed" /><?php loc('wind_rpm'); ?>, <?php loc('min'); ?><sup>-1</sup>
 
 </p>
 <p>
 
-<input type="radio" name="field" value="Energy" />Статистика выработки по дням, кВт*ч (время не учитывается)</p>
+<input type="radio" name="field" value="Energy" /><?php loc('kwh_stat'); ?></p>
 </p>
 
 </td>
@@ -93,8 +94,8 @@
 <tr>
 <td>
 
-<input type="radio" name="field" value="map_errors" /><b>Ошибки МАП
-<input type="radio" name="field" value="mppt_errors" />Ошибки MPPT</b>
+<input type="radio" name="field" value="map_errors" /><b><?php loc('mac_errors'); ?>
+<input type="radio" name="field" value="mppt_errors" /><?php loc('mppt_errors'); ?></b>
 <br>
 
 
@@ -105,8 +106,8 @@
 <tr>
 <td>
 <center>
-<input type="submit" style="background-color:lightgreen" value="Поехали!" />
-<input type="submit" style="background-color:lightgreen" name="multichart" value="Мультиграф" />  
+<input type="submit" style="background-color:lightgreen" value="<?php loc('go!_button'); ?>" />
+<input type="submit" style="background-color:lightgreen" name="multichart" value="<?php loc('multichart_button'); ?>" />  
 </center>
 </td>			    
 </tr>
@@ -114,17 +115,17 @@
 
 </form>
 <br><i>
-* Построение графиков занимает много времени и оперирует большими объемами данных. Не рекомендуется задавать большие интервалы времени, особенно на маломощных платформах (Raspberry Pi и т.п.)
+*<?php loc('note1'); ?>
 <br><br>
-* Для повторного просмотра "мультиграф" учитывается только время/дата начала проигрывания данных
+*<?php loc('note2'); ?>
 <br><br>
 </i>
 
 <div>
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" СИСТЕМА " ONCLICK="SystemButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ТЕКСТ " ONCLICK="TextButton()"> 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" ПРИБОРЫ " ONCLICK="GaugesButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('MENU'); ?> " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('SYSTEM'); ?> " ONCLICK="SystemButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('TEXT'); ?> " ONCLICK="TextButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('GAUGES'); ?> " ONCLICK="GaugesButton()"> 
 
 <script>
 
@@ -192,11 +193,11 @@ function Reset_Counter(sw) {
     if (file_exists('/var/map/.bmon')) {
 ?>
 <div style="background-color:#F0F0F0">
-<hr><p><center><b>Данные статистики по АКБ</b></center>
+<hr><p><center><b><?php loc('header_history_2'); ?></b></center>
 <div align="right">
-    <input TYPE='button' style='font-weight:bolder; background-color:orange;' VALUE=' Сбросить счетчик пользователя ' ONCLICK='Reset_Counter(1)'> 
+    <input TYPE='button' style='font-weight:bolder; background-color:orange;' VALUE=' <?php loc('reset_button1'); ?> ' ONCLICK='Reset_Counter(1)'> 
 &nbsp&nbsp
-    <input TYPE='button' style='font-weight:bolder; background-color:orange;' VALUE=' Обнулить все поля ' ONCLICK='Reset_Counter(2)'> 
+    <input TYPE='button' style='font-weight:bolder; background-color:orange;' VALUE=' <?php loc('reset_button2'); ?> ' ONCLICK='Reset_Counter(2)'> 
 </div>
 </p><hr>
 </div>
@@ -209,12 +210,12 @@ function Reset_Counter(sw) {
 	<b>
 	<table border=1>
 	    <tr>
-	    <td width='5%'>Самый глубокий разряд %DOD</td>
-	    <td width='5%'>Минимальное напряжение, В</td><td width='5%'>Максимальное напряжение, В</td>
-	    <td width='5%'>Дата последнего заряда</td><td width='5%'>Кол-во автосинхронизаций</td>
-	    <td width='5%'>Суммарно от АКБ, кВтч</td><td width='5%'>Суммарно на АКБ, кВтч</td>
-	    <td width='5%'>Альт. за день, кВтч</td><td width='5%'>Альт. за месяц, кВтч</td>
-	    <td width='5%'>Альт. всего, кВтч</td><td width='5%'>Альт. пользователь, кВтч</td>
+	    <td width='5%'>".$text['deepest_discharge']."</td>
+	    <td width='5%'>".$text['umin']."</td><td width='5%'>".$text['umax']."</td>
+	    <td width='5%'>".$text['latest_chg']."</td><td width='5%'>".$text['autosync_number']."</td>
+	    <td width='5%'>".$text['summ_from_acc']."</td><td width='5%'>".$text['summ_to_acc']."</td>
+	    <td width='5%'>".$text['alt_day']."</td><td width='5%'>".$text['alt_month']."</td>
+	    <td width='5%'>".$text['alt_total']."</td><td width='5%'>".$text['alt_user']."</td>
 	    </tr>
 	    <tr>
 	    <td>".$row['deepest_discharge']."</td>
@@ -232,10 +233,10 @@ function Reset_Counter(sw) {
 
 	    </tr>
 	</table>
-* После обнуления новые данные появляются по истечении цикла интегрирования (по умолчанию 1 мин)
+*".$text['note3']."
 	</b>
     <br>
-    <input TYPE='button' style='font-weight:bolder; background-color:darkkhaki;' VALUE=' МЕНЮ ' ONCLICK='HomeButton()'> 
+    <input TYPE='button' style='font-weight:bolder; background-color:darkkhaki;' VALUE=' ".$text['MENU']." ' ONCLICK='HomeButton()'> 
     ";
     mysql_free_result($result);
     mysql_close($db_bat);
