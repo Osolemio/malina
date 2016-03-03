@@ -7,6 +7,8 @@
   <!--[if lt IE 9]><script src="/js/excanvas.js"></script><![endif]-->
   <script src="./js/jquery-2.1.3.min.js"></script>
   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
+<?php include('./local/local_ru.inc');?>
+
   <script src="./bms.js"></script>
  
   <title>MAP Monitor. BMS</title>
@@ -32,22 +34,22 @@
   <div id="bms14"><div class="bms_in"><div class="col2 row2 scale"><div id=scale14 class="scale_display"></div></div><div class="col1 row1 display"><div id=display14>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp14</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg14" class="led_green"></div><div id="ledr14" class="led_red"></div></div></div>
   <div id="bms15"><div class="bms_in"><div class="col2 row2 scale"><div id=scale15 class="scale_display"></div></div><div class="col1 row1 display"><div id=display15>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp15</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg15" class="led_green"></div><div id="ledr15" class="led_red"></div></div></div>
   <div id="bms16"><div class="bms_in"><div class="col2 row2 scale"><div id=scale16 class="scale_display"></div></div><div class="col1 row1 display"><div id=display16>&nbspНЕТ ДАННЫХ</div></div><b>&nbspBMS&nbsp16</b><div class="logo"><img src="img/bms_logo.png" width="80" height="50"></div><div id="ledg16" class="led_green"></div><div id="ledr16" class="led_red"></div></div></div>
-  <div id="vmp">Напряжение средней точки U<sub>mp</sub>: 0В или 0%</div>
+  <div id="vmp"><?php loc('vmp');?><sub>mp</sub>: 0В <?php loc('or');?> 0%</div>
 
 <div class="menu">
   <input type="checkbox" id="menu-collapsed" name="menu-collapsed" checked/>
   <div class="menu-content">
     <ul>
-      <li><a href="menu.php">МЕНЮ</a></li>
-      <li><a href="index.php">ТЕКСТ</a></li>
-      <li><a href="gauges.php">ПРИБОРЫ</a></li>
-      <li><a href="history.php">ИСТОРИЯ</a></li>
-      <li><a href="multi_select.php">МУЛЬТИГРАФ</a></li>
-      <li><a href="graph.php">МОЩНОСТИ</a></li>
-      <li><a href="settings.php">ИНФО</a></li>
-      <li><a href="./setup/index.php">СИСТЕМА</a></li>
-      <li><a href="./setup/settings.php">СИСТЕМА-МАП</a></li>
-      <li><a href="./setup/sys.php">СИСТЕМА-СЕРВИСЫ</a></li>
+      <li><a href="menu.php"><?php loc('MENU');?></a></li>
+      <li><a href="index.php"><?php loc('TEXT');?></a></li>
+      <li><a href="gauges.php"><?php loc('GAUGES');?></a></li>
+      <li><a href="history.php"><?php loc('HISTORY');?></a></li>
+      <li><a href="multi_select.php"><?php loc('MULTICHART');?></a></li>
+      <li><a href="graph.php"><?php loc('POWERS');?></a></li>
+      <li><a href="settings.php"><?php loc('INFO');?></a></li>
+      <li><a href="./setup/index.php"><?php loc('SYSTEM');?></a></li>
+      <li><a href="./setup/settings.php"><?php loc('SYSTEM');?>-<?php loc('MAC');?></a></li>
+      <li><a href="./setup/sys.php"><?php loc('SYSTEM');?>-<?php loc('SERVICES');?></a></li>
     
     </ul>
   </div>
