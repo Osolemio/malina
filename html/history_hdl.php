@@ -2,7 +2,9 @@
     <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  <title>Diagram</title>
+<?php include('./local/local_ru.inc');?>
+
+  <title><?php loc('diagrams_title');?></title>
     </head>
 <body>
 <?php
@@ -15,24 +17,7 @@ session_start();
     $field=$_POST["field"];
     $field_width=$_POST["width"];
     $field_height=$_POST["height"];
-    $legend=array(
-    '_Uacc'=>'Battery voltage, V',
-    '_Iacc'=>'Battery current, A',
-    '_PLoad'=>'MAP load, W',
-    '_UNET'=>'Network voltage, V',
-    '_PNET'=>'Power from network, W',
-    '_UOUTmed'=>'MAP Voltage,V',
-    '_Temp_Grad0'=>'Battery Temperature',
-    '_INET_16_4'=>'Current, A',
-    '_IAcc_med_A_u16'=>'Battery current, A',
-    'Vc_PV'=>'PV voltage, V',
-    'Ic_PV'=>'PV current, A',
-    'V_Bat'=>'Battery voltage, V',
-    'P_PV'=>'PV power, W',
-    'P_curr'=>'MPPT power to battery',
-    'windspeed'=>'Rotation frequency, min-1'
 
-    );    
    include ("./bd.php");
     $map_table="data";
     $mppt_table="mppt";
@@ -44,7 +29,7 @@ session_start();
     $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
-    $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала для МАП"; 
+    $number_low=$row[0]; if ($number_low==NULL) {loc('history_error1'); 
     mysql_close($db);exit();}
     $_SESSION['number_start']=$number_low;
     mysql_free_result($result);    
@@ -54,7 +39,7 @@ session_start();
     $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
-    $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала для MPPT"; 
+    $number_low=$row[0]; if ($number_low==NULL) {loc('history_error1'); 
     mysql_close($db);exit();}
     $_SESSION['number_start_mppt']=$number_low;
 
@@ -80,11 +65,11 @@ session_start();
     $query = "SELECT MIN(number) FROM `data` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
     $row=mysql_fetch_row($result);
-    $number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
+    $number_low=$row[0]; if ($number_low==NULL) {loc('history_error1'); exit();}
     $query = "SELECT MAX(number) FROM `data` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
     $result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
     $row=mysql_fetch_row($result);
-    $number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
+    $number_high=$row[0];if ($number_high==NULL) {loc('history_error2');; exit();}
 
     $query = "SELECT date,time,".$field." FROM `data` WHERE number BETWEEN ".$number_low." AND ".$number_high."\n";
     
@@ -107,11 +92,11 @@ session_start();
     $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
     $result=mysql_query($query) or die("Query failed:".mysql_error());
     $row=mysql_fetch_row($result);
-    $number_low=$row[0];if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
+    $number_low=$row[0];if ($number_low==NULL) {loc('history_error1');; exit();}
     $query = "SELECT MAX(number) FROM `mppt` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
     $result=mysql_query($query) or die("Query failed:".mysql_error());
     $row=mysql_fetch_row($result);
-    $number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
+    $number_high=$row[0];if ($number_high==NULL) {loc('history_error2');; exit();}
 
     $query = "SELECT date,time,".$field." FROM `mppt` WHERE number BETWEEN ".$number_low." AND ".$number_high."\n";
     
@@ -129,11 +114,11 @@ session_start();
 	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' AND time >= '".$time_start."'LIMIT 1 \n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
+	$number_low=$row[0]; if ($number_low==NULL) {loc('history_error1');; exit();}
 	$query = "SELECT MAX(number) FROM `map_errors` WHERE date='".$date_end."' AND time <= '".$time_end."' LIMIT 1 \n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
+	$number_high=$row[0];if ($number_high==NULL) {loc('history_error2'); exit();}
 	$_SESSION['number_low']=$number_low;
 	$_SESSION['number_high']=$number_high;
 	$_SESSION['table']='map_errors';
@@ -147,11 +132,11 @@ session_start();
 	$query = "SELECT MIN(number) FROM `mppt_errors` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_low=$row[0]; if ($number_low==NULL) {echo "Нет соответствия по дате/времени начала"; exit();}
+	$number_low=$row[0]; if ($number_low==NULL) {loc('history_error1'); exit();}
 	$query = "SELECT MAX(number) FROM `mppt_errors` WHERE date='".$date_end."' AND time <= '".$time_end."' \n";
 	$result=mysql_query($query) or die("Query failed date/time end:".mysql_error());
 	$row=mysql_fetch_row($result);
-	$number_high=$row[0];if ($number_high==NULL) {echo "Нет соответствия по дате/времени окончания"; exit();}
+	$number_high=$row[0];if ($number_high==NULL) {loc('history_error2');exit();}
 	$_SESSION['number_low']=$number_low;
 	$_SESSION['number_high']=$number_high;
 	$_SESSION['table']='mppt_errors';
@@ -190,7 +175,7 @@ session_start();
 	        $row=mysql_fetch_row($result);
         	    $datay[$i]=$row[0];
 		    $e+=$datay[$i++];
-		    $_SESSION['Legend']=".Summary ".$e." kWh";
+		    $_SESSION['Legend']=". ".$text['summary'].$e." ".$text['kWh'];
 		}	
 	    }
 	break; 	

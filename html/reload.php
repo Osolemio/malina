@@ -1,5 +1,3 @@
-<?php include('./local/local_ru.inc');
-?>
 <style>
 
 a.button28 {

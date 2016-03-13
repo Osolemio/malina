@@ -11,7 +11,7 @@
 
   <script src="./bms.js"></script>
  
-  <title>MAP Monitor. BMS</title>
+  <title><?php loc('bms_title');?></title>
 
     
 </head>

@@ -15,7 +15,7 @@
   <script src="./js/jqueryrotate.2.1.js"></script>
   <script src="./meters.js"></script>
  
-  <title>MAP Monitor. Gauges</title>
+  <title><?php loc('gauges_title'); ?></title>
 
     
 </head>

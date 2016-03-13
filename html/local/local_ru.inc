@@ -111,7 +111,24 @@
 
 	);
 
-	   $legend=array('map_errors'=>'МАП', 'mppt_errors'=>'MPPT');
+	   $legend=array('map_errors'=>'МАП', 'mppt_errors'=>'MPPT',
+    '_Uacc'=>'Battery voltage, V',
+    '_Iacc'=>'Battery current, A',
+    '_PLoad'=>'MAP load, W',
+    '_UNET'=>'Network voltage, V',
+    '_PNET'=>'Power from network, W',
+    '_UOUTmed'=>'MAP Voltage,V',
+    '_Temp_Grad0'=>'Battery Temperature',
+    '_INET_16_4'=>'Current, A',
+    '_IAcc_med_A_u16'=>'Battery current, A',
+    'Vc_PV'=>'PV voltage, V',
+    'Ic_PV'=>'PV current, A',
+    'V_Bat'=>'Battery voltage, V',
+    'P_PV'=>'PV power, W',
+    'P_curr'=>'MPPT power to battery',
+    'windspeed'=>'Rotation frequency, min-1'
+
+    );    
 
 
 $text=array(
@@ -143,6 +160,7 @@ $text=array(
  'SELECT_ALL'=>'ВЫБРАТЬ ВСЕ',
  'DESELECT_ALL'=>'СНЯТЬ ВЫДЕЛЕНИЕ',
  'TIME'=>'Время',
+ 'DATE'=>'Дата',
  'MODE'=>'Режим',
  'UNET'=>'Напряжение с подстанции',
  'INET'=>'Ток по входу',
@@ -505,9 +523,24 @@ $text=array(
  'map_error4'=>' Ошибка (неисправность) после перегрузки.',
  'map_error5'=>' Ошибка после перегрузки',
  'map_error6'=>' Ошибка напряжения по диапазону. Нестабильность сети',
- 'map_error7'=>' Ошибка I2C'
- 
-
+ 'map_error7'=>' Ошибка I2C',
+ 'bms_title'=>'BMS',
+ 'errors_title'=>'История ошибок и предупреждений МАП и MPPT',
+ 'errors_hdr'=>'История ошибок',
+ 'err_ab_overload'=>'Состояние по перегрузке АКБ',
+ 'err_net_overload'=>'Состояние по перегрузке по сети 220',
+ 'err_fout'=>'Частота вне диапазона, Гц',
+ 'err_uout'=>'Напряжение вне диапазона, В',
+ 'gauges_title'=>'Приборы',
+ 'diagrams_title'=>'Диаграммы',
+ 'history_error1'=>'Нет соответствия по дате/времени начала',
+ 'history_error2'=>'Нет соответствия по дате/времени окончания',
+ 'summary'=>'Суммарно',
+ 'txt_title'=>'Монитор. Текст.',
+ 'multichart_hst_title'=>'Мультиграф. История',
+ 'update_title'=>'Обновление программ и компонентов',
+ 'update_text1'=>'Выберите файл для загрузки',
+ 'update_load'=>'Загрузить',
 );
 
 

@@ -11,7 +11,7 @@
   <script src="./js/jschart-2.2.1.min.js"></script>
   <script src="jschart2.js"></script>
   
-  <title>MAP Monitor. Diagrams</title>
+  <title>M<?php loc('diagrams_title');?></title>
 
     
 </head>

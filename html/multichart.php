@@ -9,7 +9,7 @@
 <?php include('./local/local_ru.inc');?>
   <script src="./multichart.js"></script>
 
-  <title>MAP Monitor. Diagrams</title>
+  <title><?php loc('diagrams_title');?></title>
     
     
 </head>
