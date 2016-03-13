@@ -175,7 +175,7 @@ session_start();
 	        $row=mysql_fetch_row($result);
         	    $datay[$i]=$row[0];
 		    $e+=$datay[$i++];
-		    $_SESSION['Legend']=". ".$text['summary'].$e." ".$text['kWh'];
+		    $_SESSION['Legend']=". ".$text['summary'].":".$e." ".$text['kWh'];
 		}	
 	    }
 	break; 	
