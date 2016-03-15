@@ -3,8 +3,8 @@
   <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  
-  <title>Работа с БД mysql</title>
+  <?php include('../local/local.inc');?>
+  <title><?php loc('db_title');?></title>
     
 </head>
 
@@ -18,14 +18,14 @@ $dev_block=explode("\n",rtrim($out));
 ?>
 <form action="data.php" method="post">
 <table border="2">
-<tr bgcolor="lightskyblue"><td><b><center>Cменные накопители, доступные для выбора, и информация о разделах:</center></b><br></td></tr>
+<tr bgcolor="lightskyblue"><td><b><center><?php loc('db_field1');?>:</center></b><br></td></tr>
 <?php
 
 $color='ivory';
 foreach ($dev_block as $value)
     {
     $color=($color=='ivory')?$color='blanchedalmond':$color='ivory';
-    echo "<tr bgcolor=$color><td>Устройство (диск, флеш-карта и т.п) <b>".$value."</b>"; ; if ($value=="/dev/sda") echo "&nbsp<b>-системный.<b>";
+    echo "<tr bgcolor=$color><td>".$text['db_field2']." <b>".$value."</b>"; ; if ($value=="/dev/sda") echo "&nbsp<b>-".$text['db_field3'].".<b>";
     echo "</td></tr>";
     if ($value!="") $out=shell_exec("sudo fdisk -l ".$value); else $out="USB media not found";
     echo "<tr bgcolor=$color><td>".str_replace("\n","<br>",$out)."<br><br></td></tr>";
@@ -34,18 +34,18 @@ foreach ($dev_block as $value)
 ?>
 </table>
 <br>
-<input type="submit" name="remove" value="Безопасно извлечь все съеные накопители">&nbspКроме системного диска.
+<input type="submit" name="remove" value="<?php loc('db_button1');?>">&nbsp<?php loc('db_field4');?>.
 <br>
-<br><b><i>В процессе нижеуказанных действий база данных будет заблокирована и недоступна, либо остановлена на время сохранения/восстановления.</b></i></u><br> <br>
+<br><b><i><?php loc('db_field5');?></b></i></u><br> <br>
 
 
-<br><b><i>*Если вы не понимаете, что и для чего вы делаете, лучше ничего не предпринимать!</b></i></u><br> <br>
+<br><b><i><?php loc('db_field6');?></b></i></u><br> <br>
 <hr>
-<center><i>Резервное копирование (занимает много времени)</i></center>
+<center><i><?php loc('db_header1');?></i></center>
 <hr>
 
 
-<br><br>Выберите устройство и раздел для резервного сохранения БД:<br>
+<br><br><?php loc('db_field7');?>:<br>
 
 
 <?php
@@ -65,11 +65,11 @@ echo "</select>"
 <br>
 <br>
 <p>
-Имя файла для сохраниения:<input type="text" value="map_backup.sql" name="filename">
-</p></p><p><input type='submit' name="backup" value='Сохранить'></p></form>
+<?php loc('db_field8');?>:<input type="text" value="map_backup.sql" name="filename">
+</p></p><p><input type='submit' name="backup" value='<?php loc('save');?>'></p></form>
 
 <hr>
-<center><i>Восстановление базы данных из резервной копии (занимает много времени)</i></center>
+<center><i><?php loc('db_field12');?></i></center>
 <hr>
 
 
@@ -77,7 +77,7 @@ echo "</select>"
 
     <form name="myform" action="data.php" method="POST">
 
-    <br>Восстановление из файла. Выберите файл и нажмите "Восстановить". Система ищет в корневом каталоге сменных носителей файл с расширением sql (*.sql)<br><br><br>
+    <br><?php loc('db_field13');?><br><br><br>
 
 <?php
 $out=glob("/mnt/*/*.sql");
@@ -91,19 +91,19 @@ for($i=0; $i<$c; $i++)
 ?>
 </select>
 <br></b>
-<input type="submit" name="recovery" value="Восстановить">
+<input type="submit" name="recovery" value="<?php loc('db_button4');?>">
 </form>
 
 <form name="form2" action="data.php" method="POST">
 <hr>
-<center><i>Очистка текущей базы данных. Будет выполнена очистка всех таблиц ПО мониторинга, за исключением настроек. Структура БД сохраняется.<i></center>
+<center><i><?php loc('db_field14');?><i></center>
 <hr>
 <br>
 <p>
-</p></p><p><input type='submit' name="clean" value='Очистить все основные таблицы данных МАП и контроллера (TRUNCATE)'></p>
-</p></p><p><input type='submit' name="clean_err" value='Очистить все таблицы ошибок МАП и контроллера (TRUNCATE)'></p>
+</p></p><p><input type='submit' name="clean" value='<?php loc('db_button2');?>'></p>
+</p></p><p><input type='submit' name="clean_err" value='<?php loc('db_button3');?>'></p>
 </form>
-Текущий размер таблиц:<br>
+<?php loc('db_field9');?>:<br>
 
 <?php
 $out=shell_exec("sudo mysql -u root -pmicroart -e 'SELECT table_schema `database_name`, sum( data_length + index_length )/1024/1024 `Data Base Size in MB` FROM information_schema.TABLES GROUP BY table_schema;'");
@@ -113,13 +113,13 @@ echo str_replace("\n","<br>",$out);
 <hr><hr>
 
 
-<br><br> <b>Статус сервера БД:</b>
+<br><br> <b><?php loc('db_field10');?>:</b>
 <?php
 $out=shell_exec('sudo mysqladmin -pmicroart variables | grep datadir | cut -d "|" -f 3');
 
 ?>
 
-<br><br>Текущее расположение БД:<b><?php echo $out;?></b><br>
+<br><br><?php loc('db_field11');?>:<b><?php echo $out;?></b><br>
 <?php 
 $out=shell_exec("sudo service mysql status");
 echo str_replace("\n","<br>",$out);
@@ -128,7 +128,7 @@ echo str_replace("\n","<br>",$out);
 
 <br><br>
 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('MENU');?> " ONCLICK="HomeButton()"> 
 <script>
 function HomeButton()
 {

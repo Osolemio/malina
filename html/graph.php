@@ -4,7 +4,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="jschart1.css">
-    <?php include('./local/local_ru.inc');?>
+    <?php include('./local/local.inc');?>
 
   <script src="js/jquery-1.11.2.min.js"></script>
   <script src="js/jquery-migrate-1.2.1.min.js"></script>

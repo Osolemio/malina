@@ -2,7 +2,7 @@
 <html>
   <head>
   <meta charset="UTF-8">
-<?php include('./local/local_ru.inc');?>
+<?php include('./local/local.inc');?>
   <title><?php loc('graph_chose');?></title>
     
     

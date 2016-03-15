@@ -3,8 +3,8 @@
   <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  
-  <title>Результат выполнения</title>
+  <?php include('../local/local.inc');?>  
+  <title><?php loc('result');?></title>
   <script src="../js/jquery-2.1.3.min.js"></script>
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
 
@@ -29,7 +29,7 @@ if (isset($_POST['clean']))
     unlink('/var/map/.lock_mysql'); 
     mysql_close($db);
     
-    echo "Таблицы ПО мониторинга успешно очищены";
+    loc('tables_cleaned');
    }
 
 if (isset($_POST['clean_err']))
@@ -41,35 +41,35 @@ if (isset($_POST['clean_err']))
     unlink('/var/map/.lock_mysql'); 
     mysql_close($db);
     
-    echo "Таблицы ПО мониторинга успешно очищены";
+    loc('tables_cleaned');
    }
 
 
 if (isset($_POST['group1']))
     {
-    echo "Команда импорта в БД отправлена. Будет импортирован файл: ".$_POST['group1']."<br><br>";
+    echo $text['command_import_sent'].$_POST['group1']."<br><br>";
     exec("sudo /usr/sbin/db_restore.sh ".$_POST['group1']." > /dev/null &");    
     }
 
 if (isset($_POST['backup']))
     {
-    echo "Команда экспорта из БД отправлена. Будет создан файл:".$_POST['device']."/".$_POST['filename']."<br><br>";
+    echo $text['command_export_sent'].$_POST['device']."/".$_POST['filename']."<br><br>";
     exec("sudo /usr/sbin/db_dump.sh ".$_POST['device']."/".$_POST['filename']." > /dev/null &");    
     }
 
 if (isset($_POST['remove']))
     {
     $out=shell_exec("sudo udevadm trigger --action=remove");
-    echo "Сменные носители были безопасно отключены. Их можно извлечь<br>".$out;
+    echo $text['media_disconnected'].$out;
     }
 
 ?>
 <br><br>
-Выполняем:
+<?php loc('executing');?>:
 <div id=progress>*------</div>
 <br><br>
-<a href="index.php"><-в меню</a>
+<a href="index.php"><- <?php loc('MENU');?></a>
 <br><br>
-<a href="disk.php"><-назад</a>
+<a href="disk.php"><-<?php loc('backward');?></a>
 </body>
 </html>

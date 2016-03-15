@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <script src="./js/jquery-2.1.3.min.js"></script>
    <script src="./js/jquery-migrate-1.2.1.min.js"></script>
-   <?php include('./local/local_ru.inc'); ?>
+   <?php include('./local/local.inc'); ?>
       
     <title><?php loc('history_page'); ?></title>
     <style>    

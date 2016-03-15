@@ -1,6 +1,7 @@
 <?php
 
 include("./bdb.php");
+include('../local/local.inc');
 
  $today=date("Y-m-d");
  $time=date("H:i");
@@ -88,9 +89,9 @@ if ($_POST['battery_type']=='USER')
 
 mysql_close($db);
 
-echo "Данные успешно записаны <br>";
+loc('saved_succes');
 header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-echo "Через 2 секунды вы будете возвращены обратно";
+loc('2sec_return);
 exit;
 
 ?>

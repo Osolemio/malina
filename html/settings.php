@@ -7,7 +7,7 @@
 
 
    include ("./request_settings.php");
-   include ("./local/local_ru.inc");
+   include ("./local/local.inc");
 ?>
   
   <title><?php loc('info_page');?></title>

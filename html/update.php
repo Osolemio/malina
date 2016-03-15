@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <meta charset="utf-8">
- <?php include('./local/local_ru.inc');?>
+ <?php include('./local/local.inc');?>
 <head>
  <title><?php loc('update_title');?></title>
  </head>
