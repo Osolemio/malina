@@ -3,7 +3,8 @@
   <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  <title>НАСТРОЙКИ</title>
+  <?php include('../local/local.inc');?>
+  <title><?php loc('SETTINGS');?></title>
     
 </head>
 
@@ -236,23 +237,23 @@ div.div_t {
 </style>
 
 <div class="wrapper">
-<a href="../menu.php" class="menu1"><div class="div_t"> ГЛАВНОЕ </div></a>
+<a href="../menu.php" class="menu1"><div class="div_t"> <?php loc('MAIN');?> </div></a>
 <br>
-<a href=<?php if (file_exists("/var/map/.map")) echo "settings.php"; else echo "#";?> class="menu2"><div class="div_t"> МАП </div></a>
+<a href=<?php if (file_exists("/var/map/.map")) echo "settings.php"; else echo "#";?> class="menu2"><div class="div_t"> <?php loc('MAC');?>  </div></a>
 <br>
-<a href="sys.php" class="menu3"><div class="div_t">СЕРВИСЫ</div></a>
+<a href="sys.php" class="menu3"><div class="div_t"><?php loc('SERVICES');?></div></a>
 <br>
-<a href="modem.php" class="menu4"><div class="div_t">МОДЕМ</div></a>
+<a href="modem.php" class="menu4"><div class="div_t"><?php loc('MODEM');?></div></a>
 <br>
-<a href="sms.php" class="menu5"><div class="div_t">СМС</div></a>
+<a href="sms.php" class="menu5"><div class="div_t"><?php loc('SMS');?></div></a>
 <br>
-<a href="psys.php" class="menu6"><div class="div_t">ПАРОЛЬ</div></a>
+<a href="psys.php" class="menu6"><div class="div_t"><?php loc('PASSWORD');?></div></a>
 <br>
 <a href="syslog.php" class="menu7"><div class="div_t">#syslog</div></a>
 <br>
-<a href="disk.php" class="menu8"><div class="div_t">Работа с БД</div></a>
+<a href="disk.php" class="menu8"><div class="div_t"><?php loc('WORK_DB');?></div></a>
 <br>
-<a href="battery.php" class="menu9"><div class="div_t">БАТАРЕЯ</div></a>
+<a href="battery.php" class="menu9"><div class="div_t"><?php loc('BATTERY');?></div></a>
 <br>
 </div>
 
