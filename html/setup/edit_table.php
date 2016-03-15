@@ -3,8 +3,8 @@
     <head>
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta charset="UTF-8">
-      
-    <title>Редактирование таблицы напряжений разомкнутой цепи</title>
+   <?php include('../local/local.inc');?>      
+    <title><?php loc('oc_title');?></title>
 
     <link rel="stylesheet" type="text/css" href="./edit_table.css">
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="../js/excanvas.min.js"></script><![endif]-->
@@ -46,12 +46,12 @@
 ?>
 
 <hr><p>
-<a href="./index.php"><b>МЕНЮ</b></a>
-<center><b>Настройки таблицы аккумуляторных батарей. Напряжение указывается поблочно/поячеечно</b></center></p><hr>
+<a href="./index.php"><b><?php loc('MENU');?></b></a>
+<center><b><?php loc('oc_field1');?></b></center></p><hr>
 <form method="post" action="table_store.php">
 <table border="1" color="black" width="20%">
 <b>
-<tr bgcolor="blanchedalmond"><td width="50%">&nbsp% заряда (SOC)&nbsp</td><td width="50%">Напряжение разомкнутой цепи, В (НРЦ) (OCV)&nbsp</td></tr> 
+<tr bgcolor="blanchedalmond"><td width="50%">&nbsp<?php loc('oc_col1');?>&nbsp</td><td width="50%"><?php loc('oc_col2');?>&nbsp</td></tr> 
 
 <?php
 
@@ -68,8 +68,8 @@
 <td>&nbsp</td><td>&nbsp</td><tr>
 
 <center>
-<td bgcolor="blue"><input type="submit" name="write_work" value="Записать в рабочую" /></td>
-<td bgcolor="green"><input type="submit" name="write_user" value="В пользовательскую" /></td>
+<td bgcolor="blue"><input type="submit" name="write_work" value="<?php loc('oc_button1');?>" /></td>
+<td bgcolor="green"><input type="submit" name="write_user" value="<?php loc('oc_button2');?>" /></td>
 
 
 </center>
@@ -85,11 +85,11 @@ mysql_close($db);
 
 
 <br><br>
-<a href="./index.php"><b>МЕНЮ</b></a>
+<a href="./index.php"><b><?php loc('MENU');?></b></a>
 
 <div class="chart_wrapper">
 <div id="hoverdata"></div>
-<div id="button_chart"><input type="button" value="Обновить график" onclick="make_graph()"></div>
+<div id="button_chart"><input type="button" value="<?php loc('oc_button3');?>" onclick="make_graph()"></div>
 <div id="chart"></div></div>
 
 
