@@ -9,9 +9,9 @@
   <script src="./menu.json"></script>
   <script src="./submenu.json"></script>
   <script src="./settings.js"></script>
-
+  <?php include('../local/local.inc');?>
   
-  <title>Настройки МАП</title>
+  <title><?php loc('MAC_title');?></title>
     
 </head>
 
@@ -31,7 +31,7 @@
 
 ?>
 
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;cursor:pointer;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;cursor:pointer;" VALUE=" <?php loc('MENU');?> " ONCLICK="HomeButton()"> 
 
 <script>
 function HomeButton()
@@ -41,18 +41,18 @@ location.href="index.php";
 </script>
 
 
-<div id='menu_div'>НАСТРОЙКИ МАП
+<div id='menu_div'><?php loc('MAC_settings');?>
 <div id='menu_in'>
 <form action="store.php" method="post">
 
 <center>
  <select size=6 id="chapter" name="Menu" style="width:80%; font-weight:bolder; background:aqua;cursor:pointer;">
-    <option value=0>Генерация МАП</option>
-    <option value=1>Сеть/Генератор, BMS/MPPT</option>
-    <option value=2>Сеть/ЭнергЭконом</option>
-    <option value=3>Параметры АКБ при заряде</option>
-    <option value=4>Доп. реле (только DOMINATOR)</option>
-    <option value=5>Другие опции</option>
+    <option value=0><?php loc('MAC_menu_generation');?></option>
+    <option value=1><?php loc('MAC_menu_net1');?></option>
+    <option value=2><?php loc('MAC_menu_net2');?></option>
+    <option value=3><?php loc('MAC_menu_battery');?></option>
+    <option value=4><?php loc('MAC_menu_relay');?></option>
+    <option value=5><?php loc('MAC_menu_others');?></option>
     </select>
 </center>
  <br><br>    
@@ -70,11 +70,11 @@ location.href="index.php";
 
 
 <div id=field><b>
-Текущее значение:
+<?php loc('MAC_menu_cur_val');?>:
 <input type="number" name="field" id="input_field" value="">
 <span id="field_units"></span>
 <br><br>
-<input type="submit" value="Записать" style="padding:1px; font-weight:bolder; font-size:100%; background:green; color:ivory; cursor:pointer;">
+<input type="submit" value="<?php loc('MAC_menu_store');?>" style="padding:1px; font-weight:bolder; font-size:100%; background:green; color:ivory; cursor:pointer;">
 
 
 </div>
@@ -94,14 +94,14 @@ location.href="index.php";
 
 <form action="commands.php" method="post">
 
-<p><input type="submit" name="on" value="включить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:green; color:ivory; cursor:pointer; border:5px outset gray;" ></p>
-<p><input type="submit" name="off" value="выключить МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
-<p><input type="submit" name="reset" value="сброс МАП" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
-<p><input type="submit" name="charge_start" value="включить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;" ></p>
-<p><input type="submit" name="charge_stop" value="выключить заряд" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;"></p>
-<p><input type="submit" id="relay_1" name="relay_1" value=<?php if ($row['_Relay1']) echo "'Выключить реле 1'"; else echo "'Включить реле 1'";?> style="height: 50px; width: 60%; font-weight:bolder; font-size:100%; background:gray; color:ivory;cursor:pointer; border:5px outset gray;" disabled></p>
-<p><input type="submit" id="relay_2" name="relay_2" value=<?php if ($row['_Relay2']) echo "'Выключить реле 2'"; else echo "'Включить реле 2'";?> style="height: 50px; width: 60%; font-weight:bolder; font-size:100%; background:gray; color:ivory;cursor:pointer; border:5px outset gray;" disabled></p>
-<p><input type="checkbox" name="confirm" value="подтверждение команды" style="left:10px; bottom:10px; height: 15px; width:15px; color:black;font-weight:bolder;" unchecked>Отметьте перед отправкой команды</p>
+<p><input type="submit" name="on" value="<?php loc('switch_on');?>" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:green; color:ivory; cursor:pointer; border:5px outset gray;" ></p>
+<p><input type="submit" name="off" value="<?php loc('switch_off');?>" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
+<p><input type="submit" name="reset" value="<?php loc('mac_reset');?>" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:red; color:ivory;cursor:pointer; border:5px outset gray;"></p>
+<p><input type="submit" name="charge_start" value="<?php loc('charge_on');?>" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;" ></p>
+<p><input type="submit" name="charge_stop" value="<?php loc('charge_off');?>" style="height: 50px; width: 60%; font-weight:bolder; font-size:130%; background:darkblue; color:ivory;cursor:pointer; border:5px outset gray;"></p>
+<p><input type="submit" id="relay_1" name="relay_1" value=<?php if ($row['_Relay1']) echo "'".$text['relay_off']." 1'"; else echo "'".$text['relay_on']." 1'";?> style="height: 50px; width: 60%; font-weight:bolder; font-size:100%; background:gray; color:ivory;cursor:pointer; border:5px outset gray;" disabled></p>
+<p><input type="submit" id="relay_2" name="relay_2" value=<?php if ($row['_Relay2']) echo "'".$text['relay_off']." 2'"; else echo "'".$text['relay_on']." 2'";?> style="height: 50px; width: 60%; font-weight:bolder; font-size:100%; background:gray; color:ivory;cursor:pointer; border:5px outset gray;" disabled></p>
+<p><input type="checkbox" name="confirm" value="<?php loc('MAC_menu_confirm');?>" style="left:10px; bottom:10px; height: 15px; width:15px; color:black;font-weight:bolder;" unchecked><?php loc('MAC_menu_checkbox');?></p>
 </form></b>
 </center>
 </div>
