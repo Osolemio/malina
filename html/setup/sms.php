@@ -3,8 +3,9 @@
     <head>
    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <meta charset="UTF-8">
+   <?php include('../local/local.inc');?>
       
-    <title>Настройка СМС</title>
+    <title><?php loc('sms_title');?></title>
     <style>    
     hr {
 	border: none;
@@ -88,40 +89,40 @@ mysql_free_result($result);
 mysql_close($db);
 ?>
 
-<hr><p><center><b>Настройка СМС уведомлений и команд</b></center></p><hr>
+<hr><p><center><b><?php loc('sms_header');?></b></center></p><hr>
 <form method="post" action="sms_set.php">
 <fieldset>
 <b>
 <p>
-Доверенные номера для команд, через пробел: <input type="text" size=30 value="<?php echo $a_n;?>" name="allowed_numbers" id="allowed_numbers">
-Номер для СМС уведомлений <input type="text" value="<?php echo $s_n;?>" name="sms_number">
+<?php loc('sms_field1');?>: <input type="text" size=30 value="<?php echo $a_n;?>" name="allowed_numbers" id="allowed_numbers">
+<?php loc('sms_field2');?> <input type="text" value="<?php echo $s_n;?>" name="sms_number">
 </b><br>
-Формат номера в международном формате (без +)
+<?php loc('sms_field3');?>
 <b>
-	    <p>СМС по событию МАП:</p>
+	    <p><?php loc('sms_field4');?>:</p>
 </b>	    
 <table border="0">
 <tr bgcolor="whitesmoke"><td>
 
-<input type="checkbox" <?php echo $_Uacc_checked; ?> name="sms_value1" value="_Uacc"  /> Диапазон напряжения АКБ, В  
+<input type="checkbox" <?php echo $_Uacc_checked; ?> name="sms_value1" value="_Uacc"  /> <?php loc('sms_field5');?>, <?php loc('V');?>  
 </td>
 <td>
-&nbspМеньше или равно:<input type="number" name="_Uacc_le" step="0.1" value=<?php echo $_Uacc_le; ?> />
-</td>
-
-<td>
-&nbspБольше или равно:<input type="number" name="_Uacc_ge" step="0.1" value=<?php echo $_Uacc_ge; ?> />
+&nbsp<?php loc('sms_field6');?>:<input type="number" name="_Uacc_le" step="0.1" value=<?php echo $_Uacc_le; ?> />
 </td>
 
 <td>
-&nbspТекст СМС (латинскими):<input type="text" name="_Uacc_sms" size=100 value="<?php echo $_Uacc_sms_text; ?>" />
+&nbsp<?php loc('sms_field7');?>:<input type="number" name="_Uacc_ge" step="0.1" value=<?php echo $_Uacc_ge; ?> />
+</td>
+
+<td>
+&nbsp<?php loc('sms_text');?>:<input type="text" name="_Uacc_sms" size=100 value="<?php echo $_Uacc_sms_text; ?>" />
 </td>
 
 
 </tr>
 
 <tr><td>
-<input type="checkbox" <?php echo $_MODE_checked; ?> name="sms_value2" value="_MODE"/> Отсутствие сети  
+<input type="checkbox" <?php echo $_MODE_checked; ?> name="sms_value2" value="_MODE"/> <?php loc('sms_field8');?>  
 </td>
 <td>&nbsp</td>
 <td>&nbsp</td>
@@ -131,39 +132,39 @@ mysql_close($db);
 </tr>
 
 <tr bgcolor="whitesmoke"><td>
-<input type="checkbox" <?php echo $_tacc_checked; ?> name="sms_value3" value="_Temp_Grad0" />Температура АКБ, &degC  
+<input type="checkbox" <?php echo $_tacc_checked; ?> name="sms_value3" value="_Temp_Grad0" /><?php loc('TACC');?>, &degC  
 </td>
 
 <td>
-&nbspМеньше или равно:<input type="number" name="_tacc_le" step="1" value=<?php echo $_tacc_le; ?> />
+&nbsp<?php loc('sms_field6');?>:<input type="number" name="_tacc_le" step="1" value=<?php echo $_tacc_le; ?> />
 </td>
 
 <td>
-&nbspБольше или равно:<input type="number" name="_tacc_ge" step="1" value=<?php echo $_tacc_ge; ?> />
+&nbsp<?php loc('sms_field7');?>:<input type="number" name="_tacc_ge" step="1" value=<?php echo $_tacc_ge; ?> />
 </td>
 
 <td>
-&nbspТекст СМС (латинскими):<input type="text" name="_tacc_sms" size=100 value="<?php echo $_tacc_sms_text; ?> "/>
+&nbsp<?php loc('sms_text');?>:<input type="text" name="_tacc_sms" size=100 value="<?php echo $_tacc_sms_text; ?> "/>
 </td>
 
 </tr>
 
 <tr><td>
-<input type="checkbox" <?php echo $_UOUTmed_checked; ?> name="sms_value4" value="_UOUTmed"/> Отсутствие сети на выходе 
+<input type="checkbox" <?php echo $_UOUTmed_checked; ?> name="sms_value4" value="_UOUTmed"/> <?php loc('sms_field9');?> 
 </td>
 <td>&nbsp</td>
 <td>&nbsp</td>
 <td>
-&nbspТекст СМС (латинскими):<input type="text" name="_UOUTmed_sms" size=100 value="<?php echo $_UOUTmed_sms_text; ?> "/>
+&nbsp<?php loc('sms_text');?>:<input type="text" name="_UOUTmed_sms" size=100 value="<?php echo $_UOUTmed_sms_text; ?> "/>
 </td>
 </tr>
 
 
 </table>
 <br><b>
-<input type="checkbox" name="sms_test" value="sms_test"/>Отправить тестовую СМС
+<input type="checkbox" name="sms_test" value="sms_test"/><?php loc('sms_field10');?>
 <br><br></b>
-<input type="submit" value="Применить" />  
+<input type="submit" value="<?php loc('sms_button1');?>" />  
 </fieldset>
 </center>
 </td>			    
@@ -173,18 +174,10 @@ mysql_close($db);
 </form>
 <br>
 <p>
-Доступные команды (только с доверенных номеров):
-<ul>
-<li>#report - запрос состояния МАП </li>
-<li>#reportmppt - зпрос состояния MPPT </li>
-<li>#stop - прекратить генерацию </li>
-<li>#start - включить генерацию </li>
-<li>#charge_on - включить заряд АКБ </li>
-<li>#charge_off - выключить заряд АКБ </li>
-</ul>
+<?php loc('sms_commands');?>
 </p>
 <br><br>
-<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" МЕНЮ " ONCLICK="HomeButton()"> 
+<input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('MENU');?> " ONCLICK="HomeButton()"> 
 <script>
 function HomeButton()
 {
