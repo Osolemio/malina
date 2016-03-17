@@ -50,7 +50,7 @@ box-shadow:
 
 <center><b>
 <table bgcolor="ghostwhite" border=5 align="left" style="border-spacing: 2px 15px;">
-<tr bgcolor="white"><td><?php loc('Services_state');?>  <?php loc('MAC');?>: </td><td><div id="map_div">N/A</div> </td> <td>
+<tr bgcolor="white"><td><?php loc('Service_state');?>  <?php loc('MAC');?>: </td><td><div id="map_div">N/A</div> </td> <td>
 
 <?php
 
@@ -118,7 +118,7 @@ if (isset($_POST['batmon']['sendRequest'])) {
 
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="batmon">
-    <input type="submit" name="batmon[sendRequest]" value="<?php if (file_exists("/var/map/.bmon")) echo "Остановить сервис батареи"; else echo "Включить сервис батареи";?>"/>
+    <input type="submit" name="batmon[sendRequest]" value="<?php if (file_exists("/var/map/.bmon")) echo $text['Stop_service']; else echo $text['Start_service'];?>"/>
 </form>
 <?php
 } else
@@ -127,7 +127,7 @@ if (isset($_POST['batmon']['sendRequest'])) {
 ?>
   
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="batmon">
-    <input type="submit" name="batmon[sendRequest]" value="<?php if (file_exists("/var/map/.bmon")) echo "Остановить сервис батареи"; else echo "Включить сервис батареи";?>"/>
+    <input type="submit" name="batmon[sendRequest]" value="<?php if (file_exists("/var/map/.bmon")) echo $text['Stop_service']; else echo $text['Start_service'];?>"/>
 </form>
 
 
@@ -137,7 +137,7 @@ if (isset($_POST['batmon']['sendRequest'])) {
 
 
 </td></tr>
-<tr bgcolor="white"><td> Состояние сервиса СМС: </td><td><div id="sms_div">N/A</div> </td> <td>
+<tr bgcolor="white"><td> <?php loc('Service_state');?>  <?php loc('SMS');?>: </td><td><div id="sms_div">N/A</div> </td> <td>
 
 <?php    
 
@@ -150,7 +150,7 @@ if (isset($_POST['sms']['sendRequest'])) {
 
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="sms">
-    <input type="submit" name="sms[sendRequest]" value="<?php if (file_exists("/var/map/.sms")) echo "Остановить сервис СМС"; else echo "Включить сервис СМС";?>"/>
+    <input type="submit" name="sms[sendRequest]" value="<?php if (file_exists("/var/map/.sms")) echo $text['Stop_service']; else echo $text['Start_service'];;?>"/>
 </form>
 <?php
 } else
@@ -159,7 +159,7 @@ if (isset($_POST['sms']['sendRequest'])) {
 ?>
   
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="sms">
-    <input type="submit" name="sms[sendRequest]" value="<?php if (file_exists("/var/map/.sms")) echo "Остановить сервис СМС"; else echo "Включить сервис СМС";?>"/>
+    <input type="submit" name="sms[sendRequest]" value="<?php if (file_exists("/var/map/.sms")) echo $text['Stop_service']; else echo $text['Start_service'];;?>"/>
 </form>
 
 
@@ -169,10 +169,10 @@ if (isset($_POST['sms']['sendRequest'])) {
 
 
 </td></tr>
-<tr bgcolor="white"><td> Состояние сервиса mysql: </td><td><div id="mysql">N/A</div> </td> <td>
+<tr bgcolor="white"><td> <?php loc('Service_state');?>  mysql: </td><td><div id="mysql">N/A</div> </td> <td>
 </td></tr>
 
-<tr><td> Перезагрузка RasPi: </td><td><div id="reboot"></div> </td> <td>
+<tr><td> <?php loc('Reboot');?> RasPi: </td><td><div id="reboot"></div> </td> <td>
 
 
 <?php
@@ -185,29 +185,29 @@ if (isset($_POST['reboot']['sendRequest'])) touch("/var/map/.reboot");
 
 
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="reboot">
-    <input type="submit" name="reboot[sendRequest]" value="Перезагрузить RasPi"/>
+    <input type="submit" name="reboot[sendRequest]" value="<?php loc('Reboot');?> RasPi"/>
 <br>
 
 </td></tr>
-<tr><td> Выключить RasPi: </td><td><div id="shutdown"></div> </td> <td>
+<tr><td> <?php loc('Turn_off');?>  RasPi: </td><td><div id="shutdown"></div> </td> <td>
 
 
 <?php
 if (isset($_POST['shutdown']['sendRequest'])) touch("/var/map/.shutdown");
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="shutdown">
-    <input type="submit" name="shutdown[sendRequest]" value="Выключить RasPi"/>
+    <input type="submit" name="shutdown[sendRequest]" value="<?php loc('Turn_off');?> RasPi"/>
 <br>
 
 </td></tr>
 
 <tr bgcolor="white"><td>
 <br><br>
-Задержка выполнения может быть до 20с.
+<?php loc('Delay_info');?>
 <br><br>
 <td></td>
 <td align="center">
-<a href="index.php" class="button">МЕНЮ</a>
+<a href="index.php" class="button"><?php loc('MENU');?></a>
 </td>
 </td></tr>
 
