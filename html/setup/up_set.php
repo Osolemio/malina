@@ -1,9 +1,11 @@
 <?php
+include('../local/local.inc');
+
 // Password to be encrypted for a .htpasswd file
 if ($_POST['password']!=$_POST['password1'])
     {
-    echo "Введенные пароли не совпадают<br>";
-    echo "<a href='index.php'>Вернуться в меню</a>";
+    echo $text['psys_different']."<br>";
+    echo "<a href='index.php'>".$text['return_to_menu']."</a>";
     exit;
      }
 
@@ -14,7 +16,7 @@ $password = crypt($_POST['password'], base64_encode($_POST['password']));
 $f=fopen("/var/map/.tmp_p","w");
 fwrite($f,$_POST['user'].":".$password);
 fclose($f);
-echo "Пароль и имя пользователя изменены<br>";
-echo "<a href='index.php'>Вернуться в меню</a>";
+echo $text['changed']."<br>";
+echo "<a href='index.php'>".$text['return_to_menu']."</a>";
 
 ?>
