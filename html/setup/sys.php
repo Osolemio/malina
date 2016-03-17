@@ -3,8 +3,8 @@
   <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  
-  <title>СИСТЕМНЫЕ НАСТРОЙКИ. УПРАВЛЕНИЕ СЕРВИСАМИ</title>
+  <?php include('../local/local.inc');?>
+  <title><?php loc('services_title');?></title>
   <script src="../js/jquery-2.1.3.min.js"></script>
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
 
@@ -50,7 +50,7 @@ box-shadow:
 
 <center><b>
 <table bgcolor="ghostwhite" border=5 align="left" style="border-spacing: 2px 15px;">
-<tr bgcolor="white"><td> Состояние сервиса МАП: </td><td><div id="map_div">N/A</div> </td> <td>
+<tr bgcolor="white"><td><?php loc('Services_state');?>  <?php loc('MAC');?>: </td><td><div id="map_div">N/A</div> </td> <td>
 
 <?php
 
@@ -61,7 +61,7 @@ if (isset($_POST['map']['sendRequest'])) {
    header("refresh");
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="map">
-    <input type="submit" name="map[sendRequest]" value="<?php if (file_exists("/var/map/.map")) echo "Остановить сервис МАП"; else echo "Включить сервис МАП";?>"/>
+    <input type="submit" name="map[sendRequest]" value="<?php if (file_exists("/var/map/.map")) echo $text['Stop_service']; else echo $text['Start_service'];?>"/>
 </form>
 <?php
 } else
@@ -70,7 +70,7 @@ if (isset($_POST['map']['sendRequest'])) {
 ?>
   
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="map">
-    <input type="submit" name="map[sendRequest]" value="<?php if (file_exists("/var/map/.map")) echo "Остановить сервис МАП"; else echo "Включить сервис МАП";?>"/>
+    <input type="submit" name="map[sendRequest]" value="<?php if (file_exists("/var/map/.map")) echo $text['Stop_service']; else echo $text['Start_service'];?>"/>
 </form>
 
 
@@ -79,7 +79,7 @@ if (isset($_POST['map']['sendRequest'])) {
 ?>
 
 </td></tr>
-<tr bgcolor="white"><td> Состояние сервиса MPPT: </td><td><div id="mppt_div">N/A</div> </td> <td>
+<tr bgcolor="white"><td><?php loc('Service_state');?>  <?php loc('MPPT');?>: </td><td><div id="mppt_div">N/A</div> </td> <td>
 
 <?php
 
@@ -90,7 +90,7 @@ if (isset($_POST['mppt']['sendRequest'])) {
    header("refresh");
 ?>
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="mppt">
-    <input type="submit" name="mppt[sendRequest]" value="<?php if (file_exists("/var/map/.mppt")) echo "Остановить сервис MPPT"; else echo "Включить сервис MPPT";?>"/>
+    <input type="submit" name="mppt[sendRequest]" value="<?php if (file_exists("/var/map/.mppt")) echo $text['Stop_service']; else echo $text['Start_service'];?>"/>
 </form>
 <?php
 } else
@@ -99,14 +99,14 @@ if (isset($_POST['mppt']['sendRequest'])) {
 ?>
   
 <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" id="mppt">
-    <input type="submit" name="mppt[sendRequest]" value="<?php if (file_exists("/var/map/.mppt")) echo "Остановить сервис MPPT"; else echo "Включить сервис MPPT";?>"/>
+    <input type="submit" name="mppt[sendRequest]" value="<?php if (file_exists("/var/map/.mppt")) echo $text['Stop_service']; else echo $text['Start_service'];?>"/>
 </form>
 <?php
 }    
 
 ?>
 </td></tr>
-<tr bgcolor="white"><td> Состояние сервиса батарейного монтора: </td><td><div id="batmon_div">N/A</div> </td> <td>
+<tr bgcolor="white"><td> <?php loc('Service_state');?>  <?php loc('batmon');?>: </td><td><div id="batmon_div">N/A</div> </td> <td>
 
 <?php
 

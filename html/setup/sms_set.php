@@ -1,5 +1,5 @@
 <?php
-
+include('../local/local.inc');
 include("../bd.php");
 unlink("/var/map/allowed_numbers.dat");
 unlink("/var/map/report_number.dat");
@@ -17,7 +17,7 @@ mysql_free_result($result);
 if (isset($_POST['sms_test']) && isset($_POST['sms_number']))
     {
     $out=shell_exec("sudo sendsms ".$_POST['sms_number']." 'Congratulations! Your MAP has sent you first SMS'");
-    echo "Результат отправки тестового смс: <br>".$out; 
+    echo $text['sms_result'].": <br>".$out; 
     }
 
 
@@ -46,9 +46,9 @@ mysql_close($db);
 
 
 
-echo "Данные успешно записаны <br>";
+echo $text['saved_succes']." <br>";
 header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-echo "Через 2 секунды вы будете возвращены обратно";
+loc('2sec_return');
 exit;
 ?>
 

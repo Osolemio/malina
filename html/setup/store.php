@@ -2,6 +2,7 @@
 $restricted=array(0x138, 0x139, 0x180, 0x181, 0x182, 0x183, 0x185);
 $offset=$_POST['mem_offset'];
 
+include('../local/local.inc');
 include("../bd.php");
 
 $to_map=fopen("/var/map/to_map","w");
@@ -10,18 +11,18 @@ $to_map=fopen("/var/map/to_map","w");
 
 if ($offset<0x102 || $offset>0x1B7)
     {
-    echo "Вы не можете менять эту настройку"."<br>";
+    echo $text['cannot_change']."<br>";
     header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-    echo "Через 2 секунды вы будете возвращены обратно";
+    loc('2sec_return');
 
     exit(-1);
     }
 
 if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
     {
-    echo "Включен режим ограничения. Вы не можете менять эту настройку <br>";
+    echo $text['restricted_mode']." <br>";
     header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-    echo "Через 2 секунды вы будете возвращены обратно";
+    loc('2sec_return');
 
     exit(-1);
     }
@@ -34,9 +35,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=$_POST['field'];
 	    if ($value<$_POST['min'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -46,9 +47,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=$_POST['field']+50;
 	    if ($value<$_POST['min'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -60,10 +61,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=$_POST['mem_value'];
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
-
+		    loc('2sec_return');
 		    exit(-1);
 		}
 	    break;
@@ -71,9 +71,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=$_POST['field']-100;    
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -86,10 +86,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
     
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
-
+		    loc('2sec_return');
 		    exit(-1);
 		}
 	    break;
@@ -98,9 +97,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=($_POST['field']/100)>>$_POST['dop'];    
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -110,9 +109,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=($_POST['field']*100);    
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -122,9 +121,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=($_POST['field']<<$_POST['eacc'])/25;    
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -137,9 +136,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=($time[0]<<3)+(round($time[1]/10));    
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -149,9 +148,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 	    $value=$_POST['field']*60/16;
 	    if ($value<$_POST['min_val'] || $value>$_POST['max_val'])
 		{
-		    echo "Значение вне допустимого диапазона"."<br>";
+		    echo $text['out_of_range']."<br>";
 		    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-		    echo "Через 2 секунды вы будете возвращены обратно";
+		    loc('2sec_return');
 
 		    exit(-1);
 		}
@@ -159,9 +158,9 @@ if (in_array($offset, $restricted) && file_exists("/var/map/.restricted"))
 
 
     default:
-	    echo "Нет данных для записи"."<br>";
+	    echo $text['no_data']."<br>";
 	    header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-	    echo "Через 2 секунды вы будете возвращены обратно"."<br>";
+	    echo $text['2sec_return']."<br>";
 
 	    exit(-1);
 	    break;
@@ -175,7 +174,7 @@ $offset=intval($offset);
 $post=chr(0xFF).chr($offset&0xFF).chr($offset>>8).chr($value);
 
 fwrite($to_map, $post);
-echo "Данные ячейки переданы на запись...<br>";
+echo $text['transmitted'].".<br>";
 
 
  do {
@@ -198,7 +197,7 @@ if ($_POST['mem_class']=='dc_dop')
 	$post=chr(0xFF).chr($offset_dop&0xFF).chr($offset_dop>>8).chr($dop);
 	fwrite($to_map, $post);
 
-echo "Данные ячейки переданы на запись...<br>";
+echo $text['transmitted']."..<br>";
 fclose($to_map);
 
  do {
@@ -218,9 +217,9 @@ sleep(2);
 fclose($to_map);
 mysql_close($db);
 
-echo "Данные успешно записаны <br>";
+echo $text['saved_succes']." <br>";
 header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-echo "Через 2 секунды вы будете возвращены обратно";
+loc('2sec_return');
 exit;
 ?>
 

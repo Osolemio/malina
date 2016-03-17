@@ -1,5 +1,5 @@
 <?php
-
+include('../local/local.inc');
 foreach (range('a','z') as $letter)
 {
 $device="/dev/sd".$letter;
@@ -18,11 +18,11 @@ if (isset($_POST['clean']))
 
     mysql_close($db);
     
-    echo "Таблицы ПО мониторинга успешно очищены";
+    loc('tables_cleaned');
    }
 
 ?>
 <br><br>
-<a href="index.php"><-в меню</a>
+<a href="index.php"><-<?php loc('MENU');?></a>
 <br><br>
-<a href="disk.php"><-назад</a>
+<a href="disk.php"><-<?php loc('backward');?></a>

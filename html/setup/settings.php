@@ -7,7 +7,7 @@
   <script src="../js/jquery-1.11.2.min.js"></script>
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
   <script src="./menu.json"></script>
-  <script src="./submenu.json"></script>
+  <script src="../local/submenu.json"></script>
   <script src="./settings.js"></script>
   <?php include('../local/local.inc');?>
   
