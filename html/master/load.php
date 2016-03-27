@@ -1,11 +1,12 @@
 <?php
     include("bd.php");
-    $dev=array('МАП','MPPT','МАП+MPPT');
+    include("../local/local.inc");
+    $dev=array($text['MAC'],$text['MPPT'],$text['MAC'].'+'.$text['MPPT']);
     $result=mysql_query("SELECT acc_number FROM nodes GROUP BY acc_number",$db) or die(mysql_error());
      $out='[';
 	while ($row=mysql_fetch_array($result)) {
 
-	$out=$out."{\"id\":\"".$row[0]."\",\"parent\":\"#\",\"text\":\"Блок АКБ ".$row[0]."\",\"icon\":\"../img/bat.png\"},";
+	$out=$out."{\"id\":\"".$row[0]."\",\"parent\":\"#\",\"text\":\"".$text['Bat_pkg']." ".$row[0]."\",\"icon\":\"../img/bat.png\"},";
 	
 	}
     mysql_free_result($result);
