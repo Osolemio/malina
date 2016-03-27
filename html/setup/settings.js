@@ -1,5 +1,5 @@
 var settings=[];
-const max_items=45;
+const max_items=46;
 
 function getXmlHttp(){
   var xmlhttp;
