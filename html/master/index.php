@@ -3,7 +3,8 @@
   <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
-  <title>НАСТРОЙКИ</title>
+<?php include('../local/local.inc');?>
+  <title><?php loc('SETTINGS');?></title>
     
 </head>
 
@@ -191,9 +192,9 @@ div.div_t {
 </style>
 <div>
 
-<a href="../menu.php" class="menu1"><div class="div_t"> ГЛАВНОЕ </div></a>
+<a href="../menu.php" class="menu1"><div class="div_t"> <?php loc('MENU');?> </div></a>
 <br>
-<a href="setup.php" class="menu2"><div class="div_t"> НАСТРОЙКИ </div></a>
+<a href="setup.php" class="menu2"><div class="div_t"> <?php loc('SETTINGS');?> </div></a>
 <br>
 
 </b>
@@ -210,7 +211,7 @@ div.div_t {
 ?>	
       
  <input type="checkbox" name="acc<?php echo $row[0]; ?>" id="acc_id<?php echo $row[0]; ?>" value="<?php echo $row[0]; ?>" checked="checked"/>
- Блок АКБ&nbsp<?php echo $row[0]; ?>
+ <?php loc('Bat_pkg');?>&nbsp<?php echo $row[0]; ?>
 
  <br>
 <?php
@@ -221,9 +222,9 @@ div.div_t {
 ?>
 </fieldset>
 
-<input type="button" onclick="open_nodes()" value="ОТКРЫТЬ">&nbsp
-<input type="button" onclick="select_all()" value="ВЫБРАТЬ ВСЕ">&nbsp
-<input type="button" onclick="deselect_all()" value="СНЯТЬ ВЫДЕЛЕНИЕ">
+<input type="button" onclick="open_nodes()" value="<?php loc('OPEN');?>">&nbsp
+<input type="button" onclick="select_all()" value="<?php loc('SELECT_ALL');?>">&nbsp
+<input type="button" onclick="deselect_all()" value="<?php loc('UNSELECT_ALL');?>">
 
 </div>
 <script>
