@@ -137,8 +137,8 @@
     
     <div class="bms_in_text">t<sub>min</sub>&degC</div>
     <div class="bms_in_text">t<sub>max</sub>&degC</div>
-    <div class="bms_in_text">U<sub>min</sub>,<?php loc('V');?></div>
-    <div class="bms_in_text">U<sub>max</sub>,<?php loc('V');?></div>
+    <div class="bms_in_text">V<sub>min</sub>,<?php loc('V');?></div>
+    <div class="bms_in_text">V<sub>max</sub>,<?php loc('V');?></div>
     </div></div>
     
     <div id="text_common"><?php loc('Common_data');?>:</div>
@@ -213,6 +213,11 @@
     </div>
     <div id="smoothie-chart-mppt-div"> 
     <canvas id="smoothie-chart-mppt"></canvas></div>
+
+    <div id="cs1"><?php loc('cs1');?><div class="ring"></div></div>
+    <div id="cs2"><?php loc('cs2');?><div class="ring"></div></div>
+    <div id="cs1_val" class="cs_val">0A</div>
+    <div id="cs2_val" class="cs_val">0A</div>
 
     <div id="wind">
     
