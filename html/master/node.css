@@ -24,7 +24,7 @@ div.map {
     width:200px;
     height:400px;
     background-color:#000010;
-    background: url(../img/panel_map.png);
+    background: url(../local/panel_map.png);
 }
 
 div.mppt {
@@ -37,7 +37,7 @@ div.mppt {
     width:200px;
     height:400px;
     background-color:#001000;
-    background: url(../img/panel_mppt.png);
+    background: url(../local/panel_mppt.png);
 
 }
 
@@ -48,7 +48,7 @@ div.acc {
     top:440px;
     width:100%;
     height:200px;
-    background: url(../img/acc.png);
+    background: url(../local/acc.png);
     background-repeat: repeat-x;    
 }
 

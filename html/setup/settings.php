@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="./settings.css">
   <script src="../js/jquery-1.11.2.min.js"></script>
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
-  <script src="./menu.json"></script>
+  <script src="../local/menu.json"></script>
   <script src="../local/submenu.json"></script>
   <script src="./settings.js"></script>
   <?php include('../local/local.inc');?>
