@@ -52,7 +52,9 @@
 		'MAP_Relay1'=>0,
 		'MAP_Relay2'=>0,
 		'Temp_Tor'=>0,
-		'flagUnet2'=>0
+		'flagUnet2'=>0,
+		'I_EXTS0'=>0,
+		'I_EXTS1'=>0
 	    );
 				
 	$flag_map=0;
@@ -181,6 +183,8 @@ if (file_exists("/var/map/.mppt")) {
      $data['MPP']=$row_mppt['MPP'];
      $data['RELAY']=$row_mppt['Relay_C'];
      $data['windspeed']=($row_mppt['windspeed']==65535)?0:$row_mppt['windspeed'];     
+     $data['I_EXTS0']=($row_mppt['Sign_C0']==0)?$row_mppt['I_EXTS0']:-$row_mppt['I_EXTS0'];
+     $data['I_EXTS1']=($row_mppt['Sign_C1']==0)?$row_mppt['I_EXTS1']:-$row_mppt['I_EXTS1'];
 
  if (!file_exists("/var/map/.map")) {
  	$data['UACC']=$row_mppt['V_Bat'];
@@ -279,11 +283,13 @@ if (file_exists("/var/map/.mppt")) {
 //----------------------------------------------------
 //$data['MAP_Relay1']=1;
 //$data['TEMP1']=-20;
+$data['I_EXTS1']=-50.4;
+$data['I_EXTS0']=40.5;
     echo $data['UNET'].",".$data['INET'].",".$data['UOUT'].",".$data['UACC'].",".$data['IACC'].",".$data['VPV'].",".$data['IPV'].",".$data['FNET'].",".$data['FMAP'].",". $data['ENET'].','.$data['EACC'].",".$data['ECHG'].",".$data['I_CH_I2C'].",".$data['EPV'].",".$data['TEMP1'].",".$data['TEMP2'].",".$data['TEMP_MPPT'].",".$data['PNET'].",".$data['PACC'].",".
 $data['PPV'].",".$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".$data['MODE'].",".$data['RELAY'].",".$error_status.",".$u_min.",".$u_max.",".$t_min.",".$t_max.",".$flag_map.",".$flag_mppt.",".
 $data['integral_dCdt'].",".$data['C_current_Ah'].",".$data['C_current_percent'].",".
 $data['C_nominal'].",".$data['C_measured'].",".$data['time_to_go'].",".$data['windspeed'].",".$data['user_counter'].",".$data['estimated_SOC'].",".$data['estimated_C'].",".$data['timer'].",".$data['CH_ST'].",".
-$data['E_alt_daily'].",".$data['E_alt_monthly'].",".$data['E_alt_summ'].",".$data['E_alt_user'].",".$data['Temp_Tor'].",".$data['MAP_Relay1'].",".$data['MAP_Relay2'].",".$data['flagUnet2'];
+$data['E_alt_daily'].",".$data['E_alt_monthly'].",".$data['E_alt_summ'].",".$data['E_alt_user'].",".$data['Temp_Tor'].",".$data['MAP_Relay1'].",".$data['MAP_Relay2'].",".$data['flagUnet2'].",".$data['I_EXTS0'].",".$data['I_EXTS1'];
      
 
  

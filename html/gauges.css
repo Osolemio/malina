@@ -1806,34 +1806,23 @@ left:83%;
 }
 
 
-.ring {
-  display: inline-block;
-  margin: 0em;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  vertical-align: middle;
-  }
-.ring:nth-child(1) {
-  border: 1.0em solid darkgoldenrod;
-  }
 
-#cs1
+.cs1
  {
-    top:57%;
+    top:56%;
     left:1%;
-    height:3em;
-    width:3em;
+    height:6em;
+    width:10em;
     color:white;
     font-weight:bolder;
  }
 
-#cs2
+.cs2
  {
-    top:57%;
+    top:56%;
     left:40%;
-    height:3em;
-    width:3em;
+    height:6em;
+    width:10em;
     color:white;
     font-weight:bolder;    
  }
@@ -1841,7 +1830,8 @@ left:83%;
 .cs_val
 {
     text-align:center;
-    top:60.5%;
+    width:10%;
+    top:61%;
     color:ivory;
     z-index:4;
     font-weight:bolder;
@@ -1850,7 +1840,7 @@ left:83%;
 
 #cs1_val
 {
-    left:16%;
+    left:17%;
 
 }
 
@@ -1858,5 +1848,5 @@ left:83%;
 #cs2_val
 {
 
-    left:55%
+    left:56%
 }

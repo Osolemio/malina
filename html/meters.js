@@ -3,6 +3,7 @@ var offsetfromcursorY=15 // y offset of tooltip
 var ie=d.all && !window.opera;
 var ns6=d.getElementById && !d.all;
 var tipobj,op,consumed=0;
+var canvas_cs1,canvas_cs2;
 
 var meter_v, meter_i, meter_i_i2c, meter_vout, meter_vacc, meter_iacc, meter_vpv,meter_ipv, v = 0, f, arr=[],
 display_1, display_2, onload, counter_net, counter_acc,counter_charge, counter_pv,
@@ -317,6 +318,19 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
     chart_wind.streamTo(canvas_wind);	
     series_wind.append(new Date().getTime(),0)    
 
+    canvas_cs1 = document.getElementById('cs1_ring');
+
+	canvas_cs1.height=document.getElementById('cs1').clientHeight;
+	canvas_cs1.width=document.getElementById('cs1').clientWidth;
+
+    canvas_cs2 = document.getElementById('cs2_ring');
+
+	canvas_cs2.height=document.getElementById('cs2').clientHeight;
+	canvas_cs2.width=document.getElementById('cs2').clientWidth;
+
+
+
+
 }
 //------------ACC Live chart-------------
 
@@ -395,6 +409,54 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
    }
   }
     
+
+  function cs(cs_canvas, value, limit) {
+	if (cs_canvas){
+	    var ctx=cs_canvas.getContext('2d');
+	    var rad=cs_canvas.height/2;
+	    var x=cs_canvas.width/2;
+	    var y=rad;
+	    var val_rad=(value/limit)*2*Math.PI;
+	    var end=1.5*Math.PI+Math.abs(val_rad);
+	    if (end>2*Math.PI) end=end-2*Math.PI;
+
+	    ctx.beginPath();
+	    ctx.moveTo(x,y);
+	    ctx.arc(x,y,rad,0,2*Math.PI);
+	    ctx.lineTo(x,y);
+	    ctx.closePath();
+	    ctx.fillStyle='darkorange';
+	    ctx.fill();
+
+	    ctx.beginPath();
+	    ctx.moveTo(x,y);
+	    ctx.fillStyle='darkblue';
+	    if (val_rad>=0)
+	    ctx.arc(x,y,rad-1,1.5*Math.PI,end,false); else
+	    {
+	    ctx.fillStyle='darkred';
+	    end=1.5*Math.PI+val_rad; if (end<0) end=2*Math.PI+end;
+	    ctx.arc(x,y,rad-1,1.5*Math.PI,end,true);
+	    }
+	    
+	    ctx.lineTo(x,y);
+	    ctx.closePath();
+	    
+	    ctx.fill();
+	    
+
+	    ctx.beginPath();
+	    ctx.moveTo(x,y);
+	    ctx.arc(x,y,(rad-0.4*rad),0,6.28);
+	    ctx.lineTo(x,y);
+	    ctx.closePath();
+	    ctx.fillStyle='#2c2c2c';
+	    ctx.fill();
+	    
+
+
+	 }
+	}
 
   function err_warn(code) {
           var i,dd, result="";
@@ -641,6 +703,12 @@ var mipv=document.getElementById('meter_ipv')
     
     series_mppt.append(new Date().getTime(),Number(arr[19]));
     series_wind.append(new Date().getTime(),Number(arr[36]));
+
+
+    var cur1=cs(canvas_cs1,arr[50],100);
+    var cur2=cs(canvas_cs2,arr[51],100);
+    $('#cs1_val').html(arr[50]+"A");
+    $('#cs2_val').html(arr[51]+"A");
 
 } //-----------MPPT SECTION
 

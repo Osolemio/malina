@@ -214,8 +214,12 @@
     <div id="smoothie-chart-mppt-div"> 
     <canvas id="smoothie-chart-mppt"></canvas></div>
 
-    <div id="cs1"><?php loc('cs1');?><div class="ring"></div></div>
-    <div id="cs2"><?php loc('cs2');?><div class="ring"></div></div>
+    <div id="cs1_text" class="cs1"><?php loc('cs1');?></div>
+    <div id="cs1" class="cs1">
+    <canvas id="cs1_ring"></canvas></div>
+    <div id="cs2_text" class="cs2"><?php loc('cs2');?></div>
+    <div id="cs2" class="cs2">
+    <canvas id="cs2_ring"></canvas></div>
     <div id="cs1_val" class="cs_val">0A</div>
     <div id="cs2_val" class="cs_val">0A</div>
 
