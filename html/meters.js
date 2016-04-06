@@ -386,8 +386,8 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
    
   function move(elem, elem1, value, limit) {
 	if (elem) {
-	elem.style.width=((value/limit)*0.9)*100+1+'%';
-	elem1.style.left=((value/limit)*0.9)*100+4+'%';
+	elem.style.width=((value/limit)*0.7)*100+1+'%';
+	elem1.style.left=((value/limit)*0.7)*100+4+'%';
 	}
 	}
   

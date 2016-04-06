@@ -282,9 +282,6 @@ if (file_exists("/var/map/.mppt")) {
 	}
 //----------------------------------------------------
 //$data['MAP_Relay1']=1;
-//$data['TEMP1']=-20;
-$data['I_EXTS1']=-50.4;
-$data['I_EXTS0']=40.5;
     echo $data['UNET'].",".$data['INET'].",".$data['UOUT'].",".$data['UACC'].",".$data['IACC'].",".$data['VPV'].",".$data['IPV'].",".$data['FNET'].",".$data['FMAP'].",". $data['ENET'].','.$data['EACC'].",".$data['ECHG'].",".$data['I_CH_I2C'].",".$data['EPV'].",".$data['TEMP1'].",".$data['TEMP2'].",".$data['TEMP_MPPT'].",".$data['PNET'].",".$data['PACC'].",".
 $data['PPV'].",".$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".$data['MODE'].",".$data['RELAY'].",".$error_status.",".$u_min.",".$u_max.",".$t_min.",".$t_max.",".$flag_map.",".$flag_mppt.",".
 $data['integral_dCdt'].",".$data['C_current_Ah'].",".$data['C_current_percent'].",".
