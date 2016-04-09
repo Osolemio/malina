@@ -5,7 +5,7 @@
   <meta charset="UTF-8"/>
   <link rel="stylesheet" type="text/css" href="gauges.css"/>
  <?php include('./local/local.inc');?>
-
+  
   <script src="./js/jquery-2.1.3.min.js"></script>
   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
   <script src="./js/jsmeter-1.1.2.min.js"></script>
@@ -13,6 +13,7 @@
   <script src="./js/jscounter-1.1.1.min.js"></script>
   <script src="./js/smoothie.js"></script>
   <script src="./js/jqueryrotate.2.1.js"></script>
+  <script src="./local/local_js.js"></script>
   <script src="./meters.js"></script>
  
   <title><?php loc('gauges_title'); ?></title>

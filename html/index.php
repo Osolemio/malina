@@ -16,23 +16,9 @@
 <body>
 
 <center><b>
-
 <?php
-
-
-   include ("./bd.php");
-    $map_table="data";
-    $mppt_table="mppt";
-?>
-
-<?php
-
-    
     header("refresh: 1");
-    
     include("./reload.php");
-
-    mysql_close($db);
 ?>
 
 </center>

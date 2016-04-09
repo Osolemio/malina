@@ -7,6 +7,7 @@
   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
   <script src="./zingchart/zingchart.min.js"></script>
 <?php include('./local/local.inc');?>
+  <script src="./local/local_js.inc"></script>
   <script src="./multichart.js"></script>
 
   <title><?php loc('diagrams_title');?></title>

@@ -7,8 +7,9 @@
   <!--[if lt IE 9]><script src="/js/excanvas.js"></script><![endif]-->
   <script src="./js/jquery-2.1.3.min.js"></script>
   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
-<?php include('./local/local.inc');?>
-
+<?php include('./local/local.inc');
+?>
+  <script src="./local/local_js.inc"></script>
   <script src="./bms.js"></script>
  
   <title><?php loc('bms_title');?></title>
