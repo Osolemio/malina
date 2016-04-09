@@ -137,8 +137,8 @@
     
     <div class="bms_in_text">t<sub>min</sub>&degC</div>
     <div class="bms_in_text">t<sub>max</sub>&degC</div>
-    <div class="bms_in_text">V<sub>min</sub>,<?php loc('V');?></div>
-    <div class="bms_in_text">V<sub>max</sub>,<?php loc('V');?></div>
+    <div class="bms_in_text"><?php loc('U');?><sub>min</sub>,<?php loc('V');?></div>
+    <div class="bms_in_text"><?php loc('U');?><sub>max</sub>,<?php loc('V');?></div>
     </div></div>
     
     <div id="text_common"><?php loc('Common_data');?>:</div>
