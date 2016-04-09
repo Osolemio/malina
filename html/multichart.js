@@ -231,7 +231,7 @@ var pnet=
       },
       {
         "decimals":0,
-        "text":"Pmppt_out, %pavgВт",
+        "text":loc['text9'],
         "values":[],
         "line-color":"green",
         "background-color":"green lime"
@@ -255,7 +255,7 @@ var inet=
     
     "legend": {},
     "title": {
-    		"text":'Ток, А'
+    		"text":loc['text10']
         	},
     "refresh":{
     "type":"feed",
@@ -287,19 +287,19 @@ var inet=
     "series": [
       {
         "decimals":1,
-        "text":"Iвх, %pavgА",
+        "text":loc['text11'],
         "values":[],
         "line-color":"red"
       },
       {
         "decimals":1,
-        "text":"Iакб-мап, %pavgА",
+        "text":loc['text12'],
         "values":[],
         "line-color":"grey"
       },
       {
         "decimals":1,
-        "text":"Imppt-acc, %pavgА",
+        "text":loc['text13'],
         "values":[],
         "line-color":"green"
       }
@@ -320,7 +320,7 @@ var ipv=
     
     "legend": {},
     "title": {
-    		"text":'Ток MPPT (данные MPPT), А'
+    		"text":loc['text14']
         	},
     "refresh":{
     "type":"feed",
@@ -352,19 +352,19 @@ var ipv=
     "series": [
       {
         "decimals":1,
-        "text":"Imppt-acc, %pavgА",
+        "text":loc['text13'],
         "values":[],
         "line-color":"green"
       },
       {
         "decimals":1,
-        "text":"ДТ1, %pavgА",
+        "text":loc['text15'],
         "values":[],
         "line-color":"lime"
       },
       {
         "decimals":1,
-        "text":"ДТ2, %pavgА",
+        "text":loc['text16'],
         "values":[],
         "line-color":"orange"
       }
@@ -386,7 +386,7 @@ var p_balance=
     
     "legend": {},
     "title": {
-    		"text":'Баланс АКБ по мощности, Вт. Источник - МАП (I2С)'
+    		"text":loc['text17']
         	},
     "refresh":{
     "type":"feed",
@@ -425,7 +425,7 @@ var p_balance=
     "series": [
       {
         "decimals":0,
-        "text":"Pбал, %pavgВт",
+        "text":loc['text18'],
         "values":[],
         "line-color":"gray",
         "background-color":"red orange"
@@ -444,7 +444,7 @@ var i_balance=
     "type":'area',
     "legend": {},
     "title": {
-    		"text":'Баланс АКБ по току, А. Источник - МАП (I2C)'
+    		"text":loc['text19']
         	},
     "refresh":{
     "type":"feed",
@@ -483,7 +483,7 @@ var i_balance=
     "series": [
       {
         "decimals":1,
-        "text":"Iсумм, %pavgА",
+        "text":loc['text20'],
         "values":[],
         "line-color":"gray"
       }
@@ -504,7 +504,7 @@ var wind=
     
     "legend": {},
     "title": {
-    		"text":'Обороты ветрогенератора, об/мин'
+    		"text":loc['text21']
         	},
     "refresh":{
     "type":"feed",
@@ -533,7 +533,7 @@ var wind=
     "series": [
       {
         "decimals":0,
-        "text":"n, %pavg об/мин",
+        "text":loc['text22'],
         "values":[],
         "line-color":"green"
       }
@@ -560,7 +560,7 @@ var wind=
     },
     "legend": {},
     "title": {
-    		"text":'Напряжение батареи, В'
+    		"text":loc['text1']
         	},
     "refresh":{
     "type":"feed",
@@ -617,7 +617,7 @@ var wind=
     "series": [
       { 
         "decimals":1,
-        "text":"Uакб, %pavgВ",
+        "text":loc['text2'],
         "values":[],
         "line-color":"black"
       }
@@ -641,7 +641,7 @@ var wind=
     },
     "legend": {},
     "title": {
-    		"text":'Напряжение батареи, В'
+    		"text":loc['text1']
         	},
     "refresh":{
     "type":"feed",
@@ -670,7 +670,7 @@ var wind=
     "series": [
       { 
         "decimals":1,
-        "text":"Uакб, %pavgВ",
+        "text":loc['text2'],
         "values":[],
         "line-color":"black"
       }
@@ -818,7 +818,7 @@ function pbal_switch() {
     "url":"request_ibalance.php?sw=map"
     },
     title: {
-    text:"Баланс токов АКБ, А. Источник - MАП (I2C)"
+    text:loc['text19']
    }
   }
   });
@@ -831,7 +831,7 @@ function pbal_switch() {
     "url":"request_pbalance.php?sw=map"
     },
     title: {
-    text:"Баланс мощности АКБ, Вт. Источник - MAP (I2C)"
+    text:loc['text17']
    }
   }
   });
@@ -848,7 +848,7 @@ function pbal_switch() {
     "url":"request_ibalance.php?sw=mppt"
     },
     title: {
-    text:"Баланс токов АКБ, А. Источник - MPPT (кольца)"
+    text:loc['text23']
    }
   }
   });
@@ -861,7 +861,7 @@ function pbal_switch() {
     "url":"request_pbalance.php?sw=mppt"
     },
     title: {
-    text:"Баланс мощности АКБ, Вт. Источник - MPPT (кольца)"
+    text:loc['text24']
     }
    
   }
