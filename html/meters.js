@@ -633,7 +633,7 @@ var mipv=document.getElementById('meter_ipv')
     display_5.setVal(arr[16]);
     $('#text_vpv').html(arr[5]);
     $('#text_ipv').html(arr[6]);
-    $('#text_kw_pv').html(loc['kWh_day']);
+    $('#text_kw_pv').html(loc['kwh_day']);
     $('#mppt_text').html("&nbsp"+arr[20]);
     
     counter_pv.setVal(arr[13]);

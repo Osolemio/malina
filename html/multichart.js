@@ -48,7 +48,7 @@ $(function() {
     },
     "legend": {},
     "title": {
-    		"text":'Напряжение батареи, В'
+    		"text":loc['text1']
         	},
     "refresh":{
     "type":"feed",
@@ -59,7 +59,7 @@ $(function() {
     "adjust-scale": false,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -77,7 +77,7 @@ $(function() {
     "series": [
       { 
         "decimals":1,
-        "text":"Uакб, %pavgВ",
+        "text":loc['text2'],
         "values":[],
         "line-color":"black"
       }
@@ -97,7 +97,7 @@ $(function() {
     },
     "legend": {},
     "title": {
-    		"text":'Напряжение, В',
+    		"text":loc['text3'],
         	},
     "refresh":{
     "type":"feed",
@@ -108,7 +108,7 @@ $(function() {
     "adjust-scale": false,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -156,14 +156,14 @@ $(function() {
     "series": [
       {
         "decimals":0,
-        "text":"Uвх, %pavgВ",
+        "text":loc['text4'],
         "values":[],
         "line-color":"blue"
         
       },
       {
         "decimals":0,
-        "text":"Uвых, %pavgВ",
+        "text":loc['text5'],
         "values":[],
         "line-color":"lime"
       }
@@ -185,7 +185,7 @@ var pnet=
     
     "legend": {},
     "title": {
-    		"text":'Мощность, ВА'
+    		"text":loc['text6']
         	},
     "refresh":{
     "type":"feed",
@@ -195,7 +195,7 @@ var pnet=
     "reset-timeout":240,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -215,7 +215,7 @@ var pnet=
     "series": [
       {
         "decimals":0,
-        "text":"Pвх, %pavgВА",
+        "text":loc['text7'],
         "values":[],
         "line-color":"red",
         "background-color":"red orange"
@@ -223,7 +223,7 @@ var pnet=
       },
       {
         "decimals":0,
-        "text":"Pакб-мап, %pavgВт",
+        "text":loc['text8'],
         "values":[],
         "line-color":"grey",
         "background-color":"grey ivory"
@@ -265,7 +265,7 @@ var inet=
     "reset-timeout":240,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -330,7 +330,7 @@ var ipv=
     "reset-timeout":240,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -396,7 +396,7 @@ var p_balance=
     "reset-timeout":240,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -454,7 +454,7 @@ var i_balance=
     "reset-timeout":240,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -514,7 +514,7 @@ var wind=
     "reset-timeout":240,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -571,7 +571,7 @@ var wind=
     "adjust-scale": false,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
@@ -652,7 +652,7 @@ var wind=
     "adjust-scale": false,
     "max-ticks":60,
     "curtain":{
-    "text": "Загрузка данных...",
+    "text": loc['loading'],
     "color": "red",
     "text-size": 30,
     "bold": true
