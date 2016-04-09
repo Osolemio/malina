@@ -8,60 +8,7 @@ var canvas_cs1,canvas_cs2;
 var meter_v, meter_i, meter_i_i2c, meter_vout, meter_vacc, meter_iacc, meter_vpv,meter_ipv, v = 0, f, arr=[],
 display_1, display_2, onload, counter_net, counter_acc,counter_charge, counter_pv,
 display_3, display_4,display_5, display_6, i=1,angle=0,
-    map_mode0="&nbspВЫКЛЮЧЕН. НЕТ СЕТИ",
-    map_mode1="&nbspВЫКЛЮЧЕН. ЕСТЬ СЕТЬ",
-    map_mode2="&nbspВКЛЮЧЕН. НЕТ СЕТИ. ГЕНЕРАЦИЯ",
-    map_mode3="&nbspВКЛЮЧЕН. ТРАНСЛИРУЕТ СЕТЬ",
-    map_mode4="&nbspВКЛЮЧЕН. ТРАНСЛИРУЕТ СЕТЬ. ЗАРЯД АКБ";
-    map_mode=["МАП выключени и нет сети на входе","МАП выключен. Сеть на входе","МАП включен. Генерация от АКБ. Нет сети.","МАП включен и транслирует сеть","МАП включен. Трансляция + заряд","","","","","",
-    "Принудительная генерация","Тарифная сеть. максимальный тариф. принудительная генерация", "Тарифная сеть. минимальный тариф",
-    "Трансляция + эко-подкачка", "Трансляция + продажа в сеть", "Ожидание внешнего полного заряда", "Тарифная сеть. трансляция+эко-подкачка",
-    "Тарифная сеть. трансляция+продажа в сеть"];
-    charge_mode=["","","1 ступень","Буферный заряд","","","2 ступень","","","","Дозаряд","","","","Дозаряд"],
-    error_status=[
-    "Критическая ошибка!",
-    "АКБ полностью разряжен, напряжение критически низкое для работы МАП.",
-    "Превышение напряжения на АКБ, генерация или заряд временно приостановлен.",
-    "Ток КЗ по АКБ при заряде, заряд временно приостановлен.",
-    "Ток КЗ по АКБ, генерация или заряд временно приостановлен.",
-    "Возможно залипание основного реле, необходим ремонт",
-    "Ток КЗ по сети 220В, произойдет переход на генерацию с возможным дальнейшим отключением по КЗ АКБ.",
-    "На выходе 220В постороннее напряжение. Генерация будет отключена!",
-    "Произошел сброс программы",
-    "АКБ полностью разряжен, МАП будет работать еще 1 минуту",
-    "Перегрузка по АКБ, генерация продолжится в течении 10сек",
-    "Нагрузка выше номинальной мощности. Работа ограниченное время",
-    "Превышение температуры, приостановка генерации или заряда.",
-    "Ошибка вентилятора",
-    "Перегрузка по сети. Переход на генерацию",
-    "Сбой режима работы (гроза или помеха)",
-    "Выключение по многократному КЗ по заряду. Ошибка снимается через 2 ч.",
-    "",
-    "Сетевое напряжение вне диапазона",
-    "Постороннее напряжение на выходе 220В, или большие выбросы от нагрузки",
-    "Выбросы напряжения в сети 220В по входу",
-    "Залипла кнопка СТАРТ или ЗАРЯД",
-    "Переход на заряд невозможен - нет сети на входе",
-    "Мощность нагрузки > установленной максимальной",
-    "Сеть нестабильна",
-    "Отключение по перегрузке по току АКБ, 10 попыток перезапуска.",
-    "Отключение по перегрузке по току АКБ во время заряда, 10 попыток перезапуска.",
-    "Отключение по перегрузке. Критически низкое напряжение АКБ.",
-    "Неисправность вентилятора. 10 попыток перезапуска.",
-    "Отключение по мощности > номинала в течение 30 минут.",
-    "Отключение по полному разряду АКБ",
-    "Отключение. Температура вне диапазона",
-    "Полное отключение по многократным перегрузкам АКБ",
-    "Отключение генерации. На выходе постороннее напряжение или реле неисправно",
-    "Переход на генерацию. Перегрузка по сети",
-    "","","","","","Выключение по многократным перегрузкам по сети",
-    "MPPT: Перенапряжение СП",
-    "MPPT: Перенапряжение АКБ",
-    "MPPT: Перезаряд АКБ",
-    "MPPT: Короткое замыкание по АКБ",
-    "MPPT: Перегрев АКБ",
-    "MPPT: Ошибка связи I2C",""
-    ], err_to_screen=[], voltage=[10,15,20,30,40,60], Voltage_eeprom=0, Power_eeprom=0, power=[1.3,1.5,2,3,4.5,6,9,12,15,18,24,36], v=[12,24,48,96];
+ err_to_screen=[], voltage=[10,15,20,30,40,60], Voltage_eeprom=0, Power_eeprom=0, power=[1.3,1.5,2,3,4.5,6,9,12,15,18,24,36], v=[12,24,48,96];
 
 function getXmlHttp(){
   var xmlhttp;
@@ -94,12 +41,13 @@ $(function() {
     xmlhttp.send(null);
     if (xmlhttp.status==200) {
     Power_eeprom=xmlhttp.responseText;
+    if (Power_eeprom>11) Power_eeprom=11;
    }
 
   var limit_acc=Math.round(power[Power_eeprom]*10/v[Voltage_eeprom])*100;        
 
   meter_v = new JSGadget.Meter($("#meter_v"), {
-    title: "Uвх,В",
+    title: loc['title1'],
     gap: 10,
     min: 160,
     max: 280,
@@ -112,7 +60,7 @@ $(function() {
     }});
     
 meter_i = new JSGadget.Meter($("#meter_i"), {
-    title: "Iвх,А",
+    title: loc['title2'],
     gap: 10,
     min: 0,
     max: 50,
@@ -125,7 +73,7 @@ meter_i = new JSGadget.Meter($("#meter_i"), {
     }});
     
 meter_vout = new JSGadget.Meter($("#meter_vout"), {
-    title: "Uвых,В",
+    title: loc['title3'],
     gap: 10,
     min: 160,
     max: 280,
@@ -138,7 +86,7 @@ meter_vout = new JSGadget.Meter($("#meter_vout"), {
     }});
 
 meter_i_i2c=new JSGadget.Meter($("#meter_i_i2c"), {
-    title: "Iсумм,A",
+    title: loc['title4'],
     gap: 10,
     min: 0,
     max: 250,
@@ -152,7 +100,7 @@ meter_i_i2c=new JSGadget.Meter($("#meter_i_i2c"), {
 
 if (document.getElementById('map')) {
 meter_vacc = new JSGadget.Meter($("#meter_vacc"), {
-    title: "Uакб,В",
+    title: loc['title5'],
     gap: 10,
     min: voltage[Voltage_eeprom*2],
     max: voltage[Voltage_eeprom*2+1],
@@ -168,7 +116,7 @@ else
 {
 
    meter_vacc = new JSGadget.Meter($("#meter_vacc"), {
-    title: "Uакб,В",
+    title: loc['title5'],
     gap: 10,
     min: 10, 
     max: 60,
@@ -183,7 +131,7 @@ else
 
 if (document.getElementById('map')) {
 meter_iacc = new JSGadget.Meter($("#meter_iacc"), {
-    title: "Iакб-мап,A",
+    title: loc['title6'],
     gap: 10,
     min: -limit_acc,
     max: limit_acc,
@@ -199,7 +147,7 @@ else
 {
 limit_acc=100;
 meter_iacc = new JSGadget.Meter($("#meter_iacc"), {
-    title: "Iакб,A",
+    title: loc['title7'],
     gap: 10,
     min: -limit_acc,
     max: limit_acc,
@@ -215,7 +163,7 @@ meter_iacc = new JSGadget.Meter($("#meter_iacc"), {
 
 
 meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
-    title: "U,В",
+    title: loc['title8'],
     gap: 10,
     min: 40,
     max: 250,
@@ -363,7 +311,7 @@ meter_vpv = new JSGadget.Meter($("#meter_vpv"), {
 	
     });
 
-    alert("Счетчик обнулен");
+    alert(loc['alert1']);
 
     } 
 
@@ -572,7 +520,7 @@ var alt_u=$('#alt_user');
     $('#text_v').html(arr[0]);
     $('#text_i').html(arr[1]);
     $('#text_vout').html(arr[2]);
-    $('#text_i2c').html((arr[12]<0)?'ОТКЛ':arr[12]);
+    $('#text_i2c').html((arr[12]<0)?loc['off1']:arr[12]);
     display_1.setVal((6250/arr[7]).toFixed(1));
     display_2.setVal((6250/arr[8]).toFixed(1));
     display_3.setVal(arr[15]);
@@ -605,15 +553,15 @@ var alt_u=$('#alt_user');
 
 
 
-    if (i==1) {i=0; $('#text1').html(">&nbspГц&nbsp>");}
-    else {i=1;$('#text1').html("<b>></b>&nbspГц&nbsp<b>><b>");}
+    if (i==1) {i=0; $('#text1').html(">&nbsp"+loc['hz']+"&nbsp>");}
+    else {i=1;$('#text1').html("<b>></b>&nbsp"+loc['hz']+"&nbsp<b>><b>");}
 
 
       counter_net.setVal(arr[9]/100);
       counter_acc.setVal(arr[10]/100);
       counter_charge.setVal(arr[11]/100);
 	
-	$('#text_mode').html("Режим МАП");
+	$('#text_mode').html(loc['map_mode']);
 
           switch (arr[21]) {
       
@@ -644,7 +592,7 @@ var alt_u=$('#alt_user');
     		document.getElementById("map_mode_in").style.background="springgreen";
 
 		    } else 
-    		$('#map_mode_in').html("НЕ ОПРЕДЕЛЕН");
+    		$('#map_mode_in').html(loc['undefined']);
     	
 	  
       }
@@ -685,7 +633,7 @@ var mipv=document.getElementById('meter_ipv')
     display_5.setVal(arr[16]);
     $('#text_vpv').html(arr[5]);
     $('#text_ipv').html(arr[6]);
-    $('#text_kw_pv').html("кВтч за день");
+    $('#text_kw_pv').html(loc['kWh_day']);
     $('#mppt_text').html("&nbsp"+arr[20]);
     
     counter_pv.setVal(arr[13]);
@@ -699,7 +647,7 @@ var mipv=document.getElementById('meter_ipv')
 
 	    }
     
-    $('#speed').html(arr[36]+"&nbspмин<sup>-1</sup>");
+    $('#speed').html(arr[36]+"&nbsp"+loc['min']+"<sup>-1</sup>");
     
     series_mppt.append(new Date().getTime(),Number(arr[19]));
     series_wind.append(new Date().getTime(),Number(arr[36]));
@@ -732,22 +680,21 @@ $('#bms_umax').html(arr[25]);if (arr[25]=='off') document.getElementById("bms_um
 	consumed=arr[30];
 	var real_p=((Number(arr[34])+Number(arr[30]))/Number(arr[34]))*100;
 	if (real_p>100) real_p=100;
-	$('#text_bmon_real').html(consumed.concat("/",arr[34],"Ач"));
+	if (consumed) $('#text_bmon_real').html(consumed.concat("/",arr[34],loc['ah']));
 	var acc_hrs=Math.floor(arr[35]/60);
 	var acc_min=arr[35]-acc_hrs*60;
-	if (arr[35]<2880 && arr[35]>=0) $('#est_time').html(acc_hrs+"ч"+"&nbsp"+acc_min+"мин");
+	if (arr[35]<2880 && arr[35]>=0) $('#est_time').html(acc_hrs+loc['h']+"&nbsp"+acc_min+loc['min']);
 	else 
-	if (arr[35]>2880) $('#est_time').html(">48ч");
+	if (arr[35]>2880) $('#est_time').html(">48"+loc['h']);
 	else
-	if (arr[35]==-1) $('#est_time').html("н/д");
+	if (arr[35]==-1) $('#est_time').html(loc['na']);
 
 	$('#timer').html((
-arr[40]<36000)?Math.floor(arr[40]/60)+'&nbspмин':Math.floor(arr[40]/3600)+'&nbspч');
-	$('#user_counter').html(arr[37]+"Ач");
-	$('#soc').html((arr[38]==-1)?"н/д":arr[38]+'%');
-	$('#est_c').html((arr[39]==0)?"н/д":arr[39]+'Ач');
+arr[40]<36000)?Math.floor(arr[40]/60)+'&nbsp'+loc['min']:Math.floor(arr[40]/3600)+'&nbsp'+loc['h']);
+	$('#user_counter').html(arr[37]+loc['ah']);
+	$('#soc').html((arr[38]==-1)?loc['na']:arr[38]+'%');
+	$('#est_c').html((arr[39]==0)?loc['na']:arr[39]+loc['ah']);
 
-//	$('#text_c_measured').html(arr[34]+"Ач");
 	document.getElementById('battery_100').style.width=arr[32]+"%"
 	document.getElementById('battery_real').style.width=real_p+"%";
 	document.getElementById('text_bmon').style.color="white";
@@ -760,7 +707,7 @@ arr[40]<36000)?Math.floor(arr[40]/60)+'&nbspмин':Math.floor(arr[40]/3600)+'&n
         if (arr[32]<=50) document.getElementById('battery_100').style.background="orange";
         if (arr[32]<=30) document.getElementById('battery_100').style.background="red";
 
-//        $('#text6').html("температура,&degС");
+//        $('#text6').html(loc['temp']+",&degС");
         
 
 	$('#text_power').html("");
