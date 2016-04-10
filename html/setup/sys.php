@@ -7,7 +7,7 @@
   <title><?php loc('services_title');?></title>
   <script src="../js/jquery-2.1.3.min.js"></script>
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
-
+  <script src="../local/local_js.js"></script>
   <script src="proc.js"></script>    
 
 

@@ -38,11 +38,11 @@ $(function() {
 //----- text values
     $(document).ready(function () {
 	
-	$('#map_div').html((arr[0]==1)?"Работает":"Не работает");
-	$('#mppt_div').html((arr[1]==1)?"Работает":"Не работает");
-	$('#batmon_div').html((arr[2]==1)?"Работает":"Не работает");
-	$('#sms_div').html((arr[3]==1)?"Работает":"Не работает");
-	$('#mysql').html((arr[4]==1)?"Работает":"Не работает");
+	$('#map_div').html((arr[0]==1)?loc['working']:loc['not_working']);
+	$('#mppt_div').html((arr[1]==1)?loc['working']:loc['not_working']);
+	$('#batmon_div').html((arr[2]==1)?loc['working']:loc['not_working']);
+	$('#sms_div').html((arr[3]==1)?loc['working']:loc['not_working']);
+	$('#mysql').html((arr[4]==1)?loc['working']:loc['not_working']);
 
        });
    };
