@@ -110,6 +110,33 @@ session_start();
         }
         break;
     
+    case "cs1": $field1='I_EXTS0'; $field2='Sign_C0';
+
+    case "cs2": if ($field=="cs2") { $field1='I_EXTS0'; $field2='Sign_C0';}
+
+		
+    $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";
+    $result=mysql_query($query) or die("Query failed:".mysql_error());
+    $row=mysql_fetch_row($result);
+    $number_low=$row[0];if ($number_low==NULL) {loc('history_error1');; exit();}
+    $query = "SELECT MAX(number) FROM `mppt` WHERE date='".$date_end."' AND time <= '".$time_end."'\n";
+    $result=mysql_query($query) or die("Query failed:".mysql_error());
+    $row=mysql_fetch_row($result);
+    $number_high=$row[0];if ($number_high==NULL) {loc('history_error2');; exit();}
+
+    $query = "SELECT date,time,".$field1.",".$field2." FROM `mppt` WHERE number BETWEEN ".$number_low." AND ".$number_high."\n";
+    
+    $result= mysql_query($query) or die("Query failed:".mysql_error());	
+	
+        while ($line = mysql_fetch_array($result, MYSQL_NUM)) {
+	$line[3]=rand(0,1);$line[2]=rand(0,100);
+	if ($line[3]==1) $line[2]=-$line[2];
+        for ($i=0;$i<3;$i++) 
+        $temp_array[$index++]=$line[$i];
+        
+        }
+        break;
+    
     case "map_errors":
 	$query = "SELECT MIN(number) FROM `map_errors` WHERE date='".$date_start."' AND time >= '".$time_start."'LIMIT 1 \n";
         $result=mysql_query($query) or die("Query failed date/time start:".mysql_error());

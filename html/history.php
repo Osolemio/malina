@@ -80,6 +80,8 @@
 <input type="radio" name="field" value="V_Bat" /><?php loc('UACC'); ?>, <?php loc('V'); ?>  
 <input type="radio" name="field" value="P_PV" /><?php loc('PPV'); ?>, <?php loc('W'); ?>  
 <input type="radio" name="field" value="P_curr" /><?php loc('PCHG'); ?>, <?php loc('W'); ?>
+<input type="radio" name="field" value="cs1" /><?php loc('cs1'); ?>, <?php loc('A'); ?>
+<input type="radio" name="field" value="cs2" /><?php loc('cs2'); ?>, <?php loc('A'); ?>
 <input type="radio" name="field" value="windspeed" /><?php loc('wind_rpm'); ?>, <?php loc('min'); ?><sup>-1</sup>
 
 </p>
