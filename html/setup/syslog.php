@@ -1,5 +1,6 @@
 <?php
 
+include('../local/local.inc');
 // full path to text file
 define("TEXT_FILE", "/var/log/syslog");
 // number of lines to read from the end of file
@@ -45,5 +46,5 @@ foreach ($lines as $line) {
     echo $line."<br>";
 }
 
-echo "<a href='index.php'><-вернуться в меню</a>";
+echo "<a href='index.php'>".$text['MENU']."</a>";
 ?>

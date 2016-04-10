@@ -1,6 +1,6 @@
 <?php
 
-include('../local/local_ru.php');
+include('../local/local.inc');
 
 if (isset($_POST['on'])) $value=chr(2);;
 if (isset($_POST['off'])) $value=chr(1);

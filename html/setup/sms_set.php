@@ -37,7 +37,7 @@ if (isset($_POST['sms_value4']))
 
 
 
-echo "Данные переданы на запись...<br>";
+echo $text['transmitted']."...<br>";
 fclose($allowed);
 fclose($number);
 

@@ -48,7 +48,7 @@ $(function() {
     if (cont== '-----*-')$('#progress').html('------*');
     if (cont== '------*')$('#progress').html('*------');
     }
-    if (arr[0]=='done')  $('#progress').html("Процесс окончен");    
+    if (arr[0]=='done')  $('#progress').html(loc['finished']);    
 
        });
    };
