@@ -51,7 +51,7 @@
 
   <button onclick="pbal_switch();"><b><?php loc('p-i');?></b></button>
   </div></div>
-  <button onclick="sw_map();"><b><?php loc('MAP');?></b></button>
+  <button onclick="sw_map();"><b><?php loc('MAC');?></b></button>
   </div></div>
   <button onclick="sw_mppt();"><b><?php loc('MPPT');?></b></button>
   </div></div>
