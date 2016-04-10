@@ -389,6 +389,8 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
       if (NetUpEco==0) //ECO forced gen or Tarifs
 	 {
 
+	if ((mode==3 || mode==2) && (NetUpLoad==1) && (Pmax_On&2>0) && (UNET>100)) return 18;
+
 	if (mode==2) 
 	    {
 		if (UNET>100)
@@ -401,7 +403,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 
 	    }
 
-	if ((mode==3 || mode==2) && (NetUpLoad==1) && (Pmax_On&2>0) && (UNET>100)) return 18;
+	
 
 
 	}
