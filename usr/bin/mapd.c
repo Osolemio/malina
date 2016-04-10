@@ -354,7 +354,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
     } 
 
 
-    unsigned char real_mode(unsigned char mode, unsigned char net_alg, unsigned char flag_eco, unsigned char NetUpEco, unsigned char NetUpLoad, unsigned char UNET)
+    unsigned char real_mode(unsigned char mode, unsigned char net_alg, unsigned char flag_eco, unsigned char NetUpEco, unsigned char NetUpLoad, unsigned char UNET, unsigned char Pmax_On)
 	
 	    {
 	    
@@ -376,7 +376,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
     15 - ожидание внешнего заряда
     16 - тарифная сеть. трансляция+эко-подкачка
     17 - тарифная сеть. трансляция+продажа в сеть
-
+    18 - режим подкачка Pmax
     
     
     
@@ -400,6 +400,9 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 		 } else return 2;
 
 	    }
+
+	if ((mode==3) && (NetUpLoad==1) && (Pmax_On&2>0)) return 18;
+
 
 	}
 
@@ -870,7 +873,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 
 // change MAP mode to my extensions
 	
-	map_data._MODE=real_mode(map_data._MODE, eeprom[0x16B], map_data._Flag_ECO, eeprom[0x13C], eeprom[0x13B], map_data._UNET);
+	map_data._MODE=real_mode(map_data._MODE, eeprom[0x16B], map_data._Flag_ECO, eeprom[0x13C], eeprom[0x13B], map_data._UNET, eeprom[0x58c]);
 
 
         map_data._Status_Char = Buffer[0x402 - 0x3FF];
