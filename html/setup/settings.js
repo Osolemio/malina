@@ -27,7 +27,7 @@ $(function() {
     if (xmlhttp.status==200) {
     var result=JSON.parse(xmlhttp.responseText);}
    
-    else alert('Ошибка получения данных');
+    else alert(loc['alert1']);
     
      var eacc=result[max_items][0];
      $('#input_field').prop('disabled',true);
@@ -59,7 +59,7 @@ $(function() {
      var chapter_id=$('#chapter').val();
      $('#input_field').prop('disabled',true);
      $('#input_field').prop('type',"text");
-     $('#input_field').val("выберите из списка");
+     $('#input_field').val(loc['text25']);
      $('#field_units').html("");
 
      if (result[29][7]==8) {
@@ -103,11 +103,11 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
-		if (result[i][4]=='sec') $('#field_units').html("сек"); else $('#field_units').html("");
+		if (result[i][4]=='sec') $('#field_units').html(loc['sec']); else $('#field_units').html("");
 
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: "+result[i][5]);
-		$('#max').html("Максимальное значение: "+result[i][6]);
+		$('#min').html(loc['minval']+result[i][5]);
+		$('#max').html(loc['maxval']+result[i][6]);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('min',result[i][5]);
 		$('#input_field').prop('max',result[i][6]);
@@ -127,8 +127,8 @@ $(function() {
 		$('#field_units').html("&degC");
 
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: "+(result[i][5]-50));
-		$('#max').html("Максимальное значение: "+(result[i][6]-50));
+		$('#min').html(loc['minval']+(result[i][5]-50));
+		$('#max').html(loc['maxval']+(result[i][6]-50));
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('min',result[i][5]-50);
 		$('#input_field').prop('max',result[i][6]-50);
@@ -147,9 +147,9 @@ $(function() {
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
 		$('#input_field').prop('disabled',true);
-		$('#field_units').html("В");
-		$('#min').html("Минимальное значение: ".concat(result[i][5]+100));
-		$('#max').html("Максимальное значение: ".concat(result[i][6]+100));
+		$('#field_units').html(loc['V']);
+		$('#min').html(loc['minval'].concat(result[i][5]+100));
+		$('#max').html(loc['maxval'].concat(result[i][6]+100));
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('min',result[i][5]+100);
 		$('#input_field').prop('max',result[i][6]+100);
@@ -169,10 +169,10 @@ $(function() {
 		$('#max_val').val(result[i][6]);
 		$('#dop').val(result[i][3]);
 		$('#eacc').val(eacc);
-		$("#field_units").html("В");
+		$("#field_units").html(loc['V']);
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat(((result[i][5]<<eacc)+result[i][3])/10));
-		$('#max').html("Максимальное значение: ".concat(((result[i][6]<<eacc)+result[i][3])/10));
+		$('#min').html(loc['minval'].concat(((result[i][5]<<eacc)+result[i][3])/10));
+		$('#max').html(loc['maxval'].concat(((result[i][6]<<eacc)+result[i][3])/10));
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('min',(((result[i][5]<<eacc)+result[i][3])/10));
 		$('#input_field').prop('max',(((result[i][6]<<eacc)+result[i][3])/10));
@@ -191,10 +191,10 @@ $(function() {
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
 		$('#eacc').val(eacc);
-		$("#field_units").html("В");
+		$("#field_units").html(loc['V']);
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat(((result[i][5]<<eacc))/10));
-		$('#max').html("Максимальное значение: ".concat(((result[i][6]<<eacc))/10));
+		$('#min').html(loc['minval'].concat(((result[i][5]<<eacc))/10));
+		$('#max').html(loc['maxval'].concat(((result[i][6]<<eacc))/10));
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('min',(((result[i][5]<<eacc))/10));
 		$('#input_field').prop('max',(((result[i][6]<<eacc))/10));
@@ -212,13 +212,13 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
-		$('#field_units').html("Вт");
+		$('#field_units').html(loc['W']);
 		$('#dop').val(result[i][3]);
 		$('#eacc').val(eacc);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat((result[i][5]<<result[i][3])*100));
-		$('#max').html("Максимальное значение: ".concat((result[i][6]<<result[i][3])*100));
+		$('#min').html(loc['minval'].concat((result[i][5]<<result[i][3])*100));
+		$('#max').html(loc['maxval'].concat((result[i][6]<<result[i][3])*100));
 		$('#input_field').prop('min',((result[i][5]<<result[i][3])*100));
 		$('#input_field').prop('max',((result[i][6]<<result[i][3])*100));
 		$('#input_field').prop('step',100);
@@ -238,8 +238,8 @@ $(function() {
 		$('#field_units').html("С");
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat(result[i][5]/100));
-		$('#max').html("Максимальное значение: ".concat(result[i][6]/100));
+		$('#min').html(loc['minval'].concat(result[i][5]/100));
+		$('#max').html(loc['maxval'].concat(result[i][6]/100));
 		$('#input_field').prop('min',result[i][5]/100);
 		$('#input_field').prop('max',result[i][6]/100);
 		$('#input_field').prop('step',0.01);
@@ -257,12 +257,12 @@ $(function() {
 		$('#mem_class').val(result[i][4]);
 		$('#min_val').val(result[i][5]);
 		$('#max_val').val(result[i][6]);
-		$('#field_units').html("Ач");
+		$('#field_units').html("ah");
 		$('#eacc').val(eacc);
 		$('#input_field').prop('type',"number");
 		$('#input_field').prop('disabled',true);
-		$('#min').html("Минимальное значение: ".concat((result[i][5]*25)>>eacc));
-		$('#max').html("Максимальное значение: ".concat((result[i][6]*25)>>eacc));
+		$('#min').html(loc['minval'].concat((result[i][5]*25)>>eacc));
+		$('#max').html(loc['maxval'].concat((result[i][6]*25)>>eacc));
 		$('#input_field').prop('min',(result[i][5]*25)>>eacc);
 		$('#input_field').prop('max',(result[i][6]*25)>>eacc);
 		$('#input_field').prop('step',1);
@@ -283,7 +283,7 @@ $(function() {
 		$('#input_field').prop('type',"time");
 		$('#input_field').prop('disabled',true);
 		$('#input_field').prop('step',"any");
-		$('#min').html("Время задается с точностью до 10 мин, например 23:50");
+		$('#min').html(loc['note1']);
 		$('#max').html("");
 		var hh=(result[i][7]>>3).toString(); hh=(hh.length==1)?"0"+hh:hh;
 		var mm=((result[i][7]&7)*10).toString();mm=(mm.length==1)?"0"+mm:mm;
@@ -304,8 +304,8 @@ $(function() {
 		$('#input_field').prop('min',(result[i][5]*16/60).toFixed(0));
 		$('#input_field').prop('max',(result[i][6]*16/60).toFixed(0));
 
-		$('#min').html("Время задается в часах");
-		$('#max').html("Максимальное значение: ".concat((result[i][6]*16/60).toFixed(0)));
+		$('#min').html(loc['note2']);
+		$('#max').html(loc['maxval'].concat((result[i][6]*16/60).toFixed(0)));
 		var hh=(result[i][7]*16/60).toFixed(0).toString();
 		
 		$('#input_field').val(hh);

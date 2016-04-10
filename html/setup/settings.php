@@ -8,6 +8,7 @@
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
   <script src="../local/menu.json"></script>
   <script src="../local/submenu.json"></script>
+  <script src="../local/local_js.js"></script>
   <script src="./settings.js"></script>
   <?php include('../local/local.inc');?>
   
