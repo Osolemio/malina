@@ -151,7 +151,7 @@
 <input type="button" value="<?php loc('bat_button3');?>" onclick="calculate()">
 </p>
 
-<?php loc('bat_peuker2');?>:<div id="result">1.00</div>
+<?php loc('bat_peukert2');?>:<div id="result">1.00</div>
 <hr>
 
 <center>

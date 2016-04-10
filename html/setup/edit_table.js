@@ -9,7 +9,7 @@
 		}
 
 		var plot = $.plot("#chart", [
-			{ data: arr, label: "U,В"},
+			{ data: arr, label: loc['title8']},
 		], {
 			series: {
 				lines: {
@@ -42,7 +42,7 @@
 
 		$("#chart").bind("plothover", function (event, pos, item) {
 
-				var str = "(" + pos.x.toFixed(2) + "%, " + pos.y.toFixed(2) + "В)";
+				var str = "(" + pos.x.toFixed(2) + "%, " + pos.y.toFixed(2) + loc['V']+")";
 				$("#hoverdata").text(str);
 
 				if (item) {

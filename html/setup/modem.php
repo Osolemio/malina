@@ -32,7 +32,7 @@
 
 $dir='/dev/serial/by-id';
 $devices=glob("/dev/ttyUSB*");
-echo "<b>".$text['ms_note8'].":<br><br></b>";
+echo "<b>".$text['ms_note80'].":<br><br></b>";
 
 for ($i=0;$i<sizeof($devices);$i++) 
     {

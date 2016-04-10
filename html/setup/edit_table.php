@@ -11,6 +11,7 @@
 
     <script src="../js/jquery.js"></script>
     <script src="../js/jquery.flot.js"></script>
+    <script src="../local/loacl_js.js"></script>
     <script src="edit_table.js"></script>
     <script>
 	$(function() { var t=make_graph(); });
