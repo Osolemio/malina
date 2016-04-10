@@ -7,8 +7,9 @@
   <script src="./js/jquery-2.1.3.min.js"></script>
   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
   <script src="./zingchart/zingchart.min.js"></script>
-  <script src="./multichart_hst.js"></script>
-
+  <script src="./local/local_js.js"></script>
+    <script src="./multichart_hst.js"></script>
+  
   <title><?php loc('multichart_hst_title');?></title>
     
     
