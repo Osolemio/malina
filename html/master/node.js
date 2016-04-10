@@ -77,9 +77,9 @@ function tick() {
 	});
 	var cur_p=Number(load_battery['C_current_percent']);
 	var cons=Number(load_battery['integral_dCdt']);
-	$('#text_battery_ah').html(C20+'Ач');
+	$('#text_battery_ah').html(C20+loc['ah']);
 	$('#text_battery_percent').html(cur_p.toFixed(0)+'%');
-	$('#text_battery_cons').html(cons.toFixed(1)+'Ач');
+	$('#text_battery_cons').html(cons.toFixed(1)+loc['ah']);
 	var cur_p_g=100-cur_p;
 	var cur_p_b=(Math.abs(cons/C20))*100; if (cur_p_b>100) cur_p_b=100;
 	document.getElementById('battery_percent').style.width=cur_p_g+'%';
@@ -155,7 +155,7 @@ function tick() {
 	if (map_error) document.getElementById('led_map_error'+key).style.visibility='visible'; else
 			document.getElementById('led_map_error'+key).style.visibility='hidden';
 	$('#map_acc_temp'+key).html(load_map[key]['_Temp_Grad0']+'&degC');
-	$('#map_vacc'+key).html(load_map[key]['_Uacc']+'В');
+	$('#map_vacc'+key).html(load_map[key]['_Uacc']+loc['V']);
 
 	var map_mode=load_map[key]['_MODE'];
 	    
@@ -295,7 +295,7 @@ function tick() {
 //-------------MPPT SECTION ---------------------------------------
 	$('#text_mppt_vpv'+key).html(load_mppt[key]['Vc_PV']);
 	$('#text_mppt_ipv'+key).html(load_mppt[key]['Ic_PV']);
-	$('#text_mppt_wind'+key).html((load_mppt[key]['windspeed']==65535)?'н/д':load_mppt[key]['windspeed']);
+	$('#text_mppt_wind'+key).html((load_mppt[key]['windspeed']==65535)?loc['na']:load_mppt[key]['windspeed']);
 	$('#text_mppt_ppv'+key).html(load_mppt[key]['P_PV']);
 	$('#text_mppt_temp'+key).html(load_mppt[key]['Temp_Int']+'&degC');
 	$('#text_mppt_counter'+key).html(load_mppt[key]['Pwr_kW']);
@@ -307,7 +307,7 @@ function tick() {
 	document.getElementById('arrow_mppt'+key).style.visibility='hidden';
 
 	$('#mppt_acc_temp'+key).html(load_mppt[key]['Temp_Bat']+'&degC');
-	$('#mppt_vacc'+key).html(load_mppt[key]['V_Bat']+'В');
+	$('#mppt_vacc'+key).html(load_mppt[key]['V_Bat']+loc['V']);
 
 	if (load_mppt[key]['RSErrSis']!=0)
 	document.getElementById('led_mppt_error'+key).style.visibility='visible'; else

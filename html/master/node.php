@@ -6,6 +6,7 @@
   <link rel="stylesheet" type="text/css" href="node.css"/>
   <script src="../js/jquery-2.1.3.min.js"></script>
   <script src="../js/jquery-migrate-1.2.1.min.js"></script>
+  <script src="../local/local_js.js"></script>
   <?php include('../local/local.inc');?>
  
   <title><?php loc('node_title'); echo $_GET['node']; ?> </title>

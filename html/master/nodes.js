@@ -1,4 +1,3 @@
-  var dev=['МАП','MPPT','МАП+MPPT'];
   var load='';
     var batmon; 
 
@@ -24,7 +23,7 @@ $(function () {
 	{
 	 'id' : '1',
 	 'parent' : '#',
-         'text' : 'Блок АКБ 1',
+         'text' : loc['text26'],
 	 'icon' : '../img/bat.png',
          'state' : {
            'opened' : true,
@@ -33,9 +32,9 @@ $(function () {
          },
 	
 	 {
-	 'id' : 'Гараж',
+	 'id' : loc['text27'],
 	 'parent' : '1',
-         'text' : 'Гараж',
+         'text' : loc['text27'],
 	 'icon' : '../img/pc.png',
          'state' : {
            'opened' : true,
@@ -44,7 +43,7 @@ $(function () {
 	 },
 	{
 	 'id' : 'IP',
-	 'parent' : 'Гараж',
+	 'parent' : loc['text27'],
          'text' : '127.0.0.1',
 	 'icon' : '../img/note.png',
          'state' : {
@@ -54,8 +53,8 @@ $(function () {
 	 },
 	 {
 	 'id' : 'dev',
-	 'parent' : 'Гараж',
-         'text' : 'МАП',
+	 'parent' : loc['text27'],
+         'text' : loc['MAC'],
 	 'icon' : '../img/note.png',
          'state' : {
            'opened' : true,
@@ -116,7 +115,7 @@ function create_node() {
 function delete_node() {
  var  instance=$('#nodes').jstree(true);
  var obj=instance.get_selected(true)[0];
- if (!obj) {alert("Ничего не выбрано");return;}
+ if (!obj) {alert(loc['text28']);return;}
   instance.delete_node(obj);
 
 }
@@ -147,7 +146,7 @@ var instance=$('#nodes').jstree(true).get_json('#',{'flat':false, 'no_state':tru
     	    alert("ExceptionType: " + r.ExceptionType);
 	}});
     }
- if (!trunc) alert("Данные сохранены");
+ if (!trunc) alert(loc['text29']);
 }
 
 
@@ -193,7 +192,7 @@ var instance=$('#nodes').jstree(true).get_json('#',{'flat':false, 'no_state':tru
 	async: false,
         method: 'POST',
 	success: function(response) {
-	alert("Сохранено");
+	alert(loc['text30']);
 	},
 	error: function (response) {
     	    var r = jQuery.parseJSON(response.responseText);
@@ -206,14 +205,14 @@ var instance=$('#nodes').jstree(true).get_json('#',{'flat':false, 'no_state':tru
 
 
 function erase() {
-    if (confirm('Вы уверены? Все узлы будут удалены из базы данных'))
+    if (confirm(loc['text31']))
 	{
 	 $.ajax({
 	url: 'erase_nodes.php',
 	async: false,
         method: 'POST',
 	success: function(response) {
-	alert("Узлы удалены");
+	alert(loc['text32']);
 	window.location.reload(true);
 	},
 	error: function (response) {

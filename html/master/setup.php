@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="dist/themes/default/style.min.css" />
   <script src="dist/libs/jquery.js"></script>
   <script src="dist/jstree.min.js"></script>  
+  <script src="../local/local_js.js"></script>
   <script src="nodes.js"></script>
 <?php include('../local/local.inc');?>
 <title><?php loc('ms_set_title');?></title>
