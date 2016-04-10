@@ -129,7 +129,6 @@ session_start();
     $result= mysql_query($query) or die("Query failed:".mysql_error());	
 	
         while ($line = mysql_fetch_array($result, MYSQL_NUM)) {
-	$line[3]=rand(0,1);$line[2]=rand(0,100);
 	if ($line[3]==1) $line[2]=-$line[2];
         for ($i=0;$i<3;$i++) 
         $temp_array[$index++]=$line[$i];
