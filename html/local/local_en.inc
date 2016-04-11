@@ -1,97 +1,97 @@
 <?php
 
     $power=array("1,3","1,5","2","3","4,5","6","9","12","15","18","24","36");
-    $dominator=array("обычный","МАП трехфазный","н/о","DOMINATOR","н/о","н/о","н/о","DOMINATOR+");
+    $dominator=array("Basic","3-phase MAC","n/d","DOMINATOR","n/d","n/d","n/d","DOMINATOR+");
     $voltage=array(12,24,48,96);
-    $sin=array("Чистый синус","Оптимальный синус","Pmax","Прецизионный синус");
-    $phase=array("Однофазная работа","Ведущий/фаза1","Фаза 2","Фаза 3", "Ведомый");
-    $eco=array("Нет подкачки. При ЭКО - генерация от АКБ","Включен","Продажа в сеть");
-    $onoff=array("Выключено", "Включено");
-    $phase_mode=array("Независимая работа трех фаз","Синхронная (зависимая) работа трех фаз", "Отключено");
-    $net=array("Промышленная сеть", "Прочие электростанции (генератор)");
-    $ext=array("Нет внешних устройств","BMS &microART&copy", "MPPT &microART&copy", "BMS+MPPT &microART&copy");
-    $net_mode=array("Трансляция+заряд","Только трансляция","Принудительная генерация ЭКО","Тарифная сеть");
-    $acc_type=array("Кислотный","Гелевый/AGM","AGM Shoto","Кислотный Trojan","Литий-ионный LYP 3.9В","Литий-ионный LYP 3.7В");
-    $charge=array("Двуступенчатый. С постоянным током","Трехступенчатый: 2 ступени постоянным током + дозаряд","Трехступенчатый: 2 постоянным током + буферный", "Четырехступенчатый: Две ступени постоянным током + дозаряд + буферный");
+    $sin=array("Pure sine","Optimal sine","Pmax","Precise sine");
+    $phase=array("Single phase operation","Master/phase 1","Phase 2","Phase 3", "Slave");
+    $eco=array("No mixing. At ECO - generation from the battery","Activated","Surplus to grid");
+    $onoff=array("Active", "Off");
+    $phase_mode=array("3 phase independent work","Sincronous (dependent) 3-phase work", "off");
+    $net=array("Power grid", "Other power stations (i.e. fuel generator)");
+    $ext=array("No external devices","BMS &microART&copy", "MPPT &microART&copy", "BMS+MPPT &microART&copy");
+    $net_mode=array("Transmitting+charge","Transmitting only","Forced ECO generation","Tariff zones");
+    $acc_type=array("Lead-acid with free electrolyte","Gel/AGM","AGM Shoto","Trojan. Lead-acid","Lithium-ion LFP 3.9V","Lithium-ion LPF 3.7V");
+    $charge=array("Two-stage. With constant current","3-stage: 2 constant current steps + absorption","3-stage: 2 constant current steps + float", "4-stage: 2 constant current steps + absorption + float");
     
 
-    $mode=array("МАП выключени и нет сети на входе","МАП выключен.Сеть на входе","МАП включен. Генерация от АКБ. Нет сети.","МАП включен и транслирует сеть","МАП включен. Трансляция + заряд","","","","","",
-    "Принудительная генерация","Тарифная сеть. максимальный тариф. принудительная генерация", "Тарифная сеть. минимальный тариф",
-    "Трансляция + эко-подкачка", "Трансляция + продажа в сеть", "Ожидание внешнего полного заряда", "Тарифная сеть. трансляция+эко-подкачка",
-    "Тарифная сеть. трансляция+продажа в сеть", "Подкачка Pmax");
+    $mode=array("MAC is turned off and no net at the input","MAC is ON. Network at the input is detected","MAC is ON. Generation mode. No network (power failure).","MAC is ON and transmitting the network","MAC is ON. Transnitting  + charge","","","","","",
+    "Forced generation","Tariff zone. Maximal rate. Forced generation", "Tariff zone. Minimal rate",
+    "Transmitting + ECO-mixing", "Transmitting + surplus to grid", "Waiting for the full external charge", "Tariff zone. Transmitting+ECO-mixing",
+    "Tariff zone. Transmitting+Surplus to grid", "Pmax mixing");
 
 
 
     $data_map=array(
 	    '_RSErrJobM'=>array(
-			'АКБ полностью разряжен, напряжение критически низкое для работы МАП.',
-			'Превышение напряжения на АКБ, генерация или заряд временно приостановлен.',
-			 'Ток КЗ по АКБ при заряде, заряд временно приостановлен.',
-			 'Ток КЗ по АКБ, генерация или заряд временно приостановлен.',
-			 'Возможно залипло основное реле, необходим ремонт.',
-			 'Ток КЗ по сети 220В, произойдет переход на генерацию с возможным дальнейшим отключением по КЗ АКБ.',
-			 'На выходе 220В (но не на входе сети 220В) постороннее напряжение, генерация будет отключена.',
-			 'Произошел сброс программы, возможно сильная помеха от грозы и т.д.'
+			'Battery is totally discharged, Voltage is too low for MAC operation.',
+			'Battery overvoltage, the generation or charge has been suspended.',
+			 'SC current on the battery while charging, the charge has been suspended.',
+			 'SC current on the battery, the generation or charge has been suspended .',
+			 'The main relay is sealed, probably. Maintenance is required.',
+			 'SC on AC network, MAC will be switched to the generation with further expectancy of the shutoff on battery SC.',
+			 'AC voltage at the output (not at the input) - generation will be stopped.',
+			 'Program reset occured. Probably some surges caused by storm an so on'
 			    ),
 	    '_RSErrJob'=>array(
-			'АКБ полностью разряжен, МАП будет работать еще 1 минуту и отключит генерацию, пока напряжение на АКБ не станет выше EE_LCD_UAccMinNetGen =12,5в (заводское) или не перейдет на заряд.',
-			'Перегрузка по АКБ, генерация продолжится в течении 10сек (отсчет времени в ячейке _T_Overload). После чего произойдет отключение на 10сек. (_TOff_Overload) и так не более 10 раз в течении 10мин.',
-			'Нагрузка выше номинальной мощности – будем работать ограниченное время (30 мин для Pro модели). Отсчет времени работы в ячейке _T_Nominal.',
-			'Превышение температуры, приостановка генерации или заряда.',
-			'Вентилятор не крутится, отрабатывает аналогично перегрузке ErrJ_PowAccMax.',
-			'Мощность перегрузки по сети, переход на генерацию.',
-			'Был сбой в режиме работы (например по сбросу питания или сильной помехи).',
-			'Выключились по многократным КЗ по заряду, через 2ч снимаем ошибку.'
+			'Battery is totally discharged, MAC will be working 1 minute more then the generation will be stopped until battery voltage is lower than EE_LCD_UAccMinNetGen =12,5V (factory pre set) or charge mode will be activated.',
+			'Overload on the battery, generation will be stopped in 10sec for 10sec. No more than 10 times in 10 minutes',
+			'The load is above nominal power – MAC will work for a limited time  (30 minutes for Pro model).',
+			'Overheating, the charge or generation is suspended.',
+			'Fan failure',
+			'AC overload, switched to the generation mode.',
+			'Operation mode fault detected (a surge or power failure).',
+			'Many short sircuits on charge. Switched off. The error will be reset in 2 hours'
 			    ),
 	    '_RSWarning'=>array(
-			'Нет действия для комбинации кнопка (“СТАРТ” и “ЗАРЯД”)',
-			'Сетевое напряжение вышло за пределы.',
-			'Есть постороннее напряжение на выходной розетке или большие выбросы напряжения от нагрузки.',
-			'Выбросы напряжения в сети 220В по входу.',
-			'Залипла кнопка (“СТАРТ” или “ЗАРЯД”).',
-			'Переход на заряд не возможен - нет сети на входе.',
-			'В режиме трансляции сети и возможно заряда, мощность нагрузки за пределами выставленной максимальной мощности (EE_LCD_NetMaxPow), но меньше мощности МАР. Произойдет переход на генерацию (кроме режима подкачки).',
-			'Сеть нестабильна (по напряжению или частоте), не будет перехода на трансляцию сети или выход из заряда если насчитали много нестабильностей'
+			'Nothing assigned for the button combination (“START” + “CHARGE”)',
+			'AC voltage is out of range.',
+			'There is extraneous voltage at the output or heavy surges caused by the load.',
+			'Voltage surges at the input.',
+			'Sticky key (“START” or “CHARGE”).',
+			'Unable to activate charge mode - no input AC network.',
+			'In transmitting or charge mode, the load power is above the maximal value, but less than MAC power. Generation mode will be activated (Except of mixing mode).',
+			'Grid is unstable (by voltage or frequency), the transfer to transmitting mode is impossible. Charge mode will be deactivated if many errors occur.'
 			    ),
 	    '_I2C_Err'=>array(
 			'I2C Err Ack',
 			'I2C Err Sum',
 			'I2C Err Data Size',
 			'I2C Err Protocol',
-			'н/о',
-			'н/о',
-			'н/о',
-			'н/о'
+			'n/d',
+			'n/d',
+			'n/d',
+			'n/d'
 			),
 	    '_RSErrDop'=>array(
-			'Неправильные данные от предыдущей фазы или нет связи вообще.',
-			'Вышли за окно синхронизации сдвига между фазами в 60 град.',
-			'Ошибка I2C BMS',
-			'Ошибка I2C MPPT',
-			'Устаревшая версия ПО MPPT',
-			'Ошибка синхронизации параллельных МАП. не правильные данные (но есть сигнал синхронизации 50Гц) или нет связи вообще.',
-			'На ведомом параллельном МАП нет сети, в то время как ведущий перешел на сеть - выключаем генерацию ведомого',
-			'н/о'
+			'Incorrect data from previous phase or no link.',
+			'Phase shift is out of range.',
+			'I2C BMS Error.',
+			'I2C MPPT Error.',
+			'Old MPPT firmware version',
+			'Parallel MACs synchronization error. Incorrect data (50Hz clocking is present) or no link.',
+			'Power failure on the parallel slave MAC, the Master MAC is on grid - generation mode on slave MAC will be stopped.',
+			'n/d'
 			    ),
 	    '_F_AccOver'=>array(
-			'Отключение по перегрузке по току АКБ, 10 попыток перезапуска.',
-			'Отключение по перегрузке по току АКБ во время заряда, 10 попыток перезапуска.',
-			'Отключение по перегрузке по S_UAccLow - критически низкое напряжение АКБ, снимается при восcтановлении напряжения на АКБ',
-			'Отключение по неисправности вентилятора, 10 попыток перезапуска.',
-			'Отключение по мощности выше номинальной более 30мин - снимается через 30мин',
-			'Отключение по полному разряду АКБ - снимаем по достижению напряжения на АКБ выше EE_LCD_UAccMinNetGen =12,5в (заводское) или при переходе на заряд',
-			'Отключение по выходу за пределы датчика температуры, снимается при остывании',
-			'Полное отключение по многократным перегрузкам по АКБ, снимается персоналом кнопкой “СТАРТ”'
+			'Stopped on ACC current overload 10 restart attempts.',
+			'Stopped on ACC current overload while charging. 10 restart attempts.',
+			'Stopped on overload on S_UAccLow - Battery voltage is too low.',
+			'Stopped on fan failure. 10 restart attempts.',
+			'Stopped on overload for more than 30 minutes - will be reset in 30 min.',
+			'Stopped on full battery discharge -  will be reset at 12,5V (factory default) or at charge.',
+			'Stopped on temperature (out of range).',
+			'Shutdown caused by many battery overloads, may be reset with "START" button.'
 			    ),
 	'_F_NETOver'=>array(
-			'Отключение генерации - на выходе постороннее напряжение или неисправное реле. Либо не правильное подключение проводов 220В либо ремонт.',
-			'Переход на генерацию - перегрузка по сети (превышена максимальная мощность EE_LCD_NetMaxPow порядка 1,5 максимальной мощности МАП) , снимается после исчезновения сети со входа но не более 10 раз в течении 10 мин.',
-			'н/о',
-			'Выключение по многократным перегрузкам по сети, снимается персоналом кнопкой “СТАРТ”',
-			'н/о',
-			'н/о',
-			'н/о',
-			'н/о'
+			'Generation is disabled - extraneous voltage at the output or relay is out of order. Incorrect grid connection. Maintenance is required.',
+			'Generation is activated - AC overload (approximately 1,5 times more than MAC nominal power).',
+			'n/d',
+			'Shutdown caused by many AC overloads, may be reset with "START" button.',
+			'n/d',
+			'n/d',
+			'n/d',
+			'n/d'
 			    )
 
     
@@ -99,19 +99,19 @@
 
 	    $data_mppt=array(
 	     '_RSErrSis'=>array(
-			'Перенапряжение панелей',
-			'Перенапряжение АКБ',
-			'Перезаряд АКБ',
-			'Короткое замыкание АКБ',
-			'Перегрев АКБ',
-			'Ошибка связи I2C',
-			'н/о',
-			'н/о'
+			'PV panels overvoltage',
+			'ACC overvoltage',
+			'ACC overcharge',
+			'ACC short circuit',
+			'ACC overheat',
+			'I2C link error',
+			'n/d',
+			'n/d'
 			    )
 
 	);
 
-	   $legend=array('map_errors'=>'МАП', 'mppt_errors'=>'MPPT',
+	   $legend=array('map_errors'=>'MAC', 'mppt_errors'=>'MPPT',
     '_Uacc'=>'Battery voltage, V',
     '_Iacc'=>'Battery current, A',
     '_PLoad'=>'MAP load, W',
@@ -132,63 +132,63 @@
 
 
 $text=array(
- 'START_SERVICES'=>'Запустите необходимые сервисы',
- 'MMENU'=>'Главное меню',
- 'ACC'=>'АКБ',
+ 'START_SERVICES'=>'You should start some service',
+ 'MMENU'=>'Main menu',
+ 'ACC'=>'BAT',
  'MPPT'=>'MPPT',
- 'NO_DATA'=>'НЕТ ДАННЫХ',
- 'MENU'=>'МЕНЮ',
- 'SYSTEM'=>'СИСТЕМА',
- 'HISTORY'=>'ИСТОРИЯ',
- 'MULTICHART'=>'МУЛЬТИГРАФ',
- 'GAUGES'=>'ПРИБОРЫ',
- 'TEXT'=>'ТЕКСТ',
- 'POWERS'=>'МОЩНОСТИ',
+ 'NO_DATA'=>'NO DATA',
+ 'MENU'=>'MENU',
+ 'SYSTEM'=>'SYSTEM',
+ 'HISTORY'=>'HISTORY',
+ 'MULTICHART'=>'MULTICHART',
+ 'GAUGES'=>'GAUGES',
+ 'TEXT'=>'TEXT',
+ 'POWERS'=>'POWERS',
  'BMS'=>'BMS',
- 'INFO'=>'ИНФО',
- 'MASTER-NODE'=>'МАСТЕР-УЗЕЛ',
- 'MAC'=>'МАП',
- 'SERVICES'=>'СЕРВИСЫ',
- 'MODEM'=>'МОДЕМ',
- 'BATTERY'=>'БАТАРЕЯ',
- 'SMS'=>'СМС',
- 'PASSWORD'=>'ПАРОЛЬ',
- 'WORK_DB'=>'РАБОТА С БД',
- 'MAIN'=>'ГЛАВНОЕ',
- 'SETTINGS'=>'НАСТРОЙКИ',
- 'OPEN'=>'ОТКРЫТЬ',
- 'SELECT_ALL'=>'ВЫБРАТЬ ВСЕ',
- 'UNSELECT_ALL'=>'СНЯТЬ ВЫДЕЛЕНИЕ',
- 'Bat_pkg'=>'Блок АКБ',
- 'TIME'=>'Время',
- 'DATE'=>'Дата',
- 'MODE'=>'Режим',
- 'UNET'=>'Напряжение с подстанции',
- 'INET'=>'Ток по входу',
- 'calc'=>'расчет',
- 'PNET'=>'Мощность с подстанции',
- 'FNET'=>'Частота с подстанции',
- 'FMAC'=>'Частота с МАП',
- 'UMAC'=>'Напряжение с МАП',
- 'UERR'=>'Последнее напряжение вне диапазона',
- 'TACC'=>'Температура АКБ',
- 'TTRANS'=>'Температура транзисторов',
- 'UACC'=>'Напряжение АКБ',
- 'IACC'=>'Ток по АКБ',
- 'PACC-MAC'=>'Мощность по линии АКБ-МАП',
- 'PACC'=>'Мощность по АКБ',
- 'ERRORS'=>'ОШИБКИ',
- 'PVP'=>'СОЛНЕЧНЫЕ ПАНЕЛИ',
- 'UPV'=>'Напряжение панелей',
- 'IPV'=>'Ток панелей',
- 'PPV'=>'Мощность панелей',
- 'POUT'=>'Мощность на выходе',
- 'PCHG'=>'Мощность заряда',
+ 'INFO'=>'MAC INFO',
+ 'MASTER-NODE'=>'MASTER-NODE',
+ 'MAC'=>'MAC',
+ 'SERVICES'=>'SERVICES',
+ 'MODEM'=>'3G MODEM',
+ 'BATTERY'=>'BATTERY',
+ 'SMS'=>'SMS',
+ 'PASSWORD'=>'PASSWORD',
+ 'WORK_DB'=>'DATABASE',
+ 'MAIN'=>'MAIN',
+ 'SETTINGS'=>'SETTINGS',
+ 'OPEN'=>'OPEN',
+ 'SELECT_ALL'=>'SELECT ALL',
+ 'UNSELECT_ALL'=>'UNSELECT ALL',
+ 'Bat_pkg'=>'Battery package',
+ 'TIME'=>'Time',
+ 'DATE'=>'Date',
+ 'MODE'=>'Mode',
+ 'UNET'=>'Power grid voltage',
+ 'INET'=>'Input current',
+ 'calc'=>'calculation',
+ 'PNET'=>'Power from substation',
+ 'FNET'=>'Frequency from substation',
+ 'FMAC'=>'Frequency from the MAC',
+ 'UMAC'=>'Voltage from the MAC',
+ 'UERR'=>'Latest voltage value is out of range',
+ 'TACC'=>'ACC temperature',
+ 'TTRANS'=>'Transistors temperature',
+ 'UACC'=>'ACC voltage',
+ 'IACC'=>'ACC current',
+ 'PACC-MAC'=>'Power on MAC-ACC line',
+ 'PACC'=>'ACC power',
+ 'ERRORS'=>'ERROR',
+ 'PVP'=>'PV PANELS',
+ 'UPV'=>'PVP voltage',
+ 'IPV'=>'PVP current',
+ 'PPV'=>'PVP power',
+ 'POUT'=>'Power at the output',
+ 'PCHG'=>'Charge power',
  'TINT'=>'Внутренняя температура',
- 'E24'=>'Энергия за сутки',
- 'MONITORING'=>'МОНИТОРИНГ',
- 'HYBRID'=>'Гибрид',
- 'Hz'=>'Гц',
+ 'E24'=>'24 hours energy',
+ 'MONITORING'=>'MONITORING',
+ 'HYBRID'=>'Hybrid',
+ 'Hz'=>'Hz',
  'U'=>'U',
  'kWh'=>'кВтч',
  'kW'=>'кВт',
