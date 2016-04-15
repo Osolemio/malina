@@ -15,7 +15,7 @@ $graph->SetScale("textlin");
 
 //$graph->SetTheme($theme_class);
 //$graph->img->SetAntiAliasing(false);
-$graph->title->Set('User diagram');
+$graph->title->Set('User\'s diagram');
 $graph->SetBox(true);
 
 //$graph->img->SetAntiAliasing();
