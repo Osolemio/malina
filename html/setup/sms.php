@@ -127,7 +127,7 @@ mysql_close($db);
 <td>&nbsp</td>
 <td>&nbsp</td>
 <td>
-&nbspТекст СМС (латинскими):<input type="text" name="_MODE_sms" size=100 value="<?php echo $_MODE_sms_text; ?> "/>
+&nbsp<?php loc('sms_text');?>:<input type="text" name="_MODE_sms" size=100 value="<?php echo $_MODE_sms_text; ?> "/>
 </td>
 </tr>
 
