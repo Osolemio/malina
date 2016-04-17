@@ -34,14 +34,14 @@
 			 'Program reset occured. Probably some surges caused by storm an so on'
 			    ),
 	    '_RSErrJob'=>array(
-			'Battery is totally discharged, MAC will be working 1 minute more then the generation will be stopped until battery voltage is lower than EE_LCD_UAccMinNetGen =12,5V (factory pre set) or charge mode will be activated.',
+			'Battery is totally discharged, MAC will be working for 1 minute then the generation will be stopped until battery voltage is lower than EE_LCD_UAccMinNetGen =12,5V (factory pre set) or charge mode will be activated.',
 			'Overload on the battery, generation will be stopped in 10sec for 10sec. No more than 10 times in 10 minutes',
 			'The load is above nominal power – MAC will work for a limited time  (30 minutes for Pro model).',
 			'Overheating, the charge or generation is suspended.',
 			'Fan failure',
 			'AC overload, switched to the generation mode.',
 			'Operation mode fault detected (a surge or power failure).',
-			'Many short sircuits on charge. Switched off. The error will be reset in 2 hours'
+			'Many short sircuits at charge. Switched off. The error will be reset in 2 hours'
 			    ),
 	    '_RSWarning'=>array(
 			'Nothing assigned for the button combination (“START” + “CHARGE”)',
@@ -50,7 +50,7 @@
 			'Voltage surges at the input.',
 			'Sticky key (“START” or “CHARGE”).',
 			'Unable to activate charge mode - no input AC network.',
-			'In transmitting or charge mode, the load power is above the maximal value, but less than MAC power. Generation mode will be activated (Except of mixing mode).',
+			'In transmitting or charge mode, the load power is above the maximal value, but less than MAC power. Generation mode will be activated (Except for the mixing mode).',
 			'Grid is unstable (by voltage or frequency), the transfer to transmitting mode is impossible. Charge mode will be deactivated if many errors occur.'
 			    ),
 	    '_I2C_Err'=>array(
@@ -70,11 +70,11 @@
 			'I2C MPPT Error.',
 			'Old MPPT firmware version',
 			'Parallel MACs synchronization error. Incorrect data (50Hz clocking is present) or no link.',
-			'Power failure on the parallel slave MAC, the Master MAC is on grid - generation mode on slave MAC will be stopped.',
+			'Power failure at the parallel slave MAC, the Master MAC is on grid - generation mode on slave MAC will be stopped.',
 			'n/d'
 			    ),
 	    '_F_AccOver'=>array(
-			'Stopped on ACC current overload 10 restart attempts.',
+			'Stopped on ACC current overload. 10 restart attempts.',
 			'Stopped on ACC current overload while charging. 10 restart attempts.',
 			'Stopped on overload on S_UAccLow - Battery voltage is too low.',
 			'Stopped on fan failure. 10 restart attempts.',
@@ -132,7 +132,7 @@
 
 
 $text=array(
- 'START_SERVICES'=>'You should start some service',
+ 'START_SERVICES'=>'No one service strted',
  'MMENU'=>'Main menu',
  'ACC'=>'BAT',
  'MPPT'=>'MPPT',
@@ -184,7 +184,7 @@ $text=array(
  'PPV'=>'PVP power',
  'POUT'=>'Power at the output',
  'PCHG'=>'Charge power',
- 'TINT'=>'Внутренняя температура',
+ 'TINT'=>'Internal temperature',
  'E24'=>'24 hours energy',
  'MONITORING'=>'MONITORING',
  'HYBRID'=>'Hybrid',
@@ -204,7 +204,7 @@ $text=array(
  'E_total'=>'Total production',
  'U_counter'=>'User\'s counter',
  'Common_data'=>'Common data. Power, VA (W)',
- 'Err_Alerts'=>'Ошибки и предупреждения',
+ 'Err_Alerts'=>'Errors and alerts',
  'ALT_SRC'=>'Alternate sources (I2C)',
  'ON'=>'On',
  'OFF'=>'Off',
@@ -310,7 +310,7 @@ $text=array(
  'acc_type'=>'Battery type',
  'c_acc_array'=>'Battery package capacity',
  '1st_step_i'=>'1st stage charge current',
- '2nd_step_i'=>'2n stage charge current',
+ '2nd_step_i'=>'2nd stage charge current',
  'acc_chg_alg'=>'AB charge algorithm',
  'u_acc_start'=>'Stop charge voltage',
  'u_acc_buf'=>'Float voltage',
@@ -327,7 +327,7 @@ $text=array(
  'depends_on_mode'=>'depends on the situaton',
  '1ph'=>'No board. 1 phase',
  'no_in_settings'=>'n/a in settings',
- 'not_available'=>'Unavailable in this model',
+ 'not_available'=>'Unavailable for this model',
  'err_hist'=>'Errors history',
  'overload_hist'=>'Overload state',
  'net220_hist'=>'On AC net',
@@ -368,8 +368,8 @@ $text=array(
  'stopped'=>'Stopped',
 
  'modem_title'=>'3G modem settings',
- 'ms_note1'=>'In general, only the last section is the subject to edit: /etc/smsd.conf - [GSM1] section',
- 'ms_note2'=>'Modem serial port. See below in the ports list. Usually, the lower one by number.',
+ 'ms_note1'=>'In general, you have to edit only the last section of the file: /etc/smsd.conf - [GSM1] section',
+ 'ms_note2'=>'Modem serial port. See below the ports list. Usually, the lower one by the number.',
  'ms_note3'=>'Incoming SMS are enabled',
  'ms_note4'=>'PIN code, if enabled on SIM-card. # should be removed then',
  'ms_note5'=>'Connection speed (see below) ',
@@ -383,11 +383,11 @@ $text=array(
  'ms_edit'=>'Configuration file editor',
  'save'=>'Save',
  'ms_note8'=>'After the configuration change, make sure that everything is correct, and then',
- 'ms_note9'=>'restart SMS service',
+ 'ms_note9'=>'restart the SMS service',
  'ms_note10'=>'Notes and recommendations:
 <br><br>
 The modem must operate in "modem only" mode. Hilink mode is not suitable as well<br>
-You can do that in terminal with he command: AT^U2DIAG=0<br>
+You can do that in a terminal with he command: AT^U2DIAG=0<br>
 For ZyXel or Huawei modems you may use 3gsw.exe utilite for Windows<br>
 You should disable PIN request on your SIM card. <br>
 If you use 3G modem, make sure, that Raspberry Pi power sully is powerful enough. No less than 1500mA. Othewise, an external storage might be corrupted.<br>
@@ -435,14 +435,14 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'bat_type_LFP37'=>'LiFePo4 (LFP) 3.7V/cell',
  'bat_type_LFP39'=>'LiFePo4 (LFP) 3.9V/cell',
  'bat_untrusted_soc'=>' Don\'t estimate SoC in range from',
- 'bat_mppt_source'=>'MPPT current source',
+ 'bat_mppt_source'=>'MPPT currents source',
  'bat_map_i2c'=>'MAC via I2C bus',
  'bat_stop_dod'=>'Stop generation at depth of discharge (DOD)',
  'bat_stop_consumed'=>'Stop generation on consumption above',
  'bat_note1'=>'For previous items - 0 (zero) - the generation won\'t stop',
  'bat_button1'=>'Full reset (new battery)',
  'bat_button2'=>'Reset battery statistics',
- 'bat_sync'=>'Sync on 100% charge',
+ 'bat_sync'=>'Sync on 100% of charge',
  'bat_note2'=>'Nominal capacity for',
  'bat_note3'=>'hours discharging',
  'bat_button3'=>'Calculate',
@@ -504,15 +504,15 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'db_field9'=>'Current size of the tables',
  'db_field10'=>'DB server status',
  'db_field11'=>'DB location',
- 'db_field14'=>'Current database rest. All the monitoring tables will be reset. Except for the settings. The DB structure will remain.',
+ 'db_field14'=>'Current database reset. All the monitoring tables will be reset. Except for the settings. The DB structure will remain.',
 
  'oc_title'=>'Edit OCV table',
  'oc_field1'=>'Setting of the OCV battery table. Voltage is shown for a block/cell',
  'oc_col1'=>' % of charge (SOC) ',
  'oc_col2'=>'Open circuit voltage, V (OCV) ',
- 'oc_button1'=>'Save to work table',
- 'oc_button2'=>'Save to user\'s table',
- 'oc_button3'=>'Refresh graph',
+ 'oc_button1'=>'Save to the work table',
+ 'oc_button2'=>'Save to the user\'s table',
+ 'oc_button3'=>'Refresh the graph',
  
  'master_button1'=>'OPEN',
  'master_button2'=>'SELECT ALL',
@@ -537,7 +537,7 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'tooltip2'=>'Output frequency',
  'tooltip3'=>'Transformer temperature (DOMINATOR)',
  'tooltip4'=>'Charge level in %. Calculated as a function of the discharge intesity and Peukert\'s exponent',
- 'tooltip5'=>'Real discharge amount in Ah / Capacity is C<sub>20</sub> with temperature coefficient. While discharging - reduced with average disccharge current',
+ 'tooltip5'=>'Real discharge amount in Ah / Capacity is C<sub>20</sub> with temperature coefficient. While discharging - reduced with average discharge current',
  'tooltip6'=>'Battery temperature',
  'tooltip7'=>'Controller temperature',
  'tooltip8'=>'Input 1. Orange - no net',
@@ -594,9 +594,9 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'checkbox_required'=>'You had to confirm the command with the checkbox. Command was not sent',
  'restricted_mode'=>'Restrict mode is active. You cannot change this setting.',
  'result'=>'Execution result',
- 'tables_cleaned'=>'Tha tables were truncated succesfully',
+ 'tables_cleaned'=>'The tables were truncated succesfully',
  'command_import_sent'=>'Command for DB import was sent. The file to import:',
- 'command_export_sent'=>'Command for DB export was sent. The file to export::',
+ 'command_export_sent'=>'Command for DB export was sent. The file to export:',
  'media_disconnected'=>'You may disconnect the removable storage(s) now.<br>',
  'executing'=>'Executing',
  'backward'=>'Back',
