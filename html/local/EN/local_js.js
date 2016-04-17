@@ -96,7 +96,7 @@ var map_mode=["MAC is ON. No grid at the input.","MAC is OFF. Grid is detected "
     "",
     "Grid voltage is out of range",
     "Extraneous voltage at the output, or heavy surges caused by the load",
-    "Surges on grid",
+    "Surges on the power grid",
     "STOP or CHARGE button was sticked",
     "Switch on charge mode is impossible - no grid",
     "Load power is above maximal one",
@@ -117,6 +117,6 @@ var map_mode=["MAC is ON. No grid at the input.","MAC is OFF. Grid is detected "
     "MPPT: AB overcharge",
     "MPPT: SC on AB",
     "MPPT: AB overheat",
-    "MPPT: I2C erro",""
+    "MPPT: I2C error",""
     ];
 var dev=['MAC','MPPT','MAC+MPPT'];
