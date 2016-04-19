@@ -566,23 +566,23 @@ var alt_u=$('#alt_user');
           switch (arr[21]) {
       
         case "0":
-    		$('#map_mode_in').html(map_mode[0]);
+    		$('#map_mode_in').html(map_mode[0].toUpperCase());
     		document.getElementById("map_mode_in").style.background="aqua";
     		break
         case "1":	
-    		$('#map_mode_in').html(map_mode[1]);
+    		$('#map_mode_in').html(map_mode[1].toUpperCase());
     		document.getElementById("map_mode_in").style.background="limegreen";
     		break
         case "2":
-    		$('#map_mode_in').html(map_mode[2]);
+    		$('#map_mode_in').html(map_mode[2].toUpperCase());
     		document.getElementById("map_mode_in").style.background="lightcoral";
     		break
         case "3":
-    		$('#map_mode_in').html(map_mode[3]);
+    		$('#map_mode_in').html(map_mode[3].toUpperCase());
     		document.getElementById("map_mode_in").style.background="springgreen";
     		break
         case "4":
-    		$('#map_mode_in').html(map_mode[4]+".<br>"+charge_mode[arr[41]]);
+    		$('#map_mode_in').html(map_mode[4].toUpperCase()+".<br>"+charge_mode[arr[41]]);
     		document.getElementById("map_mode_in").style.background="lightskyblue";
     		break
     	default:
