@@ -561,7 +561,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	
 //----------------- drop kWh counter everyday at 23:30 ----------------
 
-	if (tim.tm_hour==23 && tim.tm_min==50) 
+	if (tim.tm_hour==23 && mppt_data.Pwr_kW>0) 
 	{
 	Buffer[0]=3;
 	send_command(to_write,fd_mppt,0,0);
