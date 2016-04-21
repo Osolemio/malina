@@ -559,7 +559,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 
 	bzero(Buffer,size_of_buffer);          
 	
-//----------------- drop kWh counter everyday at 23:30 ----------------
+//----------------- drop kWh counter everyday after 23:00 ----------------
 
 	if (tim.tm_hour==23 && mppt_data.Pwr_kW>0) 
 	{
