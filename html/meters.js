@@ -653,8 +653,8 @@ var mipv=document.getElementById('meter_ipv')
     series_wind.append(new Date().getTime(),Number(arr[36]));
 
 
-    var cur1=cs(canvas_cs1,arr[50],100);
-    var cur2=cs(canvas_cs2,arr[51],100);
+    var cur1=cs(canvas_cs1,arr[50],150);
+    var cur2=cs(canvas_cs2,arr[51],150);
     $('#cs1_val').html(arr[50]+"A");
     $('#cs2_val').html(arr[51]+"A");
 
