@@ -183,8 +183,8 @@ if (file_exists("/var/map/.mppt")) {
      $data['MPP']=$row_mppt['MPP'];
      $data['RELAY']=$row_mppt['Relay_C'];
      $data['windspeed']=($row_mppt['windspeed']==65535)?0:$row_mppt['windspeed'];     
-     $data['I_EXTS0']=($row_mppt['Sign_C0']==0)?$row_mppt['I_EXTS0']:-$row_mppt['I_EXTS0'];
-     $data['I_EXTS1']=($row_mppt['Sign_C1']==0)?$row_mppt['I_EXTS1']:-$row_mppt['I_EXTS1'];
+     $data['I_EXTS0']=($row_mppt['Sign_C0']==0)?$row_mppt['I_EXTS0']/100:-$row_mppt['I_EXTS0']/100;
+     $data['I_EXTS1']=($row_mppt['Sign_C1']==0)?$row_mppt['I_EXTS1']/100:-$row_mppt['I_EXTS1']/100;
 
  if (!file_exists("/var/map/.map")) {
  	$data['UACC']=$row_mppt['V_Bat'];

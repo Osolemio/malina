@@ -494,6 +494,7 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         	  	   mppt_data.RSErrSis=Buffer[1];
 			   mppt_data.Sign_C0=Buffer[0x4F];
         	  	   mppt_data.Sign_C1=Buffer[0x50];
+/// ------be careful! I_EXT stays 100 times more!!!!
         	  	   mppt_data.I_EXTS0=(Buffer[0x52]*256+Buffer[0x51]);
         	  	   mppt_data.I_EXTS1=(Buffer[0x54]*256+Buffer[0x53]);
         	  	   mppt_data.P_EXTS0=(Buffer[0x56]*256+Buffer[0x55]);
@@ -542,7 +543,9 @@ void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 	     batmon->battery_id=1;
 	     batmon->timestamp=ltime;
 	     batmon->current1=(mppt_data.Sign_C0==1)?(0-mppt_data.I_EXTS0):mppt_data.I_EXTS0;
+	     batmon->current1/=100;
 	     batmon->current2=(mppt_data.Sign_C1==1)?(0-mppt_data.I_EXTS1):mppt_data.I_EXTS1;
+	     batmon->current2/=100;
 	     batmon->current_ch=mppt_data.I_Ch;
 	     batmon->tbat=mppt_data.Temp_Bat;
 	     batmon->Ubat=mppt_data.V_Bat;    
