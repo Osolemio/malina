@@ -2,7 +2,7 @@
 
 
  if test -e "/microart/monitor.ini"; then
-    pi_mode=`cat /microart/monitor.ini | grep -v '^#' | grep 'mode' | cut -f2 -d=`
+    pi_mode=`cat /microart/monitor.ini | sed 's/$//' | grep -v '^#' | grep 'mode' | cut -f2 -d=`
     echo $pi_mode
     if [ ${pi_mode:='enabled'} == 'restricted' ]; then
 	touch /var/map/.restricted
@@ -13,7 +13,7 @@
 
 
  if test -e "/microart/monitor.ini"; then
-    ip_mode=`cat /microart/monitor.ini | grep -v '^#' | grep 'ip' | cut -f2 -d=`
+    ip_mode=`cat /microart/monitor.ini  | sed 's/$//' | grep -v '^#' | grep 'ip' | cut -f2 -d=`
     echo $ip_mode
     if [ $ip_mode == 'auto' ]; then
 	cp /etc/network/interfaces_dhcp /etc/network/interfaces
@@ -27,7 +27,7 @@
   fi
 
 if test -e "/microart/monitor.ini"; then
-    lang_mode=`cat /microart/monitor.ini | grep -v '^#' | grep 'language' | cut -f2 -d=`
+    lang_mode=`cat /microart/monitor.ini | sed 's/$//' |grep -v '^#' | grep 'language' | cut -f2 -d=`
     echo $lang_mode
     if [ $lang_mode == 'RU' ]; then
 	cp /var/www/html/local/RU/* /var/www/html/local
@@ -38,7 +38,7 @@ if test -e "/microart/monitor.ini"; then
   fi
 
 if test -e "/microart/monitor.ini"; then
-    pass_mode=`cat /microart/monitor.ini | grep -v '^#' | grep 'protected' | cut -f2 -d=`
+    pass_mode=`cat /microart/monitor.ini | sed 's/$//' |grep -v '^#' | grep 'protected' | cut -f2 -d=`
     echo $pass_mode
     if [ $pass_mode == 'system' ]; then
 	cp /etc/nginx/sites-available/default_setup /etc/nginx/sites-available/default
