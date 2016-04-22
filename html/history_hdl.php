@@ -130,6 +130,7 @@ session_start();
 	
         while ($line = mysql_fetch_array($result, MYSQL_NUM)) {
 	if ($line[3]==1) $line[2]=-$line[2];
+	$line[2]=$line[2]/100;
         for ($i=0;$i<3;$i++) 
         $temp_array[$index++]=$line[$i];
         
