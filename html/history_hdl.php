@@ -3,7 +3,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta charset="UTF-8">
 <?php include('./local/local.inc');?>
-
   <title><?php loc('diagrams_title');?></title>
     </head>
 <body>
@@ -234,10 +233,39 @@ session_start();
   //mysql_free_result($result_mpptd);
   mysql_close($db);
 
+if (isset($_POST['go'])) {
 if ($field!="Energy")
 echo "<img src='./diagram.php'/>";
 else
 echo "<img src='./diagram_bar.php'/>";
+die;
+}
+
+if (isset($_POST['js'])) {
+echo '<link rel="stylesheet" type="text/css" href="./dc/dc.min.css" media="screen" />';
+
+echo '<script src="./dc/d3.js"></script>'; 
+echo '<script src="./dc/crossfilter.js"></script>'; 
+echo '<script src="./dc/dc.min.js"></script>'; 
+echo '<script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>'; 
+
+
+echo "<script>";
+echo "var data=[";
+for ($i=0;$i<count($temp_array);$i=$i+3)
+{
+echo '{"date":"'.$temp_array[$i].'T'.$temp_array[$i+1].'", "value":'.$temp_array[$i+2].'},';
+}
+echo "];";
+echo "graph_width=".$field_width.", graph_height=".$field_height.";";
+echo "</script>";
+echo '<script src="dc_chart.js"></script>'; 
+echo "<div id='dc_chart'></div>";
+
+
+
+
+}
 
 
 ?>
