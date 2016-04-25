@@ -214,14 +214,14 @@ session_start();
    if ($field!="Energy") 
     {
     $i=0;$i1=0;
-    do 
+    while ($i<$index)
      {
       $datax[$i1]=substr($temp_array[$i],5,9)." ".$temp_array[$i+1];
       $datay[$i1++]=$temp_array[$i+2];
       $i+=3;
           
-     } while ($i<=$index);
-   }
+     }
+}
 	$_SESSION['datay1']=$datay;
 ;	$_SESSION['datax1']=$datax;
 	
@@ -243,26 +243,35 @@ die;
 
 if (isset($_POST['js'])) {
 echo '<link rel="stylesheet" type="text/css" href="./dc/dc.min.css" media="screen" />';
-
+//echo '<link rel="stylesheet" type="text/css" href="./dc_chart.css" />';
+echo '<link rel="stylesheet" type="text/css" href="./slider.css" media="screen"/>';
 echo '<script src="./dc/d3.js"></script>'; 
 echo '<script src="./dc/crossfilter.js"></script>'; 
 echo '<script src="./dc/dc.min.js"></script>'; 
 echo '<script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>'; 
-
+echo '<script src="./js/nativemultiple.jquery.min.js" type="text/javascript" media="screen"></script>';
+$cur_d="";$count=0;
 
 echo "<script>";
 echo "var data=[";
 for ($i=0;$i<count($temp_array);$i=$i+3)
 {
-echo '{"date":"'.$temp_array[$i].'T'.$temp_array[$i+1].'", "value":'.$temp_array[$i+2].'},';
+
+if (!strcmp($temp_array[$i],$cur_d)) {
+echo '{"d":"'.$temp_array[$i].'T'.$temp_array[$i+1].'", "v":'.$temp_array[$i+2].'},';++$count;}
+$cur_d=$temp_array[$i];
 }
 echo "];";
-echo "graph_width=".$field_width.", graph_height=".$field_height.";";
+echo "graph_width=".$field_width.", graph_height=".$field_height.",legend='".$legend[$field]."';";
 echo "</script>";
 echo '<script src="dc_chart.js"></script>'; 
-echo "<div id='dc_chart'></div>";
+echo "<div id='dc_chart'></div><br>";
+echo "
+<div class='slider' style='margin:500px 0 0 0;'>
+            <input min='0' max='".$count."' step='1' name='slider' type='range'/>
+</div>
 
-
+";
 
 
 }
