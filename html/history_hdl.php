@@ -261,6 +261,7 @@ if (!strcmp($temp_array[$i],$cur_d)) {
 echo '{"d":"'.$temp_array[$i].'T'.$temp_array[$i+1].'", "v":'.$temp_array[$i+2].'},';++$count;}
 $cur_d=$temp_array[$i];
 }
+--$count;
 echo "];";
 echo "graph_width=".$field_width.", graph_height=".$field_height.",legend='".$legend[$field]."';";
 echo "</script>";
@@ -273,10 +274,12 @@ echo "
 
 ";
 
-
 }
 
 
 ?>
+<div id="date" style="margin 20px 10px 0 0; color:black;">DATE</div>
+<div id="values"></div>
+
 </body>
 </html>

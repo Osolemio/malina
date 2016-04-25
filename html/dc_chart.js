@@ -14,7 +14,7 @@ var ndx=crossfilter(data);
 var dateDim=ndx.dimension(function(d) {return d.d;});
 var yDim=ndx.dimension(function(d) {return d.v;});
 var gr = dateDim.group().reduceSum(function(d) {return d.v;});
-
+var cc=0;
 var minDate = dateDim.bottom(1)[0].d;
 var maxDate = dateDim.top(1)[0].d;
 var maxY=yDim.top(1)[0].v;
@@ -41,25 +41,28 @@ dc.renderAll();
 $('input[name=slider]').nativeMultiple({
     stylesheet: "slider",
     onCreate: function() {
+
     },
     onChange: function(first_value, second_value) {
-    chart_main.x(d3.time.scale().domain([data[first_value].d, data[second_value-1].d]));
-    console.log(data[first_value].d, data[second_value-1].d);
+    chart_main.x(d3.time.scale().domain([data[first_value].d, data[second_value].d]));
     minY=data[first_value].v;
-    maxY=0;
-    for (i=first_value;i<second_value-1;i++) 
+    maxY=0;avg=0;
+    var i=first_value;
+    while (i++<second_value) 
 	{
-	    maxY=(maxY<data[i].v)?maxY=data[i].v:maxY;
-	    minY=(minY>data[i].v)?minY=data[i].v:minY;
+	    avg+=data[i].v;
+	    if (maxY<data[i].v) maxY=data[i].v;
+	    if (minY>data[i].v) minY=data[i].v;
 	}
-    console.log(minY,maxY);
+    avg=avg/(second_value-first_value);
     chart_main.y(d3.scale.linear().domain([minY,maxY])); 
-
+    $('#values').html("<b>MAX:</b> "+maxY+",<b> MIN:</b> "+minY+" <b>AVG:</b> "+avg.toFixed(2));
     chart_main.rescale();
     chart_main.redraw();
 
     },
     onSlide: function(first_value, second_value) {
+    $('#date').html("<b>FROM:</b> "+data[first_value].d+' <b>TO:</b> '+data[second_value].d);
     }
 });
 
