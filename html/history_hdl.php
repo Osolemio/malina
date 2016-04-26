@@ -266,7 +266,7 @@ echo "</script>";
 echo '<script src="dc_chart.js"></script>'; 
 echo "<div id='dc_chart'></div><br>";
 echo "
-<div class='slider' style='margin:500px 0 0 0;'>
+<div class='slider' style='margin:".$field_height."px 0 0 0;'>
             <input min='0' max='".$count."' step='1' name='slider' type='range'/>
 </div>
 
