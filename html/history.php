@@ -110,7 +110,7 @@
 <center>
 <input type="submit" style="background-color:lightgreen" name="go" value="<?php loc('go!_button'); ?>" />
 <input type="submit" style="background-color:lightgreen" name="multichart" value="<?php loc('multichart_button'); ?>" />  
-<input type="submit" style="background-color:lightgreen" name="js" value="JS" />
+<input type="submit" style="background-color:lightgreen" name="js" value="D3-JS" />
 </center>
 </td>			    
 </tr>

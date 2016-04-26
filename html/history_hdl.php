@@ -241,9 +241,8 @@ echo "<img src='./diagram_bar.php'/>";
 die;
 }
 
-if (isset($_POST['js'])) {
+if (isset($_POST['js']) && ($field!="Energy") && ($field!="map_errors") && ($field!="mppt_errors")) {
 echo '<link rel="stylesheet" type="text/css" href="./dc/dc.min.css" media="screen" />';
-//echo '<link rel="stylesheet" type="text/css" href="./dc_chart.css" />';
 echo '<link rel="stylesheet" type="text/css" href="./slider.css" media="screen"/>';
 echo '<script src="./dc/d3.js"></script>'; 
 echo '<script src="./dc/crossfilter.js"></script>'; 
@@ -261,7 +260,6 @@ if (!strcmp($temp_array[$i],$cur_d)) {
 echo '{"d":"'.$temp_array[$i].'T'.$temp_array[$i+1].'", "v":'.$temp_array[$i+2].'},';++$count;}
 $cur_d=$temp_array[$i];
 }
---$count;
 echo "];";
 echo "graph_width=".$field_width.", graph_height=".$field_height.",legend='".$legend[$field]."';";
 echo "</script>";
