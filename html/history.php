@@ -49,7 +49,7 @@
 	<p><?php loc('Graph_size'); ?>, pix</p>
 <b>
 <p><?php loc('h_size'); ?>: <input type="number" value="1200" name="width">
-  <?php loc('v_size'); ?>: <input type="number" value="800" name="height"></p>
+  <?php loc('v_size'); ?>: <input type="number" value="600" name="height"></p>
 
 </td>
 </tr>
