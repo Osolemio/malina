@@ -367,7 +367,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
     M_ONNET        =3 – МАП включен и транслирует сеть (есть сеть на входе).
     M_ONCHARGE 	   =4 – МАП включен, транслирует сеть и одновременно заряжает АКБ.
 
-    ------------ my extentions------------------------
+    ------------ my extensions------------------------
     10 - принудительная генерация
     11 - тарифная сеть. максимальный тариф. принудительная генерация
     12 - тарифная сеть. минимальный тариф
@@ -384,12 +384,12 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
 
 */	    
 
-	if (mode<2 && mode>3) return mode;
+	if (mode<2 || mode>3) return mode;
 
       if (NetUpEco==0) //ECO forced gen or Tarifs
 	 {
 
-	if ((mode==3 || mode==2) && (NetUpLoad==1) && (Pmax_On&2>0) && (UNET>100)) return 18;
+	if ((NetUpLoad==1) && (Pmax_On&2>0) && (UNET>100)) return 18;
 
 	if (mode==2) 
 	    {
