@@ -6,7 +6,7 @@
 'W':'W',
 'U':'V',
 'title1':'Vin',
-'title2':'Ion,A',
+'title2':'Iin,A',
 'title3':'Vout',
 'title4':'Itotal,A',
 'title5':'Vbat',
