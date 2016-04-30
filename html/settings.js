@@ -27,7 +27,7 @@ $(function() {
     if (xmlhttp.status==200) {
     var result=JSON.parse(xmlhttp.responseText);}
    
-    else alert(loc['alert1']);
+    else alert(loc['alert2']);
     
      var eacc=result[max_items][0];
      $('#input_field').prop('disabled',true);

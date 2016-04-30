@@ -586,7 +586,7 @@ var alt_u=$('#alt_user');
     		document.getElementById("map_mode_in").style.background="lightskyblue";
     		break
     	default:
-		if (arr[21]>=10 && arr[21]<=17)
+		if (arr[21]>=10 && arr[21]<=18)
 		    {
 		      $('#map_mode_in').html(map_mode[arr[21]].toUpperCase());
     		document.getElementById("map_mode_in").style.background="springgreen";
