@@ -111,7 +111,7 @@ session_start();
     
     case "cs1": $field1='I_EXTS0'; $field2='Sign_C0';
 
-    case "cs2": if ($field=="cs2") { $field1='I_EXTS0'; $field2='Sign_C0';}
+    case "cs2": if ($field=="cs2") { $field1='I_EXTS1'; $field2='Sign_C1';}
 
 		
     $query = "SELECT MIN(number) FROM `mppt` WHERE date='".$date_start."' AND time >= '".$time_start."'\n";

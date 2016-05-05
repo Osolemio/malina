@@ -91,7 +91,7 @@ mysql_close($db);
 
 loc('saved_succes');
 header("Refresh:2; URL=".$_SERVER['HTTP_REFERER']);
-loc('2sec_return);
+loc('2sec_return');
 exit;
 
 ?>
