@@ -28,7 +28,6 @@ $(function() {
     var result=JSON.parse(xmlhttp.responseText);}
    
     else alert(loc['alert2']);
-    
      var eacc=result[max_items][0];
      $('#input_field').prop('disabled',true);
      $('#chapter').change(function() {
@@ -61,12 +60,11 @@ $(function() {
      $('#input_field').prop('type',"text");
      $('#input_field').val(loc['text25']);
      $('#field_units').html("");
-
-     if (result[29][7]==8) {
+     if (result[30][7]==8) {
 	    $('#relay_1').prop('disabled',false);
 	    $('#relay_1').css("background","green");
 	    }
-     if (result[33][7]==8) {
+     if (result[34][7]==8) {
 	    $('#relay_2').prop('disabled',false);
 	    $('#relay_2').css("background","green");
 
