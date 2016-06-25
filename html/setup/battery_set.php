@@ -25,7 +25,7 @@ if (isset($_POST['write'])) {
 if (isset($_POST['reset_battery']))
     {
     $result=mysql_query("TRUNCATE TABLE battery_state",$db) or die(mysql_error());
-    $query="INSERT INTO battery_state VALUES ('1','0','0','0','0','0','0','0','0','0','0','0','0','0')";
+    $query="INSERT INTO battery_state VALUES ('1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0')";
     $result=mysql_query($query,$db) or die(mysql_error());
     mysql_free_result($result);
     }
