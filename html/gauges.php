@@ -254,7 +254,7 @@
       <li><a href="index.php"><?php loc('TEXT');?></a></li>
       <li><a href="graph.php"><?php loc('POWERS');?></a></li>
       <li><a href="history.php"><?php loc('HISTORY');?></a></li>
-      <li><a href="multi_select.php><?php loc('MULTICHART');?></a></li>
+      <li><a href="multi_select.php"><?php loc('MULTICHART');?></a></li>
       <li><a href="bms.php"><?php loc('BMS');?></a></li>
       <li><a href="settings.php"><?php loc('INFO');?></a></li>
       <li><a href="./setup/index.php"><?php loc('SYSTEM');?></a></li>

@@ -9,7 +9,7 @@
   <script src="./js/jquery-migrate-1.2.1.min.js"></script>
 <?php include('./local/local.inc');
 ?>
-  <script src="./local/local_js.inc"></script>
+  <script src="./local/local_js.js"></script>
   <script src="./bms.js"></script>
  
   <title><?php loc('bms_title');?></title>
