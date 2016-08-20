@@ -48,7 +48,7 @@ max[4]=40
 index=4
 
 #====================== Where we want to send email to =========================
-mail_recipient="ivan_belarus@inbox.ru"
+mail_recipient="somedody@mail.ru"
 
 #============================== script body ===================================
 
