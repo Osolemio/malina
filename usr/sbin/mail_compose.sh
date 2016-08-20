@@ -67,7 +67,6 @@ else
 
 fi
 
-echo $i, $result
 
 if test $result -eq 0; then
 
