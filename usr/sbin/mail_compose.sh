@@ -38,23 +38,36 @@ min[2]=200
 min[3]=2
 min[4]=3
 
-max[1]=59.0
+max[1]=60.0
 max[2]=250
 max[3]=2
-max[4]=30
+max[4]=40
 
 #====================== 
 # Number of items
 index=4
 
 #====================== Where we want to send email to =========================
-mail_recipient="someemail@mail.ru"
+mail_recipient="ivan_belarus@inbox.ru"
 
 #============================== script body ===================================
 
 for ((i=1; i<=$index; i++)) do
 
-  result=(`perl -e "if(${data_fields[$i]}<${max[$i]} || ${data_fields[$i]}>${min[$i]}){print 1;}else{print 0;}"`)
+ result_cmp=(`perl -e "if(${max[$i]}==${min[$i]}){print 0;}else{print 1;}"`)
+
+if test $result_cmp -eq 0; then
+
+
+  result=(`perl -e "if(${data_fields[$i]}==${max[$i]}){print 1;}else{print 0;}"`)
+
+else
+
+  result=(`perl -e "if(${data_fields[$i]}>=${max[$i]} || ${data_fields[$i]}<=${min[$i]}){print 1;}else{print 0;}"`)
+
+fi
+
+echo $i, $result
 
 if test $result -eq 0; then
 
