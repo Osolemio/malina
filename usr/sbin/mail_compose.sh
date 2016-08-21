@@ -63,7 +63,7 @@ if test $result_cmp -eq 0; then
 
 else
 
-  result=(`perl -e "if(${data_fields[$i]}>=${max[$i]} || ${data_fields[$i]}<=${min[$i]}){print 1;}else{print 0;}"`)
+  result=(`perl -e "if(${data_fields[$i]}>=${max[$i]} || ${data_fields[$i]}<=${min[$i]}){print 0;}else{print 1;}"`)
 
 fi
 
