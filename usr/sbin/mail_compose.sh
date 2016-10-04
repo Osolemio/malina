@@ -48,7 +48,7 @@ max[4]=40
 index=4
 
 #====================== Where we want to send email to =========================
-mail_recipient="somedody@mail.ru"
+mail_recipient="somebody@mail.ru"
 
 #============================== script body ===================================
 
@@ -59,7 +59,7 @@ for ((i=1; i<=$index; i++)) do
 if test $result_cmp -eq 0; then
 
 
-  result=(`perl -e "if(${data_fields[$i]}==${max[$i]}){print 1;}else{print 0;}"`)
+  result=(`perl -e "if(${data_fields[$i]}==${max[$i]}){print 0;}else{print 1;}"`)
 
 else
 
