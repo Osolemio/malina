@@ -20,6 +20,7 @@ data_fields[3]=${out[3]}
 #_Temp_Grad0
 data_fields[4]=${out[22]}
 
+#data start# DON'T REMOVE this line!!!
 #=============  Aliases or text============================
 alias[1]="Acc voltage "
 alias[2]="Output AC "
@@ -48,8 +49,9 @@ max[4]=40
 index=4
 
 #====================== Where we want to send email to =========================
-mail_recipient="somebody@mail.ru"
+mail_recipient="123@inbox.ru"
 
+#data end# DON'T REMOVE this line!!! 
 #============================== script body ===================================
 
 for ((i=1; i<=$index; i++)) do

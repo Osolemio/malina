@@ -224,6 +224,24 @@ background: linear-gradient(ivory, orange) yellow;
 a.menu9:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
 
 
+a.menu10 {
+ top:470px;
+ left:45%;
+}
+
+
+a.menu10:hover { 
+
+-moz-transform: scale(1.1,1.1);
+ -webkit-transform: scale(1.1,1.1);
+  -o-transform: scale(1.1,1.1);
+   transform: scale(1.1,1.1);
+
+background: linear-gradient(ivory, orange) yellow;
+}
+
+a.menu10:active { background: linear-gradient(#f59500, #f5ae00) #f59500; }
+
 
 
 
@@ -255,6 +273,10 @@ div.div_t {
 <br>
 <a href="battery.php" class="menu9"><div class="div_t"><?php loc('BATTERY');?></div></a>
 <br>
+<br>
+<a href="email.php" class="menu10"><div class="div_t"><?php loc('EMAIL');?></div></a>
+<br>
+
 </div>
 
 </b>
