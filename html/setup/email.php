@@ -20,11 +20,44 @@
     <body>
 
 <?php
-
-shell_exec('/usr/sbin/splitter.sh');
+$cifers=array('0','1','2','3','4','5','6','7','8','9','0','.');
+//shell_exec('/usr/sbin/splitter.sh');
 
 
 $conf=file_get_contents("/var/tmp/splitted.txt");
+$ssmtp=file_get_contents("/var/tmp/ssmtp.conf");
+
+
+if ($conf)
+
+    {
+	for ($i=1;$i<=4;$i++)
+	    {
+		$pos=strpos($conf,"min[".$i."]=");$s="";$c=7;while (in_array($conf[$pos+$c],$cifers)) $s.=$conf[$pos+$c++];$min[$i]=$s;
+		$pos=strpos($conf,"max[".$i."]=");$s="";$c=7;while (in_array($conf[$pos+$c],$cifers)) $s.=$conf[$pos+$c++];$max[$i]=$s;
+		$pos=strpos($conf,"alias[".$i."]=");$s="";$c=10;while ($conf[$pos+$c]!='"') $s.=$conf[$pos+$c++];$alias[$i]=$s;
+	    }
+
+    }
+
+    else 
+
+    { 
+	loc('error'); exit(1);
+    }
+		$len=strlen($ssmtp);
+		$pos=strpos($ssmtp,"root="); $root="";if ($pos !== false) while ($ssmtp[$pos+5]!==PHP_EOL && ($pos+5)<$len) $root.=$ssmtp[($pos++)+5];
+		$pos=strpos($ssmtp,"mailhub="); $mailhub="";if ($pos !== false) while ($ssmtp[$pos+8]!=":" && ($pos+8)<$len) $mailhub.=$ssmtp[($pos++)+8];
+		$port=""; ++$pos; while ($ssmtp[$pos+8]!==PHP_EOL && ($pos+8)<$len) $port.=$ssmtp[($pos++)+8];
+		$pos=strpos($ssmtp,"hostname="); $hostname="";if ($pos !== false) while ($ssmtp[$pos+9]!==PHP_EOL && ($pos+9)<$len) $hostname.=$ssmtp[($pos++)+9];
+		$pos=strpos($ssmtp,"UseTLS="); $UseTLS="";if ($pos !== false) while ($ssmtp[$pos+7]!==PHP_EOL && ($pos+7)<$len) $UseTLS.=$ssmtp[($pos++)+7]; if ($UseTLS=="") $UseTLS="NO";
+		$pos=strpos($ssmtp,"UseSTARTTLS="); $UseSTARTTLS="";if ($pos !== false) while ($ssmtp[$pos+12]!==PHP_EOL && ($pos+12)<$len) $UseSTARTTLS.=$ssmtp[($pos++)+12]; if ($UseSTARTTLS=="") $UseSTARTTLS="NO";
+		$pos=strpos($ssmtp,"AuthUser="); $AuthUser="";if ($pos !== false) while ($ssmtp[$pos+9]!==PHP_EOL && ($pos+9)<$len) $AuthUser.=$ssmtp[($pos++)+9];
+		$pos=strpos($ssmtp,"AuthPass="); $AuthPass="";if ($pos !== false) while ($ssmtp[$pos+9]!==PHP_EOL && ($pos+9)<$len) $AuthPass.=$ssmtp[($pos++)+9];
+		$pos=strpos($ssmtp,"AuthMethod="); $AuthMethod="";if ($pos !== false) while ($ssmtp[$pos+11]!==PHP_EOL && ($pos+11)<$len) $AuthMethod.=$ssmtp[($pos++)+11];if ($AuthMethod=="") $AuthMethod="LOGIN";
+
+		
+
 
 
 ?><hr><p><center><b><?php loc('email_header');?></b></center></p><hr>
@@ -115,8 +148,8 @@ $conf=file_get_contents("/var/tmp/splitted.txt");
 <?php
 
 $ssmtp=fopen("/var/tmp/ssmtp.conf","rw");
-$revaliases=("/var/tmp/revaliases","rw");
-$splitted=("/var/tmp/splitted.txt","rw");
+$revaliases=fopen("/var/tmp/revaliases","rw");
+$splitted=fopen("/var/tmp/splitted.txt","rw");
  
 fclose($ssmpt);
 fclose($revaliases);
