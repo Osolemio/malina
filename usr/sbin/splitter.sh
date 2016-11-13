@@ -8,4 +8,6 @@ sed -n 1,${start_line}p /usr/sbin/mail_compose.sh > /var/tmp/begin.txt
 sed -n ${end_line},`wc -l /usr/sbin/mail_compose.sh | cut -d " " -f1`p /usr/sbin/mail_compose.sh > /var/tmp/end.txt
 grep -v '^#\|^$' /etc/ssmtp/ssmtp.conf > /var/tmp/ssmtp.conf
 grep -v '^#\|^$' /etc/ssmtp/revaliases > /var/tmp/revaliases
-
+chmod 666 /var/tmp/revaliases
+chmod 666 /var/tmp/ssmtp.conf
+chmod 666 /var/tmp/splitted.txt

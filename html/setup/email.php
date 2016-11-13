@@ -21,7 +21,7 @@
 
 <?php
 $cifers=array('0','1','2','3','4','5','6','7','8','9','0','.');
-//shell_exec('/usr/sbin/splitter.sh');
+shell_exec('/usr/sbin/splitter.sh');
 
 
 $conf=file_get_contents("/var/tmp/splitted.txt");
@@ -45,6 +45,9 @@ if ($conf)
     { 
 	loc('error'); exit(1);
     }
+		$len=strlen($conf);
+		$pos=strpos($conf,"mail_recipient="); $mail_recipient="";if ($pos !== false) while ($conf[$pos+16]!=='"' && ($pos+16)<$len) $mail_recipient.=$conf[($pos++)+16];
+
 		$len=strlen($ssmtp);
 		$pos=strpos($ssmtp,"root="); $root="";if ($pos !== false) while ($ssmtp[$pos+5]!==PHP_EOL && ($pos+5)<$len) $root.=$ssmtp[($pos++)+5];
 		$pos=strpos($ssmtp,"mailhub="); $mailhub="";if ($pos !== false) while ($ssmtp[$pos+8]!=":" && ($pos+8)<$len) $mailhub.=$ssmtp[($pos++)+8];
@@ -65,8 +68,28 @@ if ($conf)
 <fieldset>
 <b>
 <p>
-<?php loc('email_field1');?>: <input type="text" size=30 value="<?php echo $a_n;?>" name="allowed_numbers" id="allowed_numbers">
-<?php loc('email_field2');?> <input type="text" value="<?php echo $s_n;?>" name="email_number">
+<?php loc('email_field1');?>: <input type="email" size=30 value="<?php echo $root;?>" name="root" id="root" autocomplete="off">
+<?php loc('email_field2');?> <input type="text" value="<?php echo $mailhub;?>" name="mailhub" autocomplete="off">
+<?php loc('email_field1');?>: <input type="number" value="<?php echo $port;?>" min=1 max=65535 name="port" id="port" autocomplete="off">
+<?php loc('email_field2');?> <input type="text" value="<?php echo $hostname;?>" name="hostname" autocomplete="off">
+<?php loc('email_field2');?> <input type="text" value="<?php echo $AuthUser;?>" name="AuthUser" autocomplete="off">
+<?php loc('email_field2');?> <input type="password" value="<?php echo $AuthPass;?>" name="AuthPass" autocomplete="off">
+<?php loc('email_field2'); $pass_confirm=$AuthPass;?> <input type="password" value="<?php echo $pass_confirm;?>" name="pass_confirm" autocomplete="off">
+<?php loc('email_field2');?> <input type="email" value="<?php print $mail_recipient;?>" name="mail_recipient" autocomplete="off">
+<p>
+TLS:
+<input type="radio" value="YES" name="UseTLS"><?php loc('YES');?>
+<input type="radio" value="NO" name="UseTLS"><?php loc('NO');?>
+</p>
+<p>
+StarTTLS:
+<input type="radio" value="YES" name="UseStarTTLS"><?php loc('YES');?>
+<input type="radio" value="NO" name="UseStarTTLS"><?php loc('NO');?>
+</p>
+
+</fieldset>
+<fieldset>
+
 </b><br>
 <?php loc('email_field3');?>
 <b>
