@@ -68,24 +68,33 @@ if ($conf)
 <fieldset>
 <b>
 <p>
-<?php loc('email_field1');?>: <input type="email" size=30 value="<?php echo $root;?>" name="root" id="root" autocomplete="off">
-<?php loc('email_field2');?> <input type="text" value="<?php echo $mailhub;?>" name="mailhub" autocomplete="off">
-<?php loc('email_field1');?>: <input type="number" value="<?php echo $port;?>" min=1 max=65535 name="port" id="port" autocomplete="off">
-<?php loc('email_field2');?> <input type="text" value="<?php echo $hostname;?>" name="hostname" autocomplete="off">
-<?php loc('email_field2');?> <input type="text" value="<?php echo $AuthUser;?>" name="AuthUser" autocomplete="off">
-<?php loc('email_field2');?> <input type="password" value="<?php echo $AuthPass;?>" name="AuthPass" autocomplete="off">
-<?php loc('email_field2'); $pass_confirm=$AuthPass;?> <input type="password" value="<?php echo $pass_confirm;?>" name="pass_confirm" autocomplete="off">
-<?php loc('email_field2');?> <input type="email" value="<?php print $mail_recipient;?>" name="mail_recipient" autocomplete="off">
+<?php loc('email_root');?>: <input type="email" size=30 value="<?php echo $root;?>" name="root" id="root" autocomplete="off">&nbsp
+<?php loc('email_smtp');?> <input type="text" value="<?php echo $mailhub;?>" name="mailhub" autocomplete="off">
+<?php loc('email_port');?>: <input type="number" value="<?php echo $port;?>" min=1 max=65535 name="port" id="port" autocomplete="off">
+<?php loc('email_hostname');?> <input type="text" value="<?php echo $hostname;?>" name="hostname" autocomplete="off">
+<?php loc('email_login');?> <input type="text" value="<?php echo $AuthUser;?>" name="AuthUser" autocomplete="off">
+<?php loc('email_password');?> <input type="password" value="<?php echo $AuthPass;?>" name="AuthPass" autocomplete="off">
+<?php loc('email_password'); $pass_confirm=$AuthPass;?> <input type="password" value="<?php echo $pass_confirm;?>" name="pass_confirm" autocomplete="off">
+<?php loc('email_email');?> <input type="email" value="<?php print $mail_recipient;?>" name="mail_recipient" autocomplete="off">
+<table valign="baseline"><tr><td  valign="baseline">
 <p>
-TLS:
-<input type="radio" value="YES" name="UseTLS"><?php loc('YES');?>
-<input type="radio" value="NO" name="UseTLS"><?php loc('NO');?>
-</p>
+<?php loc('email_TLS');?>:</td><td  valign="baseline">
+<input type="radio" value="YES" name="UseTLS" <?php if ($UseTLS=="YES") echo "checked";?> autocomplete="off"><?php loc('YES');?>
+<input type="radio" value="NO" name="UseTLS" <?php if ($UseTLS=="NO") echo "checked";?> autocomplete="off"><?php loc('NO');?>
+</p></td></tr><tr><td  valign="baseline">
 <p>
-StarTTLS:
-<input type="radio" value="YES" name="UseStarTTLS"><?php loc('YES');?>
-<input type="radio" value="NO" name="UseStarTTLS"><?php loc('NO');?>
-</p>
+<?php loc('email_STARTTLS');?>:</td><td  valign="baseline">
+<input type="radio" value="YES" name="UseStarTTLS" <?php if ($UseSTARTTLS=="YES") echo "checked";?> autocomplete="off"><?php loc('YES');?>
+<input type="radio" value="NO" name="UseStarTTLS" <?php if ($UseSTARTTLS=="NO") echo "checked";?> autocomplete="off"><?php loc('NO');?>
+</p></td></tr>
+<tr><td  valign="baseline">
+<p>
+<?php loc('email_auth');?>:</td><td  valign="baseline">
+<input type="radio" value="LOGIN" name="AuthMethod" <?php if ($AuthMethod=="LOGIN") echo "checked";?> autocomplete="off">LOGIN (PLAIN TEXT)
+<input type="radio" value="cram-md5" name="AuthMethod" <?php if ($AuthMethod=="cram-md5") echo "checked";?> autocomplete="off">CRAM-MD5
+</p></td></tr>
+</table>
+
 
 </fieldset>
 <fieldset>
