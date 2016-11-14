@@ -42,11 +42,11 @@ if (isset($_POST['email_set']))
 	"alias[3]=\"".preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$_POST['_MODE_email'])."\"".PHP_EOL.
 	"alias[4]=\"".preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$_POST['_tacc_email'])."\"".PHP_EOL.
 	"#=============== min & max values ========================".PHP_EOL.
-	"min[1]=".filter_var($_POST['_Uacc_le'], FILTER_SANITIZE_NUMBER_FLOAT).PHP_EOL.
+	"min[1]=".filter_var(str_replace(",",".",$_POST['_Uacc_le']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION).PHP_EOL.
 	"min[2]=".filter_var($_POST['_Uout_le'], FILTER_SANITIZE_NUMBER_INT).PHP_EOL.
 	"min[3]=2".PHP_EOL.
 	"min[4]=".filter_var($_POST['_tacc_le'], FILTER_SANITIZE_NUMBER_INT).PHP_EOL.
-	"max[1]=".filter_var($_POST['_Uacc_ge'], FILTER_SANITIZE_NUMBER_FLOAT).PHP_EOL.
+	"max[1]=".filter_var(str_replace(",",".",$_POST['_Uacc_ge']), FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION).PHP_EOL.
 	"max[2]=".filter_var($_POST['_Uout_ge'], FILTER_SANITIZE_NUMBER_INT).PHP_EOL.
 	"max[3]=2".PHP_EOL.
 	"max[4]=".filter_var($_POST['_tacc_ge'], FILTER_SANITIZE_NUMBER_INT).PHP_EOL.
