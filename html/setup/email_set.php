@@ -1,14 +1,14 @@
 <?php
 include('../local/local.inc');
     session_start();
-
+    if (isset($_POST['email_test']))  {
     if ($_POST['email_test']==$text['email_field10'] && isset($_POST['mail_recipient'])) 
 	{
 	    shell_exec("sudo /usr/sbin/email.sh ".$_POST['mail_recipient']);
 	    $_SESSION['test_email']="OK";
 	    header("Refresh:0; URL=".$_SERVER['HTTP_REFERER']);
 	}
-
+    }
 if (isset($_POST['email_set']))
     {
 	if ($_POST['AuthPass']!==$_POST['pass_confirm'])
@@ -68,8 +68,6 @@ if (isset($_POST['email_set']))
 	    $_SESSION['set_email']="OK";
 	    header("Refresh:0; URL=".$_SERVER['HTTP_REFERER']);
     }
-	    $_SESSION['set_email']="ERROR";
-	    header("Refresh:0; URL=".$_SERVER['HTTP_REFERER']);
 
 
 ?>

@@ -67,7 +67,6 @@ if ($conf)
 		$pos=strpos($ssmtp,"AuthUser="); $AuthUser="";if ($pos !== false) while ($ssmtp[$pos+9]!==PHP_EOL && ($pos+9)<$len) $AuthUser.=$ssmtp[($pos++)+9];
 		$pos=strpos($ssmtp,"AuthPass="); $AuthPass="";if ($pos !== false) while ($ssmtp[$pos+9]!==PHP_EOL && ($pos+9)<$len) $AuthPass.=$ssmtp[($pos++)+9];
 		$pos=strpos($ssmtp,"AuthMethod="); $AuthMethod="";if ($pos !== false) while ($ssmtp[$pos+11]!==PHP_EOL && ($pos+11)<$len) $AuthMethod.=$ssmtp[($pos++)+11];if ($AuthMethod=="") $AuthMethod="LOGIN";
-
 		
 
 
@@ -185,9 +184,9 @@ if ($conf)
 <br>
 <?php
 
- if (isset($_SESSION['email_test'])) 
+ if (isset($_SESSION['test_email'])) 
     {
-	unset($_SESSION['email_test']);
+	unset($_SESSION['test_email']);
     	loc('email_ok');echo "<br>";
 	echo str_replace("\n","<br>",shell_exec('tail /var/log/mail.log'));
     }
