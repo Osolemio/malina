@@ -39,5 +39,7 @@ ALL ALL = NOPASSWD: /usr/sbin/db_restore.sh*
 ALL ALL = NOPASSWD: /usr/sbin/db_dump.sh*
 ALL ALL = NOPASSWD: /usr/sbin/pbase_restore.sh
 ALL ALL = NOPASSWD: /bin/stty
+ALL ALL = NOPASSWD: /usr/sbin/email.sh
+ALL ALL = NOPASSWD: /usr/sbin/compose_set.sh
 
 

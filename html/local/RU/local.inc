@@ -620,7 +620,7 @@ $text=array(
  'email_field7'=>'Больше или равно',
  'email_text'=>'Текст письма',
  'email_field8'=>'Отсутствие сети',
- 'email_field9'=>'Отсутствие сети на выходе',
+ 'email_field9'=>'Напряжение на выходе, В',
  'email_field10'=>'Отправить тестовое письмо',
  'email_button1'=>'Применить',
  'email_email'=>'Куда отправляем почту (email)',
@@ -630,8 +630,9 @@ $text=array(
  'email_port'=>'Порт (по умолчанию 25)',
  'email_hostname'=>'Имя хоста',
  'email_TLS'=>'Использовать TLS',
- 'email_STARTTLS'=>'Использовать StartTTLS',
+ 'email_STARTTLS'=>'Использовать StarTTLS',
  'email_auth'=>'Метод авторизации',
+ 'email_ok'=>'тестовое письмо отправлено. См. лог-файл:',
 
 );
 

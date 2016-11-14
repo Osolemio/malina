@@ -22,6 +22,15 @@
 <?php
 $cifers=array('0','1','2','3','4','5','6','7','8','9','0','.');
 shell_exec('/usr/sbin/splitter.sh');
+session_start();
+
+
+if (isset($_SESSION['password']))
+    {
+	unset($_SESSION['password']);
+	loc('psys_different');echo "!!!!<br>";
+
+    }
 
 
 $conf=file_get_contents("/var/tmp/splitted.txt");
@@ -69,13 +78,13 @@ if ($conf)
 <b>
 <p>
 <?php loc('email_root');?>: <input type="email" size=30 value="<?php echo $root;?>" name="root" id="root" autocomplete="off">&nbsp
-<?php loc('email_smtp');?> <input type="text" value="<?php echo $mailhub;?>" name="mailhub" autocomplete="off">
-<?php loc('email_port');?>: <input type="number" value="<?php echo $port;?>" min=1 max=65535 name="port" id="port" autocomplete="off">
-<?php loc('email_hostname');?> <input type="text" value="<?php echo $hostname;?>" name="hostname" autocomplete="off">
-<?php loc('email_login');?> <input type="text" value="<?php echo $AuthUser;?>" name="AuthUser" autocomplete="off">
-<?php loc('email_password');?> <input type="password" value="<?php echo $AuthPass;?>" name="AuthPass" autocomplete="off">
-<?php loc('email_password'); $pass_confirm=$AuthPass;?> <input type="password" value="<?php echo $pass_confirm;?>" name="pass_confirm" autocomplete="off">
-<?php loc('email_email');?> <input type="email" value="<?php print $mail_recipient;?>" name="mail_recipient" autocomplete="off">
+<?php loc('email_smtp');?>: <input type="text" value="<?php echo $mailhub;?>" name="mailhub" autocomplete="off">&nbsp
+<?php loc('email_port');?>: <input type="number" value="<?php echo $port;?>" min=1 max=65535 name="port" id="port" autocomplete="off"><br><br>
+<?php loc('email_hostname');?>: <input type="text" value="<?php echo $hostname;?>" name="hostname" autocomplete="off">&nbsp
+<?php loc('email_login');?>: <input type="text" value="<?php echo $AuthUser;?>" name="AuthUser" autocomplete="off"><br><br>
+<?php loc('email_password');?>: <input type="password" value="<?php echo $AuthPass;?>" name="AuthPass" autocomplete="off">&nbsp
+<?php loc('email_password1'); $pass_confirm=$AuthPass;?>: <input type="password" value="<?php echo $pass_confirm;?>" name="pass_confirm" autocomplete="off"><br><br>
+<?php loc('email_email');?>: <input type="email" value="<?php print $mail_recipient;?>" name="mail_recipient" autocomplete="off">&nbsp
 <table valign="baseline"><tr><td  valign="baseline">
 <p>
 <?php loc('email_TLS');?>:</td><td  valign="baseline">
@@ -84,8 +93,8 @@ if ($conf)
 </p></td></tr><tr><td  valign="baseline">
 <p>
 <?php loc('email_STARTTLS');?>:</td><td  valign="baseline">
-<input type="radio" value="YES" name="UseStarTTLS" <?php if ($UseSTARTTLS=="YES") echo "checked";?> autocomplete="off"><?php loc('YES');?>
-<input type="radio" value="NO" name="UseStarTTLS" <?php if ($UseSTARTTLS=="NO") echo "checked";?> autocomplete="off"><?php loc('NO');?>
+<input type="radio" value="YES" name="UseSTARTTLS" <?php if ($UseSTARTTLS=="YES") echo "checked";?> autocomplete="off"><?php loc('YES');?>
+<input type="radio" value="NO" name="UseSTARTTLS" <?php if ($UseSTARTTLS=="NO") echo "checked";?> autocomplete="off"><?php loc('NO');?>
 </p></td></tr>
 <tr><td  valign="baseline">
 <p>
@@ -105,90 +114,94 @@ if ($conf)
 	    <p><?php loc('email_field4');?>:</p>
 </b>	    
 <table border="0">
-<tr bgcolor="whitesmoke"><td>
+<tr bgcolor="whitesmoke"><td valign="baseline">
 
-<input type="checkbox" <?php echo $_Uacc_checked; ?> name="email_value1" value="_Uacc"  /> <?php loc('email_field5');?>, <?php loc('V');?>  
+<?php loc('email_field5');?>, <?php loc('V');?>  
 </td>
-<td>
-&nbsp<?php loc('email_field6');?>:<input type="number" name="_Uacc_le" step="0.1" value=<?php echo $_Uacc_le; ?> />
-</td>
-
-<td>
-&nbsp<?php loc('email_field7');?>:<input type="number" name="_Uacc_ge" step="0.1" value=<?php echo $_Uacc_ge; ?> />
+<td valign="baseline">
+&nbsp<?php loc('email_field6');?>:<input type="number" name="_Uacc_le" step="0.1" value=<?php echo $min[1]; ?> />
 </td>
 
-<td>
-&nbsp<?php loc('email_text');?>:<input type="text" name="_Uacc_email" size=100 value="<?php echo $_Uacc_email_text; ?>" />
+<td valign="baseline">
+&nbsp<?php loc('email_field7');?>:<input type="number" name="_Uacc_ge" step="0.1" value=<?php echo $max[1]; ?> />
+</td>
+
+<td valign="baseline">
+&nbsp<?php loc('email_text');?>:<input type="text" name="_Uacc_email" size=100 value="<?php echo $alias[1]; ?>" />
 </td>
 
 
 </tr>
 
-<tr><td>
-<input type="checkbox" <?php echo $_MODE_checked; ?> name="email_value2" value="_MODE"/> <?php loc('email_field8');?>  
+<tr><td valign="baseline">
+<?php loc('email_field8');?>  
 </td>
 <td>&nbsp</td>
 <td>&nbsp</td>
-<td>
-&nbsp<?php loc('email_text');?>:<input type="text" name="_MODE_email" size=100 value="<?php echo $_MODE_email_text; ?> "/>
+<td valign="baseline">
+&nbsp<?php loc('email_text');?>:<input type="text" name="_MODE_email" size=100 value="<?php echo $alias[3]; ?> "/>
 </td>
 </tr>
 
-<tr bgcolor="whitesmoke"><td>
-<input type="checkbox" <?php echo $_tacc_checked; ?> name="email_value3" value="_Temp_Grad0" /><?php loc('TACC');?>, &degC  
+<tr bgcolor="whitesmoke"><td valign="baseline">
+<?php loc('TACC');?>, &degC  
 </td>
 
-<td>
-&nbsp<?php loc('email_field6');?>:<input type="number" name="_tacc_le" step="1" value=<?php echo $_tacc_le; ?> />
+<td valign="baseline">
+&nbsp<?php loc('email_field6');?>:<input type="number" name="_tacc_le" step="1" value=<?php echo $min[4]; ?> />
 </td>
 
-<td>
-&nbsp<?php loc('email_field7');?>:<input type="number" name="_tacc_ge" step="1" value=<?php echo $_tacc_ge; ?> />
+<td valign="baseline">
+&nbsp<?php loc('email_field7');?>:<input type="number" name="_tacc_ge" step="1" value=<?php echo $max[4]; ?> />
 </td>
 
-<td>
-&nbsp<?php loc('email_text');?>:<input type="text" name="_tacc_email" size=100 value="<?php echo $_tacc_email_text; ?> "/>
+<td valign="baseline">
+&nbsp<?php loc('email_text');?>:<input type="text" name="_tacc_email" size=100 value="<?php echo $alias[4]; ?> "/>
 </td>
 
 </tr>
 
-<tr><td>
-<input type="checkbox" <?php echo $_UOUTmed_checked; ?> name="email_value4" value="_UOUTmed"/> <?php loc('email_field9');?> 
+<tr><td valign="baseline">
+<?php loc('email_field9');?> 
 </td>
-<td>&nbsp</td>
-<td>&nbsp</td>
-<td>
-&nbsp<?php loc('email_text');?>:<input type="text" name="_UOUTmed_email" size=100 value="<?php echo $_UOUTmed_email_text; ?> "/>
+<td valign="baseline">&nbsp<?php loc('email_field6');?>:<input type="number" name="_Uout_le" step="1" value=<?php echo $min[2]; ?> /></td>
+<td valign="baseline">&nbsp<?php loc('email_field7');?>:<input type="number" name="_Uout_ge" step="1" value=<?php echo $max[2]; ?> /></td>
+<td valign="baseline">
+&nbsp<?php loc('email_text');?>:<input type="text" name="_Uout_email" size=100 value="<?php echo $alias[2]; ?> "/>
 </td>
 </tr>
 
 
 </table>
 <br><b>
-<input type="checkbox" name="email_test" value="email_test"/><?php loc('email_field10');?>
+<input type="submit" name="email_test" value="<?php loc('email_field10');?>"/>
 <br><br></b>
-<input type="submit" value="<?php loc('email_button1');?>" />  
+<input type="submit" name="email_set" value="<?php loc('email_button1');?>" />  
 </fieldset>
 </center>
 </td>			    
 </tr>
-</table>		
+</table>
+<br>
+<?php
+
+ if (isset($_SESSION['email_test'])) 
+    {
+	unset($_SESSION['email_test']);
+    	loc('email_ok');echo "<br>";
+	echo str_replace("\n","<br>",shell_exec('tail /var/log/mail.log'));
+    }
+
+if (isset($_SESSION['set_email'])) 
+    {
+	unset($_SESSION['set_email']);
+    	loc('saved_succes');echo "<br>";
+    }
+
+?>		
 
 </form>
 <br>
-<p>
-<?php
-
-$ssmtp=fopen("/var/tmp/ssmtp.conf","rw");
-$revaliases=fopen("/var/tmp/revaliases","rw");
-$splitted=fopen("/var/tmp/splitted.txt","rw");
- 
-fclose($ssmpt);
-fclose($revaliases);
-fclose($splitted);
-
-?>
-</p>
 <br><br>
 <input TYPE="button" style="font-weight:bolder; background-color:darkkhaki;" VALUE=" <?php loc('MENU');?> " ONCLICK="HomeButton()"> 
 <script>

@@ -618,7 +618,7 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'email_field7'=>'More or equal',
  'email_text'=>'Text',
  'email_field8'=>'No grid',
- 'email_field9'=>'No AC at the output',
+ 'email_field9'=>'output AC voltage',
  'email_field10'=>'Send test email',
  'email_button1'=>'Apply',
  'email_email'=>'Where we send email to',
@@ -628,9 +628,9 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'email_port'=>'Port (25 by default)',
  'email_hostname'=>'Hostname',
  'email_TLS'=>'Use TLS',
- 'email_STARTTLS'=>'Use StartTTLS',
+ 'email_STARTTLS'=>'Use StarTTLS',
  'email_auth'=>'Authorization method',
-
+ 'email_ok'=>'Test email was sent. See the log tail:',
 
 );
 
