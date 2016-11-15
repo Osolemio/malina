@@ -22,6 +22,7 @@ data_fields[4]=${out[22]}
 
 #data start# DON'T REMOVE this line!!!
 #=============  Aliases or text============================
+exit 1
 alias[1]="Acc voltage "
 alias[2]="Output AC "
 alias[3]="Mode "
