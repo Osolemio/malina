@@ -111,7 +111,6 @@ if ($conf)
 <fieldset>
 
 </b><br>
-<?php loc('email_field3');?>
 <b>
 	    <p><?php loc('email_field4');?>:</p>
 </b>	    
