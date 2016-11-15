@@ -46,7 +46,7 @@ if ($conf)
 		$pos=strpos($conf,"max[".$i."]=");$s="";$c=7;while (in_array($conf[$pos+$c],$cifers)) $s.=$conf[$pos+$c++];$max[$i]=$s;
 		$pos=strpos($conf,"alias[".$i."]=");$s="";$c=10;while ($conf[$pos+$c]!='"') $s.=$conf[$pos+$c++];$alias[$i]=$s;
 	    }
-
+		$pos=strpos($conf,"exit 1");if ($pos!==false) $script_is_active=false; else $script_is_active=true;
     }
 
     else 
@@ -74,6 +74,9 @@ if ($conf)
 ?><hr><p><center><b><?php loc('email_header');?></b></center></p><hr>
 <form method="post" action="email_set.php">
 <fieldset>
+<p>
+<input type="checkbox" value="active" name="script_is_active" <?php if ($script_is_active) echo 'checked';?>/><?php loc('email_field3');?>
+</p>
 <b>
 <p>
 <?php loc('email_root');?>: <input type="email" size=30 value="<?php echo $root;?>" name="root" id="root" autocomplete="off">&nbsp

@@ -35,8 +35,8 @@ if (isset($_POST['email_set']))
 	$revaliases="root:".$_POST['AuthUser'].":".$_POST['mailhub'].":".$_POST['port'].PHP_EOL;
 
 	file_put_contents("/var/tmp/revaliases",$revaliases);
-
-	$splitted="#=============  Aliases or text============================".PHP_EOL.
+	if (isset($_POST['script_is_active'])) $script_is_active=""; else $script_is_active="exit 1".PHP_EOL;
+	$splitted="#=============  Aliases or text============================".PHP_EOL.$script_is_active.
 	"alias[1]=\"".preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$_POST['_Uacc_email'])."\"".PHP_EOL.
 	"alias[2]=\"".preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$_POST['_Uout_email'])."\"".PHP_EOL.
 	"alias[3]=\"".preg_replace('/[^a-zA-Zа-яА-Я0-9 ]/ui', '',$_POST['_MODE_email'])."\"".PHP_EOL.

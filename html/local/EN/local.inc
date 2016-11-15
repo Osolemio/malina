@@ -611,7 +611,7 @@ Everything about this SMS server you may find at: http://smstools3.kekekasvi.com
  'email_header'=>'Email alerts and notifications',
  'email_root'=>'Sender address',
  'email_password1'=>'Confirm password',
- 'email_field3'=>'',
+ 'email_field3'=>'Script is enabled',
  'email_field4'=>'on MAC event',
  'email_field5'=>'AB voltage range',
  'email_field6'=>'Less or equal',
