@@ -1,6 +1,7 @@
 <?php
 
-   include ("./bd_bat.php");
+   include ("/var/www/html/bd_bat.php");
+    if (!isset($_GET['table'])) $_GET['table']='cycle';
 
     if ($_GET['table']=='cycle')
     $result=mysql_query("SELECT * FROM battery_cycle WHERE number = (SELECT MAX(number) FROM battery_cycle)",$db_bat) or die(mysql_error());     
