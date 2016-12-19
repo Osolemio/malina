@@ -2,7 +2,8 @@ server {
     listen       80;
     server_name  map_monitor_pi;
     client_max_body_size 32m;
-    #charset koi8-r;
+    add_header Cache-Control no-cache;
+    charset utf8;
     #access_log  /var/log/nginx/log/host.access.log  main;
     root   /var/www/html;
 
