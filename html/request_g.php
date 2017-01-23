@@ -282,11 +282,58 @@ if (file_exists("/var/map/.mppt")) {
 	}
 //----------------------------------------------------
 //$data['MAP_Relay1']=1;
-    echo $data['UNET'].",".$data['INET'].",".$data['UOUT'].",".$data['UACC'].",".$data['IACC'].",".$data['VPV'].",".$data['IPV'].",".$data['FNET'].",".$data['FMAP'].",". $data['ENET'].','.$data['EACC'].",".$data['ECHG'].",".$data['I_CH_I2C'].",".$data['EPV'].",".$data['TEMP1'].",".$data['TEMP2'].",".$data['TEMP_MPPT'].",".$data['PNET'].",".$data['PACC'].",".
-$data['PPV'].",".$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".$data['MODE'].",".$data['RELAY'].",".$error_status.",".$u_min.",".$u_max.",".$t_min.",".$t_max.",".$flag_map.",".$flag_mppt.",".
-$data['integral_dCdt'].",".$data['C_current_Ah'].",".$data['C_current_percent'].",".
-$data['C_nominal'].",".$data['C_measured'].",".$data['time_to_go'].",".$data['windspeed'].",".$data['user_counter'].",".$data['estimated_SOC'].",".$data['estimated_C'].",".$data['timer'].",".$data['CH_ST'].",".
-$data['E_alt_daily'].",".$data['E_alt_monthly'].",".$data['E_alt_summ'].",".$data['E_alt_user'].",".$data['Temp_Tor'].",".$data['MAP_Relay1'].",".$data['MAP_Relay2'].",".$data['flagUnet2'].",".$data['I_EXTS0'].",".$data['I_EXTS1'];
+    echo $data['UNET'].",".
+$data['INET'].",".
+$data['UOUT'].",".
+$data['UACC'].",".
+$data['IACC'].",".
+$data['VPV'].",".
+$data['IPV'].",".
+$data['FNET'].",".
+$data['FMAP'].",".
+$data['ENET'].','.
+$data['EACC'].",".
+$data['ECHG'].",".//10
+$data['I_CH_I2C'].",".
+$data['EPV'].",".
+$data['TEMP1'].",".
+$data['TEMP2'].",".
+$data['TEMP_MPPT'].",".
+$data['PNET'].",".
+$data['PACC'].",".
+$data['PPV'].",".
+$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".
+$data['MODE'].",".//20
+$data['RELAY'].",".
+$error_status.",".
+$u_min.",".
+$u_max.",".
+$t_min.",".
+$t_max.",".
+$flag_map.",".
+$flag_mppt.",".
+$data['integral_dCdt'].","
+.$data['C_current_Ah'].",".//30
+$data['C_current_percent'].",".
+$data['C_nominal'].",".
+$data['C_measured'].",".
+$data['time_to_go'].",".
+$data['windspeed'].",".
+$data['user_counter'].",".
+$data['estimated_SOC'].",".
+$data['estimated_C'].",".
+$data['timer'].",".
+$data['CH_ST'].",".//40
+$data['E_alt_daily'].",".
+$data['E_alt_monthly'].",".
+$data['E_alt_summ'].",".
+$data['E_alt_user'].",".
+$data['Temp_Tor'].",".
+$data['MAP_Relay1'].",".
+$data['MAP_Relay2'].",".
+$data['flagUnet2'].",".
+$data['I_EXTS0'].",".
+$data['I_EXTS1'];
 
      
 
