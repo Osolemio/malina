@@ -292,8 +292,8 @@ $data['IPV'].",".
 $data['FNET'].",".
 $data['FMAP'].",".
 $data['ENET'].','.
-$data['EACC'].",".
-$data['ECHG'].",".//10
+$data['EACC'].",".//10
+$data['ECHG'].",".
 $data['I_CH_I2C'].",".
 $data['EPV'].",".
 $data['TEMP1'].",".
@@ -302,8 +302,8 @@ $data['TEMP_MPPT'].",".
 $data['PNET'].",".
 $data['PACC'].",".
 $data['PPV'].",".
-$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".
-$data['MODE'].",".//20
+$data['MODE_MPPT'].$data['SIGN']."MPP:".$data['MPP'].",".//20
+$data['MODE'].",".
 $data['RELAY'].",".
 $error_status.",".
 $u_min.",".
@@ -312,8 +312,8 @@ $t_min.",".
 $t_max.",".
 $flag_map.",".
 $flag_mppt.",".
-$data['integral_dCdt'].","
-.$data['C_current_Ah'].",".//30
+$data['integral_dCdt'].","//30
+.$data['C_current_Ah'].",".
 $data['C_current_percent'].",".
 $data['C_nominal'].",".
 $data['C_measured'].",".
@@ -322,8 +322,8 @@ $data['windspeed'].",".
 $data['user_counter'].",".
 $data['estimated_SOC'].",".
 $data['estimated_C'].",".
-$data['timer'].",".
-$data['CH_ST'].",".//40
+$data['timer'].",".//40
+$data['CH_ST'].",".
 $data['E_alt_daily'].",".
 $data['E_alt_monthly'].",".
 $data['E_alt_summ'].",".
@@ -332,7 +332,7 @@ $data['Temp_Tor'].",".
 $data['MAP_Relay1'].",".
 $data['MAP_Relay2'].",".
 $data['flagUnet2'].",".
-$data['I_EXTS0'].",".
+$data['I_EXTS0'].",".//50
 $data['I_EXTS1'];
 
      
