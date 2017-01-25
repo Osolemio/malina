@@ -1,23 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta charset="UTF-8">
 <?php
-
-
-   include ("./request_settings.php");
-   include ("./local/local.inc");
-?>
-  
-    
-</head>
-
-
-<body>
-
-
-<?php 
+include ("./request_settings.php");
+include ("./local/local.inc");
 echo $row[0x01][1]^0xC0; if ($row[0x01][1]&0x80) echo "&nbsp".$text['HYBRID']; echo "|";
 $i=$row[0x02][1]&0x1F;$i1=$row[0x02][1]>>5;echo $i.".".$i1; echo "|";
 echo $dominator[$row[0x24][1]]; echo "|";
@@ -62,8 +45,3 @@ $i=(($row[0x185][1]<<$row[0x06][1])+$row[0x104][1])/10; echo $i.$text['V'];  ech
 $i=(($row[0x186][1]<<$row[0x06][1])+$row[0x105][1])/10; echo $i.$text['V'];  echo "|";
 $i=(($row[0x187][1]<<$row[0x06][1])+$row[0x106][1])/10; echo $i.$text['V'];  echo "|";
 ?>
-
-<br>
-</body>
-</html>
-    
