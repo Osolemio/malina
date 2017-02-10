@@ -62,10 +62,10 @@ $(function() {
 meter_i = new JSGadget.Meter($("#meter_i"), {
     title: loc['title2'],
     gap: 10,
-    min: 0,
-    max: 50,
-    scale: { w: 1, lm: {s: 10, w: 1, l: 2, f: 4.5 },
-      sm: { s: 2, w: 0.5, l: 1 }
+    min: -100,
+    max: 100,
+    scale: { w: 1, lm: {s: 25, w: 1, l: 2, f: 4.5 },
+      sm: { s: 5, w: 0.5, l: 1 }
            },
     hand: { l: 38 },
     font: {
@@ -514,11 +514,23 @@ var alt_u=$('#alt_user');
     else 
     document.getElementById('meter_o').style.background="blue";
     
-    meter_i.setVal(arr[1]);
+
+//------------- Current to grid:
+
+if (Number(arr[52]==1)) 
+    document.getElementById('meter_o1').style.background="red"
+    else 
+    document.getElementById('meter_o1').style.background="blue";
+    
+
+//----------------------------
+
+
+    meter_i.setVal((arr[52]==1)?-arr[1]:arr[1]);
     meter_vout.setVal(arr[2]);
     meter_i_i2c.setVal((arr[12]<0)?0:arr[12]);
     $('#text_v').html(arr[0]);
-    $('#text_i').html(arr[1]);
+    $('#text_i').html((arr[52]==1)?-arr[1]:arr[1]);
     $('#text_vout').html(arr[2]);
     $('#text_i2c').html((arr[12]<0)?loc['off1']:arr[12]);
     display_1.setVal((6250/arr[7]).toFixed(1));

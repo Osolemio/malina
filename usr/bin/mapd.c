@@ -498,7 +498,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
         time_t ltime;
 	
 	struct sigaction my_signal;
- 	bzero(&my_signal, sizeof(my_signal));
+ 	bzero(&my_signal, sizeof(sigaction));
 	
 	unsigned long int HH,MM,LL;
 	
@@ -533,7 +533,7 @@ static void signal_hdl(int sig, siginfo_t *siginfo, void *context)
           unsigned long int _E_NET;
           unsigned long int _E_ACC;
           unsigned long int _E_ACC_CHARGE;
-          float _Uacc_optim;
+          float _Inet_flag;
 	  float _I_acc_avg;
 	  float _I_mppt_avg;
 	  unsigned char _I2C_err;
@@ -943,6 +943,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	 map_data._I2C_err = Buffer[0x45A-0x3FF];
 	 map_data._RSErrDop= Buffer[0x447-0x3FF];
 
+	map_data._Inet_flag= Buffer[0x443-0x3FF]+Buffer[0x444-0x3FF]*256; if (map_data._Inet_flag>32768) map_data._Inet_flag=1; else map_data._Inet_flag=0;
 
 //----------------- adding BMS data --------------------------------
 
@@ -1055,14 +1056,14 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
 	
 	
 
-         map_data._Uacc_optim=0;//reserved
+         
         	  time (&ltime);
         	  newtime = localtime (&ltime);
         	  tim = *newtime;
 //------------- updating data in memory segment
 
 		sprintf (cache_str,
-        		   "{\"time\":\"%02d:%02d:%02d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Uacc_optim\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\",\"_RSErrDop\":\"%d\",\"_flagUnet2\":\"%d\"}",
+        		   "{\"time\":\"%02d:%02d:%02d\",\"_MODE\":\"%d\",\"_Status_Char\":\"%d\",\"_Uacc\":\"%.1f\",\"_Iacc\":\"%i\",\"_PLoad\":\"%i\",\"_F_Acc_Over\":\"%d\",\"_F_Net_Over\":\"%d\",\"_UNET\":\"%i\",\"_INET\":\"%d\",\"_PNET\":\"%i\",\"_TFNET\":\"%d\",\"_ThFMAP\":\"%d\",\"_UOUTmed\":\"%i\",\"_TFNET_Limit\":\"%d\",\"_UNET_Limit\":\"%i\",\"_RSErrSis\":\"%d\",\"_RSErrJobM\":\"%d\",\"_RSErrJob\":\"%d\",\"_RSWarning\":\"%d\",\"_Temp_Grad0\":\"%d\",\"_Temp_Grad2\":\"%d\",\"_INET_16_4\":\"%.1f\",\"_IAcc_med_A_u16\":\"%.1f\",\"Temp_off\":\"%d\",\"_E_NET\":\"%d\",\"_E_ACC\":\"%d\",\"_E_ACC_CHARGE\":\"%d\",\"_Inet_flag\":\"%.1f\",\"_I_acc_avg\":\"%.1f\",\"_I_mppt_avg\":\"%.1f\",\"_I2C_Err\":\"%d\",\"_Temp_Grad1\":\"%d\",\"_Relay1\":\"%d\",\"_Relay2\":\"%d\",\"_Flag_ECO\":\"%d\",\"_RSErrDop\":\"%d\",\"_flagUnet2\":\"%d\"}",
         		   tim.tm_hour, tim.tm_min, tim.tm_sec, map_data._MODE,
         		   map_data._Status_Char, map_data._Uacc, map_data._Iacc,
         		   map_data._PLoad, map_data._F_Acc_Over,
@@ -1075,7 +1076,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         		   map_data._Temp_Grad2, map_data._INET_16_4,
         		   map_data._IAcc_med_A_u16, map_data._Temp_off,
         		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
-        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
+        		   map_data._Inet_flag, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
 			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO, map_data._RSErrDop,
 			   map_data._flagUnet2);
  
@@ -1097,7 +1098,7 @@ sprintf(query,"CREATE TABLE IF NOT EXISTS eeprom_result (`offset` tinyint(3) uns
         		   map_data._Temp_Grad2, map_data._INET_16_4,
         		   map_data._IAcc_med_A_u16, map_data._Temp_off,
         		   map_data._E_NET, map_data._E_ACC, map_data._E_ACC_CHARGE,
-        		   map_data._Uacc_optim, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
+        		   map_data._Inet_flag, map_data._I_acc_avg, map_data._I_mppt_avg, map_data._I2C_err,
 			   map_data._Temp_Grad1, map_data._Relay1, map_data._Relay2, map_data._Flag_ECO);
 
         	  if (mysql_query (&mysql, query))

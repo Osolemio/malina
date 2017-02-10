@@ -54,7 +54,8 @@
 		'Temp_Tor'=>0,
 		'flagUnet2'=>0,
 		'I_EXTS0'=>0,
-		'I_EXTS1'=>0
+		'I_EXTS1'=>0,
+		'Inet_flag'=>0
 	    );
 				
 	$flag_map=0;
@@ -138,7 +139,7 @@ if (file_exists("/var/map/.map")) {
     $data['MAP_Relay2']=$row['_Relay2'];
     $data['MODE']=$row['_MODE'];
     $data['flagUnet2']=$row['_flagUnet2'];
-
+    $data['Inet_flag']=$row['_Inet_flag'];
     
     
     if ($row['_RSErrSis']==0) {$error_status="0";} else {$error_status="1";}
@@ -333,7 +334,8 @@ $data['MAP_Relay1'].",".
 $data['MAP_Relay2'].",".
 $data['flagUnet2'].",".
 $data['I_EXTS0'].",".//50
-$data['I_EXTS1'];
+$data['I_EXTS1'].",".
+$data['Inet_flag'];
 
      
 
