@@ -7,9 +7,9 @@ include('../local/local.inc');
  $time=date("H:i");
  touch("/var/map/.bset");
 
-if (isset($_POST['write'])) {
+if (isset($_POST['write']) || isset($_POST['reset_battery'])) {
     if (isset($_POST['shared'])) $shared=1; else $shared=0;
-    if (isset($_POST['reset_battery']) || isset($_POST['reset_stat'])) $_POST['C_measured']=$_POST['C_nominal'];
+    if (isset($_POST['reset_battery'])) $_POST['C_measured']=$_POST['C_nominal'];
 
     if ($_POST['C_measured']=='0.0') $_POST['C_measured']=$_POST['C_nominal'];
     $result=mysql_query("TRUNCATE TABLE battery_info",$db) or die(mysql_error());
@@ -22,7 +22,7 @@ if (isset($_POST['write'])) {
 
     }
 
-if (isset($_POST['reset_battery']))
+if (isset($_POST['reset_battery']) || isset($_POST['reset_stat']))
     {
     $result=mysql_query("TRUNCATE TABLE battery_state",$db) or die(mysql_error());
     $query="INSERT INTO battery_state VALUES ('1','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0','0')";
@@ -30,7 +30,7 @@ if (isset($_POST['reset_battery']))
     mysql_free_result($result);
     }
 
-if (isset($_POST['sync_battery']))
+if (isset($_POST['sync_battery']) || isset($_POST['reset_battery']))
     {
     $result=mysql_query("TRUNCATE TABLE battery_cycle",$db) or die(mysql_error());
     $query="INSERT INTO battery_cycle VALUES (NULL,'".$today."','".$time."','0','".$_POST['C_measured']."','100','0','0','-1','0','0')";
