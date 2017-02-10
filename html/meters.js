@@ -564,11 +564,17 @@ if (Number(arr[52]==1))
 	}
 
 
+    if (arr[52]==1)
+	{
+	if (i==1) {i=0; $('#text1').html("<&nbsp"+loc['hz']+"&nbsp<");}
+	else {i=1;$('#text1').html("<b><</b>&nbsp"+loc['hz']+"&nbsp<b><<b>");}
 
-    if (i==1) {i=0; $('#text1').html(">&nbsp"+loc['hz']+"&nbsp>");}
-    else {i=1;$('#text1').html("<b>></b>&nbsp"+loc['hz']+"&nbsp<b>><b>");}
+	} else
+	{
+	if (i==1) {i=0; $('#text1').html(">&nbsp"+loc['hz']+"&nbsp>");}
+	else {i=1;$('#text1').html("<b>></b>&nbsp"+loc['hz']+"&nbsp<b>><b>");}
 
-
+	}
       counter_net.setVal(arr[9]/100);
       counter_acc.setVal(arr[10]/100);
       counter_charge.setVal(arr[11]/100);
