@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `data` (
   `_E_NET` decimal(10,1) unsigned NOT NULL,
   `_E_ACC` decimal(10,1) unsigned NOT NULL,
   `_E_ACC_CHARGE` decimal(10,1) unsigned NOT NULL,
-  `_Uacc_optim` decimal(3,1) unsigned NOT NULL,
+  `_Inet_flag` decimal(3,1) unsigned NOT NULL,
   `_I_acc_avg` decimal(4,1) unsigned NOT NULL,
   `_I_mppt_avg` decimal(4,1) unsigned NOT NULL,
   `_I2C_Err` tinyint(3) unsigned NOT NULL,
