@@ -1,6 +1,6 @@
 <?php
  $uploaddir = '/var/update/';
- $recipient = 'osolemio@live.ru';
+ $recipient = 'mail@smth.ru';
  $name=$uploaddir."update.tar";
  $gpg='/usr/bin/gpg';
  $pos=strpos($_FILES['update']['name'],'update');
